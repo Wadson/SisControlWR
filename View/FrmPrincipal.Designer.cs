@@ -158,7 +158,7 @@
             // 
             // panelContenedor
             // 
-            this.panelContenedor.BackColor = System.Drawing.Color.SkyBlue;
+            this.panelContenedor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(112)))), ((int)(((byte)(156)))));
             this.panelContenedor.Controls.Add(this.statusStrip1);
             this.panelContenedor.Controls.Add(this.SubmenuReportes);
             this.panelContenedor.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -441,12 +441,12 @@
             // btnSair
             // 
             this.btnSair.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSair.BackColor = System.Drawing.Color.SkyBlue;
+            this.btnSair.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(112)))), ((int)(((byte)(156)))));
             this.btnSair.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSair.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.btnSair.FlatAppearance.MouseOverBackColor = System.Drawing.Color.IndianRed;
             this.btnSair.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSair.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.btnSair.ForeColor = System.Drawing.Color.White;
             this.btnSair.Image = global::SisControl.Properties.Resources.sair;
             this.btnSair.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnSair.Location = new System.Drawing.Point(991, 1);
@@ -461,12 +461,12 @@
             // 
             // btnContasPagar
             // 
-            this.btnContasPagar.BackColor = System.Drawing.Color.SkyBlue;
+            this.btnContasPagar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(112)))), ((int)(((byte)(156)))));
             this.btnContasPagar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnContasPagar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.btnContasPagar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.IndianRed;
             this.btnContasPagar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnContasPagar.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.btnContasPagar.ForeColor = System.Drawing.Color.White;
             this.btnContasPagar.Image = global::SisControl.Properties.Resources.Contas_a_Pagar;
             this.btnContasPagar.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnContasPagar.Location = new System.Drawing.Point(722, 1);
@@ -482,12 +482,12 @@
             // 
             // btnProdutos
             // 
-            this.btnProdutos.BackColor = System.Drawing.Color.SkyBlue;
+            this.btnProdutos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(112)))), ((int)(((byte)(156)))));
             this.btnProdutos.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnProdutos.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.btnProdutos.FlatAppearance.MouseOverBackColor = System.Drawing.Color.IndianRed;
             this.btnProdutos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnProdutos.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.btnProdutos.ForeColor = System.Drawing.Color.White;
             this.btnProdutos.Image = global::SisControl.Properties.Resources.Produtos;
             this.btnProdutos.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnProdutos.Location = new System.Drawing.Point(452, 1);
@@ -503,13 +503,13 @@
             // 
             // btnCadCli
             // 
-            this.btnCadCli.BackColor = System.Drawing.Color.SkyBlue;
+            this.btnCadCli.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(112)))), ((int)(((byte)(156)))));
             this.btnCadCli.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCadCli.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.btnCadCli.FlatAppearance.MouseOverBackColor = System.Drawing.Color.IndianRed;
             this.btnCadCli.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCadCli.Font = new System.Drawing.Font("Century Gothic", 10F);
-            this.btnCadCli.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.btnCadCli.ForeColor = System.Drawing.Color.White;
             this.btnCadCli.Image = global::SisControl.Properties.Resources.Cliente;
             this.btnCadCli.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnCadCli.Location = new System.Drawing.Point(92, 1);
@@ -525,12 +525,12 @@
             // 
             // btnFerramenta
             // 
-            this.btnFerramenta.BackColor = System.Drawing.Color.SkyBlue;
+            this.btnFerramenta.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(112)))), ((int)(((byte)(156)))));
             this.btnFerramenta.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnFerramenta.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.btnFerramenta.FlatAppearance.MouseOverBackColor = System.Drawing.Color.IndianRed;
             this.btnFerramenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFerramenta.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.btnFerramenta.ForeColor = System.Drawing.Color.White;
             this.btnFerramenta.Image = global::SisControl.Properties.Resources.Ferramentas;
             this.btnFerramenta.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnFerramenta.Location = new System.Drawing.Point(902, 1);
@@ -545,12 +545,12 @@
             // 
             // btnSubCateg
             // 
-            this.btnSubCateg.BackColor = System.Drawing.Color.SkyBlue;
+            this.btnSubCateg.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(112)))), ((int)(((byte)(156)))));
             this.btnSubCateg.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSubCateg.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.btnSubCateg.FlatAppearance.MouseOverBackColor = System.Drawing.Color.IndianRed;
             this.btnSubCateg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSubCateg.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.btnSubCateg.ForeColor = System.Drawing.Color.White;
             this.btnSubCateg.Image = ((System.Drawing.Image)(resources.GetObject("btnSubCateg.Image")));
             this.btnSubCateg.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnSubCateg.Location = new System.Drawing.Point(362, 1);
@@ -566,12 +566,12 @@
             // 
             // btnContasReceber
             // 
-            this.btnContasReceber.BackColor = System.Drawing.Color.SkyBlue;
+            this.btnContasReceber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(112)))), ((int)(((byte)(156)))));
             this.btnContasReceber.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnContasReceber.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.btnContasReceber.FlatAppearance.MouseOverBackColor = System.Drawing.Color.IndianRed;
             this.btnContasReceber.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnContasReceber.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.btnContasReceber.ForeColor = System.Drawing.Color.White;
             this.btnContasReceber.Image = global::SisControl.Properties.Resources.Contas_a_Receber;
             this.btnContasReceber.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnContasReceber.Location = new System.Drawing.Point(542, 1);
@@ -587,12 +587,12 @@
             // 
             // btnCategoria
             // 
-            this.btnCategoria.BackColor = System.Drawing.Color.SkyBlue;
+            this.btnCategoria.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(112)))), ((int)(((byte)(156)))));
             this.btnCategoria.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCategoria.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.btnCategoria.FlatAppearance.MouseOverBackColor = System.Drawing.Color.IndianRed;
             this.btnCategoria.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCategoria.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.btnCategoria.ForeColor = System.Drawing.Color.White;
             this.btnCategoria.Image = global::SisControl.Properties.Resources.Categorias;
             this.btnCategoria.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnCategoria.Location = new System.Drawing.Point(272, 1);
@@ -608,12 +608,12 @@
             // 
             // btnRELATORIOS
             // 
-            this.btnRELATORIOS.BackColor = System.Drawing.Color.SkyBlue;
+            this.btnRELATORIOS.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(112)))), ((int)(((byte)(156)))));
             this.btnRELATORIOS.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRELATORIOS.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.btnRELATORIOS.FlatAppearance.MouseOverBackColor = System.Drawing.Color.IndianRed;
             this.btnRELATORIOS.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRELATORIOS.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.btnRELATORIOS.ForeColor = System.Drawing.Color.White;
             this.btnRELATORIOS.Image = global::SisControl.Properties.Resources.Relatório;
             this.btnRELATORIOS.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnRELATORIOS.Location = new System.Drawing.Point(812, 1);
@@ -629,13 +629,13 @@
             // 
             // btnFUNCIONARIOS
             // 
-            this.btnFUNCIONARIOS.BackColor = System.Drawing.Color.SkyBlue;
+            this.btnFUNCIONARIOS.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(112)))), ((int)(((byte)(156)))));
             this.btnFUNCIONARIOS.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnFUNCIONARIOS.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.btnFUNCIONARIOS.FlatAppearance.MouseOverBackColor = System.Drawing.Color.IndianRed;
             this.btnFUNCIONARIOS.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFUNCIONARIOS.Font = new System.Drawing.Font("Century Gothic", 10F);
-            this.btnFUNCIONARIOS.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.btnFUNCIONARIOS.ForeColor = System.Drawing.Color.White;
             this.btnFUNCIONARIOS.Image = global::SisControl.Properties.Resources.Usuario;
             this.btnFUNCIONARIOS.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnFUNCIONARIOS.Location = new System.Drawing.Point(2, 1);
@@ -651,12 +651,12 @@
             // 
             // btnVendas
             // 
-            this.btnVendas.BackColor = System.Drawing.Color.SkyBlue;
+            this.btnVendas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(112)))), ((int)(((byte)(156)))));
             this.btnVendas.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnVendas.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.btnVendas.FlatAppearance.MouseOverBackColor = System.Drawing.Color.IndianRed;
             this.btnVendas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnVendas.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.btnVendas.ForeColor = System.Drawing.Color.White;
             this.btnVendas.Image = ((System.Drawing.Image)(resources.GetObject("btnVendas.Image")));
             this.btnVendas.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnVendas.Location = new System.Drawing.Point(632, 1);
@@ -672,12 +672,12 @@
             // 
             // btnFORNECEDORES
             // 
-            this.btnFORNECEDORES.BackColor = System.Drawing.Color.SkyBlue;
+            this.btnFORNECEDORES.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(112)))), ((int)(((byte)(156)))));
             this.btnFORNECEDORES.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnFORNECEDORES.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.btnFORNECEDORES.FlatAppearance.MouseOverBackColor = System.Drawing.Color.IndianRed;
             this.btnFORNECEDORES.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFORNECEDORES.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.btnFORNECEDORES.ForeColor = System.Drawing.Color.White;
             this.btnFORNECEDORES.Image = global::SisControl.Properties.Resources.Fornecedor;
             this.btnFORNECEDORES.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnFORNECEDORES.Location = new System.Drawing.Point(182, 1);

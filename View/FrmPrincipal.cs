@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SisControl.View;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -59,7 +60,8 @@ namespace SisControl
 
         private void btnCadCli_Click(object sender, EventArgs e)
         {
-
+            FrmManutCliente frm = new FrmManutCliente();
+            AbrirFormInPanel(frm);
         }
 
         private void btnFORNECEDORES_Click(object sender, EventArgs e)

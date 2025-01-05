@@ -6,7 +6,9 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Linq;
 using System.Text;
+
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SisControl.BLL
 {
@@ -79,13 +81,40 @@ namespace SisControl.BLL
                 throw erro;
             }
         }
-
-        public UsuarioMODEL Pesquisar(string pesquisa)
+      
+        public UsuarioMODEL PesquisarNo(DataGridView DataGridPesquisa, string pesquisa)
         {
             var conn = Conexao.Conex();
             try
             {
                 SqlCommand sql = new SqlCommand("SELECT * FROM Usuario WHERE NomeUsuario like '" + pesquisa + "%'", conn);
+                conn.Open();
+                SqlDataReader datareader;
+                UsuarioMODEL obj_usuario = new UsuarioMODEL();
+                datareader = sql.ExecuteReader(CommandBehavior.CloseConnection);
+
+                while (datareader.Read())
+                {
+                    obj_usuario.UsuarioID = Convert.ToInt32(datareader["UsuarioID"]);
+                    obj_usuario.NomeUsuario = datareader["NomeUsuario"].ToString();
+                }
+                return obj_usuario;
+            }
+            catch (Exception erro)
+            {
+                throw erro;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+        public UsuarioMODEL PesquisarCodigo(string pesquisa)
+        {
+            var conn = Conexao.Conex();
+            try
+            {
+                SqlCommand sql = new SqlCommand("SELECT * FROM Usuario WHERE UsuarioID like '" + pesquisa + "%'", conn);
                 conn.Open();
                 SqlDataReader datareader;
                 UsuarioMODEL obj_usuario = new UsuarioMODEL();

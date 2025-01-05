@@ -259,10 +259,10 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         public System.Windows.Forms.ComboBox cmbTipoUsuario;
-        private System.Windows.Forms.TextBox txtUsuarioID;
-        private System.Windows.Forms.TextBox txtNomeUsuario;
-        private System.Windows.Forms.TextBox txtEmail;
-        private System.Windows.Forms.TextBox txtSenha;
-        private System.Windows.Forms.TextBox txtRepitaSenha;
+        public System.Windows.Forms.TextBox txtUsuarioID;
+        public System.Windows.Forms.TextBox txtNomeUsuario;
+        public System.Windows.Forms.TextBox txtEmail;
+        public System.Windows.Forms.TextBox txtSenha;
+        public System.Windows.Forms.TextBox txtRepitaSenha;
     }
 }

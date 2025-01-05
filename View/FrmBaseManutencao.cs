@@ -149,7 +149,7 @@ namespace SisControl
             }
 
         }
-        public DataTable LocalizarGeral(SqlCommand comando)
+        public virtual DataTable LocalizarGeral(SqlCommand comando)
         {
             var conn = Conexao.Conex();
 

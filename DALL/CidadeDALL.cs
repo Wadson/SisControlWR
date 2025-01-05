@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SisControl.DALL
 {
@@ -101,6 +102,80 @@ namespace SisControl.DALL
             finally
             {
                 conn.Close();
+            }
+        }
+        public DataTable PesquisarPorNome(string nome)
+        {
+            var conn = Conexao.Conex();
+            try
+            {
+                DataTable dt = new DataTable();
+
+                string sqlconn = "SELECT CidadeID, NomeCidade, EstadoID FROM Cidade WHERE NomeCidade  LIKE @NomeCidade";
+                SqlCommand cmd = new SqlCommand(sqlconn, conn);
+                cmd.Parameters.AddWithValue("@NomeCidade", nome);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+                conn.Close();
+                conn.Dispose();
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao executar a pesquisa: " + ex);
+                return null;
+            }
+        }
+        public DataTable PesquisarPorCodigo(string nome)
+        {
+            var conn = Conexao.Conex();
+            try
+            {
+                DataTable dt = new DataTable();
+
+                string sqlconn = "SELECT CidadeID, NomeCidade, EstadoID FROM Cidade WHERE CidadeID  LIKE @CidadeID";
+                SqlCommand cmd = new SqlCommand(sqlconn, conn);
+                cmd.Parameters.AddWithValue("@CidadeID", nome);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+                conn.Close();
+                conn.Dispose();
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao executar a pesquisa: " + ex);
+                return null;
+            }
+        }
+        public DataTable PesquisarGeral()
+        {
+            var conn = Conexao.Conex();
+            try
+            {
+                DataTable dt = new DataTable();
+                string sqlconn = "SELECT Cidade.CidadeID, Cidade.NomeCidade, Cidade.EstadoID, Estado.NomeEstado FROM  Cidade INNER JOIN " +
+                                 "Estado ON Cidade.EstadoID = Estado.EstadoID)";
+                                 //WHERE Cidade.NomeCidade = @NomeCidade);
+                                
+                SqlCommand cmd = new SqlCommand(sqlconn, conn);
+                //cmd.Parameters.AddWithValue("@NomeCidade", nome);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+                conn.Close();
+                conn.Dispose();
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao executar a pesquisa: " + ex);
+                return null;
             }
         }
 

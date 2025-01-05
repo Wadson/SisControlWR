@@ -37,6 +37,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(478, 270);
             this.Name = "FrmBaseGeral";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmBaseGeral";
             this.ResumeLayout(false);
 

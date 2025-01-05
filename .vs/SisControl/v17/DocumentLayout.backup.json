@@ -3,20 +3,36 @@
   "WorkspaceRootPath": "D:\\SisControl\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DBDB5375-4381-46B4-AD77-796E102800CD}|SisControl.csproj|d:\\siscontrol\\frmmanutusuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DBDB5375-4381-46B4-AD77-796E102800CD}|SisControl.csproj|solutionrelative:frmmanutusuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DBDB5375-4381-46B4-AD77-796E102800CD}|SisControl.csproj|d:\\siscontrol\\view\\frmmanutcliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DBDB5375-4381-46B4-AD77-796E102800CD}|SisControl.csproj|solutionrelative:view\\frmmanutcliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DBDB5375-4381-46B4-AD77-796E102800CD}|SisControl.csproj|d:\\siscontrol\\frmmanutusuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{DBDB5375-4381-46B4-AD77-796E102800CD}|SisControl.csproj|solutionrelative:frmmanutusuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{DBDB5375-4381-46B4-AD77-796E102800CD}|SisControl.csproj|d:\\siscontrol\\view\\frmmanutcliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{DBDB5375-4381-46B4-AD77-796E102800CD}|SisControl.csproj|solutionrelative:view\\frmmanutcliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DBDB5375-4381-46B4-AD77-796E102800CD}|SisControl.csproj|d:\\siscontrol\\frmcadusuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{DBDB5375-4381-46B4-AD77-796E102800CD}|SisControl.csproj|solutionrelative:frmcadusuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{DBDB5375-4381-46B4-AD77-796E102800CD}|SisControl.csproj|d:\\siscontrol\\view\\frmcadcliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DBDB5375-4381-46B4-AD77-796E102800CD}|SisControl.csproj|solutionrelative:view\\frmcadcliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DBDB5375-4381-46B4-AD77-796E102800CD}|SisControl.csproj|d:\\siscontrol\\frmcadusuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DBDB5375-4381-46B4-AD77-796E102800CD}|SisControl.csproj|solutionrelative:frmcadusuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DBDB5375-4381-46B4-AD77-796E102800CD}|SisControl.csproj|d:\\siscontrol\\view\\frmcadcliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{DBDB5375-4381-46B4-AD77-796E102800CD}|SisControl.csproj|solutionrelative:view\\frmcadcliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DBDB5375-4381-46B4-AD77-796E102800CD}|SisControl.csproj|d:\\siscontrol\\view\\frmlocalizarcidade.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{DBDB5375-4381-46B4-AD77-796E102800CD}|SisControl.csproj|solutionrelative:view\\frmlocalizarcidade.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DBDB5375-4381-46B4-AD77-796E102800CD}|SisControl.csproj|d:\\siscontrol\\view\\frmlocalizarcidade.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DBDB5375-4381-46B4-AD77-796E102800CD}|SisControl.csproj|solutionrelative:view\\frmlocalizarcidade.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DBDB5375-4381-46B4-AD77-796E102800CD}|SisControl.csproj|d:\\siscontrol\\dall\\cidadedall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DBDB5375-4381-46B4-AD77-796E102800CD}|SisControl.csproj|solutionrelative:dall\\cidadedall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DBDB5375-4381-46B4-AD77-796E102800CD}|SisControl.csproj|d:\\siscontrol\\moneydataset.xsd||{07AC752B-D2B0-4DCD-AD9C-237BF561A30A}",
+      "RelativeMoniker": "D:0:0:{DBDB5375-4381-46B4-AD77-796E102800CD}|SisControl.csproj|solutionrelative:moneydataset.xsd||{07AC752B-D2B0-4DCD-AD9C-237BF561A30A}"
     }
   ],
   "DocumentGroupContainers": [
@@ -35,51 +51,101 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "FrmManutUsuario.cs",
-              "DocumentMoniker": "D:\\SisControl\\FrmManutUsuario.cs",
-              "RelativeDocumentMoniker": "FrmManutUsuario.cs",
-              "ToolTip": "D:\\SisControl\\FrmManutUsuario.cs",
-              "RelativeToolTip": "FrmManutUsuario.cs",
-              "ViewState": "AgIAAEsAAAAAAAAAAAAowFcAAAAZAAAAAAAAAA==",
+              "Title": "FrmManutCliente.cs",
+              "DocumentMoniker": "D:\\SisControl\\View\\FrmManutCliente.cs",
+              "RelativeDocumentMoniker": "View\\FrmManutCliente.cs",
+              "ToolTip": "D:\\SisControl\\View\\FrmManutCliente.cs",
+              "RelativeToolTip": "View\\FrmManutCliente.cs",
+              "ViewState": "AgIAAGQAAAAAAAAAAAAkwEEAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-05T00:41:42.689Z",
+              "WhenOpened": "2025-01-05T17:42:41.732Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "FrmCadUsuario.cs",
-              "DocumentMoniker": "D:\\SisControl\\FrmCadUsuario.cs",
-              "RelativeDocumentMoniker": "FrmCadUsuario.cs",
-              "ToolTip": "D:\\SisControl\\FrmCadUsuario.cs",
-              "RelativeToolTip": "FrmCadUsuario.cs",
-              "ViewState": "AgIAAHcAAAAAAAAAAAAiwI0AAAANAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "FrmManutCliente.cs [Design]",
+              "DocumentMoniker": "D:\\SisControl\\View\\FrmManutCliente.cs",
+              "RelativeDocumentMoniker": "View\\FrmManutCliente.cs",
+              "ToolTip": "D:\\SisControl\\View\\FrmManutCliente.cs [Design]",
+              "RelativeToolTip": "View\\FrmManutCliente.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-05T00:26:04.141Z",
+              "WhenOpened": "2025-01-05T17:42:40.392Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CidadeDALL.cs",
+              "DocumentMoniker": "D:\\SisControl\\DALL\\CidadeDALL.cs",
+              "RelativeDocumentMoniker": "DALL\\CidadeDALL.cs",
+              "ToolTip": "D:\\SisControl\\DALL\\CidadeDALL.cs",
+              "RelativeToolTip": "DALL\\CidadeDALL.cs",
+              "ViewState": "AgIAAJMAAAAAAAAAAAAkwJ4AAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-05T17:38:43.803Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "FrmLocalizarCidade.cs",
+              "DocumentMoniker": "D:\\SisControl\\View\\FrmLocalizarCidade.cs",
+              "RelativeDocumentMoniker": "View\\FrmLocalizarCidade.cs",
+              "ToolTip": "D:\\SisControl\\View\\FrmLocalizarCidade.cs",
+              "RelativeToolTip": "View\\FrmLocalizarCidade.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABkAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-05T17:38:38.451Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "FrmLocalizarCidade.cs [Design]",
+              "DocumentMoniker": "D:\\SisControl\\View\\FrmLocalizarCidade.cs",
+              "RelativeDocumentMoniker": "View\\FrmLocalizarCidade.cs",
+              "ToolTip": "D:\\SisControl\\View\\FrmLocalizarCidade.cs [Design]",
+              "RelativeToolTip": "View\\FrmLocalizarCidade.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-05T17:38:36.051Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "moneyDataSet.xsd",
+              "DocumentMoniker": "D:\\SisControl\\moneyDataSet.xsd",
+              "RelativeDocumentMoniker": "moneyDataSet.xsd",
+              "ToolTip": "D:\\SisControl\\moneyDataSet.xsd",
+              "RelativeToolTip": "moneyDataSet.xsd",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003579|",
+              "WhenOpened": "2025-01-05T17:36:05.713Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "FrmCadUsuario.cs [Design]",
-              "DocumentMoniker": "D:\\SisControl\\FrmCadUsuario.cs",
-              "RelativeDocumentMoniker": "FrmCadUsuario.cs",
-              "ToolTip": "D:\\SisControl\\FrmCadUsuario.cs [Design]",
-              "RelativeToolTip": "FrmCadUsuario.cs [Design]",
+              "Title": "FrmCadCliente.cs",
+              "DocumentMoniker": "D:\\SisControl\\View\\FrmCadCliente.cs",
+              "RelativeDocumentMoniker": "View\\FrmCadCliente.cs",
+              "ToolTip": "D:\\SisControl\\View\\FrmCadCliente.cs",
+              "RelativeToolTip": "View\\FrmCadCliente.cs",
+              "ViewState": "AgIAAIwAAAAAAAAAAAA1wG0AAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-05T00:22:31.751Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-01-05T17:22:21.236Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "FrmManutUsuario.cs [Design]",
-              "DocumentMoniker": "D:\\SisControl\\FrmManutUsuario.cs",
-              "RelativeDocumentMoniker": "FrmManutUsuario.cs",
-              "ToolTip": "D:\\SisControl\\FrmManutUsuario.cs [Design]",
-              "RelativeToolTip": "FrmManutUsuario.cs [Design]",
+              "DocumentIndex": 3,
+              "Title": "FrmCadCliente.cs [Design]",
+              "DocumentMoniker": "D:\\SisControl\\View\\FrmCadCliente.cs",
+              "RelativeDocumentMoniker": "View\\FrmCadCliente.cs",
+              "ToolTip": "D:\\SisControl\\View\\FrmCadCliente.cs [Design]",
+              "RelativeToolTip": "View\\FrmCadCliente.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-05T00:22:28.797Z",
+              "WhenOpened": "2025-01-05T16:51:48.569Z",
               "EditorCaption": " [Design]"
             }
           ]

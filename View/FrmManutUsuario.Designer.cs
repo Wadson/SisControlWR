@@ -38,7 +38,13 @@
             this.btnSair.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.btnSair.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnSair.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnSair.Location = new System.Drawing.Point(650, 380);
             this.btnSair.Click += new System.EventHandler(this.btnSair_Click);
+            // 
+            // txtPesquisa
+            // 
+            this.txtPesquisa.Size = new System.Drawing.Size(512, 22);
+            this.txtPesquisa.TextChanged += new System.EventHandler(this.txtPesquisa_TextChanged);
             // 
             // btnExcluir
             // 
@@ -46,6 +52,8 @@
             this.btnExcluir.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.btnExcluir.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnExcluir.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnExcluir.Location = new System.Drawing.Point(650, 157);
+            this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
             // 
             // btnNovo
             // 
@@ -53,6 +61,7 @@
             this.btnNovo.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.btnNovo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnNovo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnNovo.Location = new System.Drawing.Point(650, 67);
             this.btnNovo.Click += new System.EventHandler(this.btnNovo_Click);
             // 
             // btnAlterar
@@ -61,6 +70,8 @@
             this.btnAlterar.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.btnAlterar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnAlterar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnAlterar.Location = new System.Drawing.Point(650, 112);
+            this.btnAlterar.Click += new System.EventHandler(this.btnAlterar_Click);
             // 
             // timer1
             // 
@@ -70,7 +81,7 @@
             // FrmManutUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(811, 456);
+            this.ClientSize = new System.Drawing.Size(779, 456);
             this.Name = "FrmManutUsuario";
             this.Text = "SisControl - Manutenção de Usuário";
             this.Load += new System.EventHandler(this.FrmManutUsuario_Load);

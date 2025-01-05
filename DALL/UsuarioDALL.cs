@@ -6,6 +6,8 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace SisControl.DALL
 {
@@ -18,7 +20,7 @@ namespace SisControl.DALL
             var conn = Conexao.Conex();
             try
             {
-                SqlCommand comando = new SqlCommand("SELECT * FROM Usuario", conn);
+                SqlCommand comando = new SqlCommand("SELECT UsuarioID, NomeUsuario, Email, Senha, TipoUsuario FROM Usuario", conn);
                 //id_usuario, nome_usuario, user_usuario, dt_nascimento, nivelacesso_usuario, senha_usuario, email_usuario, dt_nascimento
 
                 SqlDataAdapter daUsuario = new SqlDataAdapter();
@@ -42,22 +44,18 @@ namespace SisControl.DALL
         {
             var conn = Conexao.Conex();
 
-
-            SqlCommand sqlcomm = new SqlCommand("INSERT INTO Usuario (NomeUsuario, Email, Senha, TipoUsuario) VALUES (@NomeUsuario, @Email, @Senha, @TipoUsuario)", conn);
-
-            //sqlcomm.Parameters.AddWithValue("@UsuarioID", usuarios.UsuarioID);
-            sqlcomm.Parameters.AddWithValue("@NomeUsuario", usuarios.NomeUsuario);
-            sqlcomm.Parameters.AddWithValue("@Email", usuarios.Email);
-            sqlcomm.Parameters.AddWithValue("@Senha", usuarios.Senha);
-            sqlcomm.Parameters.AddWithValue("@TipoUsuario", usuarios.Email);
-
-
-            conn.Open();
-            sqlcomm.ExecuteNonQuery();
-            conn.Close();
             try
             {
+                SqlCommand sqlcomm = new SqlCommand("INSERT INTO Usuario (NomeUsuario, Email, Senha, TipoUsuario) VALUES (@NomeUsuario, @Email, @Senha, @TipoUsuario)", conn);
 
+                //sqlcomm.Parameters.AddWithValue("@UsuarioID", usuarios.UsuarioID);
+                sqlcomm.Parameters.AddWithValue("@NomeUsuario", usuarios.NomeUsuario);
+                sqlcomm.Parameters.AddWithValue("@Email", usuarios.Email);
+                sqlcomm.Parameters.AddWithValue("@Senha", usuarios.Senha);
+                sqlcomm.Parameters.AddWithValue("@TipoUsuario", usuarios.TipoUsuario);
+
+                conn.Open();
+                sqlcomm.ExecuteNonQuery();
             }
             catch (SqlException ex)
             {
@@ -65,7 +63,7 @@ namespace SisControl.DALL
             }
             finally
             {
-                //conn.Close();
+                conn.Close();
             }
         }
         // ***********E  X  C  L  U  I         U  S  U  A  R  I  O***********************************
@@ -94,7 +92,7 @@ namespace SisControl.DALL
             var conn = Conexao.Conex();
             try
             {
-                SqlCommand sqlcomm = new SqlCommand("UPDATE Usuario SET UsuarioID = @UsuarioID, NomeUsuario = @NomeUsuario, Email = @ Email, Senha = @Senha, TipoUsuario = @TipoUsuario", conn);
+                SqlCommand sqlcomm = new SqlCommand("UPDATE Usuario SET NomeUsuario = @NomeUsuario, Email = @Email, Senha = @Senha, TipoUsuario = @TipoUsuario WHERE UsuarioID = @UsuarioID", conn);
 
                 sqlcomm.Parameters.AddWithValue("@NomeUsuario", usuarios.NomeUsuario);
                 sqlcomm.Parameters.AddWithValue("@Email", usuarios.Email);
@@ -138,6 +136,54 @@ namespace SisControl.DALL
             finally
             {
                 conn.Close();
+            }
+        }
+        public DataTable PesquisarPorNome(string nome)
+        {
+            var conn = Conexao.Conex();
+            try
+            {
+                DataTable dt = new DataTable();
+
+                string sqlconn = "SELECT UsuarioID, NomeUsuario, Email, Senha, TipoUsuario FROM Usuario WHERE NomeUsuario  LIKE @NomeUsuario";
+                SqlCommand cmd = new SqlCommand(sqlconn, conn);
+                cmd.Parameters.AddWithValue("@NomeUsuario", nome);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+                conn.Close();
+                conn.Dispose();
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao executar a pesquisa: " + ex);
+                return null;
+            }
+        }
+        public DataTable PesquisarPorCodigo(string codigo)
+        {
+            var conn = Conexao.Conex();
+            try
+            {
+                DataTable dt = new DataTable();
+
+                string sqlconn = "SELECT UsuarioID, NomeUsuario, Email, Senha, TipoUsuario FROM Usuario WHERE NomeUsuario  LIKE @UsuarioID";
+                SqlCommand cmd = new SqlCommand(sqlconn, conn);
+                cmd.Parameters.AddWithValue("@UsuarioID", codigo);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+                conn.Close();
+                conn.Dispose();
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao executar a pesquisa: " + ex);
+                return null;
             }
         }
     }

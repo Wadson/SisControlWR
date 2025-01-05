@@ -46,31 +46,51 @@ namespace SisControl
                 MessageBox.Show("Win32 Win32!!! \n" + erro);
             }
         }
-        public void AlterarRegistro()
+        public void ExcluirRegistro()
         {
-            UsuarioMODEL objetoUsuario = new UsuarioMODEL();
-
-            objetoUsuario.UsuarioID = Convert.ToInt32(txtUsuarioID.Text);
-            objetoUsuario.NomeUsuario = txtNomeUsuario.Text;
-            objetoUsuario.Email = txtEmail.Text;
-            objetoUsuario.Senha = Convert.ToString(txtSenha.Text);
-            objetoUsuario.TipoUsuario = cmbTipoUsuario.Text;
-
-            UsuarioBLL usuarioBll = new UsuarioBLL();
-
-            usuarioBll.Alterar(objetoUsuario);
-            MessageBox.Show("Registro Alterado com sucesso!", "Alteração!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-            ((FrmManutUsuario)Application.OpenForms["FrmManutUsuario"]).HabilitarTimer(true);// Habilita Timer do outro form Obs: O timer no outro form executa um Método.    
-            LimpaCampo();
-            this.Close();
-
             try
             {
-                //this.Close();
+                UsuarioMODEL objetoUsuario = new UsuarioMODEL();
+
+                objetoUsuario.UsuarioID = Convert.ToInt32(txtUsuarioID.Text);
+                UsuarioBLL usuarioBll = new UsuarioBLL();
+
+                usuarioBll.Excluir(objetoUsuario);
+                MessageBox.Show("Registro Excluído com sucesso!", "Alteração!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                ((FrmManutUsuario)Application.OpenForms["FrmManutUsuario"]).HabilitarTimer(true);// Habilita Timer do outro form Obs: O timer no outro form executa um Método.    
+                LimpaCampo();
+                this.Close(); 
             }
             catch (Exception erro)
             {
-                MessageBox.Show("Erro ao Alterar O REGISTRO!!! " + erro);
+                MessageBox.Show("Erro ao Excluir o registro!!! " + erro);
+            }
+        }
+
+
+        public void AlterarRegistro()
+        {
+            try
+            {
+                UsuarioMODEL objetoUsuario = new UsuarioMODEL();
+
+                objetoUsuario.UsuarioID = Convert.ToInt32(txtUsuarioID.Text);
+                objetoUsuario.NomeUsuario = txtNomeUsuario.Text;
+                objetoUsuario.Email = txtEmail.Text;
+                objetoUsuario.Senha = Convert.ToString(txtSenha.Text);
+                objetoUsuario.TipoUsuario = cmbTipoUsuario.Text;
+
+                UsuarioBLL usuarioBll = new UsuarioBLL();
+                usuarioBll.Alterar(objetoUsuario);
+
+                MessageBox.Show("Registro Alterado com sucesso!", "Alteração!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                ((FrmManutUsuario)Application.OpenForms["FrmManutUsuario"]).HabilitarTimer(true);// Habilita Timer do outro form Obs: O timer no outro form executa um Método.    
+                LimpaCampo();
+                this.Close();
+            }
+            catch (Exception erro)
+            {
+                MessageBox.Show("Erro ao Alterar o registro!!! " + erro);
             }
         }
         private void btnSalvar_Click(object sender, EventArgs e)
@@ -96,12 +116,20 @@ namespace SisControl
                     ((FrmManutUsuario)Application.OpenForms["FrmManutUsuario"]).HabilitarTimer(true);
                 }
             }
+            if (StatusOperacao == "EXCLUSÃO")
+            {
+                if (MessageBox.Show("Deseja Excluir? \n\n O Usuário: " + txtNomeUsuario.Text + " ??? ", "Excluir", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    ExcluirRegistro();
+                }                    
+            }
         }
 
         private void btnNovo_Click(object sender, EventArgs e)
         {
             LimpaCampo();
             txtUsuarioID.Text = RetornaCodigoContaMaisUm(QueryUsuario).ToString();
+            AcrescenteZero_a_Esquerda2(txtUsuarioID);
         }
 
         private void btnSair_Click(object sender, EventArgs e)
