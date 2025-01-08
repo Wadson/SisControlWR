@@ -32,10 +32,11 @@ namespace SisControl.BLL
 
         public void Salvar(CategoriaMODEL categoria)
         {
+            categoriaDAL = new CategoriaDALL();
+            categoriaDAL.SalvarCategoria(categoria);
             try
             {
-                categoriaDAL = new  CategoriaDALL();
-                categoriaDAL.SalvarCategoria(categoria);
+                
             }
             catch (Exception erro)
             {

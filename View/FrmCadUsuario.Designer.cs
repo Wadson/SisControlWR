@@ -237,11 +237,9 @@
             this.Controls.Add(this.btnSair);
             this.Controls.Add(this.btnNovo);
             this.Controls.Add(this.btnSalvar);
-            this.KeyPreview = true;
             this.Name = "FrmCadUsuario";
             this.Text = "SistControl - Cadastro de Usuário";
             this.Load += new System.EventHandler(this.FrmCadUsuario_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmCadUsuario_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

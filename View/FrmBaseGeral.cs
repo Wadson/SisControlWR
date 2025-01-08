@@ -19,6 +19,8 @@ namespace SisControl
         {
             InitializeComponent();
         }
+        
+        
         public string RetornoEvitaDuplicado { get; set; }
 
         public string QueryUsuario = "SELECT MAX(UsuarioID) FROM Usuario";
@@ -30,7 +32,8 @@ namespace SisControl
         public string QueryContaReceber = "SELECT MAX(ContaReceberID) FROM ContaReceberID";
         public string QueryCentro = "SELECT MAX(CategoriaID) FROM Categoria";
         public string QueryFormaPag = "SELECT MAX(FormaPgtoID) FROM FormaPgto";
-        public string QuerySubCat = "SELECT MAX(SubCategoriaId) FROM SubCategoria";
+        public string QuerySubCat = "SELECT MAX(SubCategoriaID) FROM SubCategoria";
+        public string QueryCategoria = "SELECT MAX(CategoriaID) FROM Categoria";
         public string QueryClientes = "SELECT MAX(ClienteID)  FROM Cliente";
 
         public DateTime DataVencimento { get; set; }
@@ -270,7 +273,13 @@ namespace SisControl
             finally { conn.Close(); }
         }
 
-        public string ReplaceValores(System.Windows.Forms.TextBox TxTValor)
+        public string ReplaceValoresTexBox(System.Windows.Forms.TextBox TxTValor)
+        {
+            string valorsemformato = TxTValor.Text;
+            valorsemformato = valorsemformato.ToString().Replace("R$", "").Replace(" ", "");
+            return valorsemformato;
+        }
+        public string ReplaceValoresMasketTexBox(System.Windows.Forms.MaskedTextBox TxTValor)
         {
             string valorsemformato = TxTValor.Text;
             valorsemformato = valorsemformato.ToString().Replace("R$", "").Replace(" ", "");
@@ -641,6 +650,19 @@ namespace SisControl
         {            
         }
 
+        private void FrmBaseGeral_KeyDown_1(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+
+                if (this.GetNextControl(ActiveControl, true) != null)
+                {
+                    e.Handled = true;
+                    this.GetNextControl(ActiveControl, true).Focus();
+                }
+            }
+        }
+
         private void panelFormat_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -650,5 +672,9 @@ namespace SisControl
                 mover = true;
             }
         }
+    }
+    public static class VariavelGlobal
+    {
+        public static string NomeFormulario = "";
     }
 }

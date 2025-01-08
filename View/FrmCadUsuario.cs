@@ -141,33 +141,14 @@ namespace SisControl
         {
             if (StatusOperacao == "ALTERAR")
             {
-                AcrescenteZero_a_Esquerda2(txtUsuarioID);
+                return;
             }
             if (StatusOperacao == "NOVO")
             {
                 UsuarioID = RetornaCodigoContaMaisUm(QueryUsuario);
                 txtUsuarioID.Text = RetornaCodigoContaMaisUm(QueryUsuario).ToString();
                 txtNomeUsuario.Focus();
-            }
-            AcrescenteZero_a_Esquerda2(txtUsuarioID);
-        }
-
-        private void FrmCadUsuario_KeyDown(object sender, KeyEventArgs e)
-        {
-            //if (e.KeyData == Keys.Enter)
-            //{
-            //    e.SuppressKeyPress = true;
-            //    SelectNextControl(ActiveControl, true, true, true, true);
-            //}
-            if (e.KeyCode == Keys.Enter)
-            {
-
-                if (this.GetNextControl(ActiveControl, true) != null)
-                {
-                    e.Handled = true;
-                    this.GetNextControl(ActiveControl, true).Focus();
-                }
-            }
+            }            
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SisControl.DALL
 {
@@ -37,15 +38,19 @@ namespace SisControl.DALL
         public void SalvarCategoria(CategoriaMODEL categoria)
         {
             var conn = Conexao.Conex();
+
+            SqlCommand sql = new SqlCommand("INSERT INTO Categoria (NomeCategoria) VALUES (@NomeCategoria)", conn);
+
+            //sql.Parameters.AddWithValue("@CategoriaID", categoria.CategoriaID);
+            sql.Parameters.AddWithValue("@NomeCategoria", categoria.NomeCategoria);
+
+            conn.Open();
+            sql.ExecuteNonQuery();
+
+
             try
             {
-                SqlCommand sql = new SqlCommand("INSERT INTO CategoriaID, NomeCategoria) VALUES (@CategoriaID, @NomeCategoria)", conn);
-
-                sql.Parameters.AddWithValue("@CategoriaID", categoria.CategoriaID);
-                sql.Parameters.AddWithValue("@NomeCategoria", categoria.NomeCategoria);
-               
-                conn.Open();
-                sql.ExecuteNonQuery();
+                
             }
             catch (SqlException ex)
             {
@@ -82,10 +87,11 @@ namespace SisControl.DALL
             var conn = Conexao.Conex();
             try
             {
-                SqlCommand Sql = new SqlCommand("UPDATE Categoria SET CategoriaID = @CategoriaID, NomeCategoria = @NomeCategoria", conn);
+                SqlCommand Sql = new SqlCommand("UPDATE Categoria SET NomeCategoria = @NomeCategoria WHERE CategoriaID = @CategoriaID", conn);
 
-                Sql.Parameters.AddWithValue("@CategoriaID", categoria.CategoriaID);
+                
                 Sql.Parameters.AddWithValue("@NomeCategoria", categoria.NomeCategoria);
+                Sql.Parameters.AddWithValue("@CategoriaID", categoria.CategoriaID);
 
                 conn.Open();
                 Sql.ExecuteNonQuery();
@@ -97,6 +103,80 @@ namespace SisControl.DALL
             finally
             {
                 conn.Close();
+            }
+        }
+
+        public DataTable PesquisarGeral()
+        {
+            var conn = Conexao.Conex();
+            try
+            {
+                DataTable dt = new DataTable();
+
+                string sqlconn = "SELECT TOP (30) CategoriaID, NomeCategoria FROM Categoria";
+                SqlCommand cmd = new SqlCommand(sqlconn, conn);
+                //cmd.Parameters.AddWithValue("@NomeCategoria", nome);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+                conn.Close();
+                conn.Dispose();
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao executar a pesquisa: " + ex);
+                return null;
+            }
+        }
+
+        public DataTable PesquisarPorNome(string nome)
+        {
+            var conn = Conexao.Conex();
+            try
+            {
+                DataTable dt = new DataTable();
+
+                string sqlconn = "SELECT TOP (30) CategoriaID, NomeCategoria FROM  Categoria WHERE NomeCategoria LIKE @NomeCategoria";
+                SqlCommand cmd = new SqlCommand(sqlconn, conn);
+                cmd.Parameters.AddWithValue("@NomeCategoria", nome);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+                conn.Close();
+                conn.Dispose();
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao executar a pesquisa: " + ex);
+                return null;
+            }
+        }
+        public DataTable PesquisarPorCodigo(string nome)
+        {
+            var conn = Conexao.Conex();
+            try
+            {
+                DataTable dt = new DataTable();
+
+                string sqlconn = "SELECT TOP (30) CategoriaID, NomeCategoria FROM Categoria WHERE CategoriaID  LIKE @CategoriaID";
+                SqlCommand cmd = new SqlCommand(sqlconn, conn);
+                cmd.Parameters.AddWithValue("@CategoriaID", nome);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+                conn.Close();
+                conn.Dispose();
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao executar a pesquisa: " + ex);
+                return null;
             }
         }
     }

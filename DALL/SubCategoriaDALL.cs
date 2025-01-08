@@ -11,13 +11,13 @@ namespace SisControl.DALL
 {
     internal class SubCategoriaDALL
     {
-        public DataTable ListaCategoria()
+        public DataTable ListaSubCategoria()
         {
             var conn = Conexao.Conex();
 
             try
             {
-                SqlCommand comando = new SqlCommand("SELECT * FROM Categoria", conn);
+                SqlCommand comando = new SqlCommand("SELECT SubCategoriaID, NomeSubCategoria, CategoriaID FROM SubCategoria", conn);
 
                 SqlDataAdapter dacategoria = new SqlDataAdapter();
                 dacategoria.SelectCommand = comando;

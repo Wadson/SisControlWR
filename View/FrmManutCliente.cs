@@ -1,4 +1,5 @@
 ﻿using SisControl.BLL;
+using SisControl.DALL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,8 +18,8 @@ namespace SisControl.View
         }
         public void ListarCliente()
         {
-            ClienteBLL clienteBll = new ClienteBLL();
-            dataGridPesquisa.DataSource = clienteBll.Listar();
+            ClienteBLL objetoBll = new ClienteBLL();
+            dataGridPesquisa.DataSource = objetoBll.Listar();
             PersonalizarDatagridView();
         }
         public void HabilitarTimer(bool habilitar)
@@ -48,14 +49,18 @@ namespace SisControl.View
 
             // Defina os nomes dos cabeçalhos das colunas.
 
-            this.dataGridPesquisa.Columns[0].Name = "ClienteID";
+            
             this.dataGridPesquisa.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
+            this.dataGridPesquisa.Columns[0].Name = "ClienteID";
             this.dataGridPesquisa.Columns[1].Name = "NomeCliente";
             this.dataGridPesquisa.Columns[2].Name = "CpfCnpj";
             this.dataGridPesquisa.Columns[3].Name = "Endereco";
             this.dataGridPesquisa.Columns[4].Name = "Telefone";
             this.dataGridPesquisa.Columns[5].Name = "Email";
             this.dataGridPesquisa.Columns[6].Name = "CidadeID";
+            this.dataGridPesquisa.Columns[7].Name = "Expr1";
+            this.dataGridPesquisa.Columns[8].Name = "EstadoID";
+            
 
             DefinirFonteeCores();
 
@@ -67,70 +72,120 @@ namespace SisControl.View
         {
             FrmCadCliente cadCliente = new FrmCadCliente();
 
-            try
+            if (StatusOperacao == "NOVO")
             {
-                if (StatusOperacao == "NOVO")
-                {
-                    cadCliente.Text = "SISCONTROL - NOVO CADASTRO DE USUÁRIO";
-                    cadCliente.StatusOperacao = "NOVO";
-                    cadCliente.ShowDialog();
-                    
-                    ((FrmManutCliente)Application.OpenForms["FrmManutCliente"]).HabilitarTimer(true);
-                }
-                if (StatusOperacao == "ALTERAR")
-                {
-                    cadCliente.txtClienteID.Text = dataGridPesquisa.CurrentRow.Cells["ClienteID"].Value.ToString();
-                    cadCliente.txtNomeCliente.Text = dataGridPesquisa.CurrentRow.Cells["NomeCliente"].Value.ToString();
-                    cadCliente.txtCpfCnpj.Text = dataGridPesquisa.CurrentRow.Cells["CpfCnpj"].Value.ToString();
-                    cadCliente.txtEndereco.Text = dataGridPesquisa.CurrentRow.Cells["Endereco"].Value.ToString();
-                    cadCliente.txtTelefone.Text = dataGridPesquisa.CurrentRow.Cells["Telefone"].Value.ToString();
-                    cadCliente.txtEmail.Text = dataGridPesquisa.CurrentRow.Cells["Email"].Value.ToString();
-                    cadCliente.txtCidadeID.Text = dataGridPesquisa.CurrentRow.Cells["CidadeID"].Value.ToString();
+                cadCliente.Text = "SISCONTROL - NOVO CADASTRO DE CLIENTE";
+                cadCliente.StatusOperacao = "NOVO";
+                cadCliente.ShowDialog();
 
-                    cadCliente.Text = "SISCONTROL - ALTERAR REGISTRO";
-                    cadCliente.StatusOperacao = "ALTERAR";
-                   cadCliente.btnSalvar.Text = "Alterar";
-                   cadCliente.btnNovo.Enabled = false;
-                   cadCliente.btnSalvar.TextAlign = ContentAlignment.MiddleRight;//AlinhamentoDeConteúdo.MiddleLeft; =  StringAlignment
-                   cadCliente.btnSalvar.Image = Properties.Resources.Alterar;
-                    cadCliente.ShowDialog();
-                    ((FrmManutCliente)Application.OpenForms["FrmManutCliente"]).HabilitarTimer(true);
-                }
-                if (StatusOperacao == "EXCLUSÃO")
-                {
-                    cadCliente.txtClienteID.Text = dataGridPesquisa.CurrentRow.Cells["ClienteID"].Value.ToString();
-                    cadCliente.txtNomeCliente.Text = dataGridPesquisa.CurrentRow.Cells["NomeCliente"].Value.ToString();
-                    cadCliente.txtCpfCnpj.Text = dataGridPesquisa.CurrentRow.Cells["CpfCnpj"].Value.ToString();
-                    cadCliente.txtEndereco.Text = dataGridPesquisa.CurrentRow.Cells["Endereco"].Value.ToString();
-                    cadCliente.txtTelefone.Text = dataGridPesquisa.CurrentRow.Cells["Telefone"].Value.ToString();
-                    cadCliente.txtEmail.Text = dataGridPesquisa.CurrentRow.Cells["Email"].Value.ToString();
-                    cadCliente.txtCidadeID.Text = dataGridPesquisa.CurrentRow.Cells["CidadeID"].Value.ToString();
-
-                    cadCliente.Text = "SISCONTROL - EXCLUSÃO DE REGISTRO";
-                    cadCliente.StatusOperacao = "EXCLUSÃO";
-                    cadCliente.btnSalvar.Text = "Excluir";
-                    cadCliente.btnNovo.Enabled = false;
-                    cadCliente.btnSalvar.TextAlign = ContentAlignment.MiddleRight;//AlinhamentoDeConteúdo.MiddleLeft; =  StringAlignment
-                    cadCliente.btnSalvar.Image = Properties.Resources.Excluir2;
-
-                    cadCliente.txtClienteID.Enabled = false;
-                    cadCliente.txtNomeCliente.Enabled = false;
-                    cadCliente.txtCpfCnpj.Enabled = false;
-                    cadCliente.txtEndereco.Enabled = false;
-                    cadCliente.txtTelefone.Enabled = false;
-                    cadCliente.txtEmail.Enabled = false;
-                    cadCliente.txtCidadeID.Enabled = false;
-
-                    cadCliente.ShowDialog();
-                    ((FrmManutCliente)Application.OpenForms["FrmManutCliente"]).HabilitarTimer(true);
-                }
-                ListarCliente();
+                //((FrmManutCliente)Application.OpenForms["FrmManutCliente"]).HabilitarTimer(true);
             }
-            catch (Exception ex)
+            if (StatusOperacao == "ALTERAR")
             {
-                MessageBox.Show("Erro..." + ex.Message);
+                try
+                {
+                    // Verificar se a DataGridView contém alguma linha
+                    if (dataGridPesquisa.Rows.Count == 0)
+                    {
+                        // Lançar exceção personalizada
+                        //throw new Exception("A DataGridView está vazia. Não há dados para serem processados.");
+                        MessageBox.Show("A DataGridView está vazia. Não há dados para serem processados.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+
+                    }
+                    else
+                    {
+                        // Exemplo: Acessar a primeira célula de cada linha
+                        //  var valor = row.Cells[0].Value;
+                        cadCliente.txtClienteID.Text = dataGridPesquisa.CurrentRow.Cells["ClienteID"].Value.ToString();
+                        cadCliente.txtNomeCliente.Text = dataGridPesquisa.CurrentRow.Cells["NomeCliente"].Value.ToString();
+                        cadCliente.txtCpfCnpj.Text = dataGridPesquisa.CurrentRow.Cells["CpfCnpj"].Value.ToString();
+                        cadCliente.txtEndereco.Text = dataGridPesquisa.CurrentRow.Cells["Endereco"].Value.ToString();
+                        cadCliente.txtTelefone.Text = dataGridPesquisa.CurrentRow.Cells["Telefone"].Value.ToString();
+                        cadCliente.txtEmail.Text = dataGridPesquisa.CurrentRow.Cells["Email"].Value.ToString();
+                        cadCliente.txtCidadeID.Text = dataGridPesquisa.CurrentRow.Cells["CidadeID"].Value.ToString();
+                        cadCliente.txtNomeCidade.Text = dataGridPesquisa.CurrentRow.Cells["Expr1"].Value.ToString();
+                        //cadCliente.tx.Text = dataGridPesquisa.CurrentRow.Cells["EstadoID"].Value.ToString();
+
+                        cadCliente.Text = "SISCONTROL - ALTERAR REGISTRO";
+                        cadCliente.StatusOperacao = "ALTERAR";
+                        cadCliente.btnSalvar.Text = "Alterar";
+                        cadCliente.btnNovo.Enabled = false;
+                        cadCliente.btnSalvar.TextAlign = ContentAlignment.MiddleRight;//AlinhamentoDeConteúdo.MiddleLeft; =  StringAlignment
+                        cadCliente.btnSalvar.Image = Properties.Resources.Alterar;
+                        cadCliente.ShowDialog();
+                        ((FrmManutCliente)Application.OpenForms["FrmManutCliente"]).HabilitarTimer(true);
+                    }
+
+                    //// Execução do código desejado
+                    //foreach (DataGridViewRow row in dataGridPesquisa.Rows)
+                    //{
+                       
+
+                    //}
+                }
+                catch (Exception ex)
+                {
+                    // Exibir uma mensagem de erro para o usuário
+                    MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }                
             }
-            ((FrmManutCliente)Application.OpenForms["FrmManutCliente"]).HabilitarTimer(true);
+            if (StatusOperacao == "EXCLUSÃO")
+            {
+                try
+                {
+                    // Verificar se a DataGridView contém alguma linha
+                    if (dataGridPesquisa.Rows.Count == 0)
+                    {
+                        // Lançar exceção personalizada
+                        //throw new Exception("A DataGridView está vazia. Não há dados para serem processados.");
+                        MessageBox.Show("A DataGridView está vazia. Não há dados para serem processados.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    }
+                    else
+                    {
+                        // Exemplo: Acessar a primeira célula de cada linha
+                        //  var valor = row.Cells[0].Value;
+                        cadCliente.txtClienteID.Text = dataGridPesquisa.CurrentRow.Cells["ClienteID"].Value.ToString();
+                        cadCliente.txtNomeCliente.Text = dataGridPesquisa.CurrentRow.Cells["NomeCliente"].Value.ToString();
+                        cadCliente.txtCpfCnpj.Text = dataGridPesquisa.CurrentRow.Cells["CpfCnpj"].Value.ToString();
+                        cadCliente.txtEndereco.Text = dataGridPesquisa.CurrentRow.Cells["Endereco"].Value.ToString();
+                        cadCliente.txtTelefone.Text = dataGridPesquisa.CurrentRow.Cells["Telefone"].Value.ToString();
+                        cadCliente.txtEmail.Text = dataGridPesquisa.CurrentRow.Cells["Email"].Value.ToString();
+                        cadCliente.txtCidadeID.Text = dataGridPesquisa.CurrentRow.Cells["CidadeID"].Value.ToString();
+                        cadCliente.txtNomeCidade.Text = dataGridPesquisa.CurrentRow.Cells["Expr1"].Value.ToString();
+
+                        cadCliente.Text = "SISCONTROL - EXCLUSÃO DE REGISTRO";
+                        cadCliente.StatusOperacao = "EXCLUSÃO";
+                        cadCliente.btnSalvar.Text = "Excluir";
+                        cadCliente.btnNovo.Enabled = false;
+                        cadCliente.btnSalvar.TextAlign = ContentAlignment.MiddleRight;//AlinhamentoDeConteúdo.MiddleLeft; =  StringAlignment
+                        cadCliente.btnSalvar.Image = Properties.Resources.Excluir2;
+
+                        cadCliente.txtClienteID.Enabled = false;
+                        cadCliente.txtNomeCliente.Enabled = false;
+                        cadCliente.txtCpfCnpj.Enabled = false;
+                        cadCliente.txtEndereco.Enabled = false;
+                        cadCliente.txtTelefone.Enabled = false;
+                        cadCliente.txtEmail.Enabled = false;
+                        cadCliente.txtCidadeID.Enabled = false;
+                        cadCliente.txtNomeCidade.Enabled = false;
+                        cadCliente.txtEstadoCliente.Enabled = false;
+                        cadCliente.btnLocalizar.Enabled = false;
+
+                        cadCliente.ShowDialog();
+                        ((FrmManutCliente)Application.OpenForms["FrmManutCliente"]).HabilitarTimer(true);
+                    }
+                    // Execução do código desejado
+                    //foreach (DataGridViewRow row in dataGridPesquisa.Rows)
+                    //{
+                    //}
+                }
+                catch (Exception ex)
+                {
+                    // Exibir uma mensagem de erro para o usuário
+                    MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }       
+            }
+            ListarCliente();
         }
         private void btnNovo_Click(object sender, EventArgs e)
         {
@@ -152,18 +207,26 @@ namespace SisControl.View
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            //LISTAR();
+            ListarCliente();
             timer1.Enabled = false;
         }
 
         private void btnSair_Click(object sender, EventArgs e)
-        {
-            this.Close();
+        {            
         }
 
         private void txtPesquisa_TextChanged(object sender, EventArgs e)
         {
+            string nome = "%" + txtPesquisa.Text + "%";
+            ClienteDALL clienteDao = new ClienteDALL();
 
+            dataGridPesquisa.DataSource = clienteDao.PesquisarPorNome(nome);
+            PersonalizarDatagridView();
+        }
+
+        private void FrmManutCliente_Load(object sender, EventArgs e)
+        {
+            ListarCliente();
         }
     }
 }

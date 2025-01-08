@@ -46,7 +46,7 @@ FornecedorID = @Fornecedor, Nome = @Nome, Cnpj = @Cnpj, Endereco = @Endereço, T
 @Fornecedor, @Nome, @Cnpj, @Endereço, @Telefone, @Email, CidadeID
 
 "@FornecedorID", 
-"@Nome", 
+"@NomeFornecedor", 
 "@Cnpj", 
 "@Endereco", 
 "@Telefone", 

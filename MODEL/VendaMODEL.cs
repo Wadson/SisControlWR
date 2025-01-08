@@ -12,5 +12,13 @@ namespace SisControl.MODEL
         public int ClienteID { get; set; }
         public DateTime DataVenda { get; set; }
         public Decimal ValorTotal { get; set; }
+
+        public List<int> ItemVendaID = new List<int>();
+        public List<int> ParcelaID = new List<int>();
+        public List<int> ContaReceberID = new List<int>();
+
+        //public List<ItemVenda> ItensVenda { get; set; }
+        //public List<Parcela> Parcelas { get; set; }
+        //public List<ContaReceber> ContasReceber { get; set; }
     }
 }

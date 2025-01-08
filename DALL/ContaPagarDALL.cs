@@ -80,7 +80,6 @@ namespace SisControl.DALL
             {
                 conn.Close();
             }
-
         }
         public void excluiConta(ContaPagarMODEL contas)
         {

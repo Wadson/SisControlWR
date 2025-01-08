@@ -54,7 +54,7 @@
             // txtCpfCnpj
             // 
             this.txtCpfCnpj.Location = new System.Drawing.Point(116, 152);
-            this.txtCpfCnpj.MaxLength = 100;
+            this.txtCpfCnpj.MaxLength = 14;
             this.txtCpfCnpj.Name = "txtCpfCnpj";
             this.txtCpfCnpj.Size = new System.Drawing.Size(143, 20);
             this.txtCpfCnpj.TabIndex = 2;
@@ -122,6 +122,7 @@
             // 
             // txtEstadoCliente
             // 
+            this.txtEstadoCliente.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtEstadoCliente.Location = new System.Drawing.Point(116, 261);
             this.txtEstadoCliente.MaxLength = 100;
             this.txtEstadoCliente.Name = "txtEstadoCliente";
@@ -143,6 +144,7 @@
             // 
             // txtNomeCidade
             // 
+            this.txtNomeCidade.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtNomeCidade.Location = new System.Drawing.Point(206, 233);
             this.txtNomeCidade.MaxLength = 100;
             this.txtNomeCidade.Name = "txtNomeCidade";
@@ -163,6 +165,7 @@
             // 
             // txtEmail
             // 
+            this.txtEmail.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
             this.txtEmail.Location = new System.Drawing.Point(116, 207);
             this.txtEmail.MaxLength = 100;
             this.txtEmail.Name = "txtEmail";
@@ -182,6 +185,7 @@
             // 
             // txtEndereco
             // 
+            this.txtEndereco.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtEndereco.Location = new System.Drawing.Point(116, 180);
             this.txtEndereco.MaxLength = 100;
             this.txtEndereco.Name = "txtEndereco";
@@ -246,6 +250,7 @@
             // 
             // txtNomeCliente
             // 
+            this.txtNomeCliente.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtNomeCliente.Location = new System.Drawing.Point(116, 94);
             this.txtNomeCliente.MaxLength = 100;
             this.txtNomeCliente.Name = "txtNomeCliente";
@@ -307,10 +312,8 @@
             this.Controls.Add(this.txtNomeCliente);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.label2);
-            this.KeyPreview = true;
             this.Name = "FrmCadCliente";
             this.Load += new System.EventHandler(this.FrmCadCliente_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmCadCliente_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -322,7 +325,6 @@
         private System.Windows.Forms.Label label9;
         public System.Windows.Forms.TextBox txtClienteID;
         public System.Windows.Forms.TextBox txtCidadeID;
-        private System.Windows.Forms.Button btnLocalizar;
         public System.Windows.Forms.TextBox txtEstadoCliente;
         private System.Windows.Forms.Label label7;
         public System.Windows.Forms.TextBox txtNomeCidade;
@@ -339,5 +341,6 @@
         public System.Windows.Forms.Button btnNovo;
         public System.Windows.Forms.Button btnSalvar;
         public System.Windows.Forms.MaskedTextBox txtTelefone;
+        public System.Windows.Forms.Button btnLocalizar;
     }
 }

@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SisControl.DALL
 {
@@ -17,7 +18,7 @@ namespace SisControl.DALL
             try
             {
                 conn.Open();
-                SqlCommand sqlcomando = new SqlCommand("SELECT * FROM Fornecedor", conn);
+                SqlCommand sqlcomando = new SqlCommand("SELECT Fornecedor.FornecedorID, Fornecedor.NomeFornecedor, Fornecedor.Cnpj, Fornecedor.Endereco, Fornecedor.Telefone, Fornecedor.Email, Fornecedor.CidadeID, Cidade.NomeCidade FROM Fornecedor INNER JOIN Cidade ON Fornecedor.CidadeID = Cidade.CidadeID", conn);
                 SqlDataAdapter daFornecedor = new SqlDataAdapter();
                 daFornecedor.SelectCommand = sqlcomando;
                 DataTable dtFornecedor = new DataTable();
@@ -40,7 +41,7 @@ namespace SisControl.DALL
 
             try
             {
-                SqlCommand sqlcomando = new SqlCommand("INSERT INTO Fornecedor (FornecedorID, NomeFornecedor, Cnpj, Endereco, Telefone, Email, CidadeID) VALUES  (@FornecedorID, @NomeFornecedor, @Cnpj, @Endereço, @Telefone, @Email, CidadeID)", conn);
+                SqlCommand sqlcomando = new SqlCommand("INSERT INTO Fornecedor (FornecedorID, NomeFornecedor, Cnpj, Endereco, Telefone, Email, CidadeID) VALUES  (@FornecedorID, @NomeFornecedor, @Cnpj, @Endereco, @Telefone, @Email, @CidadeID)", conn);
 
                 sqlcomando.Parameters.AddWithValue("@FornecedorID", fornecedor.FornecedorID);
                 sqlcomando.Parameters.AddWithValue("@NomeFornecedor", fornecedor.NomeFornecedor);
@@ -89,7 +90,7 @@ namespace SisControl.DALL
             var conn = Conexao.Conex();
             try
             {
-                SqlCommand sqlcomando = new SqlCommand("UPDATE Fornecedor SET FornecedorID = @Fornecedor, NomeFornecedor = @NomeFornecedor, Cnpj = @Cnpj, Endereco = @Endereço, Telefone = @Telefone, Email = @Email, CidadeID = CidadeID", conn);
+                SqlCommand sqlcomando = new SqlCommand("UPDATE Fornecedor SET NomeFornecedor = @NomeFornecedor, Cnpj = @Cnpj, Endereco = @Endereco, Telefone = @Telefone, Email = @Email, CidadeID = CidadeID", conn);
 
                 sqlcomando.Parameters.AddWithValue("@NomeFornecedor", fornecedor.NomeFornecedor);
                 sqlcomando.Parameters.AddWithValue("@Cnpj", fornecedor.Cnpj);
@@ -109,6 +110,34 @@ namespace SisControl.DALL
             finally
             {
                 conn.Close();
+            }
+        }
+
+        public DataTable PesquisarPorNome(string nome)
+        {
+            var conn = Conexao.Conex();
+            try
+            {
+                DataTable dt = new DataTable();
+
+                string sqlconn = "SELECT FornecedorID, NomeFornecedor, Cnpj, Endereco, Telefone, Email, CidadeID FROM Fornecedor WHERE NomeFornecedor LIKE @NomeFornecedor";
+
+
+                //string sqlconn = "SELECT TOP (30) * FROM Cliente WHERE NomeCliente LIKE @NomeCliente";
+                SqlCommand cmd = new SqlCommand(sqlconn, conn);
+                cmd.Parameters.AddWithValue("@NomeFornecedor", nome);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+                conn.Close();
+                conn.Dispose();
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao executar a pesquisa: " + ex);
+                return null;
             }
         }
     }

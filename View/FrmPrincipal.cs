@@ -30,6 +30,9 @@ namespace SisControl
             this.panelContenedor.Tag = fh;
             fh.Show();
         }
+
+       
+
         private void FrmPrincipal_Load(object sender, EventArgs e)
         {
             string currentPath = Path.GetDirectoryName(Application.ExecutablePath);
@@ -55,28 +58,43 @@ namespace SisControl
         private void btnFUNCIONARIOS_Click(object sender, EventArgs e)
         {
             FrmManutUsuario frm = new FrmManutUsuario();
-            AbrirFormInPanel(frm);
+            //AbrirFormInPanel(frm);
+            frm.ShowDialog();
+
+            //Form1 form1 = new Form1();
+
+            //// Definir o evento de fechamento do Form2 quando Form1 é aberto
+            //form1.FormClosed += (s, args) => this.Close();
+
+            //// Mostra o Form1
+            //form1.Show();
+
+            //// Esconder o Form2
+            //this.Hide();
         }
 
         private void btnCadCli_Click(object sender, EventArgs e)
         {
             FrmManutCliente frm = new FrmManutCliente();
-            AbrirFormInPanel(frm);
+            frm.ShowDialog();
         }
 
         private void btnFORNECEDORES_Click(object sender, EventArgs e)
         {
-
+            FrmManutFornecedor frm = new FrmManutFornecedor();
+            frm.ShowDialog();
         }
 
         private void btnCategoria_Click(object sender, EventArgs e)
         {
-
+            FrmManutCategoria frm = new FrmManutCategoria();
+            frm.ShowDialog();
         }
 
         private void btnSubCateg_Click(object sender, EventArgs e)
         {
-
+            FrmManutSubCategoria frmManutSubCat = new FrmManutSubCategoria();
+            frmManutSubCat.ShowDialog();
         }
 
         private void btnProdutos_Click(object sender, EventArgs e)
@@ -91,7 +109,8 @@ namespace SisControl
 
         private void btnVendas_Click(object sender, EventArgs e)
         {
-
+            FrmVendas frm = new FrmVendas();
+            AbrirFormInPanel(frm);
         }
 
         private void btnContasPagar_Click(object sender, EventArgs e)

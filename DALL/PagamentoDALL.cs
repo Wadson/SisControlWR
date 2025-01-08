@@ -10,19 +10,17 @@ namespace SisControl.DALL
 {
     internal class PagamentoDALL
     {
-        public void SalvarRegistroPagamento(PagamentoMODEL parcela)
+        public void SalvarRegistroPagamento(PagamentoMODEL pagamento)
         {
             var conn = Conexao.Conex(); try
             {
-                SqlCommand sql = new SqlCommand("INSERT INTO parcelas (id_pagamento, id_contasreceber, id_formapgto, valor_pgto, dt_pgto) " +
-                "VALUES (@id_Pagamento, @id_Contasreceber, @id_Formapgto, @valor_Pgto, @dt_pgto)", conn);
+                SqlCommand sql = new SqlCommand("INSERT INTO Pagamento (PagamentoID, ParcelaID, DataPagamento, ValorPago) VALUES (@PagamentoID, @ParcelaID, @DataPagamento, @ValorPago)", conn);
 
-                //sql.Parameters.AddWithValue("@id_Pagamento", parcela.Id_pagamento);
-                //sql.Parameters.AddWithValue("@id_Contasreceber", parcela.Id_contasreceber);
-                //sql.Parameters.AddWithValue("@id_Formapgto", parcela.Id_formapgto);
-                //sql.Parameters.AddWithValue("@valor_Pgto", parcela.Valor_pgto);
-                //sql.Parameters.AddWithValue("@dt_pgto", parcela.Dt_pgto);
-
+                sql.Parameters.AddWithValue("@PagamentoID",   pagamento.PagamentoID);
+                sql.Parameters.AddWithValue("@ParcelaID",   pagamento.ParcelaID);
+                sql.Parameters.AddWithValue("@DataPagamento",   pagamento.DataPagamento);
+                sql.Parameters.AddWithValue("@ValorPago", pagamento.ValorPago);
+                
                 conn.Open();
                 sql.ExecuteNonQuery();
             }
@@ -38,13 +36,13 @@ namespace SisControl.DALL
 
         }
 
-        public void excluirTodosPagamentos(PagamentoMODEL parcela)
+        public void ExcluirTodosPagamentos(PagamentoMODEL parcela)
         {
             var conn = Conexao.Conex();
             try
             {
-                SqlCommand sql = new SqlCommand("DELETE FROM registropagamento WHERE id_pagamento = @id_Pagamento", conn);
-                sql.Parameters.AddWithValue("@id_Pagamento", parcela.PagamentoID);
+                SqlCommand sql = new SqlCommand("DELETE FROM Pagamento WHERE PagamentoID = @PagamentoID", conn);
+                sql.Parameters.AddWithValue("@PagamentoID", parcela.PagamentoID);
                 conn.Open();
                 sql.ExecuteNonQuery();
             }
@@ -57,13 +55,13 @@ namespace SisControl.DALL
                 conn.Close();
             }
         }
-        public void excluiParcelaUnica(PagamentoMODEL parcelas)
+        public void ExcluiUnicoPagamento(PagamentoMODEL pagamento)
         {
             var conn = Conexao.Conex();
             try
             {
-                SqlCommand sql = new SqlCommand("DELETE FROM registropagamento WHERE id_pagamento = @id_Pagamento", conn);
-                sql.Parameters.AddWithValue("@id_Pagamento", parcelas.PagamentoID);
+                SqlCommand sql = new SqlCommand("DELETE FROM Pagamento WHERE PagamentoID = @PagamentoID", conn);
+                sql.Parameters.AddWithValue("@PagamentoID", pagamento.PagamentoID);
                 conn.Open();
                 sql.ExecuteNonQuery();
             }
@@ -76,18 +74,17 @@ namespace SisControl.DALL
                 conn.Close();
             }
         }
-        public void atualizaRegistroPagamento(PagamentoMODEL parc)
+        public void AtualizaRegistroPagamento(PagamentoMODEL pagamento)
         {
             var conn = Conexao.Conex();
             try
             {
-                SqlCommand sql = new SqlCommand("UPDATE registropagamento SET id_pagamento = @id_Pagamento, id_contasreceber = @id_Contasreceber, id_formapgto = @id_Formapgto, valor_pgto = @valor_Pgto, dt_pgto = @dt_pgto", conn);
-
-                //sql.Parameters.AddWithValue("@id_Contasreceber", parc.Id_contasreceber);
-                //sql.Parameters.AddWithValue("@id_Formapgto", parc.Id_formapgto);
-                //sql.Parameters.AddWithValue("@valor_Pgto", parc.Valor_pgto);
-                //sql.Parameters.AddWithValue("@dt_pgto", parc.Dt_pgto);
-                //sql.Parameters.AddWithValue("@id_Pagamento", parc.Id_pagamento);
+                SqlCommand sql = new SqlCommand("UPDATE Pagamento SET PagamentoID = @PagamentoID, ParcelaID = @ParcelaID, DataPagamento = @DataPagamento, ValorPago = @ValorPago", conn);
+                                
+                sql.Parameters.AddWithValue("@ParcelaID", pagamento.ParcelaID);
+                sql.Parameters.AddWithValue("@DataPagamento", pagamento.DataPagamento);
+                sql.Parameters.AddWithValue("@ValorPago", pagamento.ValorPago);
+                sql.Parameters.AddWithValue("@PagamentoID", pagamento.PagamentoID);
 
                 conn.Open();
                 sql.ExecuteNonQuery();

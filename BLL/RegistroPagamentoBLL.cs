@@ -31,7 +31,7 @@ namespace SisControl.BLL
             try
             {
                 registroPagamentodal = new PagamentoDALL();
-                registroPagamentodal.excluirTodosPagamentos(registropagamento);
+                registroPagamentodal.ExcluirTodosPagamentos(registropagamento);
             }
             catch (Exception erro)
             {
@@ -43,7 +43,7 @@ namespace SisControl.BLL
             try
             {
                 registroPagamentodal = new PagamentoDALL();
-                registroPagamentodal.excluiParcelaUnica(excluirumaparcela);
+                registroPagamentodal.ExcluiUnicoPagamento(excluirumaparcela);
             }
             catch (Exception erro)
             {
@@ -56,7 +56,7 @@ namespace SisControl.BLL
             try
             {
                 registroPagamentodal = new PagamentoDALL();
-                registroPagamentodal.atualizaRegistroPagamento(registropagamento);
+                registroPagamentodal.AtualizaRegistroPagamento(registropagamento);
             }
             catch (Exception erro)
             {

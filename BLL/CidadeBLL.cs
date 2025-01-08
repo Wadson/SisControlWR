@@ -17,6 +17,7 @@ namespace SisControl.BLL
         public DataTable Listar()
         {
             DataTable dtable = new DataTable();
+            
             try
             {
                 CidadeDal = new CidadeDALL();
@@ -57,6 +58,7 @@ namespace SisControl.BLL
 
         public void Atualizar(CidadeMODEL cidades)
         {
+           
             try
             {
                 CidadeDal = new CidadeDALL();

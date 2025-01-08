@@ -39,7 +39,6 @@
             this.btnSair.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnSair.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnSair.Location = new System.Drawing.Point(650, 380);
-            this.btnSair.Click += new System.EventHandler(this.btnSair_Click);
             // 
             // txtPesquisa
             // 

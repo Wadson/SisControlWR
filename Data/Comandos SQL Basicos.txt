@@ -1,0 +1,5 @@
+
+Altera uma coluna no banco de dados
+
+ALTER TABLE Cliente ALTER COLUMN Telefone nvarchar(20);  
+GO 

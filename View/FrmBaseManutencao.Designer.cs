@@ -62,6 +62,7 @@
             this.btnSair.TabIndex = 426;
             this.btnSair.Text = "&Sair";
             this.btnSair.UseVisualStyleBackColor = false;
+            this.btnSair.Click += new System.EventHandler(this.btnSair_Click);
             // 
             // txtPesquisa
             // 
@@ -96,7 +97,7 @@
             this.btnExcluir.Name = "btnExcluir";
             this.btnExcluir.Size = new System.Drawing.Size(117, 37);
             this.btnExcluir.TabIndex = 424;
-            this.btnExcluir.Text = "  &Excluir";
+            this.btnExcluir.Text = "&Excluir";
             this.btnExcluir.UseVisualStyleBackColor = false;
             // 
             // btnNovo
@@ -178,6 +179,7 @@
             this.dataGridPesquisa.GridColor = System.Drawing.Color.SteelBlue;
             this.dataGridPesquisa.Location = new System.Drawing.Point(10, 67);
             this.dataGridPesquisa.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dataGridPesquisa.MultiSelect = false;
             this.dataGridPesquisa.Name = "dataGridPesquisa";
             this.dataGridPesquisa.ReadOnly = true;
             this.dataGridPesquisa.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;

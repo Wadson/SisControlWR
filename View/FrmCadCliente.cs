@@ -22,19 +22,19 @@ namespace SisControl.View
             {
                 ClienteMODEL objetoCliente = new ClienteMODEL();
 
-               objetoCliente.ClienteID = Convert.ToInt32(txtCidadeID.Text);
-               objetoCliente.NomeCliente = txtNomeCliente.Text;
-               objetoCliente.CpfCnpj = txtCpfCnpj.Text;
-               objetoCliente.Endereco = txtEndereco.Text;
-               objetoCliente.Telefone = txtTelefone.Text;
-               objetoCliente.Email = txtEmail.Text;
-               objetoCliente.CidadeID = Convert.ToInt32(txtCidadeID.Text);
+                objetoCliente.ClienteID = Convert.ToInt32(txtClienteID.Text);
+                objetoCliente.NomeCliente = txtNomeCliente.Text;
+                objetoCliente.CpfCnpj = txtCpfCnpj.Text;
+                objetoCliente.Endereco = txtEndereco.Text;
+                objetoCliente.Telefone = txtTelefone.Text;
+                objetoCliente.Email = txtEmail.Text;
+                objetoCliente.CidadeID = Convert.ToInt32(txtCidadeID.Text);
 
                 ClienteBLL clienteBll = new ClienteBLL();
                 clienteBll.Alterar(objetoCliente);
-                
+
                 MessageBox.Show("Registro Alterado com sucesso!", "Alteração!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                //((FrmManutUsuario)Application.OpenForms["FrmManutUsuario"]).HabilitarTimer(true);// Habilita Timer do outro form Obs: O timer no outro form executa um Método.    
+                ((FrmManutCliente)Application.OpenForms["FrmManutCliente"]).HabilitarTimer(true);// Habilita Timer do outro form Obs: O timer no outro form executa um Método.    
                 LimpaCampo();
                 this.Close();
             }
@@ -47,32 +47,30 @@ namespace SisControl.View
         {
             try
             {
-                if (ClienteID != 0 && txtCidadeID.Text!= string.Empty && txtNomeCidade.Text != string.Empty)
-                {
-                    ClienteMODEL objetoCliente = new ClienteMODEL();
+                ClienteMODEL objetoCliente = new ClienteMODEL();
 
-                    objetoCliente.ClienteID = Convert.ToInt32(txtCidadeID.Text);
-                    objetoCliente.NomeCliente = txtNomeCliente.Text;
-                    objetoCliente.CpfCnpj = txtCpfCnpj.Text;
-                    objetoCliente.Endereco = txtEndereco.Text;
-                    objetoCliente.Telefone = txtTelefone.Text;
-                    objetoCliente.Email = txtEmail.Text;
-                    objetoCliente.CidadeID = Convert.ToInt32(txtCidadeID.Text);
-                    
+                //objetoCliente.ClienteID = Convert.ToInt32(txtClienteID.Text);
+                objetoCliente.NomeCliente = txtNomeCliente.Text;
+                objetoCliente.CpfCnpj = txtCpfCnpj.Text;
+                objetoCliente.Endereco = txtEndereco.Text;
+                objetoCliente.Telefone = ReplaceValoresMasketTexBox(txtTelefone);
+                objetoCliente.Email = txtEmail.Text;
+                objetoCliente.CidadeID = Convert.ToInt32(txtCidadeID.Text);
 
-                    ClienteBLL clienteBll = new ClienteBLL();
-                    clienteBll.Salvar(objetoCliente);
+                ClienteBLL clienteBll = new ClienteBLL();
+                clienteBll.Salvar(objetoCliente);
 
-                    MessageBox.Show("REGISTRO gravado com sucesso! ", "Informação!!!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    ((FrmManutCliente)Application.OpenForms["FrmManutCliente"]).HabilitarTimer(true);
-                    
-                    LimpaCampo();
-                    txtNomeCliente.Focus();
+                MessageBox.Show("REGISTRO gravado com sucesso! ", "Informação!!!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                ((FrmManutCliente)Application.OpenForms["FrmManutCliente"]).HabilitarTimer(true);
 
-                    txtClienteID.Text = RetornaCodigoContaMaisUm(QueryClientes).ToString();
-                    UsuarioID = RetornaCodigoContaMaisUm(QueryUsuario);
-                    AcrescenteZero_a_Esquerda2(txtClienteID);
-                    
+                LimpaCampo();
+                txtNomeCliente.Focus();
+
+                txtClienteID.Text = RetornaCodigoContaMaisUm(QueryClientes).ToString();
+                UsuarioID = RetornaCodigoContaMaisUm(QueryUsuario);
+                AcrescenteZero_a_Esquerda2(txtClienteID);
+                if (txtClienteID.Text != string.Empty && txtCidadeID.Text!= string.Empty && txtNomeCidade.Text != string.Empty)
+                { 
                 }
             }
             catch (OverflowException ov)
@@ -107,28 +105,25 @@ namespace SisControl.View
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
-            FrmManutUsuario pesquisausuario = new FrmManutUsuario();
-
-            if (StatusOperacao == "ALTERAR")
-            {
-                AlterarRegistro();
-            }
             if (StatusOperacao == "NOVO")
             {
-                EvitarDuplicado("Usuario", "NomeUsuario", txtNomeCliente.Text);
+                EvitarDuplicado("Cliente", "NomeCliente", txtNomeCliente.Text);
                 if (RetornoEvitaDuplicado == "0")
                 {
                     SalvarRegistro();
                 }
             }
-            if (StatusOperacao == "EXCLUSÃO")
+            else if (StatusOperacao == "ALTERAR")
             {
-                if (MessageBox.Show("Deseja Excluir? \n\n O Usuário: " + txtNomeCliente.Text + " ??? ", "Excluir", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                AlterarRegistro();
+            }
+            else if (StatusOperacao == "EXCLUSÃO")
+            {
+                if (MessageBox.Show("Deseja Excluir? \n\n O Cliente: " + txtNomeCliente.Text + " ??? ", "Excluir", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     ExcluirRegistro();
                 }
             }
-
         }
 
         private void btnNovo_Click(object sender, EventArgs e)
@@ -147,34 +142,21 @@ namespace SisControl.View
         {
             if (StatusOperacao == "ALTERAR")
             {
-                AcrescenteZero_a_Esquerda2(txtCidadeID);
+                return;
             }
             if (StatusOperacao == "NOVO")
             {
                 UsuarioID = RetornaCodigoContaMaisUm(QueryClientes);
                 txtClienteID.Text = RetornaCodigoContaMaisUm(QueryClientes).ToString();
                 txtNomeCliente.Focus();
-            }
-            AcrescenteZero_a_Esquerda2(txtClienteID);
-        }
-
-        private void FrmCadCliente_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-
-                if (this.GetNextControl(ActiveControl, true) != null)
-                {
-                    e.Handled = true;
-                    this.GetNextControl(ActiveControl, true).Focus();
-                }
-            }
+            }            
         }
 
         private void btnLocalizar_Click(object sender, EventArgs e)
         {
             FrmLocalizarCidade frmLocalizarCidade = new FrmLocalizarCidade();
             frmLocalizarCidade.Text = "Localizar Cidade...";
+            VariavelGlobal.NomeFormulario = "FrmCadCliente";
             frmLocalizarCidade.ShowDialog();
             AcrescenteZero_a_Esquerda2(txtCidadeID);
         }

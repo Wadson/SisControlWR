@@ -36,9 +36,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(478, 270);
+            this.KeyPreview = true;
             this.Name = "FrmBaseGeral";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmBaseGeral";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmBaseGeral_KeyDown_1);
             this.ResumeLayout(false);
 
         }

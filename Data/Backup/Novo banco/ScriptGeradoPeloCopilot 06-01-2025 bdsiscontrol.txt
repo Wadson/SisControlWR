@@ -1,0 +1,158 @@
+
+-- Usa o banco de dados criado
+USE bdsiscontrol;
+GO
+
+-- Cria a tabela Usuario
+CREATE TABLE Usuario (    
+	UsuarioID INT PRIMARY KEY,
+	NomeUsuario nvarchar(100) NOT NULL,
+	Email nvarchar(100) NOT NULL,
+	Senha nvarchar(100) NOT NULL,
+	TipoUsuario nvarchar(20) NOT NULL,
+);
+GO
+
+-- Cria a tabela Cliente
+CREATE TABLE Cliente (
+    ClienteID INT PRIMARY KEY,
+    Nome NVARCHAR(100) NOT NULL,
+    Sobrenome NVARCHAR(100),
+    Email NVARCHAR(100)
+);
+GO
+
+-- Cria a tabela Fornecedor
+CREATE TABLE Fornecedor (
+    FornecedorID INT PRIMARY KEY,
+   NomeFornecedor nvarchar(100) NOT NULL,
+	Cnpj nvarchar(14) NOT NULL,
+	Endereco nvarchar(255) NULL,
+	Telefone nvarchar(15) NULL,
+	Email nvarchar(100) NULL,
+	CidadeID int NOT NULL,
+);
+GO
+
+-- Cria a tabela Produtos
+CREATE TABLE Produtos (
+    ProdutoID INT PRIMARY KEY,
+    NomeProduto nvarchar(100) NOT NULL,
+	Descricao nvarchar(max) NULL,
+	Preco decimal(10, 2) NOT NULL,
+	Estoque int NOT NULL,
+	CategoriaID int NOT NULL,
+	SubCategoriaID int NOT NULL,
+    FOREIGN KEY (CategoriaID) REFERENCES Categoria(CategoriaID)
+	FOREIGN KEY (SubCategoriaID) REFERENCES SubCategoria(SubCategoriaID),
+);
+GO
+
+-- Cria a tabela Vendas
+CREATE TABLE Venda (        
+	VendaID INT PRIMARY KEY,
+	ClienteID int NOT NULL,
+	DataVenda datetime NOT NULL,
+	ValorTotal decimal(10, 2) NOT NULL,
+
+    FOREIGN KEY (ClienteID) REFERENCES Cliente(ClienteID)
+);
+GO
+
+-- Cria a tabela ItensDeVenda
+CREATE TABLE ItensDeVenda (
+    ItemVendaID INT PRIMARY KEY,
+    VendaID INT,
+    ProdutoID INT,
+    Quantidade INT,
+    PrecoUnitario DECIMAL(10, 2),
+    FOREIGN KEY (VendaID) REFERENCES Venda(VendaID),
+    FOREIGN KEY (ProdutoID) REFERENCES Produtos(ProdutoID)
+);
+GO
+
+-- Cria a tabela ContasAReceber
+CREATE TABLE ContasAReceber (
+    ContaReceberID INT PRIMARY KEY,
+    VendaID INT,
+    DataVencimento DATE,
+    ValorTotal DECIMAL(10, 2),
+    Pago BIT,
+    FOREIGN KEY (VendaID) REFERENCES Venda(VendaID)
+);
+GO
+
+-- Cria a tabela ContasAPagar
+CREATE TABLE ContasAPagar (
+    ContaPagarID INT PRIMARY KEY,
+    FornecedorID INT,
+    DataVencimento DATE,
+    ValorTotal DECIMAL(10, 2),
+    Pago BIT,
+    FOREIGN KEY (FornecedorID) REFERENCES Fornecedor(FornecedorID)
+);
+GO
+
+-- Cria a tabela Categoria
+CREATE TABLE Categoria (
+    CategoriaID INT PRIMARY KEY,
+    NomeCategoria NVARCHAR(100)
+);
+GO
+
+-- Cria a tabela SubCategoria
+CREATE TABLE SubCategoria (    
+	SubCategoriaID INT PRIMARY KEY,
+	NomeSubCategoria nvarchar(100) NOT NULL,
+	CategoriaID int NOT NULL,
+
+    FOREIGN KEY (CategoriaID) REFERENCES Categoria(CategoriaID)
+);
+GO
+
+-- Cria a tabela Cidade
+CREATE TABLE Cidade (
+    CidadeID INT PRIMARY KEY,
+    Nome NVARCHAR(100),
+    EstadoID INT,
+    FOREIGN KEY (EstadoID) REFERENCES Estado(EstadoID)
+);
+GO
+
+-- Cria a tabela Estado
+CREATE TABLE Estado (
+    EstadoID INT PRIMARY KEY,
+    NomeEstado NVARCHAR(100),
+    Uf NVARCHAR(2),
+	Ibge INT NULL,
+	Pais int NULL,
+	ddd NVARCHAR(50)
+);
+GO
+
+-- Cria a tabela Parcelas
+CREATE TABLE Parcela (
+    ParcelaID INT PRIMARY KEY,
+    ContaReceberID INT,
+	NumeroParcela int NOT NULL,
+    DataVencimento DATE,
+    ValorParcela DECIMAL(10, 2),
+    Pago BIT,
+    FOREIGN KEY (ContaReceberID) REFERENCES ContasAReceber(ContaReceberID)
+);
+GO
+
+-- Cria a tabela Pagamento
+CREATE TABLE Pagamento (
+    PagamentoID INT PRIMARY KEY,
+    ParcelaID INT,
+    DataPagamento DATE,
+    ValorPago DECIMAL(10, 2),
+    FOREIGN KEY (ParcelaID) REFERENCES Parcela(ParcelaID)
+);
+GO
+CREATE TABLE FormaPgto (
+    FormaPgtoID INT PRIMARY KEY,
+    NomeFormaPgto NVARCHAR(50),    
+);
+GO

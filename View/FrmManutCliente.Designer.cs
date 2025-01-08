@@ -38,7 +38,6 @@
             this.btnSair.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.btnSair.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnSair.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnSair.Click += new System.EventHandler(this.btnSair_Click);
             // 
             // txtPesquisa
             // 
@@ -78,6 +77,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(785, 430);
             this.Name = "FrmManutCliente";
+            this.Load += new System.EventHandler(this.FrmManutCliente_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

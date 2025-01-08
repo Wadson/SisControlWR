@@ -46,9 +46,9 @@ namespace SisControl.DALL
 
             try
             {
-                SqlCommand sqlcomm = new SqlCommand("INSERT INTO Usuario (NomeUsuario, Email, Senha, TipoUsuario) VALUES (@NomeUsuario, @Email, @Senha, @TipoUsuario)", conn);
+                SqlCommand sqlcomm = new SqlCommand("INSERT INTO Usuario (UsuarioID, NomeUsuario, Email, Senha, TipoUsuario) VALUES (@UsuarioID, @NomeUsuario, @Email, @Senha, @TipoUsuario)", conn);
 
-                //sqlcomm.Parameters.AddWithValue("@UsuarioID", usuarios.UsuarioID);
+                sqlcomm.Parameters.AddWithValue("@UsuarioID", usuarios.UsuarioID);
                 sqlcomm.Parameters.AddWithValue("@NomeUsuario", usuarios.NomeUsuario);
                 sqlcomm.Parameters.AddWithValue("@Email", usuarios.Email);
                 sqlcomm.Parameters.AddWithValue("@Senha", usuarios.Senha);

@@ -20,7 +20,7 @@ namespace SisControl.BLL
             try
             {
                 SubCategoriaDAL = new SubCategoriaDALL();
-                dtable = SubCategoriaDAL.ListaCategoria();
+                dtable = SubCategoriaDAL.ListaSubCategoria();
             }
             catch (Exception erro)
             {

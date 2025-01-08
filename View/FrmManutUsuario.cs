@@ -144,8 +144,7 @@ namespace SisControl
         }
 
         private void btnSair_Click(object sender, EventArgs e)
-        {
-            this.Close();
+        {            
         }
         private void btnNovo_Click(object sender, EventArgs e)
         {

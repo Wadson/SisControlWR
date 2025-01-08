@@ -18,7 +18,7 @@ namespace SisControl.DALL
             try
             {
                 conn.Open();
-                SqlCommand sqlcomando = new SqlCommand("SELECT Cidade.CidadeID, Cidade.Nome, Cidade.EstadoID, Estado.Nome AS Expr1, Estado.Uf FROM Cidade INNER JOIN Estado ON Cidade.EstadoID = Estado.EstadoID", conn);
+                SqlCommand sqlcomando = new SqlCommand("SELECT TOP (30) Cidade.CidadeID, Cidade.Nome, Cidade.EstadoID, Estado.Nome AS Expr1, Estado.Uf FROM Cidade INNER JOIN Estado ON Cidade.EstadoID = Estado.EstadoID", conn);
                 SqlDataAdapter daReceitas = new SqlDataAdapter();
                 daReceitas.SelectCommand = sqlcomando;
                 DataTable dtReceitas = new DataTable();
@@ -111,7 +111,7 @@ namespace SisControl.DALL
             {
                 DataTable dt = new DataTable();
 
-                string sqlconn = "SELECT CidadeID, NomeCidade, EstadoID FROM Cidade WHERE NomeCidade  LIKE @NomeCidade";
+                string sqlconn = "SELECT TOP (30) Cidade.CidadeID, Cidade.NomeCidade, Cidade.EstadoID, Estado.NomeEstado FROM  Cidade INNER JOIN Estado ON Cidade.EstadoID = Estado.EstadoID WHERE NomeCidade LIKE @NomeCidade";
                 SqlCommand cmd = new SqlCommand(sqlconn, conn);
                 cmd.Parameters.AddWithValue("@NomeCidade", nome);
                 conn.Open();
@@ -135,7 +135,7 @@ namespace SisControl.DALL
             {
                 DataTable dt = new DataTable();
 
-                string sqlconn = "SELECT CidadeID, NomeCidade, EstadoID FROM Cidade WHERE CidadeID  LIKE @CidadeID";
+                string sqlconn = "SELECT TOP (30) Cidade.CidadeID, Cidade.NomeCidade, Cidade.EstadoID, Estado.NomeEstado FROM  Cidade INNER JOIN Estado ON Cidade.EstadoID = Estado.EstadoID WHERE CidadeID  LIKE @CidadeID";
                 SqlCommand cmd = new SqlCommand(sqlconn, conn);
                 cmd.Parameters.AddWithValue("@CidadeID", nome);
                 conn.Open();
@@ -158,8 +158,7 @@ namespace SisControl.DALL
             try
             {
                 DataTable dt = new DataTable();
-                string sqlconn = "SELECT Cidade.CidadeID, Cidade.NomeCidade, Cidade.EstadoID, Estado.NomeEstado FROM  Cidade INNER JOIN " +
-                                 "Estado ON Cidade.EstadoID = Estado.EstadoID)";
+                string sqlconn = "SELECT TOP (30) Cidade.CidadeID, Cidade.NomeCidade, Cidade.EstadoID, Estado.NomeEstado FROM  Cidade INNER JOIN Estado ON Cidade.EstadoID = Estado.EstadoID";
                                  //WHERE Cidade.NomeCidade = @NomeCidade);
                                 
                 SqlCommand cmd = new SqlCommand(sqlconn, conn);

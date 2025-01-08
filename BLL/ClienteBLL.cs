@@ -31,10 +31,12 @@ namespace SisControl.BLL
 
         public void Salvar(ClienteMODEL clienteS)
         {
+
+            clienteDAL = new ClienteDALL();
+            clienteDAL.salvaCliente(clienteS);
             try
             {
-                clienteDAL = new ClienteDALL();
-                clienteDAL.salvaCliente(clienteS);
+               
             }
             catch (SqlException erro)
             {
@@ -43,12 +45,10 @@ namespace SisControl.BLL
         }
         public void Alterar(ClienteMODEL clienteS)
         {
-            clienteDAL = new ClienteDALL();
-            clienteDAL.atualiza_Cliente(clienteS);
             try
             {
-                //clienteDAL = new ClienteDAL();
-                //clienteDAL.atualiza_Cliente(clienteS);
+                clienteDAL = new ClienteDALL();
+                clienteDAL.atualiza_Cliente(clienteS);
             }
             catch (SqlException erro)
             {
