@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -19,8 +20,55 @@ namespace SisControl
         {
             InitializeComponent();
         }
-        
-        
+        public static decimal FormataNumeroReplace(string valor)
+        {
+            // Remove o símbolo da moeda e espaços
+            string valorSemFormato = valor.Replace("R$", "").Replace(" ", "");
+
+            // Remove os separadores de milhares e converte a vírgula em ponto
+            valorSemFormato = valorSemFormato.Replace(".", "").Replace(",", ".");
+
+            // Converte a string limpa para decimal
+            if (decimal.TryParse(valorSemFormato, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out decimal valorDecimal))
+            {
+                return valorDecimal;
+            }
+            else
+            {
+                throw new FormatException("O valor fornecido não pode ser convertido para decimal.");
+            }
+        }
+        public virtual bool ValidarCPF(string cpf)
+        {
+            if (cpf.Length != 11 || cpf.All(c => c == cpf[0])) return false;
+
+            int[] multiplicadores1 = { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+            int[] multiplicadores2 = { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+
+            string tempCpf = cpf.Substring(0, 9);
+            int soma = 0;
+
+            for (int i = 0; i < 9; i++)
+                soma += int.Parse(tempCpf[i].ToString()) * multiplicadores1[i];
+
+            int resto = soma % 11;
+            resto = resto < 2 ? 0 : 11 - resto;
+
+            string digito = resto.ToString();
+            tempCpf += digito;
+            soma = 0;
+
+            for (int i = 0; i < 10; i++)
+                soma += int.Parse(tempCpf[i].ToString()) * multiplicadores2[i];
+
+            resto = soma % 11;
+            resto = resto < 2 ? 0 : 11 - resto;
+
+            digito += resto.ToString();
+
+            return cpf.EndsWith(digito);
+        }
+
         public string RetornoEvitaDuplicado { get; set; }
 
         public string QueryUsuario = "SELECT MAX(UsuarioID) FROM Usuario";
@@ -38,7 +86,8 @@ namespace SisControl
 
         public DateTime DataVencimento { get; set; }
         public DateTime DataVenda { get; set; }
-        public decimal PrecoProduto { get; set; }
+        public decimal PrecoCusto { get; set; }
+        public decimal PrecoVenda { get; set; }
         public decimal PrecoUnitario { get; set; }
         public decimal ValorParcela { get; set; }
         public decimal ValorTotal { get; set; }

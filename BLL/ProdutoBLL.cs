@@ -81,10 +81,9 @@ namespace SisControl.BLL
                 {
                     obj_Produto.ProdutoID = Convert.ToInt32(datareader["ProdutoID"]);
                     obj_Produto.NomeProduto = datareader["NomeProduto"].ToString();
-                    obj_Produto.Descricao = datareader["Descricao"].ToString();
-                    obj_Produto.PrecoProduto = Convert.ToDecimal(datareader["PrecoProduto"]);
                     obj_Produto.Estoque = Convert.ToInt32(datareader["Estoque"]);
-                    obj_Produto.CategoriaID = Convert.ToInt32(datareader["CategoriaID"]);
+                    obj_Produto.PrecoCusto = Convert.ToDecimal(datareader["PrecoCusto"]);
+                    obj_Produto.PrecoVenda = Convert.ToDecimal(datareader["PrecoVenda"]);                    
                 }
                 return obj_Produto;
             }

@@ -17,7 +17,7 @@ namespace SisControl.DALL
             var conn = Conexao.Conex();
             try
             {
-                SqlCommand sql = new SqlCommand("SELECT Cliente.ClienteID, Cliente.NomeCliente, Cliente.CpfCnpj, Cliente.Endereco, Cliente.Telefone, Cliente.Email, Cliente.CidadeID, Cidade.NomeCidade AS Expr1, Cidade.EstadoID, Estado.NomeEstado AS Expr2, Estado.Uf " +
+                SqlCommand sql = new SqlCommand("SELECT Cliente.ClienteID, Cliente.NomeCliente, Cliente.Cpf, Cliente.Endereco, Cliente.Telefone, Cliente.Email, Cliente.CidadeID, Cidade.NomeCidade AS Expr1, Cidade.EstadoID, Estado.NomeEstado AS Expr2, Estado.Uf " +
 "FROM Cliente INNER JOIN Cidade ON Cliente.CidadeID = Cidade.CidadeID INNER JOIN Estado ON Cidade.EstadoID = Estado.EstadoID", conn);
 
                 SqlDataAdapter daCliente = new SqlDataAdapter();
@@ -40,12 +40,12 @@ namespace SisControl.DALL
         {
             var conn = Conexao.Conex();
 
-            SqlCommand sql = new SqlCommand("INSERT INTO Cliente (ClienteID, NomeCliente, CpfCnpj, Endereco, Telefone, Email, CidadeID) VALUES (@ClienteID, @NomeCliente, @CpfCnpj, @Endereco, @Telefone, @Email, @CidadeID)", conn);
+            SqlCommand sql = new SqlCommand("INSERT INTO Cliente (ClienteID, NomeCliente, Cpf, Endereco, Telefone, Email, CidadeID) VALUES (@ClienteID, @NomeCliente, @Cpf, @Endereco, @Telefone, @Email, @CidadeID)", conn);
 
 
             sql.Parameters.AddWithValue("@ClienteID", cliente.ClienteID);
             sql.Parameters.AddWithValue("@NomeCliente", cliente.NomeCliente);
-            sql.Parameters.AddWithValue("@CpfCnpj", cliente.CpfCnpj);
+            sql.Parameters.AddWithValue("@Cpf", cliente.Cpf);
             sql.Parameters.AddWithValue("@Endereco", cliente.Endereco);
             sql.Parameters.AddWithValue("@Telefone", cliente.Telefone);
             sql.Parameters.AddWithValue("@Email", cliente.Email);
@@ -96,10 +96,10 @@ namespace SisControl.DALL
             
             try
             {
-                SqlCommand Sql = new SqlCommand("UPDATE Cliente SET NomeCliente = @NomeCliente, CpfCnpj = @CpfCnpj, Endereco = @Endereco, Telefone = @Telefone, Email = @Email, CidadeID = @CidadeID WHERE ClienteID = @ClienteID", conn);
+                SqlCommand Sql = new SqlCommand("UPDATE Cliente SET NomeCliente = @NomeCliente, Cpf = @Cpf, Endereco = @Endereco, Telefone = @Telefone, Email = @Email, CidadeID = @CidadeID WHERE ClienteID = @ClienteID", conn);
 
                 Sql.Parameters.AddWithValue("@NomeCliente", cliente.NomeCliente);
-                Sql.Parameters.AddWithValue("@CpfCnpj", cliente.CpfCnpj);
+                Sql.Parameters.AddWithValue("@Cpf", cliente.Cpf);
                 Sql.Parameters.AddWithValue("@Endereco", cliente.Endereco);
                 Sql.Parameters.AddWithValue("@Telefone", cliente.Telefone);
                 Sql.Parameters.AddWithValue("@Email", cliente.Email);
@@ -125,7 +125,7 @@ namespace SisControl.DALL
             {
                 DataTable dt = new DataTable();
 
-                string sqlconn = "SELECT Fornecedor.FornecedorID, Fornecedor.NomeFornecedor, Fornecedor.Cnpj, Fornecedor.Endereco, Fornecedor.Telefone, Fornecedor.Email, Fornecedor.CidadeID, Cidade.NomeCidade FROM Fornecedor INNER JOIN Cidade ON Fornecedor.CidadeID = Cidade.CidadeID WHERE NomeCliente LIKE @NomeCliente";
+                string sqlconn = "SELECT SELECT Cliente.ClienteID, Cliente.NomeCliente, Cliente.Cpf, Cliente.Email, Cliente.Endereco, Cliente.Telefone, Cliente.CidadeID, Cliente.Cpf AS Expr1, Cidade.NomeCidade FROM Cliente INNER JOIN Cidade ON Cliente.CidadeID = Cidade.CidadeID WHERE NomeCliente LIKE @NomeCliente";
 
 
                 //string sqlconn = "SELECT TOP (30) * FROM Cliente WHERE NomeCliente LIKE @NomeCliente";

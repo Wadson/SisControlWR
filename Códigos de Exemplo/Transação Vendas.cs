@@ -18,6 +18,7 @@ public class VendaService
                 // Inserir Venda
                 string insertVendaQuery = "INSERT INTO Vendas (VendaID, DataVenda, ClienteID, ValorTotal) OUTPUT INSERTED.VendaID VALUES (@VendaID, @DataVenda, @ClienteID, @ValorTotal)";
                 SqlCommand cmdVenda = new SqlCommand(insertVendaQuery, con, transaction);
+                
                 cmdVenda.Parameters.AddWithValue("@VendaID", venda.VendaID);
                 cmdVenda.Parameters.AddWithValue("@DataVenda", venda.DataVenda);
                 cmdVenda.Parameters.AddWithValue("@ClienteID", venda.ClienteID);
@@ -43,8 +44,8 @@ public class VendaService
                     string insertParcelaQuery = "INSERT INTO Parcelas (ParcelaID, VendaID, NumeroParcela, DataVencimento, ValorParcela) VALUES (ParcelaID, @VendaID, @NumeroParcela, @DataVencimento, @ValorParcela)";
                     SqlCommand cmdParcela = new SqlCommand(insertParcelaQuery, con, transaction);
                     
-                    cmdParcela.Parameters.AddWithValue("@ParcelaID", vendaId);
-                    cmdParcela.Parameters.AddWithValue("@VendaID", vendaId);
+                    cmdParcela.Parameters.AddWithValue("@ParcelaID", parcela.ParcelaID);
+                    cmdParcela.Parameters.AddWithValue("@VendaID", parcela.VendaID);
                     cmdParcela.Parameters.AddWithValue("@NumeroParcela", parcela.NumeroParcela);
                     cmdParcela.Parameters.AddWithValue("@DataVencimento", parcela.DataVencimento);
                     cmdParcela.Parameters.AddWithValue("@ValorParcela", parcela.Valor);
@@ -57,7 +58,8 @@ public class VendaService
                 {
                     string insertContaQuery = "INSERT INTO ContasReceber (VendaId, DataRecebimento, ValorRecebido) VALUES (@VendaId, @DataRecebimento, @ValorRecebido)";
                     SqlCommand cmdConta = new SqlCommand(insertContaQuery, con, transaction);
-                    cmdConta.Parameters.AddWithValue("@VendaId", vendaId);
+                    cmdConta.Parameters.AddWithValue("@ContaReceberID", conta.ContaReceberID);
+                    cmdConta.Parameters.AddWithValue("@VendaID", conta.VendaID);
                     cmdConta.Parameters.AddWithValue("@DataRecebimento", conta.DataRecebimento.HasValue ? (object)conta.DataRecebimento.Value : DBNull.Value);
                     cmdConta.Parameters.AddWithValue("@ValorRecebido", conta.ValorRecebido.HasValue ? (object)conta.ValorRecebido.Value : DBNull.Value);
                     cmdConta.ExecuteNonQuery();

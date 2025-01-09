@@ -35,11 +35,11 @@ namespace SisControl
                 }
                 if(StatusOperacao == "ALTERAR")
                 {
-                    cadUsuarios.txtUsuarioID.Text =     dataGridPesquisa.CurrentRow.Cells["UsuarioID"].Value.ToString();
-                    cadUsuarios.txtNomeUsuario.Text =      dataGridPesquisa.CurrentRow.Cells["NomeUsuario"].Value.ToString();
-                    cadUsuarios.txtEmail.Text =         dataGridPesquisa.CurrentRow.Cells["Email"].Value.ToString();
-                    cadUsuarios.txtSenha.Text =         dataGridPesquisa.CurrentRow.Cells["Senha"].Value.ToString();
-                    cadUsuarios.cmbTipoUsuario.Text =    dataGridPesquisa.CurrentRow.Cells["TipoUsuario"].Value.ToString();
+                    cadUsuarios.txtUsuarioID.Text =     dataGridPesquisar.CurrentRow.Cells["UsuarioID"].Value.ToString();
+                    cadUsuarios.txtNomeUsuario.Text =      dataGridPesquisar.CurrentRow.Cells["NomeUsuario"].Value.ToString();
+                    cadUsuarios.txtEmail.Text =         dataGridPesquisar.CurrentRow.Cells["Email"].Value.ToString();
+                    cadUsuarios.txtSenha.Text =         dataGridPesquisar.CurrentRow.Cells["Senha"].Value.ToString();
+                    cadUsuarios.cmbTipoUsuario.Text =    dataGridPesquisar.CurrentRow.Cells["TipoUsuario"].Value.ToString();
 
                     cadUsuarios.Text = "SISCONTROL - ALTERAR REGISTRO";
                     cadUsuarios.StatusOperacao = "ALTERAR";
@@ -53,11 +53,11 @@ namespace SisControl
                 }
                 if (StatusOperacao == "EXCLUSÃO")
                 {
-                    cadUsuarios.txtUsuarioID.Text = dataGridPesquisa.CurrentRow.Cells["UsuarioID"].Value.ToString();
-                    cadUsuarios.txtNomeUsuario.Text = dataGridPesquisa.CurrentRow.Cells["NomeUsuario"].Value.ToString();
-                    cadUsuarios.txtEmail.Text = dataGridPesquisa.CurrentRow.Cells["Email"].Value.ToString();
-                    cadUsuarios.txtSenha.Text = dataGridPesquisa.CurrentRow.Cells["Senha"].Value.ToString();
-                    cadUsuarios.cmbTipoUsuario.Text = dataGridPesquisa.CurrentRow.Cells["TipoUsuario"].Value.ToString();
+                    cadUsuarios.txtUsuarioID.Text = dataGridPesquisar.CurrentRow.Cells["UsuarioID"].Value.ToString();
+                    cadUsuarios.txtNomeUsuario.Text = dataGridPesquisar.CurrentRow.Cells["NomeUsuario"].Value.ToString();
+                    cadUsuarios.txtEmail.Text = dataGridPesquisar.CurrentRow.Cells["Email"].Value.ToString();
+                    cadUsuarios.txtSenha.Text = dataGridPesquisar.CurrentRow.Cells["Senha"].Value.ToString();
+                    cadUsuarios.cmbTipoUsuario.Text = dataGridPesquisar.CurrentRow.Cells["TipoUsuario"].Value.ToString();
 
                     cadUsuarios.Text = "SISCONTROL - EXCLUSÃO DE REGISTRO";
                     cadUsuarios.StatusOperacao = "EXCLUSÃO";
@@ -88,48 +88,59 @@ namespace SisControl
         {
             ListaUsuario();
         }
-        private void DefinirFonteeCores()
+        public void PersonalizarDataGridView(DataGridView dgv)
         {
-            this.dataGridPesquisa.DefaultCellStyle.Font = new Font("Tahoma", 9);
-            this.dataGridPesquisa.DefaultCellStyle.ForeColor = Color.Blue;
-            this.dataGridPesquisa.DefaultCellStyle.BackColor = Color.Beige;
-            this.dataGridPesquisa.DefaultCellStyle.SelectionForeColor = Color.Yellow;
-            this.dataGridPesquisa.DefaultCellStyle.SelectionBackColor = Color.Black;
-        }
-        public void PersonalizarDatagridView()
-        {
-            // Defina a altura da linha para acomodar o conteúdo que
-            // abrange várias colunas.
-            //this.dataGridPesquisa.RowTemplate.Height += CUSTOM_CONTENT_HEIGHT;
+            // Configuração dos cabeçalhos das colunas
+            dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy;
+            dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 12, FontStyle.Bold);
+            dgv.EnableHeadersVisualStyles = false; // Necessário para aplicar as cores personalizadas no cabeçalho
 
-            // Inicializa outras propriedades DataGridView.
-            this.dataGridPesquisa.AllowUserToAddRows = false;
-            this.dataGridPesquisa.EditMode = DataGridViewEditMode.EditOnKeystrokeOrF2;
-            this.dataGridPesquisa.CellBorderStyle = DataGridViewCellBorderStyle.None;
-            this.dataGridPesquisa.SelectionMode =
-                DataGridViewSelectionMode.FullRowSelect;
+            // Estilo alternado das linhas
+            dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.LightGray;
 
-            // Defina os nomes dos cabeçalhos das colunas.
-            
-            this.dataGridPesquisa.Columns[0].Name = "UsuarioID";
-            this.dataGridPesquisa.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
-            this.dataGridPesquisa.Columns[1].Name = "NomeUsuario";
-            this.dataGridPesquisa.Columns[2].Name = "Email";
-            this.dataGridPesquisa.Columns[3].Name = "Senha";
-            this.dataGridPesquisa.Columns[4].Name = "TipoUsuario";
+            // Alinhamento e fonte das células
+            dgv.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dgv.DefaultCellStyle.Font = new Font("Arial", 10);
 
-            DefinirFonteeCores();
+            //Alinhar o as colunas
 
-            // Hide the column that contains the content that spans
-            // multiple columns.
-            //this.dataGridPesquisa.Columns[2].Visible = false;
-        }
+            //dataGridPesquisar.Columns["ProdutoID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
+            //dataGridPesquisar.Columns["Estoque"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
+
+            // Ajustar colunas automaticamente
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            // Tornar o grid somente leitura
+            dgv.ReadOnly = true;
+
+            // Estilo das bordas das células
+            dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+
+            // Estilo da seleção das células
+            dgv.DefaultCellStyle.SelectionBackColor = Color.DarkTurquoise;
+            dgv.DefaultCellStyle.SelectionForeColor = Color.White;
+
+            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv.MultiSelect = false;
+            // Esconder a coluna de cabeçalho de linha
+            //dgv.RowHeadersVisible = false;
+
+            // Cor do grid
+            dgv.GridColor = Color.Black;
+
+            this.dataGridPesquisar.Columns[0].Name = "UsuarioID";
+            this.dataGridPesquisar.Columns[1].Name = "NomeUsuario";
+            this.dataGridPesquisar.Columns[2].Name = "Email";
+            this.dataGridPesquisar.Columns[3].Name = "Senha";
+            this.dataGridPesquisar.Columns[4].Name = "TipoUsuario";
+        }        
        
         public void ListaUsuario()
         {
             UsuarioBLL usuariosBll = new UsuarioBLL();
-            dataGridPesquisa.DataSource = usuariosBll.Listar();
-            PersonalizarDatagridView();
+            dataGridPesquisar.DataSource = usuariosBll.Listar();
+            PersonalizarDataGridView(dataGridPesquisar);
         }
         public void HabilitarTimer(bool habilitar)
         {
@@ -168,7 +179,7 @@ namespace SisControl
             string nome = "%" + txtPesquisa.Text + "%";
 
             UsuarioDALL dao = new UsuarioDALL();
-            dataGridPesquisa.DataSource = dao.PesquisarPorNome(nome);
+            dataGridPesquisar.DataSource = dao.PesquisarPorNome(nome);
         }
     }
 }

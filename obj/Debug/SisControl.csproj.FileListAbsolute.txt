@@ -97,3 +97,4 @@ D:\SisControl\bin\Debug\zh-Hant\Microsoft.Data.SqlClient.resources.dll
 D:\SisControl\obj\Debug\SisControl.csproj.Up2Date
 D:\SisControl\obj\Debug\SisControl.exe
 D:\SisControl\obj\Debug\SisControl.pdb
+D:\SisControl\obj\Debug\SisControl.View.FrmCadProduto.resources

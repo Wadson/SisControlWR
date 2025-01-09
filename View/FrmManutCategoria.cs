@@ -33,7 +33,7 @@ namespace SisControl.View
                 try
                 {
                     // Verificar se a DataGridView contém alguma linha
-                    if (dataGridPesquisa.Rows.Count == 0)
+                    if (dataGridPesquisar.Rows.Count == 0)
                     {
                         // Lançar exceção personalizada
                         //throw new Exception("A DataGridView está vazia. Não há dados para serem processados.");
@@ -42,12 +42,12 @@ namespace SisControl.View
                     }
 
                     // Execução do código desejado
-                    foreach (DataGridViewRow row in dataGridPesquisa.Rows)
+                    foreach (DataGridViewRow row in dataGridPesquisar.Rows)
                     {
                         // Exemplo: Acessar a primeira célula de cada linha
                         //  var valor = row.Cells[0].Value;
-                        cadCategoria.txtCodigo.Text = dataGridPesquisa.CurrentRow.Cells["CategoriaID"].Value.ToString();
-                        cadCategoria.txtNome.Text = dataGridPesquisa.CurrentRow.Cells["NomeCategoria"].Value.ToString();
+                        cadCategoria.txtCodigo.Text = dataGridPesquisar.CurrentRow.Cells["CategoriaID"].Value.ToString();
+                        cadCategoria.txtNome.Text = dataGridPesquisar.CurrentRow.Cells["NomeCategoria"].Value.ToString();
 
                         cadCategoria.Text = "SISCONTROL - ALTERAR REGISTRO";
                         cadCategoria.StatusOperacao = "ALTERAR";
@@ -71,7 +71,7 @@ namespace SisControl.View
                 try
                 {
                     // Verificar se a DataGridView contém alguma linha
-                    if (dataGridPesquisa.Rows.Count == 0)
+                    if (dataGridPesquisar.Rows.Count == 0)
                     {
                         // Lançar exceção personalizada
                         //throw new Exception("A DataGridView está vazia. Não há dados para serem processados.");
@@ -80,12 +80,12 @@ namespace SisControl.View
                     }
 
                     // Execução do código desejado
-                    foreach (DataGridViewRow row in dataGridPesquisa.Rows)
+                    foreach (DataGridViewRow row in dataGridPesquisar.Rows)
                     {
                         // Exemplo: Acessar a primeira célula de cada linha
                         //  var valor = row.Cells[0].Value;
-                        cadCategoria.txtCodigo.Text = dataGridPesquisa.CurrentRow.Cells["CategoriaID"].Value.ToString();
-                        cadCategoria.txtNome.Text = dataGridPesquisa.CurrentRow.Cells["NomeCategoria"].Value.ToString();
+                        cadCategoria.txtCodigo.Text = dataGridPesquisar.CurrentRow.Cells["CategoriaID"].Value.ToString();
+                        cadCategoria.txtNome.Text = dataGridPesquisar.CurrentRow.Cells["NomeCategoria"].Value.ToString();
 
                         cadCategoria.Text = "SISCONTROL - EXCLUSÃO DE REGISTRO";
                         cadCategoria.StatusOperacao = "EXCLUSÃO";
@@ -119,43 +119,57 @@ namespace SisControl.View
             //}
 
         }
-        public void PersonalizarDatagridView()
+   
+        public void PersonalizarDataGridView(DataGridView dgv)
         {
-            // Defina a altura da linha para acomodar o conteúdo que
-            // abrange várias colunas.
-            //this.dataGridPesquisa.RowTemplate.Height += CUSTOM_CONTENT_HEIGHT;
+            // Configuração dos cabeçalhos das colunas
+            dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy;
+            dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 12, FontStyle.Bold);
+            dgv.EnableHeadersVisualStyles = false; // Necessário para aplicar as cores personalizadas no cabeçalho
 
-            // Inicializa outras propriedades DataGridView.
-            this.dataGridPesquisa.AllowUserToAddRows = false;
-            this.dataGridPesquisa.EditMode = DataGridViewEditMode.EditOnKeystrokeOrF2;
-            this.dataGridPesquisa.CellBorderStyle = DataGridViewCellBorderStyle.None;
-            this.dataGridPesquisa.SelectionMode =
-                DataGridViewSelectionMode.FullRowSelect;
+            // Estilo alternado das linhas
+            dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.LightGray;
 
-            // Defina os nomes dos cabeçalhos das colunas.
-            this.dataGridPesquisa.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
-            this.dataGridPesquisa.Columns[0].Name = "CategoriaID";
-            this.dataGridPesquisa.Columns[1].Name = "NomeCategoria";
-           
-            DefinirFonteeCores();
+            // Alinhamento e fonte das células
+            dgv.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dgv.DefaultCellStyle.Font = new Font("Arial", 10);
 
-            // Hide the column that contains the content that spans
-            // multiple columns.
-            //this.dataGridPesquisa.Columns[2].Visible = false;
+            //Alinhar o as colunas
+
+            //dataGridPesquisar.Columns["ProdutoID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
+            //dataGridPesquisar.Columns["Estoque"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
+
+            // Ajustar colunas automaticamente
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            // Tornar o grid somente leitura
+            dgv.ReadOnly = true;
+
+            // Estilo das bordas das células
+            dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+
+            // Estilo da seleção das células
+            dgv.DefaultCellStyle.SelectionBackColor = Color.DarkTurquoise;
+            dgv.DefaultCellStyle.SelectionForeColor = Color.White;
+
+            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv.MultiSelect = false;
+            // Esconder a coluna de cabeçalho de linha
+            //dgv.RowHeadersVisible = false;
+
+            // Cor do grid
+            dgv.GridColor = Color.Black;
+
+            this.dataGridPesquisar.Columns[0].Name = "CategoriaID";
+            this.dataGridPesquisar.Columns[1].Name = "NomeCategoria";
         }
-        private void DefinirFonteeCores()
-        {
-            this.dataGridPesquisa.DefaultCellStyle.Font = new Font("Tahoma", 9);
-            this.dataGridPesquisa.DefaultCellStyle.ForeColor = Color.Blue;
-            this.dataGridPesquisa.DefaultCellStyle.BackColor = Color.Beige;
-            this.dataGridPesquisa.DefaultCellStyle.SelectionForeColor = Color.Yellow;
-            this.dataGridPesquisa.DefaultCellStyle.SelectionBackColor = Color.Black;
-        }
+
         public void ListarCategoria()
         {
             CategoriaBLL categoriaBll = new CategoriaBLL();
-            dataGridPesquisa.DataSource = categoriaBll.Listar();
-            PersonalizarDatagridView();
+            dataGridPesquisar.DataSource = categoriaBll.Listar();
+            PersonalizarDataGridView(dataGridPesquisar);
         }
         private void FrmManutCategoria_Load(object sender, EventArgs e)
         {
@@ -167,7 +181,7 @@ namespace SisControl.View
             string nome = "%" + txtPesquisa.Text + "%";
             CategoriaDALL CategoriaDao = new CategoriaDALL();
 
-            dataGridPesquisa.DataSource = CategoriaDao.PesquisarPorNome(nome);
+            dataGridPesquisar.DataSource = CategoriaDao.PesquisarPorNome(nome);
         }
 
         private void btnNovo_Click(object sender, EventArgs e)

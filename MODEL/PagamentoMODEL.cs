@@ -10,7 +10,11 @@ namespace SisControl.MODEL
     {
         public int PagamentoID { get; set; }
         public int ParcelaID { get; set; }
-        public decimal ValorPago { get; set; }
         public DateTime DataPagamento { get; set; }
+        public decimal ValorPago { get; set; }
+        public string MetodoPagamento { get; set; }
+        public string Observacao { get; set; }
+
+        // Construtor padrão        
     }
 }

@@ -31,7 +31,7 @@ namespace SisControl.View
                 try
                 {
                     // Verificar se a DataGridView contém alguma linha
-                    if (dataGridPesquisa.Rows.Count == 0)
+                    if (dataGridPesquisar.Rows.Count == 0)
                     {
                         // Lançar exceção personalizada
                         //throw new Exception("A DataGridView está vazia. Não há dados para serem processados.");
@@ -39,13 +39,14 @@ namespace SisControl.View
                     }
                     // Execução do código desejado
 
-                    frm.txtFornecedorID.Text = dataGridPesquisa.CurrentRow.Cells["FornecedorID"].Value.ToString();
-                    frm.txtNomeFornecedor.Text = dataGridPesquisa.CurrentRow.Cells["NomeFornecedor"].Value.ToString();
-                    frm.txtCnpjCpf.Text = dataGridPesquisa.CurrentRow.Cells["Cnpj"].Value.ToString();
-                    frm.txtEndereco.Text = dataGridPesquisa.CurrentRow.Cells["Endereco"].Value.ToString();
-                    frm.txtTelefone.Text = dataGridPesquisa.CurrentRow.Cells["Telefone"].Value.ToString();
-                    frm.txtNomeCidade.Text = dataGridPesquisa.CurrentRow.Cells["NomeCidade"].Value.ToString();
-                    frm.txtCidadeID.Text = dataGridPesquisa.CurrentRow.Cells["CidadeID"].Value.ToString();
+                    frm.txtFornecedorID.Text = dataGridPesquisar.CurrentRow.Cells["FornecedorID"].Value.ToString();
+                    frm.txtNomeFornecedor.Text = dataGridPesquisar.CurrentRow.Cells["NomeFornecedor"].Value.ToString();
+                    frm.txtCnpjCpf.Text = dataGridPesquisar.CurrentRow.Cells["Cnpj"].Value.ToString();
+                    frm.txtEndereco.Text = dataGridPesquisar.CurrentRow.Cells["Endereco"].Value.ToString();
+                    frm.txtTelefone.Text = dataGridPesquisar.CurrentRow.Cells["Telefone"].Value.ToString();
+                    frm.txtEmail.Text = dataGridPesquisar.CurrentRow.Cells["Email"].Value.ToString();
+                    frm.txtNomeCidade.Text = dataGridPesquisar.CurrentRow.Cells["NomeCidade"].Value.ToString();
+                    frm.txtCidadeID.Text = dataGridPesquisar.CurrentRow.Cells["CidadeID"].Value.ToString();
 
                     frm.Text = "SISCONTROL - ALTERAR REGISTRO";
                     frm.StatusOperacao = "ALTERAR";
@@ -54,7 +55,7 @@ namespace SisControl.View
                     frm.btnSalvar.TextAlign = ContentAlignment.MiddleRight;//AlinhamentoDeConteúdo.MiddleLeft; =  StringAlignment
                     frm.btnSalvar.Image = Properties.Resources.Alterar;
                     frm.ShowDialog();
-                    //foreach (DataGridViewRow row in dataGridPesquisa.Rows)
+                    //foreach (DataGridViewRow row in dataGridPesquisar.Rows)
                     //{
                     //    // Exemplo: Acessar a primeira célula de cada linha
                     //    //  var valor = row.Cells[0].Value;                     
@@ -71,7 +72,7 @@ namespace SisControl.View
                 try
                 {
                     // Verificar se a DataGridView contém alguma linha
-                    if (dataGridPesquisa.Rows.Count == 0)
+                    if (dataGridPesquisar.Rows.Count == 0)
                     {
                         // Lançar exceção personalizada
                         //throw new Exception("A DataGridView está vazia. Não há dados para serem processados.");
@@ -80,13 +81,14 @@ namespace SisControl.View
                     else
                     // Exemplo: Acessar a primeira célula de cada linha
                     //  var valor = row.Cells[0].Value;
-                    frm.txtFornecedorID.Text = dataGridPesquisa.CurrentRow.Cells["FornecedorID"].Value.ToString();
-                    frm.txtNomeFornecedor.Text = dataGridPesquisa.CurrentRow.Cells["NomeFornecedor"].Value.ToString();
-                    frm.txtCnpjCpf.Text = dataGridPesquisa.CurrentRow.Cells["Cnpj"].Value.ToString();
-                    frm.txtEndereco.Text = dataGridPesquisa.CurrentRow.Cells["Endereco"].Value.ToString();
-                    frm.txtTelefone.Text = dataGridPesquisa.CurrentRow.Cells["Telefone"].Value.ToString();
-                    frm.txtNomeCidade.Text = dataGridPesquisa.CurrentRow.Cells["NomeCidade"].Value.ToString();
-                    frm.txtCidadeID.Text = dataGridPesquisa.CurrentRow.Cells["CidadeID"].Value.ToString();
+                    frm.txtFornecedorID.Text = dataGridPesquisar.CurrentRow.Cells["FornecedorID"].Value.ToString();
+                    frm.txtNomeFornecedor.Text = dataGridPesquisar.CurrentRow.Cells["NomeFornecedor"].Value.ToString();
+                    frm.txtCnpjCpf.Text = dataGridPesquisar.CurrentRow.Cells["Cnpj"].Value.ToString();
+                    frm.txtEndereco.Text = dataGridPesquisar.CurrentRow.Cells["Endereco"].Value.ToString();
+                    frm.txtTelefone.Text = dataGridPesquisar.CurrentRow.Cells["Telefone"].Value.ToString();
+                    frm.txtEmail.Text = dataGridPesquisar.CurrentRow.Cells["Email"].Value.ToString();
+                    frm.txtNomeCidade.Text = dataGridPesquisar.CurrentRow.Cells["NomeCidade"].Value.ToString();
+                    frm.txtCidadeID.Text = dataGridPesquisar.CurrentRow.Cells["CidadeID"].Value.ToString();
                     frm.Text = "SISCONTROL - EXCLUSÃO DE REGISTRO";
                     frm.StatusOperacao = "EXCLUSÃO";
                     frm.btnSalvar.Text = "Excluir";
@@ -101,10 +103,10 @@ namespace SisControl.View
                     frm.txtTelefone.Enabled = false;
                     frm.ShowDialog();
                     // Execução do código desejado
-                    //foreach (DataGridViewRow row in dataGridPesquisa.Rows)
+                    //foreach (DataGridViewRow row in dataGridPesquisar.Rows)
                     //{
 
-                    //}
+                    //}                    
                 }
                 catch (Exception ex)
                 {
@@ -113,46 +115,62 @@ namespace SisControl.View
                 }
             }            
         }
-        public void PersonalizarDatagridView()
+       
+        public void PersonalizarDataGridView(DataGridView dgv)
         {
-            // Defina a altura da linha para acomodar o conteúdo que
-            // abrange várias colunas.
-            //this.dataGridPesquisa.RowTemplate.Height += CUSTOM_CONTENT_HEIGHT;
+            // Configuração dos cabeçalhos das colunas
+            dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy;
+            dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 12, FontStyle.Bold);
+            dgv.EnableHeadersVisualStyles = false; // Necessário para aplicar as cores personalizadas no cabeçalho
 
-            // Inicializa outras propriedades DataGridView.
-            this.dataGridPesquisa.AllowUserToAddRows = false;
-            this.dataGridPesquisa.EditMode = DataGridViewEditMode.EditOnKeystrokeOrF2;
-            this.dataGridPesquisa.CellBorderStyle = DataGridViewCellBorderStyle.None;
-            this.dataGridPesquisa.SelectionMode =
-                DataGridViewSelectionMode.FullRowSelect;
+            // Estilo alternado das linhas
+            dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.LightGray;
 
-            // Defina os nomes dos cabeçalhos das colunas.
-            //this.dataGridPesquisa.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
-            this.dataGridPesquisa.Columns[0].Name = "FornecedorID";
-            this.dataGridPesquisa.Columns[1].Name = "NomeFornecedor";
-            this.dataGridPesquisa.Columns[2].Name = "Cnpj";
-            this.dataGridPesquisa.Columns[3].Name = "Endereco";
-            this.dataGridPesquisa.Columns[4].Name = "Telefone";
-            this.dataGridPesquisa.Columns[5].Name = "Email";
-            this.dataGridPesquisa.Columns[6].Name = "CidadeID";
-            this.dataGridPesquisa.Columns[7].Name = "NomeCidade";
-                       
+            // Alinhamento e fonte das células
+            dgv.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dgv.DefaultCellStyle.Font = new Font("Arial", 10);
 
-            DefinirFonteeCores();
-        }
-        private void DefinirFonteeCores()
-        {
-            this.dataGridPesquisa.DefaultCellStyle.Font = new Font("Tahoma", 9);
-            this.dataGridPesquisa.DefaultCellStyle.ForeColor = Color.Blue;
-            this.dataGridPesquisa.DefaultCellStyle.BackColor = Color.Beige;
-            this.dataGridPesquisa.DefaultCellStyle.SelectionForeColor = Color.Yellow;
-            this.dataGridPesquisa.DefaultCellStyle.SelectionBackColor = Color.Black;
+            //Alinhar o as colunas
+
+            //dataGridPesquisar.Columns["ProdutoID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
+            //dataGridPesquisar.Columns["Estoque"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
+
+            // Ajustar colunas automaticamente
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            // Tornar o grid somente leitura
+            dgv.ReadOnly = true;
+
+            // Estilo das bordas das células
+            dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+
+            // Estilo da seleção das células
+            dgv.DefaultCellStyle.SelectionBackColor = Color.DarkTurquoise;
+            dgv.DefaultCellStyle.SelectionForeColor = Color.White;
+
+            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv.MultiSelect = false;
+            // Esconder a coluna de cabeçalho de linha
+            //dgv.RowHeadersVisible = false;
+
+            // Cor do grid
+            dgv.GridColor = Color.Black;
+
+            this.dataGridPesquisar.Columns[0].Name = "FornecedorID";
+            this.dataGridPesquisar.Columns[1].Name = "NomeFornecedor";
+            this.dataGridPesquisar.Columns[2].Name = "Cnpj";
+            this.dataGridPesquisar.Columns[3].Name = "Endereco";
+            this.dataGridPesquisar.Columns[4].Name = "Telefone";
+            this.dataGridPesquisar.Columns[5].Name = "Email";
+            this.dataGridPesquisar.Columns[6].Name = "CidadeID";
+            this.dataGridPesquisar.Columns[7].Name = "NomeCidade";
         }
         public void ListarFornecedor()
         {
             FornecedorBLL objetoBll = new FornecedorBLL();
-            dataGridPesquisa.DataSource = objetoBll.Listar();
-            PersonalizarDatagridView();
+            dataGridPesquisar.DataSource = objetoBll.Listar();
+            PersonalizarDataGridView(dataGridPesquisar);
         }
         public void HabilitarTimer(bool habilitar)
         {
@@ -167,7 +185,7 @@ namespace SisControl.View
             string nome = "%" + txtPesquisa.Text + "%";
             FornecedorDALL fornecedorDAL = new FornecedorDALL();
 
-            dataGridPesquisa.DataSource = fornecedorDAL.PesquisarPorNome(nome);
+            dataGridPesquisar.DataSource = fornecedorDAL.PesquisarPorNome(nome);
         }
 
         private void FrmManutFornecedor_Load(object sender, EventArgs e)

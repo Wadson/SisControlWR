@@ -10,7 +10,7 @@ namespace SisControl.MODEL
     {
         public int ClienteID { get; set; }
         public string NomeCliente { get; set; }
-        public string CpfCnpj { get; set; }
+        public string Cpf { get; set; }
         public string Endereco { get; set; }
         public string Telefone { get; set; }
         public string Email { get; set; }

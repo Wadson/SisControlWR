@@ -50,7 +50,7 @@ namespace SisControl.DALL
             {
                 SqlCommand sql = new SqlCommand("SELECT cliente.nome_cliente, cliente.id_cliente, venda.dt_venda, produto.id_produto, produto.nome_produto, parcelas.num_parcela, parcelas.dt_vcto_parcela, parcelas.id_venda AS Expr1, itensvenda.qtd_produto, contasreceber.valor_parcela, contasreceber.status_conta FROM produto INNER JOIN itensvenda ON produto.id_produto = itensvenda.id_produto INNER JOIN venda ON itensvenda.id_venda = venda.id_venda INNER JOIN cliente ON venda.id_cliente = cliente.id_cliente INNER JOIN contasreceber INNER JOIN parcelas ON contasreceber.id_parcela = parcelas.id_parcela ON venda.id_venda = parcelas.id_venda WHERE (contasreceber.status_conta = @StatusConta)", conn);
 
-                sql.Parameters.AddWithValue("@StatusConta", conta.DataVencimento);
+                sql.Parameters.AddWithValue("@StatusConta", conta.DataPagamento);
 
                 conn.Open();
                 sql.ExecuteNonQuery();

@@ -28,6 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.dataGridPesquisar = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridPesquisar)).BeginInit();
             this.SuspendLayout();
             // 
             // btnSair
@@ -66,16 +70,45 @@
             this.btnAlterar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnAlterar.Click += new System.EventHandler(this.btnAlterar_Click);
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // dataGridPesquisar
+            // 
+            this.dataGridPesquisar.AllowUserToAddRows = false;
+            this.dataGridPesquisar.AllowUserToDeleteRows = false;
+            this.dataGridPesquisar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridPesquisar.Location = new System.Drawing.Point(10, 67);
+            this.dataGridPesquisar.Name = "dataGridPesquisar";
+            this.dataGridPesquisar.ReadOnly = true;
+            this.dataGridPesquisar.Size = new System.Drawing.Size(630, 350);
+            this.dataGridPesquisar.TabIndex = 429;
+            this.dataGridPesquisar.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridPesquisar_CellFormatting);
+            // 
             // FrmManutProduto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(785, 430);
+            this.Controls.Add(this.dataGridPesquisar);
             this.Name = "FrmManutProduto";
+            this.Load += new System.EventHandler(this.FrmManutProduto_Load);
+            this.Controls.SetChildIndex(this.btnAlterar, 0);
+            this.Controls.SetChildIndex(this.btnNovo, 0);
+            this.Controls.SetChildIndex(this.btnExcluir, 0);
+            this.Controls.SetChildIndex(this.txtPesquisa, 0);
+            this.Controls.SetChildIndex(this.btnSair, 0);
+            this.Controls.SetChildIndex(this.dataGridPesquisar, 0);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridPesquisar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.DataGridView dataGridPesquisar;
     }
 }

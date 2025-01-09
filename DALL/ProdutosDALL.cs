@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SisControl.DALL
 {
@@ -16,7 +17,7 @@ namespace SisControl.DALL
             var conn = Conexao.Conex();
             try
             {
-                SqlCommand sql = new SqlCommand("SELECT ProdutoID, Nome, Descricao, Preco, Estoque, CategoriaID FROM Produto", conn);
+                SqlCommand sql = new SqlCommand("SELECT ProdutoID, NomeProduto, PrecoCusto, Estoque, PrecoVenda FROM Produto", conn);
 
                 SqlDataAdapter daCliente = new SqlDataAdapter();
                 daCliente.SelectCommand = sql;
@@ -39,15 +40,13 @@ namespace SisControl.DALL
             var conn = Conexao.Conex();
             try
             {
-                SqlCommand sql = new SqlCommand("INSERT INTO Produto (ProdutoID, NomeProduto, Descricao, PrecoProduto, Estoque, CategoriaID, SubCategoriaID) VALUES (@ProdutoID, @NomeProduto, @Descricao, @PrecoProduto, @Estoque, @CategoriaID, @SubCategoriaID)", conn);
+                SqlCommand sql = new SqlCommand("INSERT INTO Produto (ProdutoID, NomeProduto, PrecoCusto, Estoque, PrecoVenda) VALUES (@ProdutoID, @NomeProduto, @Estoque, @PrecoCusto, @PrecoVenda)", conn);
 
-                sql.Parameters.AddWithValue("@ProdutoID",    produto.ProdutoID);
-                sql.Parameters.AddWithValue("@NomeProduto",    produto.NomeProduto);
-                sql.Parameters.AddWithValue("@Descricao",    produto.Descricao);
-                sql.Parameters.AddWithValue("@PrecoProduto",    produto.PrecoProduto);
-                sql.Parameters.AddWithValue("@Estoque",     produto.Estoque);
-                sql.Parameters.AddWithValue("@CategoriaID",    produto.CategoriaID);
-                sql.Parameters.AddWithValue("@SubCategoriaID", produto.SubCategoriaID);
+                sql.Parameters.AddWithValue("@ProdutoID", produto.ProdutoID);
+                sql.Parameters.AddWithValue("@NomeProduto", produto.NomeProduto);
+                sql.Parameters.AddWithValue("@PrecoCusto", produto.PrecoCusto);
+                sql.Parameters.AddWithValue("@Estoque", produto.Estoque);
+                sql.Parameters.AddWithValue("@PrecoVenda", produto.PrecoVenda);                
 
                 conn.Open();
                 sql.ExecuteNonQuery();
@@ -87,14 +86,12 @@ namespace SisControl.DALL
             var conn = Conexao.Conex();
             try
             {
-                SqlCommand sql = new SqlCommand("UPDATE Produto SET ProdutoID = @ProdutoID, NomeProduto = @NomeProduto, Descricao = @Descricao, PrecoProduto = @PrecoProduto, Estoque = @Estoque, CategoriaID = @CategoriaID, SubCategoriaID = @SubCategoriaID", conn);
+                SqlCommand sql = new SqlCommand("UPDATE Produto SET NomeProduto = @NomeProduto, PrecoCusto = @PrecoCusto, Estoque = @Estoque, PrecoVenda = @PrecoVenda", conn);
                                 
                 sql.Parameters.AddWithValue("@NomeProduto", produto.NomeProduto);
-                sql.Parameters.AddWithValue("@Descricao", produto.Descricao);
-                sql.Parameters.AddWithValue("@PrecoProduto", produto.PrecoProduto);
-                sql.Parameters.AddWithValue("@Estoque", produto.Estoque);
-                sql.Parameters.AddWithValue("@CategoriaID", produto.CategoriaID);
-                sql.Parameters.AddWithValue("@SubCategoriaID", produto.SubCategoriaID);
+                sql.Parameters.AddWithValue("@PrecoCusto", produto.PrecoCusto);
+                sql.Parameters.AddWithValue("@Estoque", produto.PrecoVenda);
+                sql.Parameters.AddWithValue("@PrecoVenda", produto.Estoque);           
                 sql.Parameters.AddWithValue("@ProdutoID", produto.ProdutoID);
 
                 conn.Open();
@@ -107,6 +104,31 @@ namespace SisControl.DALL
             finally
             {
                 conn.Close();
+            }
+        }
+        public DataTable PesquisarPorNome(string nome)
+        {
+            var conn = Conexao.Conex();
+            try
+            {
+                DataTable dt = new DataTable();
+
+                string sqlconn = "SELECT ProdutoID, NomeProduto, PrecoCusto, Estoque, PrecoVenda WHERE NomeProduto LIKE @NomeProduto";
+
+                SqlCommand cmd = new SqlCommand(sqlconn, conn);
+                cmd.Parameters.AddWithValue("@NomeProduto", nome);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+                conn.Close();
+                conn.Dispose();
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao executar a pesquisa: " + ex);
+                return null;
             }
         }
     }

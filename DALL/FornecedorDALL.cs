@@ -90,7 +90,7 @@ namespace SisControl.DALL
             var conn = Conexao.Conex();
             try
             {
-                SqlCommand sqlcomando = new SqlCommand("UPDATE Fornecedor SET NomeFornecedor = @NomeFornecedor, Cnpj = @Cnpj, Endereco = @Endereco, Telefone = @Telefone, Email = @Email, CidadeID = CidadeID", conn);
+                SqlCommand sqlcomando = new SqlCommand("UPDATE Fornecedor SET NomeFornecedor = @NomeFornecedor, Cnpj = @Cnpj, Endereco = @Endereco, Telefone = @Telefone, Email = @Email, CidadeID = CidadeID WHERE FornecedorID = @FornecedorID", conn);
 
                 sqlcomando.Parameters.AddWithValue("@NomeFornecedor", fornecedor.NomeFornecedor);
                 sqlcomando.Parameters.AddWithValue("@Cnpj", fornecedor.Cnpj);

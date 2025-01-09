@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.dataGridPesquisar = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridPesquisar)).BeginInit();
             this.SuspendLayout();
             // 
             // btnSair
@@ -77,13 +79,32 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // dataGridPesquisar
+            // 
+            this.dataGridPesquisar.AllowUserToAddRows = false;
+            this.dataGridPesquisar.AllowUserToDeleteRows = false;
+            this.dataGridPesquisar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridPesquisar.Location = new System.Drawing.Point(10, 67);
+            this.dataGridPesquisar.Name = "dataGridPesquisar";
+            this.dataGridPesquisar.ReadOnly = true;
+            this.dataGridPesquisar.Size = new System.Drawing.Size(614, 350);
+            this.dataGridPesquisar.TabIndex = 430;
+            // 
             // FrmManutUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(779, 456);
+            this.Controls.Add(this.dataGridPesquisar);
             this.Name = "FrmManutUsuario";
             this.Text = "SisControl - Manutenção de Usuário";
             this.Load += new System.EventHandler(this.FrmManutUsuario_Load);
+            this.Controls.SetChildIndex(this.btnAlterar, 0);
+            this.Controls.SetChildIndex(this.btnNovo, 0);
+            this.Controls.SetChildIndex(this.btnExcluir, 0);
+            this.Controls.SetChildIndex(this.txtPesquisa, 0);
+            this.Controls.SetChildIndex(this.btnSair, 0);
+            this.Controls.SetChildIndex(this.dataGridPesquisar, 0);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridPesquisar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -92,5 +113,6 @@
         #endregion
 
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.DataGridView dataGridPesquisar;
     }
 }

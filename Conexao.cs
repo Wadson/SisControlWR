@@ -15,7 +15,7 @@ namespace SisControl
             try
             {
                 //DESKTOP 
-                string conn = "Data Source=DESKTOP-WR\\SQLEXPRESS;Initial Catalog=bdsiscontrol;Integrated Security=True;";
+                string conn = "Data Source=NOTEBOOK-DELL\\SQLEXPRESS;Initial Catalog=bdsiscontrol;Integrated Security=True;";
                 //NOTEBOOK
                 //string conn = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=D:\\Money\\Data\\bdmoney.mdf;Integrated Security=True;";
 

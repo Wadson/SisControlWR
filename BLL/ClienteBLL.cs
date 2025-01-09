@@ -83,7 +83,7 @@ namespace SisControl.BLL
                 {
                     obj_cliente.ClienteID = Convert.ToInt32(datareader["ClienteID"]);
                     obj_cliente.NomeCliente = datareader["NomeCliente"].ToString();
-                    obj_cliente.CpfCnpj = datareader["CpfCnpj"].ToString();
+                    obj_cliente.Cpf = datareader["Cpf"].ToString();
                     obj_cliente.Endereco = datareader["Endereco"].ToString();
                     obj_cliente.Telefone = datareader["Telefone"].ToString();
                     obj_cliente.Email = datareader["Email"].ToString();

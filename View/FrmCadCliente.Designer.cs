@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtCpfCnpj = new System.Windows.Forms.TextBox();
+            this.txtCpf = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.txtClienteID = new System.Windows.Forms.TextBox();
             this.txtCidadeID = new System.Windows.Forms.TextBox();
@@ -51,13 +51,15 @@
             this.txtTelefone = new System.Windows.Forms.MaskedTextBox();
             this.SuspendLayout();
             // 
-            // txtCpfCnpj
+            // txtCpf
             // 
-            this.txtCpfCnpj.Location = new System.Drawing.Point(116, 152);
-            this.txtCpfCnpj.MaxLength = 14;
-            this.txtCpfCnpj.Name = "txtCpfCnpj";
-            this.txtCpfCnpj.Size = new System.Drawing.Size(143, 20);
-            this.txtCpfCnpj.TabIndex = 2;
+            this.txtCpf.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.txtCpf.Location = new System.Drawing.Point(116, 151);
+            this.txtCpf.MaxLength = 14;
+            this.txtCpf.Name = "txtCpf";
+            this.txtCpf.Size = new System.Drawing.Size(143, 23);
+            this.txtCpf.TabIndex = 2;
+            this.txtCpf.Leave += new System.EventHandler(this.txtCpf_Leave);
             // 
             // label9
             // 
@@ -66,9 +68,9 @@
             this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(76)))), ((int)(((byte)(172)))));
             this.label9.Location = new System.Drawing.Point(25, 154);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(72, 16);
+            this.label9.Size = new System.Drawing.Size(33, 16);
             this.label9.TabIndex = 178;
-            this.label9.Text = "CPF/CNPJ";
+            this.label9.Text = "CPF";
             // 
             // txtClienteID
             // 
@@ -291,7 +293,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(579, 376);
-            this.Controls.Add(this.txtCpfCnpj);
+            this.Controls.Add(this.txtCpf);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.txtClienteID);
             this.Controls.Add(this.txtCidadeID);
@@ -321,7 +323,7 @@
 
         #endregion
 
-        public System.Windows.Forms.TextBox txtCpfCnpj;
+        public System.Windows.Forms.TextBox txtCpf;
         private System.Windows.Forms.Label label9;
         public System.Windows.Forms.TextBox txtClienteID;
         public System.Windows.Forms.TextBox txtCidadeID;

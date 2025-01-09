@@ -86,20 +86,17 @@ namespace SisControl
         }
 
         private void btnCategoria_Click(object sender, EventArgs e)
-        {
-            FrmManutCategoria frm = new FrmManutCategoria();
-            frm.ShowDialog();
+        {            
         }
 
         private void btnSubCateg_Click(object sender, EventArgs e)
-        {
-            FrmManutSubCategoria frmManutSubCat = new FrmManutSubCategoria();
-            frmManutSubCat.ShowDialog();
+        {           
         }
 
         private void btnProdutos_Click(object sender, EventArgs e)
         {
-
+            FrmManutProduto frm = new FrmManutProduto();
+            frm.ShowDialog();
         }
 
         private void btnContasReceber_Click(object sender, EventArgs e)

@@ -224,6 +224,12 @@
     <Compile Include="View\FrmCadFornecedor.Designer.cs">
       <DependentUpon>FrmCadFornecedor.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\FrmCadProduto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FrmCadProduto.Designer.cs">
+      <DependentUpon>FrmCadProduto.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\FrmCadSubCategoria.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -334,6 +340,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\FrmCadFornecedor.resx">
       <DependentUpon>FrmCadFornecedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FrmCadProduto.resx">
+      <DependentUpon>FrmCadProduto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\FrmCadSubCategoria.resx">
       <DependentUpon>FrmCadSubCategoria.cs</DependentUpon>

@@ -28,17 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnSair = new System.Windows.Forms.Button();
             this.txtPesquisa = new System.Windows.Forms.TextBox();
             this.btnExcluir = new System.Windows.Forms.Button();
             this.btnNovo = new System.Windows.Forms.Button();
             this.btnAlterar = new System.Windows.Forms.Button();
-            this.dataGridPesquisa = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridPesquisa)).BeginInit();
             this.SuspendLayout();
             // 
             // btnSair
@@ -144,59 +139,6 @@
             this.btnAlterar.Text = "   &Alterar";
             this.btnAlterar.UseVisualStyleBackColor = false;
             // 
-            // dataGridPesquisa
-            // 
-            this.dataGridPesquisa.AllowUserToAddRows = false;
-            this.dataGridPesquisa.AllowUserToDeleteRows = false;
-            this.dataGridPesquisa.AllowUserToResizeColumns = false;
-            this.dataGridPesquisa.AllowUserToResizeRows = false;
-            this.dataGridPesquisa.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridPesquisa.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dataGridPesquisa.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridPesquisa.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.dataGridPesquisa.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.dataGridPesquisa.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(112)))), ((int)(((byte)(156)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridPesquisa.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridPesquisa.ColumnHeadersHeight = 20;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(112)))), ((int)(((byte)(156)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridPesquisa.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridPesquisa.EnableHeadersVisualStyles = false;
-            this.dataGridPesquisa.GridColor = System.Drawing.Color.SteelBlue;
-            this.dataGridPesquisa.Location = new System.Drawing.Point(10, 67);
-            this.dataGridPesquisa.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.dataGridPesquisa.MultiSelect = false;
-            this.dataGridPesquisa.Name = "dataGridPesquisa";
-            this.dataGridPesquisa.ReadOnly = true;
-            this.dataGridPesquisa.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(112)))), ((int)(((byte)(156)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridPesquisa.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridPesquisa.RowHeadersVisible = false;
-            this.dataGridPesquisa.RowHeadersWidth = 20;
-            this.dataGridPesquisa.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridPesquisa.Size = new System.Drawing.Size(630, 350);
-            this.dataGridPesquisa.TabIndex = 427;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -214,7 +156,6 @@
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(785, 430);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.dataGridPesquisa);
             this.Controls.Add(this.btnSair);
             this.Controls.Add(this.txtPesquisa);
             this.Controls.Add(this.btnExcluir);
@@ -223,7 +164,6 @@
             this.Name = "FrmBaseManutencao";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmBaseManutencao";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridPesquisa)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -237,6 +177,5 @@
         public System.Windows.Forms.Button btnNovo;
         public System.Windows.Forms.Button btnAlterar;
         private System.Windows.Forms.Label label1;
-        public System.Windows.Forms.DataGridView dataGridPesquisa;
     }
 }

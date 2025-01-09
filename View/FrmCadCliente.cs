@@ -24,7 +24,7 @@ namespace SisControl.View
 
                 objetoCliente.ClienteID = Convert.ToInt32(txtClienteID.Text);
                 objetoCliente.NomeCliente = txtNomeCliente.Text;
-                objetoCliente.CpfCnpj = txtCpfCnpj.Text;
+                objetoCliente.Cpf = txtCpf.Text;
                 objetoCliente.Endereco = txtEndereco.Text;
                 objetoCliente.Telefone = txtTelefone.Text;
                 objetoCliente.Email = txtEmail.Text;
@@ -49,9 +49,9 @@ namespace SisControl.View
             {
                 ClienteMODEL objetoCliente = new ClienteMODEL();
 
-                //objetoCliente.ClienteID = Convert.ToInt32(txtClienteID.Text);
+                objetoCliente.ClienteID = Convert.ToInt32(txtClienteID.Text);
                 objetoCliente.NomeCliente = txtNomeCliente.Text;
-                objetoCliente.CpfCnpj = txtCpfCnpj.Text;
+                objetoCliente.Cpf = txtCpf.Text;
                 objetoCliente.Endereco = txtEndereco.Text;
                 objetoCliente.Telefone = ReplaceValoresMasketTexBox(txtTelefone);
                 objetoCliente.Email = txtEmail.Text;
@@ -66,12 +66,8 @@ namespace SisControl.View
                 LimpaCampo();
                 txtNomeCliente.Focus();
 
-                txtClienteID.Text = RetornaCodigoContaMaisUm(QueryClientes).ToString();
-                UsuarioID = RetornaCodigoContaMaisUm(QueryUsuario);
-                AcrescenteZero_a_Esquerda2(txtClienteID);
-                if (txtClienteID.Text != string.Empty && txtCidadeID.Text!= string.Empty && txtNomeCidade.Text != string.Empty)
-                { 
-                }
+                txtClienteID.Text = RetornaCodigoContaMaisUm(QueryClientes).ToString();                
+                AcrescenteZero_a_Esquerda2(txtClienteID);               
             }
             catch (OverflowException ov)
             {
@@ -148,6 +144,7 @@ namespace SisControl.View
             {
                 UsuarioID = RetornaCodigoContaMaisUm(QueryClientes);
                 txtClienteID.Text = RetornaCodigoContaMaisUm(QueryClientes).ToString();
+                AcrescenteZero_a_Esquerda2(txtClienteID);
                 txtNomeCliente.Focus();
             }            
         }
@@ -159,6 +156,22 @@ namespace SisControl.View
             VariavelGlobal.NomeFormulario = "FrmCadCliente";
             frmLocalizarCidade.ShowDialog();
             AcrescenteZero_a_Esquerda2(txtCidadeID);
+        }
+        public override bool ValidarCPF(string cpf)
+        {
+            return base.ValidarCPF(cpf);
+        }
+        private void txtCpf_Leave(object sender, EventArgs e)
+        {
+            //Validar CPF está funcionando
+            if (ValidarCPF(txtCpf.Text))
+            {                
+            }
+            else
+            {
+                MessageBox.Show("CPF inválido","Informação", MessageBoxButtons.OK,MessageBoxIcon.Error);//esultado.Text = "CPF inválido!";
+                txtCpf.Focus();
+            }
         }
     }
 }

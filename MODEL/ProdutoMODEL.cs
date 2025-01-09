@@ -10,10 +10,8 @@ namespace SisControl.MODEL
     {
         public int ProdutoID { get; set; }
         public string NomeProduto { get; set; }
-        public string Descricao { get; set; }
-        public decimal PrecoProduto { get; set; }
+        public decimal PrecoCusto { get; set; }
+        public decimal PrecoVenda { get; set; }
         public int Estoque { get; set; }
-        public int CategoriaID { get; set; }
-        public int SubCategoriaID { get; set; }
     }
 }

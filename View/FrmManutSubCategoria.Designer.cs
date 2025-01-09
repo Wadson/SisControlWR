@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.dataGridPesquisar = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridPesquisar)).BeginInit();
             this.SuspendLayout();
             // 
             // btnSair
@@ -49,7 +51,6 @@
             this.btnExcluir.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.btnExcluir.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnExcluir.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnExcluir.Text = "&Excluir";
             this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
             // 
             // btnNovo
@@ -73,13 +74,32 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // dataGridPesquisar
+            // 
+            this.dataGridPesquisar.AllowUserToAddRows = false;
+            this.dataGridPesquisar.AllowUserToDeleteRows = false;
+            this.dataGridPesquisar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridPesquisar.Location = new System.Drawing.Point(12, 67);
+            this.dataGridPesquisar.Name = "dataGridPesquisar";
+            this.dataGridPesquisar.ReadOnly = true;
+            this.dataGridPesquisar.Size = new System.Drawing.Size(618, 350);
+            this.dataGridPesquisar.TabIndex = 430;
+            // 
             // FrmManutSubCategoria
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(785, 430);
+            this.Controls.Add(this.dataGridPesquisar);
             this.Name = "FrmManutSubCategoria";
             this.Text = "SISCONTROL - Manutenção de Sub Catetoria";
             this.Load += new System.EventHandler(this.FrmManutSubCategoria_Load);
+            this.Controls.SetChildIndex(this.btnAlterar, 0);
+            this.Controls.SetChildIndex(this.btnNovo, 0);
+            this.Controls.SetChildIndex(this.btnExcluir, 0);
+            this.Controls.SetChildIndex(this.txtPesquisa, 0);
+            this.Controls.SetChildIndex(this.btnSair, 0);
+            this.Controls.SetChildIndex(this.dataGridPesquisar, 0);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridPesquisar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -88,5 +108,6 @@
         #endregion
 
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.DataGridView dataGridPesquisar;
     }
 }
