@@ -188,6 +188,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>moneyDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Utilitario.cs" />
     <Compile Include="View\FrmBaseGeral.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -242,6 +243,12 @@
     <Compile Include="View\FrmCadUsuario.Designer.cs">
       <DependentUpon>FrmCadUsuario.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\FrmGerarParcelas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FrmGerarParcelas.Designer.cs">
+      <DependentUpon>FrmGerarParcelas.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\FrmLocalizarCategoria.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -253,6 +260,18 @@
     </Compile>
     <Compile Include="View\FrmLocalizarCidade.Designer.cs">
       <DependentUpon>FrmLocalizarCidade.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FrmLocalizarCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FrmLocalizarCliente.Designer.cs">
+      <DependentUpon>FrmLocalizarCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FrmLocalizarProduto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FrmLocalizarProduto.Designer.cs">
+      <DependentUpon>FrmLocalizarProduto.cs</DependentUpon>
     </Compile>
     <Compile Include="View\FrmManutCategoria.cs">
       <SubType>Form</SubType>
@@ -300,7 +319,7 @@
     <Compile Include="MODEL\CidadeMODEL.cs" />
     <Compile Include="MODEL\ClienteMODEL.cs" />
     <Compile Include="MODEL\ContaPagarMODEL.cs" />
-    <Compile Include="MODEL\ContaRedeberMODEL.cs" />
+    <Compile Include="MODEL\ContaReceberMODEL.cs" />
     <Compile Include="MODEL\FornecedorMODEL.cs" />
     <Compile Include="MODEL\ItemVendaMODEL.cs" />
     <Compile Include="MODEL\PagamentoMODEL.cs" />
@@ -350,11 +369,20 @@
     <EmbeddedResource Include="View\FrmCadUsuario.resx">
       <DependentUpon>FrmCadUsuario.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\FrmGerarParcelas.resx">
+      <DependentUpon>FrmGerarParcelas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\FrmLocalizarCategoria.resx">
       <DependentUpon>FrmLocalizarCategoria.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\FrmLocalizarCidade.resx">
       <DependentUpon>FrmLocalizarCidade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FrmLocalizarCliente.resx">
+      <DependentUpon>FrmLocalizarCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FrmLocalizarProduto.resx">
+      <DependentUpon>FrmLocalizarProduto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\FrmManutCategoria.resx">
       <DependentUpon>FrmManutCategoria.cs</DependentUpon>
@@ -494,6 +522,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Vendas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\inserir.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Localizar16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Parcelar1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Parcelar2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\inserir32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Localizar32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LocalizarProduto32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\Microsoft.Data.SqlClient.SNI.5.2.0\build\net462\Microsoft.Data.SqlClient.SNI.targets" Condition="Exists('packages\Microsoft.Data.SqlClient.SNI.5.2.0\build\net462\Microsoft.Data.SqlClient.SNI.targets')" />

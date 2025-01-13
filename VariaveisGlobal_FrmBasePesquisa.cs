@@ -1,0 +1,33 @@
+  private string NivelAcesso { get; set; }
+  private int VendaID { get; set; }
+  private int ClienteID { get; set; }
+  private int CategoriaID { get; set; }
+  private int ParcelaID { get; set; }
+  private int FornecedorID { get; set; }
+  private int ContaReceberID { get; set; }
+  private int UsuarioID { get; set; }               
+  private string Situacao { get; set; }
+  private string NomeFornecedor { get; set; }        
+  private string Marca { get; set; }
+  private string NomeUsuario { get; set; }
+  private string Cliente { get; set; }
+  private string NomeCategoria { get; set; }
+  private string EventoBotao { get; set; }
+  private string Descricao { get; set; }
+  private string NumeroParcela { get; set; }
+  private string Documento { get; set; }
+  private string String_Busca_codigo { get; set; }
+  private string Capturavalor { get; set; }
+  private string Contagem { get; set; }
+
+  private int linhaAtual { get; set; }
+  private string TipoPesquisa { get; set; }
+  private string criterio { get; set; }
+  private string sqlString { get; set; }       
+  private double ValorProduto { get; set; }
+
+  private DateTime PrevReceb { get; set; }
+  private DateTime DataVenda { get; set; }
+  private DateTime DataVencimento { get; set; }
+  private DateTime DataPagamento { get; set; }
+  private DateTime Data { get; set; }
