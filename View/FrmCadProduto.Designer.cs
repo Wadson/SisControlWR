@@ -63,9 +63,8 @@
             this.txtPrecoVenda.Name = "txtPrecoVenda";
             this.txtPrecoVenda.Size = new System.Drawing.Size(329, 20);
             this.txtPrecoVenda.TabIndex = 4;
-            this.txtPrecoVenda.TextChanged += new System.EventHandler(this.txtPrecoVenda_TextChanged);
             this.txtPrecoVenda.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecoVenda_KeyPress);
-            this.txtPrecoVenda.Leave += new System.EventHandler(this.txtPrecoVenda_Leave);
+            this.txtPrecoVenda.Leave += new System.EventHandler(this.txtPrecoVenda_Leave_1);
             // 
             // label6
             // 
@@ -120,9 +119,8 @@
             this.txtPrecoCusto.Name = "txtPrecoCusto";
             this.txtPrecoCusto.Size = new System.Drawing.Size(329, 20);
             this.txtPrecoCusto.TabIndex = 2;
-            this.txtPrecoCusto.TextChanged += new System.EventHandler(this.txtPrecoCusto_TextChanged);
             this.txtPrecoCusto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecoCusto_KeyPress);
-            this.txtPrecoCusto.Leave += new System.EventHandler(this.txtPrecoCusto_Leave);
+            this.txtPrecoCusto.Leave += new System.EventHandler(this.txtPrecoCusto_Leave_1);
             // 
             // btnNovo
             // 

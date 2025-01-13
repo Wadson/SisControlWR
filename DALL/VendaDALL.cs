@@ -5,80 +5,85 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace SisControl.DALL
 {
-    internal class VendaDALL
+    public class VendaDAL
     {
-        public void SalvarVenda(VendaMODEL venda)
-        {
-            var conn = Conexao.Conex();
-            try
-            {
-                SqlCommand sql = new SqlCommand("INSERT INTO Venda (VendaID, ClienteID, DataVenda, ValorTotal) " +
-                "VALUES (@VendaID, @ClienteID, @DataVenda, @ValorTotal)", conn);
+        private string connectionString = ConfigurationManager.ConnectionStrings["Data Source=NOTEBOOK-DELL\\SQLEXPRESS;Initial Catalog=bdsiscontrol;Integrated Security=True;"].ConnectionString;
 
-                sql.Parameters.AddWithValue("@VendaID", venda.VendaID);
-                sql.Parameters.AddWithValue("@ClienteID", venda.ClienteID);
-                sql.Parameters.AddWithValue("@DataVenda", venda.DataVenda);
-                sql.Parameters.AddWithValue("@ValorTotal", venda.ValorTotal);
-
-                conn.Open();
-                sql.ExecuteNonQuery();
-            }
-            catch (SqlException ex)
-            {
-                throw new ApplicationException(ex.ToString());
-            }
-            finally
-            {
-                conn.Close();
-            }
-            conn.Close();
-        }
-        public void excluirVenda(VendaMODEL venda)
+        public void AddVenda(VendaModel venda)
         {
-            var conn = Conexao.Conex();
-            try
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand sql = new SqlCommand("DELETE FROM Venda WHERE VendaID = @VendaID", conn);
-                sql.Parameters.AddWithValue("@VendaID", venda.VendaID);
-                conn.Open();
-                sql.ExecuteNonQuery();
-            }
-            catch (Exception erro)
-            {
-                throw erro;
-            }
-            finally
-            {
-                conn.Close();
+                string query = @"INSERT INTO Venda (DataVenda, ClienteID, ValorTotal, VendaID) 
+                             VALUES (@DataVenda, @ClienteID, @ValorTotal, @VendaID)";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@DataVenda", venda.DataVenda);
+                command.Parameters.AddWithValue("@ClienteID", venda.ClienteID);
+                command.Parameters.AddWithValue("@ValorTotal", venda.ValorTotal);
+                command.Parameters.AddWithValue("@VendaID", venda.VendaID);
+
+                connection.Open();
+                command.ExecuteNonQuery();
             }
         }
 
-        public void atualizaVenda(VendaMODEL venda)
+        public void UpdateVenda(VendaModel venda)
         {
-            var conn = Conexao.Conex();
-            try
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand sql = new SqlCommand("UPDATE Venda SET VendaID = @VendaID, ClienteID = @ClienteID, DataVenda = @DataVenda, ValorTotal = @ValorTotal", conn);
+                string query = @"UPDATE Venda SET DataVenda = @DataVenda, ClienteID = @ClienteID, ValorTotal = @ValorTotal 
+                             WHERE VendaID = @VendaID";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@DataVenda", venda.DataVenda);
+                command.Parameters.AddWithValue("@ClienteID", venda.ClienteID);
+                command.Parameters.AddWithValue("@ValorTotal", venda.ValorTotal);
+                command.Parameters.AddWithValue("@VendaID", venda.VendaID);
 
-                sql.Parameters.AddWithValue("@ClienteID", venda.ClienteID);
-                sql.Parameters.AddWithValue("@DataVenda", venda.DataVenda);
-                sql.Parameters.AddWithValue("@ValorTotal", venda.ValorTotal);
-                sql.Parameters.AddWithValue("@VendaID", venda.VendaID);
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
 
-                conn.Open();
-                sql.ExecuteNonQuery();
-            }
-            catch (Exception erro)
+        public void DeleteVenda(int vendaId)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                throw erro;
+                string query = "DELETE FROM Venda WHERE VendaID = @VendaID";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@VendaID", vendaId);
+
+                connection.Open();
+                command.ExecuteNonQuery();
             }
-            finally
+        }
+
+        public VendaModel GetVenda(Guid vendaId)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                conn.Close();
+                string query = "SELECT * FROM Venda WHERE VendaID = @VendaID";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@VendaID", vendaId);
+
+                connection.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        return new VendaModel
+                        {
+                            VendaID = Guid.Parse(reader["VendaID"].ToString()),
+                            DataVenda = (DateTime)reader["DataVenda"],
+                            ClienteID = (int)reader["ClienteID"],
+                            ValorTotal = (decimal)reader["ValorTotal"]
+                        };
+                    }
+                }
             }
+            return null;
         }
     }
 }

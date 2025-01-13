@@ -12,9 +12,15 @@ namespace SisControl.View
 {
     public partial class FrmCadCliente : SisControl.FrmBaseGeral
     {
-        public FrmCadCliente()
+
+        private string QueryClientes = "SELECT MAX(ClienteID)  FROM Cliente";
+        private string StatusOperacao;
+        private int ClienteID;
+        
+        public FrmCadCliente( string statusOperação)
         {
             InitializeComponent();
+            this.StatusOperacao = statusOperação;
         }
         public void AlterarRegistro()
         {
@@ -35,7 +41,7 @@ namespace SisControl.View
 
                 MessageBox.Show("Registro Alterado com sucesso!", "Alteração!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 ((FrmManutCliente)Application.OpenForms["FrmManutCliente"]).HabilitarTimer(true);// Habilita Timer do outro form Obs: O timer no outro form executa um Método.    
-                LimpaCampo();
+                Utilitario.LimpaCampo(groupBox1);
                 this.Close();
             }
             catch (Exception erro)
@@ -47,13 +53,17 @@ namespace SisControl.View
         {
             try
             {
+                // Supomos que você tenha três TextBoxes chamados textBox1, textBox2 e textBox3
+                string enDereco = txtEndereco.Text +", " +txtNumero.Text +" - "+ txtBairro.Text;
+
                 ClienteMODEL objetoCliente = new ClienteMODEL();
 
                 objetoCliente.ClienteID = Convert.ToInt32(txtClienteID.Text);
                 objetoCliente.NomeCliente = txtNomeCliente.Text;
                 objetoCliente.Cpf = txtCpf.Text;
-                objetoCliente.Endereco = txtEndereco.Text;
-                objetoCliente.Telefone = ReplaceValoresMasketTexBox(txtTelefone);
+                objetoCliente.Endereco = enDereco;
+                objetoCliente.Telefone = Utilitario.RemoverParentesesETraços(txtTelefone.Text).ToString();
+                
                 objetoCliente.Email = txtEmail.Text;
                 objetoCliente.CidadeID = Convert.ToInt32(txtCidadeID.Text);
 
@@ -63,11 +73,17 @@ namespace SisControl.View
                 MessageBox.Show("REGISTRO gravado com sucesso! ", "Informação!!!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 ((FrmManutCliente)Application.OpenForms["FrmManutCliente"]).HabilitarTimer(true);
 
-                LimpaCampo();
+                Utilitario.LimpaCampo(groupBox1);
                 txtNomeCliente.Focus();
 
-                txtClienteID.Text = RetornaCodigoContaMaisUm(QueryClientes).ToString();                
-                AcrescenteZero_a_Esquerda2(txtClienteID);               
+                txtClienteID.Text = Utilitario.GerarProximoCodigo(QueryClientes).ToString();
+                Utilitario.AcrescentarZerosEsquerda(txtClienteID, 6);//();                                                                    
+
+                int NovoCodigo = Utilitario.GerarProximoCodigo(QueryClientes);//RetornaCodigoContaMaisUm(QueryUsuario).ToString();
+                string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(NovoCodigo, 6);
+                ClienteID = NovoCodigo;
+                txtClienteID.Text = numeroComZeros;
+
             }
             catch (OverflowException ov)
             {
@@ -90,7 +106,7 @@ namespace SisControl.View
                 clienteBll.Excluir(objetoUsuario);
                 MessageBox.Show("Registro Excluído com sucesso!", "Alteração!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 ((FrmManutCliente)Application.OpenForms["FrmManutCliente"]).HabilitarTimer(true);// Habilita Timer do outro form Obs: O timer no outro form executa um Método.    
-                LimpaCampo();
+                Utilitario.LimpaCampo(groupBox1);
                 this.Close();
             }
             catch (Exception erro)
@@ -103,11 +119,7 @@ namespace SisControl.View
         {
             if (StatusOperacao == "NOVO")
             {
-                EvitarDuplicado("Cliente", "NomeCliente", txtNomeCliente.Text);
-                if (RetornoEvitaDuplicado == "0")
-                {
-                    SalvarRegistro();
-                }
+                SalvarRegistro();
             }
             else if (StatusOperacao == "ALTERAR")
             {
@@ -124,9 +136,13 @@ namespace SisControl.View
 
         private void btnNovo_Click(object sender, EventArgs e)
         {
-            LimpaCampo();
-            txtClienteID.Text = RetornaCodigoContaMaisUm(QueryClientes).ToString();
-            AcrescenteZero_a_Esquerda2(txtClienteID);
+            Utilitario.LimpaCampo(this);
+            
+            int NovoCodigo = Utilitario.GerarProximoCodigo(QueryClientes);//RetornaCodigoContaMaisUm(QueryUsuario).ToString();
+            string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(NovoCodigo, 6);
+            ClienteID = NovoCodigo;
+            txtClienteID.Text = numeroComZeros;
+            
         }
 
         private void btnFechar_Click(object sender, EventArgs e)
@@ -142,36 +158,25 @@ namespace SisControl.View
             }
             if (StatusOperacao == "NOVO")
             {
-                UsuarioID = RetornaCodigoContaMaisUm(QueryClientes);
-                txtClienteID.Text = RetornaCodigoContaMaisUm(QueryClientes).ToString();
-                AcrescenteZero_a_Esquerda2(txtClienteID);
+                int NovoCodigo = Utilitario.GerarProximoCodigo(QueryClientes);//RetornaCodigoContaMaisUm(QueryUsuario).ToString();
+                string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(NovoCodigo, 6);
+                ClienteID = NovoCodigo;
+                txtClienteID.Text = numeroComZeros;
+
                 txtNomeCliente.Focus();
             }            
         }
 
         private void btnLocalizar_Click(object sender, EventArgs e)
-        {
+        {           
             FrmLocalizarCidade frmLocalizarCidade = new FrmLocalizarCidade();
             frmLocalizarCidade.Text = "Localizar Cidade...";
             VariavelGlobal.NomeFormulario = "FrmCadCliente";
-            frmLocalizarCidade.ShowDialog();
-            AcrescenteZero_a_Esquerda2(txtCidadeID);
+            frmLocalizarCidade.ShowDialog();            
         }
-        public override bool ValidarCPF(string cpf)
-        {
-            return base.ValidarCPF(cpf);
-        }
+       
         private void txtCpf_Leave(object sender, EventArgs e)
-        {
-            //Validar CPF está funcionando
-            if (ValidarCPF(txtCpf.Text))
-            {                
-            }
-            else
-            {
-                MessageBox.Show("CPF inválido","Informação", MessageBoxButtons.OK,MessageBoxIcon.Error);//esultado.Text = "CPF inválido!";
-                txtCpf.Focus();
-            }
+        {            
         }
     }
 }

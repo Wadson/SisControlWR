@@ -12,18 +12,19 @@ namespace SisControl.View
 {
     public partial class FrmManutFornecedor : SisControl.FrmBaseManutencao
     {
-        public FrmManutFornecedor()
+        private new string StatusOperacao;
+        public FrmManutFornecedor( string statusOperacao)
         {
+            this.StatusOperacao = statusOperacao;
             InitializeComponent();
         }
         private void CarregaDados()
         {
-            FrmCadFornecedor frm = new FrmCadFornecedor();
+            FrmCadFornecedor frm = new FrmCadFornecedor(StatusOperacao);
 
             if (StatusOperacao == "NOVO")
             {
-                frm.Text = "SISCONTROL - NOVO CADASTRO DE FORNECEDOR";
-                frm.StatusOperacao = "NOVO";
+                frm.Text = "SISCONTROL - NOVO CADASTRO DE FORNECEDOR";                
                 frm.ShowDialog();
             }
             if (StatusOperacao == "ALTERAR")
@@ -49,7 +50,7 @@ namespace SisControl.View
                     frm.txtCidadeID.Text = dataGridPesquisar.CurrentRow.Cells["CidadeID"].Value.ToString();
 
                     frm.Text = "SISCONTROL - ALTERAR REGISTRO";
-                    frm.StatusOperacao = "ALTERAR";
+                    StatusOperacao = "ALTERAR";
                     frm.btnSalvar.Text = "Alterar";
                     frm.btnNovo.Enabled = false;
                     frm.btnSalvar.TextAlign = ContentAlignment.MiddleRight;//AlinhamentoDeConteúdo.MiddleLeft; =  StringAlignment
@@ -90,7 +91,7 @@ namespace SisControl.View
                     frm.txtNomeCidade.Text = dataGridPesquisar.CurrentRow.Cells["NomeCidade"].Value.ToString();
                     frm.txtCidadeID.Text = dataGridPesquisar.CurrentRow.Cells["CidadeID"].Value.ToString();
                     frm.Text = "SISCONTROL - EXCLUSÃO DE REGISTRO";
-                    frm.StatusOperacao = "EXCLUSÃO";
+                    StatusOperacao = "EXCLUSÃO";
                     frm.btnSalvar.Text = "Excluir";
                     frm.btnNovo.Enabled = false;
                     frm.btnSalvar.TextAlign = ContentAlignment.MiddleRight;//AlinhamentoDeConteúdo.MiddleLeft; =  StringAlignment
@@ -133,11 +134,11 @@ namespace SisControl.View
 
             //Alinhar o as colunas
 
-            //dataGridPesquisar.Columns["ProdutoID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
-            //dataGridPesquisar.Columns["Estoque"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
+            dgv.Columns["FornecedorID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
+            dgv.Columns["CidadeID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
 
             // Ajustar colunas automaticamente
-            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
             // Tornar o grid somente leitura
             dgv.ReadOnly = true;
@@ -157,14 +158,27 @@ namespace SisControl.View
             // Cor do grid
             dgv.GridColor = Color.Black;
 
-            this.dataGridPesquisar.Columns[0].Name = "FornecedorID";
-            this.dataGridPesquisar.Columns[1].Name = "NomeFornecedor";
-            this.dataGridPesquisar.Columns[2].Name = "Cnpj";
-            this.dataGridPesquisar.Columns[3].Name = "Endereco";
-            this.dataGridPesquisar.Columns[4].Name = "Telefone";
-            this.dataGridPesquisar.Columns[5].Name = "Email";
-            this.dataGridPesquisar.Columns[6].Name = "CidadeID";
-            this.dataGridPesquisar.Columns[7].Name = "NomeCidade";
+            this.dataGridPesquisar.Columns[0].Name = "FornecedorID"   ;
+            this.dataGridPesquisar.Columns[1].Name = "NomeFornecedor" ;
+            this.dataGridPesquisar.Columns[2].Name = "Cnpj"           ;
+            this.dataGridPesquisar.Columns[3].Name = "Endereco"        ;
+            this.dataGridPesquisar.Columns[4].Name = "Telefone"           ;
+            this.dataGridPesquisar.Columns[5].Name = "Email"          ;
+            this.dataGridPesquisar.Columns[6].Name = "CidadeID"            ;
+            this.dataGridPesquisar.Columns[7].Name = "NomeCidade"          ;
+
+
+            //// Definir largura fixa  das colunas
+            //dgv.Columns["FornecedorID"   ].Width = 100;
+            //dgv.Columns["NomeFornecedor" ].Width = 250;
+            //dgv.Columns["Cnpj"           ].Width = 100;
+            //dgv.Columns["Endereco"       ].Width = 200;
+            //dgv.Columns["Telefone"       ].Width = 100;
+            //dgv.Columns["Email"          ].Width = 150;
+            //dgv.Columns["CidadeID"       ].Width = 100;
+            //dgv.Columns["NomeCidade"].Width = 200;
+
+
         }
         public void ListarFornecedor()
         {

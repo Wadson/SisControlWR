@@ -12,8 +12,10 @@ namespace SisControl.View
 {
     public partial class FrmManutCliente : SisControl.FrmBaseManutencao
     {
-        public FrmManutCliente()
+        private new string StatusOperacao;
+        public FrmManutCliente(string statusOperacao)
         {
+            this.StatusOperacao = statusOperacao;
             InitializeComponent();
         }
         public void ListarCliente()
@@ -47,7 +49,7 @@ namespace SisControl.View
             //dataGridPesquisar.Columns["Estoque"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
 
             // Ajustar colunas automaticamente
-            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
             // Tornar o grid somente leitura
             dgv.ReadOnly = true;
@@ -67,26 +69,40 @@ namespace SisControl.View
             // Cor do grid
             dgv.GridColor = Color.Black;
 
-            this.dataGridPesquisar.Columns[0].Name = "ClienteID";
-            this.dataGridPesquisar.Columns[1].Name = "NomeCliente";
-            this.dataGridPesquisar.Columns[2].Name = "Cpf";
-            this.dataGridPesquisar.Columns[3].Name = "Endereco";
-            this.dataGridPesquisar.Columns[4].Name = "Telefone";
-            this.dataGridPesquisar.Columns[5].Name = "Email";
-            this.dataGridPesquisar.Columns[6].Name = "CidadeID";
-            this.dataGridPesquisar.Columns[7].Name = "Expr1";
-            this.dataGridPesquisar.Columns[8].Name = "Expr2";
-            this.dataGridPesquisar.Columns[9].Name = "Uf";
+            this.dataGridPesquisar.Columns[0].Name = "ClienteID"   ;
+            this.dataGridPesquisar.Columns[1].Name = "NomeCliente" ;
+            this.dataGridPesquisar.Columns[2].Name = "Cpf"         ;
+            this.dataGridPesquisar.Columns[3].Name = "Endereco"      ;
+            this.dataGridPesquisar.Columns[4].Name = "Telefone"    ;
+            this.dataGridPesquisar.Columns[5].Name = "Email"        ;
+            this.dataGridPesquisar.Columns[6].Name = "CidadeID"     ;
+            this.dataGridPesquisar.Columns[7].Name = "Expr1"         ;
+            this.dataGridPesquisar.Columns[8].Name = "Expr2"        ;
+            this.dataGridPesquisar.Columns[9].Name = "Uf"            ;
+
+
+
+            // Definir largura fixa  das colunas
+            //dgv.Columns["ClienteID"   ].Width = 100;
+            //dgv.Columns["NomeCliente" ].Width = 250;
+            //dgv.Columns["Cpf"         ].Width = 100;
+            //dgv.Columns["Endereco"    ].Width = 200;
+            //dgv.Columns["Telefone"    ].Width = 100;
+            //dgv.Columns["Email"       ].Width = 150;
+            //dgv.Columns["CidadeID"    ].Width = 100;
+            //dgv.Columns["Expr1"       ].Width = 200;
+            //dgv.Columns["Expr2"       ].Width = 100;
+            //dgv.Columns["Uf"].Width = 200;
         }
       
         private void CarregaDados()
         {
-            FrmCadCliente cadCliente = new FrmCadCliente();
+            FrmCadCliente cadCliente = new FrmCadCliente(StatusOperacao);
 
             if (StatusOperacao == "NOVO")
             {
                 cadCliente.Text = "SISCONTROL - NOVO CADASTRO DE CLIENTE";
-                cadCliente.StatusOperacao = "NOVO";
+                StatusOperacao = "NOVO";
                 cadCliente.ShowDialog();
 
                 ((FrmManutCliente)Application.OpenForms["FrmManutCliente"]).HabilitarTimer(true);
@@ -111,6 +127,13 @@ namespace SisControl.View
                         cadCliente.txtNomeCliente.Text = dataGridPesquisar.CurrentRow.Cells["NomeCliente"].Value.ToString();
                         cadCliente.txtCpf.Text = dataGridPesquisar.CurrentRow.Cells["Cpf"].Value.ToString();
                         cadCliente.txtEndereco.Text = dataGridPesquisar.CurrentRow.Cells["Endereco"].Value.ToString();
+
+                        //Utilitario.RestoreTextBoxesFromDataGridView(cadCliente.txtEndereco, cadCliente.txtNumero, cadCliente.txtBairro, dataGridPesquisar);
+
+                        cadCliente.txtEndereco.Text = dataGridPesquisar.CurrentRow.Cells[""].Value.ToString();
+                        cadCliente.txtEndereco.Text = dataGridPesquisar.CurrentRow.Cells["Endereco"].Value.ToString();
+                        cadCliente.txtEndereco.Text = dataGridPesquisar.CurrentRow.Cells["Endereco"].Value.ToString();
+
                         cadCliente.txtTelefone.Text = dataGridPesquisar.CurrentRow.Cells["Telefone"].Value.ToString();
                         cadCliente.txtEmail.Text = dataGridPesquisar.CurrentRow.Cells["Email"].Value.ToString();
                         cadCliente.txtCidadeID.Text = dataGridPesquisar.CurrentRow.Cells["CidadeID"].Value.ToString();
@@ -119,7 +142,7 @@ namespace SisControl.View
                         cadCliente.txtEstadoCliente.Text = dataGridPesquisar.CurrentRow.Cells["Uf"].Value.ToString();
 
                         cadCliente.Text = "SISCONTROL - ALTERAR REGISTRO";
-                        cadCliente.StatusOperacao = "ALTERAR";
+                        StatusOperacao = "ALTERAR";
                         cadCliente.btnSalvar.Text = "Alterar";
                         cadCliente.btnNovo.Enabled = false;
                         cadCliente.btnSalvar.TextAlign = ContentAlignment.MiddleRight;//AlinhamentoDeConteúdo.MiddleLeft; =  StringAlignment
@@ -161,7 +184,7 @@ namespace SisControl.View
                         cadCliente.txtEstadoCliente.Text = dataGridPesquisar.CurrentRow.Cells["Uf"].Value.ToString();
 
                         cadCliente.Text = "SISCONTROL - EXCLUSÃO DE REGISTRO";
-                        cadCliente.StatusOperacao = "EXCLUSÃO";
+                        StatusOperacao = "EXCLUSÃO";
                         cadCliente.btnSalvar.Text = "Excluir";
                         cadCliente.btnNovo.Enabled = false;
                         cadCliente.btnSalvar.TextAlign = ContentAlignment.MiddleRight;//AlinhamentoDeConteúdo.MiddleLeft; =  StringAlignment

@@ -7,108 +7,121 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Configuration;
+
 namespace SisControl.DALL
 {
-    internal class ItemVendaDALL
+    public class ItemVendaDAL
     {
-        public DataTable listaItensVenda()
+        private string connectionString = ConfigurationManager.ConnectionStrings["Data Source=NOTEBOOK-DELL\\SQLEXPRESS;Initial Catalog=bdsiscontrol;Integrated Security=True;"].ConnectionString;
+
+        public void AddItemVenda(ItemVendaModel itemVenda)
         {
-            var conn = Conexao.Conex();
-            try
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand comando = new SqlCommand("SELECT ItemVendaID, VendaID, ProdutoID, Quantidade, PrecoUnitario FROM ItemVenda", conn);
+                string query = @"INSERT INTO ItemVenda (VendaID, ProdutoID, Quantidade, PrecoUnitario, ItemVendaID) 
+                             VALUES (@VendaID, @ProdutoID, @Quantidade, @PrecoUnitario, @ItemVendaID)";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@VendaID", itemVenda.VendaID);
+                command.Parameters.AddWithValue("@ProdutoID", itemVenda.ProdutoID);
+                command.Parameters.AddWithValue("@Quantidade", itemVenda.Quantidade);
+                command.Parameters.AddWithValue("@PrecoUnitario", itemVenda.PrecoUnitario);
+                command.Parameters.AddWithValue("@ItemVendaID", itemVenda.ItemVendaID);
 
-                SqlDataAdapter daItensVenda = new SqlDataAdapter();
-                daItensVenda.SelectCommand = comando;
-
-                DataTable dtItensVenda = new DataTable();
-                daItensVenda.Fill(dtItensVenda);
-                return dtItensVenda;
-            }
-            catch (Exception erro)
-            {
-                throw erro;
-            }
-            finally
-            {
-                conn.Close();
+                connection.Open();
+                command.ExecuteNonQuery();
             }
         }
 
-        public void SalvarItensVenda(ItemVendaMODEL itensvenda)
+        public void UpdateItemVenda(ItemVendaModel itemVenda)
         {
-            var conn = Conexao.Conex();
-
-            SqlCommand sqlcomm = new SqlCommand("INSERT INTO ItemVenda (ItemVendaID, VendaID, ProdutoID, Quantidade, PrecoUnitario) VALUES (@ItemVendaID, @VendaID, @ProdutoID, @Quantidade, @PrecoUnitario)", conn);
-
-            sqlcomm.Parameters.AddWithValue("@ItemVendaID", itensvenda.ItemVendaID);
-            sqlcomm.Parameters.AddWithValue("@VendaID", itensvenda.VendaID);
-            sqlcomm.Parameters.AddWithValue("@ProdutoID", itensvenda.ProdutoID);
-            sqlcomm.Parameters.AddWithValue("@Quantidade", itensvenda.Quantidade);
-            sqlcomm.Parameters.AddWithValue("@PrecoUnitario", itensvenda.PrecoUnitario);
-
-            conn.Open();
-            sqlcomm.ExecuteNonQuery();
-            try
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
+                string query = @"UPDATE ItemVenda SET ProdutoID = @ProdutoID, Quantidade = @Quantidade, PrecoUnitario = @PrecoUnitario 
+                             WHERE ItemVendaID = @ItemVendaID";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@ProdutoID", itemVenda.ProdutoID);
+                command.Parameters.AddWithValue("@Quantidade", itemVenda.Quantidade);
+                command.Parameters.AddWithValue("@PrecoUnitario", itemVenda.PrecoUnitario);
+                command.Parameters.AddWithValue("@ItemVendaID", itemVenda.ItemVendaID);
 
-            }
-            catch (SqlException ex)
-            {
-                throw new ApplicationException(ex.ToString());
-            }
-            finally
-            {
-                conn.Close();
+                connection.Open();
+                command.ExecuteNonQuery();
             }
         }
-        // ***********E  X  C  L  U  I         U  S  U  A  R  I  O***********************************
-        public void excluirItensVenda(ItemVendaMODEL itensvenda)
+
+        public void DeleteItemVenda(int itemVendaId)
         {
-            var conn = Conexao.Conex();
-            try
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand sqlcomando = new SqlCommand("DELETE FROM ItenVenda WHERE ItemVendaID = @ItemVendaID", conn);
-                sqlcomando.Parameters.AddWithValue("@ItemVendaID", itensvenda.ItemVendaID);
-                conn.Open();
-                sqlcomando.ExecuteNonQuery();
-            }
-            catch (Exception erro)
-            {
-                throw erro;
-            }
-            finally
-            {
-                conn.Close();
+                string query = "DELETE FROM ItemVenda WHERE ItemVendaID = @ItemVendaID";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@ItemVendaID", itemVendaId);
+
+                connection.Open();
+                command.ExecuteNonQuery();
             }
         }
-        //********A  T  U  A  L  I  Z  A     U  S  U  A  R  I  O  *****************************************************
-        public void atualizaItensVenda(ItemVendaMODEL itensvenda)
+
+        public List<ItemVendaModel> GetItensVenda(Guid vendaId)
         {
-            var conn = Conexao.Conex();
-            try
+            List<ItemVendaModel> itens = new List<ItemVendaModel>();
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand sqlcomm = new SqlCommand("UPDATE ItemVenda SET  ItemVendaID = @ItemVendaID, VendaID = @VendaID, ProdutoID = @ProdutoID, Quantidade = @Quantidade, PrecoUnitario = @PrecoUnitario", conn);
+                string query = "SELECT * FROM ItemVenda WHERE VendaID = @VendaID";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@VendaID", vendaId);
 
-                sqlcomm.Parameters.AddWithValue("@ItemVendaID", itensvenda.ItemVendaID);
-                sqlcomm.Parameters.AddWithValue("@VendaID", itensvenda.VendaID);
-                sqlcomm.Parameters.AddWithValue("@ProdutoID", itensvenda.ProdutoID);
-                sqlcomm.Parameters.AddWithValue("@Quantidade", itensvenda.Quantidade);
-                sqlcomm.Parameters.AddWithValue("@PrecoUnitario", itensvenda.PrecoUnitario);
+                connection.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Guid itemVendaID;
+                        Guid vendaID;
 
-                conn.Open();
-                sqlcomm.ExecuteNonQuery();
-
+                        // Verificar e converter ItemVendaID e VendaID
+                        if (Guid.TryParse(reader["ItemVendaID"].ToString(), out itemVendaID) &&
+                            Guid.TryParse(reader["VendaID"].ToString(), out vendaID))
+                        {
+                            itens.Add(new ItemVendaModel
+                            {
+                                ItemVendaID = itemVendaID,
+                                VendaID = Convert.ToInt32(vendaID),
+                                ProdutoID = (int)reader["ProdutoID"],
+                                Quantidade = (int)reader["Quantidade"],
+                                PrecoUnitario = (decimal)reader["PrecoUnitario"]
+                            });
+                        }
+                        else
+                        {
+                            // Lidando com falha de conversão
+                            throw new Exception("Falha ao converter ItemVendaID ou VendaID para Guid.");
+                        }
+                    }
+                }
             }
-            catch (Exception erro)
-            {
-                throw erro;
-            }
-            finally
-            {
-                conn.Close();
-            }
-
+            return itens;
         }
+
+
+
+        //public DataTable ObterItensDeVenda()
+        //{
+        //    DataTable dataTable = new DataTable();
+
+        //    using (SqlConnection connection = new SqlConnection(connectionString))
+        //    {
+        //        string query = "SELECT Nome, Preco FROM ItensDeVenda";
+        //        using (SqlCommand command = new SqlCommand(query, connection))
+        //        {
+        //            connection.Open();
+        //            SqlDataAdapter adapter = new SqlDataAdapter(command);
+        //            adapter.Fill(dataTable);
+        //        }
+        //    }
+
+        //    return dataTable;
+        //}
     }
 }

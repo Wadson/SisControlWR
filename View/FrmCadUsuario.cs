@@ -12,8 +12,13 @@ namespace SisControl
 {
     public partial class FrmCadUsuario : SisControl.FrmBaseGeral
     {
-        public FrmCadUsuario()
+        private string QueryUsuario = "SELECT MAX(UsuarioID) FROM Usuario";
+
+        private string StatusOperacao;
+        private int UsuarioID;
+        public FrmCadUsuario(string statusOperacao)
         {
+            this.StatusOperacao = statusOperacao;
             InitializeComponent();
         }
         public void SalvarRegistro()
@@ -58,7 +63,7 @@ namespace SisControl
                 usuarioBll.Excluir(objetoUsuario);
                 MessageBox.Show("Registro Excluído com sucesso!", "Alteração!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 ((FrmManutUsuario)Application.OpenForms["FrmManutUsuario"]).HabilitarTimer(true);// Habilita Timer do outro form Obs: O timer no outro form executa um Método.    
-                LimpaCampo();
+                Utilitario.LimpaCampo(groupBox1);
                 this.Close(); 
             }
             catch (Exception erro)
@@ -85,7 +90,7 @@ namespace SisControl
 
                 MessageBox.Show("Registro Alterado com sucesso!", "Alteração!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 ((FrmManutUsuario)Application.OpenForms["FrmManutUsuario"]).HabilitarTimer(true);// Habilita Timer do outro form Obs: O timer no outro form executa um Método.    
-                LimpaCampo();
+                Utilitario.LimpaCampo(groupBox1);
                 this.Close();
             }
             catch (Exception erro)
@@ -103,18 +108,15 @@ namespace SisControl
             }
             if (StatusOperacao == "NOVO")
             {
-                EvitarDuplicado("Usuario", "NomeUsuario", txtNomeUsuario.Text);
-                if (RetornoEvitaDuplicado == "0")
-                {
-                    SalvarRegistro();
-                    LimpaCampo();
-                    txtNomeUsuario.Focus();
+                SalvarRegistro();
+                Utilitario.LimpaCampo(this);
+                txtNomeUsuario.Focus();
 
-                    txtUsuarioID.Text = RetornaCodigoContaMaisUm(QueryUsuario).ToString();
-                    UsuarioID = RetornaCodigoContaMaisUm(QueryUsuario);
-                    AcrescenteZero_a_Esquerda2(txtUsuarioID);
-                    ((FrmManutUsuario)Application.OpenForms["FrmManutUsuario"]).HabilitarTimer(true);
-                }
+                UsuarioID = Utilitario.GerarProximoCodigo(QueryUsuario);
+                int codigo = UsuarioID;
+                txtUsuarioID.Text = Utilitario.AcrescentarZerosEsquerda(codigo, 6);
+
+                ((FrmManutUsuario)Application.OpenForms["FrmManutUsuario"]).HabilitarTimer(true);
             }
             if (StatusOperacao == "EXCLUSÃO")
             {
@@ -126,10 +128,13 @@ namespace SisControl
         }
 
         private void btnNovo_Click(object sender, EventArgs e)
-        {
-            LimpaCampo();
-            txtUsuarioID.Text = RetornaCodigoContaMaisUm(QueryUsuario).ToString();
-            AcrescenteZero_a_Esquerda2(txtUsuarioID);
+        {            
+            Utilitario.LimpaCampo(groupBox1);
+
+            int NovoCodigo = Utilitario.GerarProximoCodigo(QueryUsuario);//RetornaCodigoContaMaisUm(QueryUsuario).ToString();
+            string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(NovoCodigo, 6);
+            UsuarioID = NovoCodigo;
+            txtUsuarioID.Text = numeroComZeros;
         }
 
         private void btnSair_Click(object sender, EventArgs e)
@@ -145,8 +150,11 @@ namespace SisControl
             }
             if (StatusOperacao == "NOVO")
             {
-                UsuarioID = RetornaCodigoContaMaisUm(QueryUsuario);
-                txtUsuarioID.Text = RetornaCodigoContaMaisUm(QueryUsuario).ToString();
+                int NovoCodigo = Utilitario.GerarProximoCodigo(QueryUsuario);//RetornaCodigoContaMaisUm(QueryUsuario).ToString();
+                string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(NovoCodigo, 6);
+                UsuarioID = NovoCodigo;
+                txtUsuarioID.Text = numeroComZeros;
+
                 txtNomeUsuario.Focus();
             }            
         }

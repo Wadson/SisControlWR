@@ -10,38 +10,38 @@ namespace SisControl.BLL
 {
     internal class VendaBLL
     {
-        VendaDALL vendaDALL = null;
-        public void Salvar(VendaMODEL vendas)
+        VendaDAL vendaDALL = null;
+        public void Salvar(VendaDAL vendas)
         {
-            vendaDALL = new VendaDALL();
-            vendaDALL.SalvarVenda(vendas);
+            
             try
             {
-
+                //vendaDALL = new VendaDAL();
+                //vendaDALL.SalvarVenda(vendas);
             }
             catch (Exception erro)
             {
                 throw erro;
             }
         }
-        public void Excluir(VendaMODEL vendas)
+        public void Excluir(VendaModel vendas)
         {
             try
             {
-                vendaDALL = new VendaDALL();
-                vendaDALL.excluirVenda(vendas);
+                //vendaDALL = new VendaDAL();
+                //vendaDALL.excluirVenda(vendas);
             }
             catch (Exception erro)
             {
                 throw erro;
             }
         }
-        public void Alterar(VendaMODEL vendas)
+        public void Alterar(VendaModel vendas)
         {
             try
             {
-                vendaDALL = new VendaDALL();
-                vendaDALL.atualizaVenda(vendas);
+                //vendaDALL = new VendaDALL();
+                //vendaDALL.atualizaVenda(vendas);
             }
             catch (Exception erro)
             {

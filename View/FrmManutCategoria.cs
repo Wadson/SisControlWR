@@ -12,18 +12,20 @@ namespace SisControl.View
 {
     public partial class FrmManutCategoria : SisControl.FrmBaseManutencao
     {
-        public FrmManutCategoria()
+        private new string StatusOperacao;
+        public FrmManutCategoria(string statusOperacao)
         {
-            InitializeComponent();
+            this.StatusOperacao = statusOperacao;
+            InitializeComponent();            
         }
         private void CarregaDados()
         {
-            FrmCadCategoria cadCategoria = new FrmCadCategoria();
+            FrmCadCategoria cadCategoria = new FrmCadCategoria(StatusOperacao);
 
             if (StatusOperacao == "NOVO")
             {
                 cadCategoria.Text = "SISCONTROL - NOVO CADASTRO DE CATEGORIA";
-                cadCategoria.StatusOperacao = "NOVO";
+                StatusOperacao = "NOVO";
                 cadCategoria.ShowDialog();
 
                 ((FrmManutCategoria)Application.OpenForms["FrmManutCategoria"]).HabilitarTimer(true);
@@ -50,7 +52,7 @@ namespace SisControl.View
                         cadCategoria.txtNome.Text = dataGridPesquisar.CurrentRow.Cells["NomeCategoria"].Value.ToString();
 
                         cadCategoria.Text = "SISCONTROL - ALTERAR REGISTRO";
-                        cadCategoria.StatusOperacao = "ALTERAR";
+                        StatusOperacao = "ALTERAR";
                         cadCategoria.btnSalvar.Text = "Alterar";
                         cadCategoria.btnNovo.Enabled = false;
                         cadCategoria.btnSalvar.TextAlign = ContentAlignment.MiddleRight;//AlinhamentoDeConteúdo.MiddleLeft; =  StringAlignment
@@ -88,7 +90,7 @@ namespace SisControl.View
                         cadCategoria.txtNome.Text = dataGridPesquisar.CurrentRow.Cells["NomeCategoria"].Value.ToString();
 
                         cadCategoria.Text = "SISCONTROL - EXCLUSÃO DE REGISTRO";
-                        cadCategoria.StatusOperacao = "EXCLUSÃO";
+                        StatusOperacao = "EXCLUSÃO";
                         cadCategoria.btnSalvar.Text = "Excluir";
                         cadCategoria.btnNovo.Enabled = false;
                         cadCategoria.btnSalvar.TextAlign = ContentAlignment.MiddleRight;//AlinhamentoDeConteúdo.MiddleLeft; =  StringAlignment
@@ -141,7 +143,7 @@ namespace SisControl.View
             //dataGridPesquisar.Columns["Estoque"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
 
             // Ajustar colunas automaticamente
-            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
             // Tornar o grid somente leitura
             dgv.ReadOnly = true;
@@ -163,6 +165,11 @@ namespace SisControl.View
 
             this.dataGridPesquisar.Columns[0].Name = "CategoriaID";
             this.dataGridPesquisar.Columns[1].Name = "NomeCategoria";
+
+            // Definir largura fixa das colunas
+            dgv.Columns["CategoriaID"].Width = 150;
+            dgv.Columns["NomeCategoria"].Width = 350;
+            
         }
 
         public void ListarCategoria()

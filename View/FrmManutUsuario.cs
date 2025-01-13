@@ -21,14 +21,14 @@ namespace SisControl
       
         private void CarregaDados()
         {
-            FrmCadUsuario cadUsuarios = new FrmCadUsuario();
+            FrmCadUsuario cadUsuarios = new FrmCadUsuario(StatusOperacao);
 
             try
             {
                 if (StatusOperacao == "NOVO")
                 {
                     cadUsuarios.Text = "SISCONTROL - NOVO CADASTRO DE USUÁRIO";
-                    cadUsuarios.StatusOperacao = "NOVO";  
+                    StatusOperacao = "NOVO";  
                     cadUsuarios.ShowDialog();
 
                     ((FrmManutUsuario)Application.OpenForms["FrmManutUsuario"]).HabilitarTimer(true);
@@ -42,7 +42,7 @@ namespace SisControl
                     cadUsuarios.cmbTipoUsuario.Text =    dataGridPesquisar.CurrentRow.Cells["TipoUsuario"].Value.ToString();
 
                     cadUsuarios.Text = "SISCONTROL - ALTERAR REGISTRO";
-                    cadUsuarios.StatusOperacao = "ALTERAR";
+                    StatusOperacao = "ALTERAR";
                     
                     cadUsuarios.btnSalvar.Text = "Alterar";
                     cadUsuarios.btnNovo.Enabled = false;
@@ -60,7 +60,7 @@ namespace SisControl
                     cadUsuarios.cmbTipoUsuario.Text = dataGridPesquisar.CurrentRow.Cells["TipoUsuario"].Value.ToString();
 
                     cadUsuarios.Text = "SISCONTROL - EXCLUSÃO DE REGISTRO";
-                    cadUsuarios.StatusOperacao = "EXCLUSÃO";
+                    StatusOperacao = "EXCLUSÃO";
 
                     cadUsuarios.btnSalvar.Text = "Excluir";
                     cadUsuarios.btnNovo.Enabled = false;
@@ -105,11 +105,11 @@ namespace SisControl
 
             //Alinhar o as colunas
 
-            //dataGridPesquisar.Columns["ProdutoID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
+            dataGridPesquisar.Columns["UsuarioID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
             //dataGridPesquisar.Columns["Estoque"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
 
             // Ajustar colunas automaticamente
-            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
             // Tornar o grid somente leitura
             dgv.ReadOnly = true;
@@ -129,11 +129,18 @@ namespace SisControl
             // Cor do grid
             dgv.GridColor = Color.Black;
 
-            this.dataGridPesquisar.Columns[0].Name = "UsuarioID";
-            this.dataGridPesquisar.Columns[1].Name = "NomeUsuario";
-            this.dataGridPesquisar.Columns[2].Name = "Email";
-            this.dataGridPesquisar.Columns[3].Name = "Senha";
-            this.dataGridPesquisar.Columns[4].Name = "TipoUsuario";
+            this.dataGridPesquisar.Columns[0].Name = "UsuarioID"   ;
+            this.dataGridPesquisar.Columns[1].Name = "NomeUsuario" ;
+            this.dataGridPesquisar.Columns[2].Name = "Email"       ;
+            this.dataGridPesquisar.Columns[3].Name = "Senha"        ;
+            this.dataGridPesquisar.Columns[4].Name = "TipoUsuario" ;  
+
+            // Definir largura fixa das colunas
+            //dgv.Columns["UsuarioID"  ].Width = 100;
+            //dgv.Columns["NomeUsuario"].Width = 250;
+            //dgv.Columns["Email"      ].Width = 200;
+            //dgv.Columns["Senha"      ].Width = 100;
+            //dgv.Columns["TipoUsuario"].Width = 150;
         }        
        
         public void ListaUsuario()

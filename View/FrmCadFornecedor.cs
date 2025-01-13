@@ -12,8 +12,12 @@ namespace SisControl.View
 {
     public partial class FrmCadFornecedor : SisControl.FrmBaseGeral
     {
-        public FrmCadFornecedor()
+        private string QueryFornecedor = "SELECT MAX(FornecedorID) FROM Fornecedor";
+        private int FornecedorID;        
+        private string StatusOperacao;
+        public FrmCadFornecedor(string statusOperacao)
         {
+            this.StatusOperacao = statusOperacao;
             InitializeComponent();
         }
         public void SalvarRegistro()
@@ -64,7 +68,7 @@ namespace SisControl.View
 
                 MessageBox.Show("Registro Alterado com sucesso!", "Alteração!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 ((FrmManutFornecedor)Application.OpenForms["FrmManutFornecedor"]).HabilitarTimer(true);// Habilita Timer do outro form Obs: O timer no outro form executa um Método.    
-                LimpaCampo();
+                Utilitario.LimpaCampo(this);
                 this.Close();
             }
             catch (Exception erro)
@@ -84,7 +88,8 @@ namespace SisControl.View
                 objetoBll.Excluir(objetoModel);
                 MessageBox.Show("Registro Excluído com sucesso!", "Alteração!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 //((FrmManutUsuario)Application.OpenForms["FrmManutUsuario"]).HabilitarTimer(true);// Habilita Timer do outro form Obs: O timer no outro form executa um Método.    
-                LimpaCampo();
+                
+                Utilitario.LimpaCampo(this);
                 this.Close();
             }
             catch (Exception erro)
@@ -99,19 +104,18 @@ namespace SisControl.View
                 AlterarRegistro();
             }
             if (StatusOperacao == "NOVO")
-            {
-                EvitarDuplicado("Fornecedor", "NomeFornecedor", txtNomeFornecedor.Text);
-                if (RetornoEvitaDuplicado == "0")
-                {
-                    SalvarRegistro();
-                    LimpaCampo();
-                    txtNomeFornecedor.Focus();
-                    
-                    txtFornecedorID.Text = RetornaCodigoContaMaisUm(QueryFornecedor).ToString();
-                    UsuarioID = RetornaCodigoContaMaisUm(QueryFornecedor);
-                    AcrescenteZero_a_Esquerda2(txtFornecedorID);
-                    ((FrmManutFornecedor)Application.OpenForms["FrmManutFornecedor"]).HabilitarTimer(true);
-                }
+            {               
+                SalvarRegistro();
+                Utilitario.LimpaCampo(this);
+                txtNomeFornecedor.Focus();
+
+                int NovoCodigo = Utilitario.GerarProximoCodigo(QueryFornecedor);//RetornaCodigoContaMaisUm(QueryUsuario).ToString();
+                string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(NovoCodigo, 6);
+                FornecedorID = NovoCodigo;
+                txtFornecedorID.Text = numeroComZeros;
+
+                ((FrmManutFornecedor)Application.OpenForms["FrmManutFornecedor"]).HabilitarTimer(true);
+                
             }
             if (StatusOperacao == "EXCLUSÃO")
             {
@@ -124,9 +128,12 @@ namespace SisControl.View
 
         private void btnNovo_Click(object sender, EventArgs e)
         {
-            LimpaCampo();
-            txtFornecedorID.Text = RetornaCodigoContaMaisUm(QueryFornecedor).ToString();
-            AcrescenteZero_a_Esquerda2(txtFornecedorID);
+            Utilitario.LimpaCampo(this);
+
+            int NovoCodigo = Utilitario.GerarProximoCodigo(QueryFornecedor);//RetornaCodigoContaMaisUm(QueryUsuario).ToString();
+            string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(NovoCodigo, 6);
+            FornecedorID = NovoCodigo;
+            txtFornecedorID.Text = numeroComZeros;
         }
 
         private void btnFechar_Click(object sender, EventArgs e)
@@ -142,20 +149,23 @@ namespace SisControl.View
             }
             if (StatusOperacao == "NOVO")
             {
-                txtFornecedorID.Text = RetornaCodigoContaMaisUm(QueryFornecedor).ToString();                
-                txtNomeFornecedor.Focus();
-                AcrescenteZero_a_Esquerda2(txtFornecedorID);
+                int NovoCodigo = Utilitario.GerarProximoCodigo(QueryFornecedor);//RetornaCodigoContaMaisUm(QueryUsuario).ToString();
+                string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(NovoCodigo, 6);
+                FornecedorID = NovoCodigo;
+                txtFornecedorID.Text = numeroComZeros;
             }
         }
 
         private void btnLocalizar_Click(object sender, EventArgs e)
-        {
-            
+        {            
             FrmLocalizarCidade frmLocalizarCidade = new FrmLocalizarCidade();
-            frmLocalizarCidade.Text = "Localizar Cidade...";
+            frmLocalizarCidade.Text = "Localizar Fornecedor...";
             VariavelGlobal.NomeFormulario = "FrmCadFornecedor";
             frmLocalizarCidade.ShowDialog();
-            AcrescenteZero_a_Esquerda2(txtCidadeID);
+            
+            string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(FornecedorID, 6);
+            FornecedorID = int.Parse(numeroComZeros);
+            txtFornecedorID.Text = FornecedorID.ToString();
         }
     }
 }

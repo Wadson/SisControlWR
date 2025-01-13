@@ -6,19 +6,21 @@ using System.Threading.Tasks;
 
 namespace SisControl.MODEL
 {
-    internal class VendaMODEL
+    public class VendaModel
     {
-        public int VendaID { get; set; }
-        public int ClienteID { get; set; }
+        //public int VendaID { get; set; }
+        public Guid VendaID { get; set; } // Usando GUID como chave primária
         public DateTime DataVenda { get; set; }
-        public Decimal ValorTotal { get; set; }
+        public int ClienteID { get; set; }
+        public decimal ValorTotal { get; set; }
 
-        public List<int> ItemVendaID = new List<int>();
-        public List<int> ParcelaID = new List<int>();
-        public List<int> ContaReceberID = new List<int>();
+        public List<ItemVendaModel> ItensVendidos { get; set; }
+        public List<ParcelaModel> Parcelas { get; set; }
 
-        //public List<ItemVenda> ItensVenda { get; set; }
-        //public List<Parcela> Parcelas { get; set; }
-        //public List<ContaReceber> ContasReceber { get; set; }
+        public VendaModel()
+        {
+            ItensVendidos = new List<ItemVendaModel>();
+            Parcelas = new List<ParcelaModel>();
+        }
     }
 }

@@ -7,181 +7,111 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
+using System.Configuration;
+
 namespace SisControl.DALL
 {
-    internal class ContaReceberDALL
+    public class ContaReceberDAL
     {
-        public DataTable lista_contas_receber()
+        private string connectionString = ConfigurationManager.ConnectionStrings["Data Source=NOTEBOOK-DELL\\SQLEXPRESS;Initial Catalog=bdsiscontrol;Integrated Security=True;"].ConnectionString;
+
+        public void AddContaReceber(ContaReceberModel contaReceber)
         {
-            var conn = Conexao.Conex();
-            try
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                //SqlCommand sql = new SqlCommand("SELECT cliente.nome_cliente, cliente.id_cliente, venda.dt_venda, produto.id_produto, produto.nome_produto, parcelas.num_parcela, parcelas.dt_vcto_parcela, parcelas.id_venda AS Expr1, itensvenda.qtd_produto, contasreceber.valor_parcela, contasreceber.status_conta FROM produto INNER JOIN itensvenda ON produto.id_produto = itensvenda.id_produto INNER JOIN venda ON itensvenda.id_venda = venda.id_venda INNER JOIN cliente ON venda.id_cliente = cliente.id_cliente INNER JOIN contasreceber INNER JOIN parcelas ON contasreceber.id_parcela = parcelas.id_parcela ON venda.id_venda = parcelas.id_venda WHERE (contasreceber.status_conta = 0)", conn);
+                string query = @"INSERT INTO ContaReceber (VendaID, ParcelaID, DataRecebimento, ValorRecebido, SaldoRestante Observacao, ContaReceberID) 
+                             VALUES (@VendaID, @ParcelaID, @DataRecebimento, @ValorRecebido,@SaldoRestante, @Observacao, @Pago, @ContaReceberID)";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@VendaID", contaReceber.VendaID);
+                command.Parameters.AddWithValue("@ParcelaID", contaReceber.ParcelaID);
+                command.Parameters.AddWithValue("@DataRecebimento", contaReceber.DataRecebimento);
+                command.Parameters.AddWithValue("@ValorRecebido", contaReceber.ValorRecebido);
+                command.Parameters.AddWithValue("@SaldoRestante", contaReceber.SaldoRestante);
+                command.Parameters.AddWithValue("@Pago", contaReceber.Pago);
+                command.Parameters.AddWithValue("@ContaReceberID", contaReceber.ContaReceberID);
 
-                SqlCommand sql = new SqlCommand("SELECT cliente.nome_cliente, cliente.id_cliente, venda.dt_venda, produto.id_produto, produto.nome_produto, parcelas.num_parcela, parcelas.dt_vcto_parcela, itensvenda.qtd_produto, contasreceber.valor_parcela, " +
-"contasreceber.status_conta, venda.id_venda, parcelas.id_parcela, contasreceber.id_contasreceber, itensvenda.id_itensvenda " +
-"FROM produto INNER JOIN " +
-"itensvenda ON produto.id_produto = itensvenda.id_produto INNER JOIN " +
-"venda ON itensvenda.id_venda = venda.id_venda INNER JOIN " +
-"cliente ON venda.id_cliente = cliente.id_cliente INNER JOIN " +
-"contasreceber INNER JOIN " +
-"parcelas ON contasreceber.id_parcela = parcelas.id_parcela ON venda.id_venda = parcelas.id_venda " +
-"WHERE (contasreceber.status_conta = 0)", conn);
-
-                SqlDataAdapter daControle = new SqlDataAdapter();
-                daControle.SelectCommand = sql;
-                DataTable dtcontrole = new DataTable();
-                daControle.Fill(dtcontrole);
-                return dtcontrole;
-            }
-            catch (Exception erro)
-            {
-                throw erro;
-            }
-            finally
-            {
-                conn.Close();
-            }
-        }
-        public void listarcontasreceber2(ContaRedeberMODEL conta)
-        {
-            var conn = Conexao.Conex();
-            try
-            {
-                SqlCommand sql = new SqlCommand("SELECT cliente.nome_cliente, cliente.id_cliente, venda.dt_venda, produto.id_produto, produto.nome_produto, parcelas.num_parcela, parcelas.dt_vcto_parcela, parcelas.id_venda AS Expr1, itensvenda.qtd_produto, contasreceber.valor_parcela, contasreceber.status_conta FROM produto INNER JOIN itensvenda ON produto.id_produto = itensvenda.id_produto INNER JOIN venda ON itensvenda.id_venda = venda.id_venda INNER JOIN cliente ON venda.id_cliente = cliente.id_cliente INNER JOIN contasreceber INNER JOIN parcelas ON contasreceber.id_parcela = parcelas.id_parcela ON venda.id_venda = parcelas.id_venda WHERE (contasreceber.status_conta = @StatusConta)", conn);
-
-                sql.Parameters.AddWithValue("@StatusConta", conta.DataPagamento);
-
-                conn.Open();
-                sql.ExecuteNonQuery();
-            }
-            catch (SqlException ex)
-            {
-                throw new ApplicationException(ex.ToString());
-            }
-            finally
-            {
-                conn.Close();
-            }
-
-        }
-        public void salvarcontasreceber(ContaRedeberMODEL conta)
-        {
-            var conn = Conexao.Conex();
-
-            try
-            {
-
-                SqlCommand sql = new SqlCommand("INSERT INTO contasreceber (id_contasreceber, id_parcela, valor_parcela, status_conta ) " +
-                       "VALUES (@id_Contasreceber, @id_Parcela, @valor_Parcela, @StatusConta)", conn);
-
-                //sql.Parameters.AddWithValue("@id_contasreceber", conta.Id_contasreceber);
-                //sql.Parameters.AddWithValue("@id_Parcela", conta.Id_parcela);
-                //sql.Parameters.AddWithValue("@valor_Parcela", conta.Valor_parcela);
-                //sql.Parameters.AddWithValue("@StatusConta", conta.Status_conta);
-
-                conn.Open();
-                sql.ExecuteNonQuery();
-            }
-            catch (SqlException ex)
-            {
-                throw new ApplicationException(ex.ToString());
-            }
-            finally
-            {
-                conn.Close();
-            }
-
-        }
-        public void excluicontasreceber(ContaRedeberMODEL contas)
-        {
-            var conn = Conexao.Conex();
-            try
-            {
-                SqlCommand sql = new SqlCommand("DELETE FROM ContaReceber WHERE ContaReceberID = @ContaReceberID ", conn);
-
-                sql.Parameters.AddWithValue("@ContaReceberID", contas.ContaReceberID);
-                conn.Open();
-                sql.ExecuteNonQuery();
-            }
-            catch (Exception erro)
-            {
-                throw erro;
-            }
-            finally
-            {
-                conn.Close();
-            }
-        }
-        public void Deletarcontaspagar(ContaRedeberMODEL contas)
-        {
-            var conn = Conexao.Conex();
-            try
-            {
-                SqlCommand sql = new SqlCommand("DELETE FROM contas, parcelas USING contas, parcelas WHERE contas.idconta = @IdCont AND parcelas.idconta = @IdCont", conn);
-
-                sql.Parameters.AddWithValue("@ContaReceberID", contas.ContaReceberID);
-                conn.Open();
-                sql.ExecuteNonQuery();
-            }
-            catch (Exception erro)
-            {
-                throw erro;
-            }
-            finally
-            {
-                conn.Close();
+                connection.Open();
+                command.ExecuteNonQuery();
             }
         }
 
-        public void atualiza_contasreceber(ContaRedeberMODEL conta)
+        public void UpdateContaReceber(ContaReceberModel contaReceber)
         {
-            var conn = Conexao.Conex();
-            try
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand sql = new SqlCommand("UPDATE contasreceber SET id_parcela = @id_Parcela, valor_parcela = @valor_Parcela WHERE id_parcela = @id_Parcela", conn);
+                string query = @"UPDATE ContaReceber SET ParcelaID = @ParcelaID, DataRecebimento = @DataRecebimento, ValorRecebido = @ValorRecebido, MetodoRecebimento = @MetodoRecebimento, Observacao = @Observacao 
+                             WHERE ContaReceberID = @ContaReceberID";
 
-                //sql.Parameters.AddWithValue("@id_contasreceber", conta.ContaReceberID);
-                //sql.Parameters.AddWithValue("@id_Parcela", conta.parcela);
-                //sql.Parameters.AddWithValue("@valor_Parcela", conta.Valor_parcela);
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@VendaID", contaReceber.VendaID);
+                command.Parameters.AddWithValue("@ParcelaID", contaReceber.ParcelaID);
+                command.Parameters.AddWithValue("@DataRecebimento", contaReceber.DataRecebimento);
+                command.Parameters.AddWithValue("@ValorRecebido", contaReceber.ValorRecebido);
+                command.Parameters.AddWithValue("@SaldoRestante", contaReceber.SaldoRestante);
+                command.Parameters.AddWithValue("@Pago", contaReceber.Pago);
+                command.Parameters.AddWithValue("@ContaReceberID", contaReceber.ContaReceberID);
 
-
-                conn.Open();
-                sql.ExecuteNonQuery();
-            }
-            catch (Exception erro)
-            {
-                throw erro;
-            }
-            finally
-            {
-                conn.Close();
+                connection.Open();
+                command.ExecuteNonQuery();
             }
         }
 
+        public void DeleteContaReceber(int contaReceberId)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string query = "DELETE FROM ContaReceber WHERE ContaReceberID = @ContaReceberID";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@ContaReceberID", contaReceberId);
 
-        //public void darBaixaConta(ContasMODEL contas)
-        //{
-        //    var conn = Conexao.Conex();
-        //    try
-        //    {
-        //        SqlCommand sql = new SqlCommand("UPDATE controle SET datacadastro = @datacadastro, idfornecedor = @idfornecedor, descricao = @descricao WHERE idconta = @idconta", conn);
-        //        sql.Parameters.AddWithValue("@datacadastro", contas.Datacadastro);
-        //        sql.Parameters.AddWithValue("@idfornecedor", contas.IDFornecedor);
-        //        sql.Parameters.AddWithValue("@descricao", contas.Descricao);
-        //        sql.Parameters.AddWithValue("@idconta", contas.IDConta);
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
 
-        //        conn.Open();
-        //        sql.ExecuteNonQuery();
-        //    }
-        //    catch (Exception erro)
-        //    {
-        //        throw erro;
-        //    }
-        //    finally
-        //    {
-        //        conn.Close();
-        //    }
-        //}
+        public List<ContaReceberModel> GetContasReceber(Guid parcelaId)
+        {
+            List<ContaReceberModel> contasReceber = new List<ContaReceberModel>();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string query = "SELECT * FROM ContaReceber WHERE ParcelaID = @ParcelaID";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@ParcelaID", parcelaId);
+
+                connection.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Guid contaReceberID;
+                        Guid parcelaID;
+
+                        // Verificar e converter ContaReceberID
+                        if (Guid.TryParse(reader["ContaReceberID"].ToString(), out contaReceberID) &&
+                            Guid.TryParse(reader["ParcelaID"].ToString(), out parcelaID))
+                        {
+                            contasReceber.Add(new ContaReceberModel
+                            {
+                                ContaReceberID = contaReceberID,
+                                ParcelaID = parcelaID,
+                                DataRecebimento = reader["DataRecebimento"] != DBNull.Value ? (DateTime)reader["DataRecebimento"] : (DateTime?)null,
+                                ValorRecebido = (decimal)reader["ValorRecebido"],
+                                SaldoRestante = (decimal)reader["SaldoRestante"],
+                                Pago = (bool)reader["Pago"]
+                            });
+                        }
+                        else
+                        {
+                            // Lidando com falha de conversão
+                            throw new Exception("Falha ao converter ContaReceberID ou ParcelaID para Guid.");
+                        }
+                    }
+                }
+            }
+            return contasReceber;
+        }
+
+
     }
 }

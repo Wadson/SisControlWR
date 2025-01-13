@@ -14,9 +14,11 @@ namespace SisControl
 {
     public partial class FrmPrincipal : Form
     {
+        private string StatusOperacao = "";
         public FrmPrincipal()
         {
             InitializeComponent();
+            StatusOperacao = "";
         }
         private void AbrirFormInPanel(object formHijo)
         {
@@ -75,13 +77,14 @@ namespace SisControl
 
         private void btnCadCli_Click(object sender, EventArgs e)
         {
-            FrmManutCliente frm = new FrmManutCliente();
+            FrmManutCliente frm = new FrmManutCliente(StatusOperacao);
+            StatusOperacao = "NOVO";
             frm.ShowDialog();
         }
 
         private void btnFORNECEDORES_Click(object sender, EventArgs e)
         {
-            FrmManutFornecedor frm = new FrmManutFornecedor();
+            FrmManutFornecedor frm = new FrmManutFornecedor(StatusOperacao);
             frm.ShowDialog();
         }
 
@@ -95,7 +98,7 @@ namespace SisControl
 
         private void btnProdutos_Click(object sender, EventArgs e)
         {
-            FrmManutProduto frm = new FrmManutProduto();
+            FrmManutProduto frm = new FrmManutProduto(StatusOperacao);
             frm.ShowDialog();
         }
 
@@ -107,7 +110,8 @@ namespace SisControl
         private void btnVendas_Click(object sender, EventArgs e)
         {
             FrmVendas frm = new FrmVendas();
-            AbrirFormInPanel(frm);
+                        //AbrirFormInPanel(frm); 
+            frm.ShowDialog();   
         }
 
         private void btnContasPagar_Click(object sender, EventArgs e)

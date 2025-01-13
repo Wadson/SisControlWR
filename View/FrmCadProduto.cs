@@ -13,9 +13,16 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 namespace SisControl.View
 {
     public partial class FrmCadProduto : SisControl.FrmBaseGeral
-    {
-        public FrmCadProduto()
+    {        
+        private string QueryProduto = "SELECT MAX(ProdutoID) FROM Produto";
+        private string QueryFornecedor = "SELECT MAX(FornecedorID) FROM Fornecedor";
+        
+        private int ProdutoID;
+        private string StatusOperacao;
+        private decimal PrecoCusto, PrecoVenda;
+        public FrmCadProduto(string statusOperacao)
         {
+            this.StatusOperacao = statusOperacao;
             InitializeComponent();
         }
       
@@ -40,8 +47,8 @@ namespace SisControl.View
             {
                 ProdutoMODEL objetoModel = new ProdutoMODEL();
 
-                PrecoCusto = FormataNumeroReplace(txtPrecoCusto.Text);
-                PrecoVenda = FormataNumeroReplace(txtPrecoVenda.Text);
+                PrecoCusto = Utilitario.RemoverFormatoMoeda(txtPrecoCusto);
+                PrecoVenda = Utilitario.RemoverFormatoMoeda(txtPrecoVenda);
 
                 objetoModel.ProdutoID = Convert.ToInt32(txtProdutoID.Text);
                 objetoModel.NomeProduto = txtNomeProduto.Text;
@@ -64,6 +71,8 @@ namespace SisControl.View
                 MessageBox.Show("Win32 Win32!!! \n" + erro);
             }
         }
+
+
         public void AlterarRegistro()
         {
             try
@@ -72,17 +81,17 @@ namespace SisControl.View
 
                 objetoModel.ProdutoID = Convert.ToInt32(txtProdutoID.Text);
                 objetoModel.NomeProduto = txtNomeProduto.Text;
-                objetoModel.PrecoCusto = Convert.ToDecimal(txtPrecoCusto.Text);
+                objetoModel.PrecoCusto = Convert.ToDecimal(Utilitario.RemoverFormatoMoeda(txtPrecoCusto));
                 objetoModel.Estoque = Convert.ToInt32(txtEstoque.Text);
-                objetoModel.PrecoVenda = Convert.ToDecimal(txtPrecoVenda.Text);
-                
+                objetoModel.PrecoVenda = Convert.ToDecimal(Utilitario.RemoverFormatoMoeda(txtPrecoVenda));
+
 
                 ProdutoBLL objetoBll = new ProdutoBLL();
                 objetoBll.Alterar(objetoModel);
 
                 MessageBox.Show("Registro Alterado com sucesso!", "Alteração!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 ((FrmManutProduto)Application.OpenForms["FrmManutProduto"]).HabilitarTimer(true);// Habilita Timer do outro form Obs: O timer no outro form executa um Método.    
-                LimpaCampo();
+                Utilitario.LimpaCampo(this);
                 this.Close();
             }
             catch (Exception erro)
@@ -96,13 +105,16 @@ namespace SisControl.View
             {
                 ProdutoMODEL objetoModel = new ProdutoMODEL();
 
-                objetoModel.ProdutoID = Convert.ToInt32(txtProdutoID.Text);
+                string valorComZeros = txtProdutoID.Text;
+                string valorSemZeros = Utilitario.RemoverZerosAEsquerda(valorComZeros);
+
+                objetoModel.ProdutoID = Convert.ToInt32(valorSemZeros);
                 ProdutoBLL objetoBll = new ProdutoBLL();
 
                 objetoBll.Excluir(objetoModel);
                 MessageBox.Show("Registro Excluído com sucesso!", "Alteração!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 ((FrmManutProduto)Application.OpenForms["FrmManutProduto"]).HabilitarTimer(true);// Habilita Timer do outro form Obs: O timer no outro form executa um Método.    
-                LimpaCampo();
+                Utilitario.LimpaCampo(this);
                 this.Close();
             }
             catch (Exception erro)
@@ -117,19 +129,18 @@ namespace SisControl.View
                 AlterarRegistro();
             }
             if (StatusOperacao == "NOVO")
-            {
-                EvitarDuplicado("Produto", "NomeProduto", txtNomeProduto.Text);
-                if (RetornoEvitaDuplicado == "0")
-                {
+            {                
                     SalvarRegistro();
-                    LimpaCampo();
+                    Utilitario.LimpaCampo(this);
                     txtNomeProduto.Focus();
 
-                    txtProdutoID.Text = RetornaCodigoContaMaisUm(QueryFornecedor).ToString();
-                    UsuarioID = RetornaCodigoContaMaisUm(QueryFornecedor);
-                    AcrescenteZero_a_Esquerda2(txtProdutoID);
-                    ((FrmManutProduto)Application.OpenForms["FrmManutProduto"]).HabilitarTimer(true);
-                }
+                int NovoCodigo = Utilitario.GerarProximoCodigo(QueryProduto);//RetornaCodigoContaMaisUm(QueryUsuario).ToString();
+                string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(NovoCodigo, 6);
+                ProdutoID = NovoCodigo;
+                txtProdutoID.Text = numeroComZeros;
+
+                ((FrmManutProduto)Application.OpenForms["FrmManutProduto"]).HabilitarTimer(true);
+                
             }
             if (StatusOperacao == "EXCLUSÃO")
             {
@@ -142,9 +153,12 @@ namespace SisControl.View
 
         private void btnNovo_Click(object sender, EventArgs e)
         {
-            LimpaCampo();
-            txtProdutoID.Text = RetornaCodigoContaMaisUm(QueryFornecedor).ToString();
-            AcrescenteZero_a_Esquerda2(txtProdutoID);
+            Utilitario.LimpaCampo(this);
+
+            int NovoCodigo = Utilitario.GerarProximoCodigo(QueryProduto);//RetornaCodigoContaMaisUm(QueryUsuario).ToString();
+            string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(NovoCodigo, 6);
+            ProdutoID = NovoCodigo;
+            txtProdutoID.Text = numeroComZeros;
         }
 
         private void btnFechar_Click(object sender, EventArgs e)
@@ -159,10 +173,13 @@ namespace SisControl.View
                 return;
             }
             if (StatusOperacao == "NOVO")
-            {
-                txtProdutoID.Text = RetornaCodigoContaMaisUm(QueryProduto).ToString();
-                txtNomeProduto.Focus();
-                AcrescenteZero_a_Esquerda2(txtProdutoID);
+            {                
+                txtNomeProduto.Focus();                
+
+                int NovoCodigo = Utilitario.GerarProximoCodigo(QueryProduto);//RetornaCodigoContaMaisUm(QueryUsuario).ToString();
+                string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(NovoCodigo, 6);
+                ProdutoID = NovoCodigo;
+                txtProdutoID.Text = numeroComZeros;
             }
         }
 
@@ -199,23 +216,15 @@ namespace SisControl.View
             }
         }
 
-        private void txtPrecoVenda_Leave(object sender, EventArgs e)
-        {
-            TexBoxMoeda(txtPrecoVenda);
-        }
-
-        private void txtPrecoCusto_KeyUp(object sender, KeyEventArgs e)
-        {            
-        }
-
-        private void txtPrecoCusto_TextChanged(object sender, EventArgs e)
+        private void txtPrecoCusto_Leave_1(object sender, EventArgs e)
         {
             TexBoxMoeda(txtPrecoCusto);
         }
 
-        private void txtPrecoVenda_TextChanged(object sender, EventArgs e)
+        private void txtPrecoVenda_Leave_1(object sender, EventArgs e)
         {
             TexBoxMoeda(txtPrecoVenda);
         }
+
     }
 }

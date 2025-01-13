@@ -25,7 +25,7 @@ namespace SisControl.View
             if (StatusOperacao == "NOVO")
             {
                 cadSubCategoria.Text = "SISCONTROL - NOVO CADASTRO DE SUBCATEGORIA";
-                cadSubCategoria.StatusOperacao = "NOVO";
+                StatusOperacao = "NOVO";
                 cadSubCategoria.ShowDialog();
                 
                 ((FrmManutSubCategoria)Application.OpenForms["FrmManutSubCategoria"]).HabilitarTimer(true);
@@ -50,7 +50,7 @@ namespace SisControl.View
                         cadSubCategoria.txtSubCatID.Text = dataGridPesquisar.CurrentRow.Cells["CategoriaID"].Value.ToString();
                         cadSubCategoria.txtNomeSubCat.Text = dataGridPesquisar.CurrentRow.Cells["NomeCategoria"].Value.ToString();
                         cadSubCategoria.Text = "SISCONTROL - ALTERAR REGISTRO";
-                        cadSubCategoria.StatusOperacao = "ALTERAR";
+                        StatusOperacao = "ALTERAR";
                         cadSubCategoria.btnSalvar.Text = "Alterar";
                         cadSubCategoria.btnNovo.Enabled = false;
                         cadSubCategoria.btnSalvar.TextAlign = ContentAlignment.MiddleRight;//AlinhamentoDeConteúdo.MiddleLeft; =  StringAlignment
@@ -88,7 +88,7 @@ namespace SisControl.View
                         cadSubCategoria.txtSubCatID.Text = dataGridPesquisar.CurrentRow.Cells["CategoriaID"].Value.ToString();
                         cadSubCategoria.txtNomeSubCat.Text = dataGridPesquisar.CurrentRow.Cells["NomeCategoria"].Value.ToString();
                         cadSubCategoria.Text = "SISCONTROL - EXCLUSÃO DE REGISTRO";
-                        cadSubCategoria.StatusOperacao = "EXCLUSÃO";
+                        StatusOperacao = "EXCLUSÃO";
                         cadSubCategoria.btnSalvar.Text = "Excluir";
                         cadSubCategoria.btnNovo.Enabled = false;
                         cadSubCategoria.btnSalvar.TextAlign = ContentAlignment.MiddleRight;//AlinhamentoDeConteúdo.MiddleLeft; =  StringAlignment

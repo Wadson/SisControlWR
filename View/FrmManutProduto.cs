@@ -13,8 +13,10 @@ namespace SisControl.View
 {
     public partial class FrmManutProduto : SisControl.FrmBaseManutencao
     {
-        public FrmManutProduto()
+        private new string StatusOperacao;
+        public FrmManutProduto( string statusOperacao)
         {
+            this.StatusOperacao = statusOperacao;
             InitializeComponent();
         }
 
@@ -41,20 +43,25 @@ namespace SisControl.View
 
             // Alinhamento e fonte das células
             dgv.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dgv.DefaultCellStyle.Font = new Font("Arial", 10);            
-            
+            dgv.DefaultCellStyle.Font = new Font("Arial", 10);
+
             //Alinhar o as colunas
 
-            dataGridPesquisar.Columns["ProdutoID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
-            dataGridPesquisar.Columns["Estoque"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
+            dgv.Columns["ProdutoID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
+            dgv.Columns["Estoque"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
 
             // Ajustar colunas automaticamente
-            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            //dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
             // Tornar o grid somente leitura
             dgv.ReadOnly = true;
 
             // Estilo das bordas das células
+
+            //Adiciona Dock para expandir o DataGridView
+            dgv.Dock = DockStyle.Fill;
+
             dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
 
             // Estilo da seleção das células
@@ -69,20 +76,20 @@ namespace SisControl.View
             // Cor do grid
             dgv.GridColor = Color.Black;
 
-            this.dataGridPesquisar.Columns[0].Name = "ProdutoID";
-            this.dataGridPesquisar.Columns[1].Name = "NomeProduto";
-            this.dataGridPesquisar.Columns[2].Name = "PrecoCusto";
-            this.dataGridPesquisar.Columns[3].Name = "Estoque";            
-            this.dataGridPesquisar.Columns[4].Name = "PrecoVenda";
+            dgv.Columns[0].Name = "ProdutoID";
+            dgv.Columns[1].Name = "NomeProduto";
+            dgv.Columns[2].Name = "PrecoCusto";
+            dgv.Columns[3].Name = "Estoque";
+            dgv.Columns[4].Name = "PrecoVenda";
         }       
         private void CarregaDados()
         {
-            FrmCadProduto frm = new FrmCadProduto();
+            FrmCadProduto frm = new FrmCadProduto(StatusOperacao);
 
             if (StatusOperacao == "NOVO")
             {
                 frm.Text = "SISCONTROL - NOVO CADASTRO DE PRODUTOS";
-                frm.StatusOperacao = "NOVO";
+                StatusOperacao = "NOVO";
                 frm.ShowDialog();
 
                 ((FrmManutProduto)Application.OpenForms["FrmManutProduto"]).HabilitarTimer(true);
@@ -111,7 +118,7 @@ namespace SisControl.View
                        
 
                         frm.Text = "SISCONTROL - ALTERAR REGISTRO";
-                        frm.StatusOperacao = "ALTERAR";
+                        StatusOperacao = "ALTERAR";
                         frm.btnSalvar.Text = "Alterar";
                         frm.btnNovo.Enabled = false;
                         frm.btnSalvar.TextAlign = ContentAlignment.MiddleRight;//AlinhamentoDeConteúdo.MiddleLeft; =  StringAlignment
@@ -154,8 +161,7 @@ namespace SisControl.View
                         frm.txtEstoque.Text = dataGridPesquisar.CurrentRow.Cells["Estoque"].Value.ToString();
                         frm.txtPrecoVenda.Text = dataGridPesquisar.CurrentRow.Cells["PrecoVenda"].Value.ToString();
 
-                        frm.Text = "SISCONTROL - EXCLUSÃO DE REGISTRO";
-                        frm.StatusOperacao = "EXCLUSÃO";
+                        frm.Text = "SISCONTROL - EXCLUSÃO DE REGISTRO";                        
                         frm.btnSalvar.Text = "Excluir";
                         frm.btnNovo.Enabled = false;
                         frm.btnSalvar.TextAlign = ContentAlignment.MiddleRight;//AlinhamentoDeConteúdo.MiddleLeft; =  StringAlignment

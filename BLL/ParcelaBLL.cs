@@ -12,16 +12,14 @@ namespace SisControl.BLL
 {
     internal class ParcelaBLL
     {
-        ParcelaDALL parceladal = null;
+        ParcelaDAL parceladal = null;
 
-        public void Salvar(ParcelaMODEL parcela)
+        public void Salvar(ParcelaModel parcela)
         {
-            parceladal = new ParcelaDALL();
-            parceladal.SalvarParcelas(parcela);
-
             try
             {
-
+                //parceladal = new ParcelaDAL();
+                //parceladal.SalvarParcelas(parcela);
             }
             catch (SqlException erro)
             {
@@ -29,12 +27,12 @@ namespace SisControl.BLL
             }
         }
 
-        public void ExcluirTodas(ParcelaMODEL parcela)
+        public void ExcluirTodas(ParcelaModel parcela)
         {
             try
             {
-                parceladal = new ParcelaDALL();
-                parceladal.ExcluirTodasParcela(parcela);
+                //parceladal = new ParcelaDALL();
+                //parceladal.ExcluirTodasParcela(parcela);
             }
             catch (Exception erro)
             {
@@ -42,24 +40,24 @@ namespace SisControl.BLL
             }
 
         }
-        public void ExcluirUma(ParcelaMODEL parcelas)
+        public void ExcluirUma(ParcelaModel parcelas)
         {
             try
             {
-                parceladal = new ParcelaDALL();
-                parceladal.ExcluiParcelaUnica(parcelas);
+                //parceladal = new ParcelaDALL();
+                //parceladal.ExcluiParcelaUnica(parcelas);
             }
             catch (Exception erro)
             {
                 throw erro;
             }
         }
-        public void Atualizar(ParcelaMODEL parcela)
+        public void Atualizar(ParcelaModel parcela)
         {
             try
             {
-                parceladal = new ParcelaDALL();
-                parceladal.AtualizaParcela(parcela);
+                //parceladal = new ParcelaDALL();
+                //parceladal.AtualizaParcela(parcela);
             }
             catch (Exception erro)
             {
@@ -124,7 +122,7 @@ namespace SisControl.BLL
         //    }
         //}
 
-        public ParcelaMODEL pesquisar(string pesquisa)
+        public ParcelaModel pesquisar(string pesquisa)
         {
             var conexao = Conexao.Conex();
 
@@ -133,7 +131,7 @@ namespace SisControl.BLL
                 SqlCommand sql = new SqlCommand("SELECT  fornecedor.fornecedor, parcelas.valor_parc, parcelas.datavenc, parcelas.datapgto FROM   parcelas WHERE fornecedor LIKE '" + pesquisa + "%' AND pago = false", conexao);
                 conexao.Open();
                 SqlDataReader datareader;
-                ParcelaMODEL obj_parcela = new ParcelaMODEL();
+                ParcelaModel obj_parcela = new ParcelaModel();
 
 
                 datareader = sql.ExecuteReader(CommandBehavior.CloseConnection);

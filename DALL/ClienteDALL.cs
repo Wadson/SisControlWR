@@ -125,12 +125,64 @@ namespace SisControl.DALL
             {
                 DataTable dt = new DataTable();
 
-                string sqlconn = "SELECT SELECT Cliente.ClienteID, Cliente.NomeCliente, Cliente.Cpf, Cliente.Email, Cliente.Endereco, Cliente.Telefone, Cliente.CidadeID, Cliente.Cpf AS Expr1, Cidade.NomeCidade FROM Cliente INNER JOIN Cidade ON Cliente.CidadeID = Cidade.CidadeID WHERE NomeCliente LIKE @NomeCliente";
+                string sqlconn = "SELECT Cliente.ClienteID, Cliente.NomeCliente, Cliente.Cpf, Cliente.Email, Cliente.Endereco, Cliente.Telefone, Cliente.CidadeID, Cidade.NomeCidade, Estado.NomeEstado FROM Cliente INNER JOIN Cidade ON Cliente.CidadeID = Cidade.CidadeID INNER JOIN Estado ON Cidade.EstadoID = Estado.EstadoID WHERE NomeCliente LIKE @NomeCliente";
 
 
                 //string sqlconn = "SELECT TOP (30) * FROM Cliente WHERE NomeCliente LIKE @NomeCliente";
                 SqlCommand cmd = new SqlCommand(sqlconn, conn);
                 cmd.Parameters.AddWithValue("@NomeCliente", nome);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+                conn.Close();
+                conn.Dispose();
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao executar a pesquisa: " + ex);
+                return null;
+            }
+        }
+        public DataTable PesquisarPorCodigo(string nome)
+        {
+            var conn = Conexao.Conex();
+            try
+            {
+                DataTable dt = new DataTable();
+
+                string sqlconn = "SELECT TOP (30) Cliente.ClienteID, Cliente.NomeCliente, Cliente.Cpf, Cliente.Email, Cliente.Endereco, Cliente.Telefone, Cliente.CidadeID, Cidade.NomeCidade, Estado.NomeEstado FROM Cliente INNER JOIN Cidade ON Cliente.CidadeID = Cidade.CidadeID INNER JOIN Estado ON Cidade.EstadoID = Estado.EstadoID WHERE ClienteID LIKE @ClienteID";
+
+
+                //string sqlconn = "SELECT TOP (30) * FROM Cliente WHERE NomeCliente LIKE @NomeCliente";
+                SqlCommand cmd = new SqlCommand(sqlconn, conn);
+                cmd.Parameters.AddWithValue("@ClienteID", nome);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+                conn.Close();
+                conn.Dispose();
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao executar a pesquisa: " + ex);
+                return null;
+            }
+        }
+        public DataTable PesquisarGeral()
+        {
+            var conn = Conexao.Conex();
+            try
+            {
+                DataTable dt = new DataTable();
+                string sqlconn = "SELECT TOP (30) Cliente.ClienteID, Cliente.NomeCliente, Cliente.Cpf, Cliente.Email, Cliente.Endereco, Cliente.Telefone, Cliente.CidadeID, Cidade.NomeCidade, Estado.NomeEstado FROM Cliente INNER JOIN Cidade ON Cliente.CidadeID = Cidade.CidadeID INNER JOIN Estado ON Cidade.EstadoID = Estado.EstadoID";
+                //WHERE Cidade.NomeCidade = @NomeCidade);
+
+                SqlCommand cmd = new SqlCommand(sqlconn, conn);
+                //cmd.Parameters.AddWithValue("@NomeCidade", nome);
                 conn.Open();
                 cmd.ExecuteNonQuery();
                 SqlDataAdapter da = new SqlDataAdapter(cmd);

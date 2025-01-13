@@ -1,4 +1,4 @@
-﻿using SisControl.BLL;
+﻿ using SisControl.BLL;
 using SisControl.MODEL;
 using System;
 using System.Collections.Generic;
@@ -12,6 +12,13 @@ namespace SisControl.View
 {
     public partial class FrmCadSubCategoria : SisControl.FrmBaseGeral
     {
+        private string QuerySubCat = "SELECT MAX(SubCategoriaID) FROM SubCategoria";
+        private string QueryCategoria = "SELECT MAX(CategoriaID) FROM Categoria";
+        private int CategoriaID;
+        private int SubCategoriaID;
+
+        private string StatusOperacao;
+
         public FrmCadSubCategoria()
         {
             InitializeComponent();
@@ -33,12 +40,13 @@ namespace SisControl.View
                 MessageBox.Show("REGISTRO gravado com sucesso! ", "Informação!!!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 ((FrmManutSubCategoria)Application.OpenForms["FrmManutSubCategoria"]).HabilitarTimer(true);
 
-                LimpaCampo();
+                Utilitario.LimpaCampo(this);
                 txtNomeSubCat.Focus();
 
-                txtSubCatID.Text = RetornaCodigoContaMaisUm(QuerySubCat).ToString();
-                CategoriaID = RetornaCodigoContaMaisUm(QuerySubCat);
-                AcrescenteZero_a_Esquerda2(txtSubCatID);
+                int NovoCodigo = Utilitario.GerarProximoCodigo(QuerySubCat);//RetornaCodigoContaMaisUm(QueryUsuario).ToString();
+                string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(NovoCodigo, 6);
+                CategoriaID = NovoCodigo;
+                txtSubCatID.Text = numeroComZeros;
             }
             catch (OverflowException ov)
             {
@@ -63,7 +71,7 @@ namespace SisControl.View
 
                 MessageBox.Show("Registro Alterado com sucesso!", "Alteração!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 //((FrmManutCliente)Application.OpenForms["FrmManutCliente"]).HabilitarTimer(true);// Habilita Timer do outro form Obs: O timer no outro form executa um Método.    
-                LimpaCampo();
+                Utilitario.LimpaCampo(this);
                 this.Close();
             }
             catch (Exception erro)
@@ -83,8 +91,7 @@ namespace SisControl.View
                 categoriaBll.Excluir(objetocategoria);
                 MessageBox.Show("Registro Excluído com sucesso!", "Alteração!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 //((FrmManutCliente)Application.OpenForms["FrmManutCliente"]).HabilitarTimer(true);// Habilita Timer do outro form Obs: O timer no outro form executa um Método.    
-                LimpaCampo();
-                this.Close();
+                Utilitario.LimpaCampo(this); this.Close();                
             }
             catch (Exception erro)
             {
@@ -95,11 +102,7 @@ namespace SisControl.View
         {
             if (StatusOperacao == "NOVO")
             {
-                EvitarDuplicado("Cliente", "NomeCliente", txtNomeSubCat.Text);
-                if (RetornoEvitaDuplicado == "0")
-                {
-                    SalvarRegistro();
-                }
+                SalvarRegistro();              
             }
             else if (StatusOperacao == "ALTERAR")
             {
@@ -116,9 +119,12 @@ namespace SisControl.View
 
         private void btnNovo_Click(object sender, EventArgs e)
         {
-            LimpaCampo();
-            txtSubCatID.Text = RetornaCodigoContaMaisUm(QueryCategoria).ToString();
-            AcrescenteZero_a_Esquerda2(txtNomeSubCat);
+            Utilitario.LimpaCampo(this);
+
+            int NovoCodigo = Utilitario.GerarProximoCodigo(QuerySubCat);//RetornaCodigoContaMaisUm(QueryUsuario).ToString();
+            string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(NovoCodigo, 6);
+            CategoriaID = NovoCodigo;
+            txtSubCatID.Text = numeroComZeros;
         }
 
         private void btnFechar_Click(object sender, EventArgs e)
@@ -130,8 +136,7 @@ namespace SisControl.View
         {
             FrmLocalizarCategoria frmLocalizarCategoria = new FrmLocalizarCategoria();
             frmLocalizarCategoria.Text = "Localizar Categoria...";
-            frmLocalizarCategoria.ShowDialog();
-            AcrescenteZero_a_Esquerda2(txtSubCatID);
+            frmLocalizarCategoria.ShowDialog();            
         }
 
         private void FrmCadSubCategoria_Load(object sender, EventArgs e)
@@ -142,9 +147,11 @@ namespace SisControl.View
             }
             if (StatusOperacao == "NOVO")
             {
-                SubCategoriaID = RetornaCodigoContaMaisUm(QuerySubCat);
-                txtSubCatID.Text = RetornaCodigoContaMaisUm(QuerySubCat).ToString();
-                AcrescenteZero_a_Esquerda2(txtSubCatID);
+                int NovoCodigo = Utilitario.GerarProximoCodigo(QuerySubCat);//RetornaCodigoContaMaisUm(QueryUsuario).ToString();
+                string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(NovoCodigo, 6);
+                CategoriaID = NovoCodigo;
+                txtSubCatID.Text = numeroComZeros;
+
                 txtNomeSubCat.Focus();
             }
         }

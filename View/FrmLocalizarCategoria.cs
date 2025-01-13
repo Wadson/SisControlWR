@@ -11,9 +11,14 @@ namespace SisControl.View
 {
     public partial class FrmLocalizarCategoria : SisControl.FrmBasePesquisa
     {
+        protected int LinhaAtual = -1;
         public FrmLocalizarCategoria()
         {
             InitializeComponent();
+        }
+        public new int ObterLinhaAtual()
+        {
+            return LinhaAtual;
         }
         private void InicializaDataGridView()
         {
@@ -21,28 +26,28 @@ namespace SisControl.View
             // dataGridPesquisa.BackgroundColor = Color.LightGray;
             //dataGridPesquisa.BorderStyle = BorderStyle.Fixed3D;
 
-            dataGridPesquisa.MultiSelect = false;
+            dataGridPesquisar.MultiSelect = false;
 
             //Configuração das linhas do DataGridView
 
             //Cores alternadas no DataGridView
-            dataGridPesquisa.RowsDefaultCellStyle.BackColor = Color.LightGray;
-            dataGridPesquisa.AlternatingRowsDefaultCellStyle.BackColor = Color.DarkGray;
+            dataGridPesquisar.RowsDefaultCellStyle.BackColor = Color.LightGray;
+            dataGridPesquisar.AlternatingRowsDefaultCellStyle.BackColor = Color.DarkGray;
 
             //Redimensiona o tamanho das colunas do DataGridView 
-            dataGridPesquisa.Columns[0].Width = 100;
-            dataGridPesquisa.Columns[1].Width = 660;
+            dataGridPesquisar.Columns[0].Width = 100;
+            dataGridPesquisar.Columns[1].Width = 660;
            
 
             //Renomeia as colunas do DataGridView 
-            dataGridPesquisa.Columns[0].HeaderText = "CategoriaID";
-            dataGridPesquisa.Columns[1].HeaderText = "NomeCategoria";
+            dataGridPesquisar.Columns[0].HeaderText = "CategoriaID";
+            dataGridPesquisar.Columns[1].HeaderText = "NomeCategoria";
            
         }
         public void ListarCategoria()
         {
             CategoriaDALL CategoriaDao = new CategoriaDALL();
-            dataGridPesquisa.DataSource = CategoriaDao.PesquisarGeral();
+            dataGridPesquisar.DataSource = CategoriaDao.PesquisarGeral();
 
             //InicializaDataGridView();
         }
@@ -58,11 +63,11 @@ namespace SisControl.View
 
             if (rbtCodigo.Checked)
             {
-                dataGridPesquisa.DataSource = CategoriaDao.PesquisarPorCodigo(nome);
+                dataGridPesquisar.DataSource = CategoriaDao.PesquisarPorCodigo(nome);
             }
             else
             {
-                dataGridPesquisa.DataSource = CategoriaDao.PesquisarPorNome(nome);
+                dataGridPesquisar.DataSource = CategoriaDao.PesquisarPorNome(nome);
             }
         }
         private void ExemploDataGridView()
@@ -77,7 +82,7 @@ namespace SisControl.View
             try
             {
                 // Verificar se a DataGridView contém alguma linha
-                if (dataGridPesquisa.Rows.Count == 0)
+                if (dataGridPesquisar.Rows.Count == 0)
                 {
                     // Lançar exceção personalizada
                     //throw new Exception("A DataGridView está vazia. Não há dados para serem processados.");
@@ -87,14 +92,14 @@ namespace SisControl.View
                 }
 
                 // Execução do código desejado
-                foreach (DataGridViewRow row in dataGridPesquisa.Rows)
+                foreach (DataGridViewRow row in dataGridPesquisar.Rows)
                 {
                     // Exemplo: Acessar a primeira célula de cada linha
                     //  var valor = row.Cells[0].Value;
-                    linhaAtual = dataGridPesquisa.CurrentRow.Index;
+                    LinhaAtual = dataGridPesquisar.CurrentRow.Index;
                     //((FrmVendas)Application.OpenForms["FrmVendas"]).txtIdCliente.Text = dataGridPesquisa[0, linhaAtual].Value.ToString();
-                    ((FrmCadSubCategoria)Application.OpenForms["FrmCadSubCategoria"]).txtCategoriaID.Text = dataGridPesquisa[0, linhaAtual].Value.ToString();
-                    ((FrmCadSubCategoria)Application.OpenForms["FrmCadSubCategoria"]).txtNomeCategoria.Text = dataGridPesquisa[1, linhaAtual].Value.ToString();
+                    ((FrmCadSubCategoria)Application.OpenForms["FrmCadSubCategoria"]).txtCategoriaID.Text = dataGridPesquisar[0, LinhaAtual].Value.ToString();
+                    ((FrmCadSubCategoria)Application.OpenForms["FrmCadSubCategoria"]).txtNomeCategoria.Text = dataGridPesquisar[1, LinhaAtual].Value.ToString();
 
                 }
             }
@@ -103,6 +108,14 @@ namespace SisControl.View
                 // Exibir uma mensagem de erro para o usuário
                 MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }           
+        }
+
+        private void FrmLocalizarCategoria_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (dataGridPesquisar.CurrentRow != null)
+            {
+                LinhaAtual = dataGridPesquisar.CurrentRow.Index;
+            }
         }
     }
 }

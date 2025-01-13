@@ -31,7 +31,9 @@
             this.components = new System.ComponentModel.Container();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.dataGridPesquisar = new System.Windows.Forms.DataGridView();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridPesquisar)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnSair
@@ -80,27 +82,38 @@
             this.dataGridPesquisar.AllowUserToAddRows = false;
             this.dataGridPesquisar.AllowUserToDeleteRows = false;
             this.dataGridPesquisar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridPesquisar.Location = new System.Drawing.Point(10, 67);
+            this.dataGridPesquisar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridPesquisar.Location = new System.Drawing.Point(0, 0);
             this.dataGridPesquisar.Name = "dataGridPesquisar";
             this.dataGridPesquisar.ReadOnly = true;
-            this.dataGridPesquisar.Size = new System.Drawing.Size(630, 350);
+            this.dataGridPesquisar.Size = new System.Drawing.Size(628, 350);
             this.dataGridPesquisar.TabIndex = 429;
             this.dataGridPesquisar.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridPesquisar_CellFormatting);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.dataGridPesquisar);
+            this.panel1.Location = new System.Drawing.Point(12, 67);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(628, 350);
+            this.panel1.TabIndex = 430;
             // 
             // FrmManutProduto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(785, 430);
-            this.Controls.Add(this.dataGridPesquisar);
+            this.Controls.Add(this.panel1);
             this.Name = "FrmManutProduto";
+            this.Text = "Manutenção de Produtos";
             this.Load += new System.EventHandler(this.FrmManutProduto_Load);
             this.Controls.SetChildIndex(this.btnAlterar, 0);
             this.Controls.SetChildIndex(this.btnNovo, 0);
             this.Controls.SetChildIndex(this.btnExcluir, 0);
             this.Controls.SetChildIndex(this.txtPesquisa, 0);
             this.Controls.SetChildIndex(this.btnSair, 0);
-            this.Controls.SetChildIndex(this.dataGridPesquisar, 0);
+            this.Controls.SetChildIndex(this.panel1, 0);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridPesquisar)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -110,5 +123,6 @@
 
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.DataGridView dataGridPesquisar;
+        private System.Windows.Forms.Panel panel1;
     }
 }

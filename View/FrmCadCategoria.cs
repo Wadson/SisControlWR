@@ -12,8 +12,16 @@ namespace SisControl.View
 {
     public partial class FrmCadCategoria : SisControl.FrmBaseGeral
     {
-        public FrmCadCategoria()
+        private string QueryCategoria = "SELECT MAX(CategoriaID) FROM Categoria";
+        private int UsuarioID;
+        private int CategoriaID;
+        private string CategoriaName;
+
+        private string StatusOperacao;
+
+        public FrmCadCategoria(string statusOperacao)
         {
+            this.StatusOperacao = statusOperacao;
             InitializeComponent();
         }
         public void SalvarRegistro()
@@ -33,12 +41,13 @@ namespace SisControl.View
                 MessageBox.Show("REGISTRO gravado com sucesso! ", "Informação!!!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 ((FrmManutCategoria)Application.OpenForms["FrmManutCategoria"]).HabilitarTimer(true);
 
-                LimpaCampo();
+                Utilitario.LimpaCampo(this);
                 txtNome.Focus();
 
-                txtCodigo.Text = RetornaCodigoContaMaisUm(QueryCategoria).ToString();
-                CategoriaID = RetornaCodigoContaMaisUm(QueryCategoria);
-                AcrescenteZero_a_Esquerda2(txtCodigo);                
+                int NovoCodigo = Utilitario.GerarProximoCodigo(QueryCategoria);//RetornaCodigoContaMaisUm(QueryUsuario).ToString();
+                string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(NovoCodigo, 6);
+                CategoriaID = NovoCodigo;
+                txtCodigo.Text = numeroComZeros;
             }
             catch (OverflowException ov)
             {
@@ -53,11 +62,7 @@ namespace SisControl.View
         {
             if (StatusOperacao == "NOVO")
             {
-                EvitarDuplicado("Cliente", "NomeCliente", txtNome.Text);
-                if (RetornoEvitaDuplicado == "0")
-                {
-                    SalvarRegistro();
-                }
+                SalvarRegistro();                
             }
             else if (StatusOperacao == "ALTERAR")
             {
@@ -85,7 +90,7 @@ namespace SisControl.View
 
                 MessageBox.Show("Registro Alterado com sucesso!", "Alteração!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 //((FrmManutCliente)Application.OpenForms["FrmManutCliente"]).HabilitarTimer(true);// Habilita Timer do outro form Obs: O timer no outro form executa um Método.    
-                LimpaCampo();
+                Utilitario.LimpaCampo(this);
                 this.Close();
             }
             catch (Exception erro)
@@ -105,7 +110,7 @@ namespace SisControl.View
                 categoriaBll.Excluir(objetocategoria);
                 MessageBox.Show("Registro Excluído com sucesso!", "Alteração!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 //((FrmManutCliente)Application.OpenForms["FrmManutCliente"]).HabilitarTimer(true);// Habilita Timer do outro form Obs: O timer no outro form executa um Método.    
-                LimpaCampo();
+                Utilitario.LimpaCampo(this);
                 this.Close();
             }
             catch (Exception erro)
@@ -115,9 +120,11 @@ namespace SisControl.View
         }
         private void btnNovo_Click(object sender, EventArgs e)
         {
-            LimpaCampo();
-            txtCodigo.Text = RetornaCodigoContaMaisUm(QueryCategoria).ToString();
-            AcrescenteZero_a_Esquerda2(txtNome);
+            Utilitario.LimpaCampo(this);
+            int NovoCodigo = Utilitario.GerarProximoCodigo(QueryCategoria);//RetornaCodigoContaMaisUm(QueryUsuario).ToString();
+            string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(NovoCodigo, 6);
+            CategoriaID = NovoCodigo;
+            txtCodigo.Text = numeroComZeros;
         }
 
         private void btnFechar_Click(object sender, EventArgs e)
@@ -133,9 +140,11 @@ namespace SisControl.View
             }
             if (StatusOperacao == "NOVO")
             {
-                UsuarioID = RetornaCodigoContaMaisUm(QueryCategoria);
-                txtCodigo.Text = RetornaCodigoContaMaisUm(QueryCategoria).ToString();
-                AcrescenteZero_a_Esquerda2(txtCodigo);
+                int NovoCodigo = Utilitario.GerarProximoCodigo(QueryCategoria);//RetornaCodigoContaMaisUm(QueryUsuario).ToString();
+                string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(NovoCodigo, 6);
+                CategoriaID = NovoCodigo;
+                txtCodigo.Text = numeroComZeros;
+
                 txtNome.Focus();
             }            
         }

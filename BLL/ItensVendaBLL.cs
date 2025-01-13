@@ -12,15 +12,15 @@ namespace SisControl.BLL
 {
     internal class ItensVendaBLL
     {
-        ItemVendaDALL itensvendasdall = null;
+        ItemVendaDAL itensvendasdall = null;
         // ************************LISTA USUARIO*********************************************
         public DataTable Listar()
         {
             DataTable dtable = new DataTable();
             try
             {
-                itensvendasdall = new ItemVendaDALL();
-                dtable = itensvendasdall.listaItensVenda();
+                //itensvendasdall = new ItemVendaDAL();
+                //dtable = itensvendasdall.listaItensVenda();
             }
             catch (Exception erro)
             {
@@ -29,12 +29,12 @@ namespace SisControl.BLL
             return dtable;
         }
 
-        public void Salvar(ItemVendaMODEL itensvenda)
+        public void Salvar(ItemVendaModel itensvenda)
         {
             try
             {
-                itensvendasdall = new ItemVendaDALL();
-                itensvendasdall.SalvarItensVenda(itensvenda);
+                //itensvendasdall = new ItemVendaDAL();
+                //itensvendasdall.SalvarItensVenda(itensvenda);
             }
             catch (Exception erro)
             {
@@ -42,12 +42,12 @@ namespace SisControl.BLL
             }
         }
 
-        public void Excluir(ItemVendaMODEL itensvenda)
+        public void Excluir(ItemVendaModel itensvenda)
         {
             try
             {
-                itensvendasdall = new ItemVendaDALL();
-                itensvendasdall.excluirItensVenda(itensvenda);
+                //itensvendasdall = new ItemVendaDAL();
+                //itensvendasdall.excluirItensVenda(itensvenda);
             }
             catch (Exception erro)
             {
@@ -55,12 +55,12 @@ namespace SisControl.BLL
             }
         }
 
-        public void Atualizar(ItemVendaMODEL itensvenda)
+        public void Atualizar(ItemVendaModel itensvenda)
         {
             try
             {
-                itensvendasdall = new ItemVendaDALL();
-                itensvendasdall.atualizaItensVenda(itensvenda);
+                //itensvendasdall = new ItemVendaDAL();
+                //itensvendasdall.atualizaItensVenda(itensvenda);
             }
             catch (Exception erro)
             {
@@ -68,21 +68,29 @@ namespace SisControl.BLL
             }
         }
 
-        public ItemVendaMODEL PesquisaItemVenda(string pesquisa)
+        public ItemVendaModel PesquisaItemVenda(string pesquisa)
         {
             var conn = Conexao.Conex();
             try
             {
-                SqlCommand sql = new SqlCommand("SELECT * FROM ItemVenda WHERE ItemVendaID like '" + pesquisa + "%'", conn);
+                SqlCommand sql = new SqlCommand("SELECT * FROM ItemVenda WHERE ItemVendaID like @Pesquisa + '%'", conn);
+                sql.Parameters.AddWithValue("@Pesquisa", pesquisa);
+
                 conn.Open();
                 SqlDataReader datareader;
-                ItemVendaMODEL obj_Itensvenda = new ItemVendaMODEL();
+                ItemVendaModel obj_Itensvenda = new ItemVendaModel();
                 datareader = sql.ExecuteReader(CommandBehavior.CloseConnection);
 
                 while (datareader.Read())
                 {
-
-                    obj_Itensvenda.ItemVendaID = Convert.ToInt32(datareader["ItemVendaID"]);
+                    if (Guid.TryParse(datareader["ItemVendaID"].ToString(), out Guid itemVendaID))
+                    {
+                        obj_Itensvenda.ItemVendaID = itemVendaID;
+                    }
+                    else
+                    {
+                        throw new Exception("Falha ao converter ItemVendaID para Guid.");
+                    }
                 }
                 return obj_Itensvenda;
             }
@@ -95,5 +103,6 @@ namespace SisControl.BLL
                 conn.Close();
             }
         }
+
     }
 }
