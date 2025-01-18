@@ -23,9 +23,7 @@ namespace SisControl.View
         public FrmGerarParcelas()
         {
             InitializeComponent();
-
-            Guid parcelaID;
-            Guid vendaID;
+            
             this.valorTotal = valorTotal;
             this.numeroParcelas = numeroParcelas;
             this.parcelas = new List<ParcelaModel>();
@@ -70,73 +68,14 @@ namespace SisControl.View
             dgv.GridColor = Color.Black;
           
             // Ocultar coluna específica se necessário
-            if (dgv.Columns.Contains("ParcelaID"))
-            {
-                dgv.Columns["ParcelaID"].Visible = false; // Oculta a coluna "ParcelaID"
-            }
-            if (dgv.Columns.Contains("VendaID"))
-            {
-                dgv.Columns["VendaID"].Visible = false; // Oculta a coluna "VendaID"
-            }
-        }
-        private void GerarParcelasOld()
-        {
-            try
-            {
-                parcelaID = Guid.NewGuid();
-
-                int dias = Convert.ToInt32(txtDias.Value);
-                nomeCliente = txtNomeCliente.Text;
-                numeroParcelas = Convert.ToInt32(txtQtdParcelas.Value);
-                valorTotal = Convert.ToDecimal(txtTotal.Text);
-                dataVencimento = Convert.ToDateTime(dtPrimeiraParc.Value);
-                valorParcela = Math.Round(valorTotal / numeroParcelas, 2); // Arredondar para duas casas decimais
-
-                // Obter a fonte de dados do DataGridView, se houver
-                DataTable dt = dataGrid_Parcelas.DataSource as DataTable;
-
-                // Se a fonte de dados estiver vazia, inicialize-a
-                if (dt == null || dt.Columns.Count == 0)
-                {
-                    dt = new DataTable();
-
-                    // Definir colunas no DataTable apenas uma vez
-                    dt.Columns.Add("ParcelaID", typeof(int));
-                    dt.Columns.Add("ValorParcela", typeof(decimal));
-                    dt.Columns.Add("NumeroParcela", typeof(int));
-                    dt.Columns.Add("DataVencimento", typeof(DateTime));
-                    dt.Columns.Add("VendaID", typeof(int));
-
-                    dataGrid_Parcelas.DataSource = dt;
-                }
-                else
-                {
-                    // Limpar as linhas do DataTable antes de adicionar novas
-                    dt.Rows.Clear();
-                }
-
-                // Adicionar linhas ao DataTable
-                for (var i = 0; i < numeroParcelas; i++)
-                {
-                    dt.Rows.Add(parcelaID, valorParcela, (i + 1), dataVencimento.AddDays(i * dias), Convert.ToInt32(txtIdVenda.Text));
-                }
-
-                // Tentar obter a instância correta do FrmVendas
-                FrmVendas frmVendas = Application.OpenForms.OfType<FrmVendas>().FirstOrDefault();
-
-                if (frmVendas != null)
-                {
-                    frmVendas.ReceberDadosParcelas(dt); // Passa o DataTable para o método no FrmVendas                    
-                }
-                else
-                {
-                    MessageBox.Show("FrmVendas não está aberto.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Erro ao gerar parcelas: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            //if (dgv.Columns.Contains("ParcelaID"))
+            //{
+            //    dgv.Columns["ParcelaID"].Visible = false; // Oculta a coluna "ParcelaID"
+            //}
+            //if (dgv.Columns.Contains("VendaID"))
+            //{
+            //    dgv.Columns["VendaID"].Visible = false; // Oculta a coluna "VendaID"
+            //}
         }
 
         private void GerarParcelas()
@@ -147,7 +86,8 @@ namespace SisControl.View
                 nomeCliente = txtNomeCliente.Text;
                 numeroParcelas = Convert.ToInt32(txtQtdParcelas.Value);
                 valorTotal = Convert.ToDecimal(txtTotal.Text);
-                dataVencimento = Convert.ToDateTime(dtPrimeiraParc.Value);
+                // Definir a data de vencimento para incluir apenas a data, sem a hora
+                dataVencimento = Convert.ToDateTime(dtPrimeiraParc.Value).Date;
                 valorParcela = Math.Round(valorTotal / numeroParcelas, 2); // Arredondar para duas casas decimais
 
                 // Obter a fonte de dados do DataGridView, se houver
@@ -158,12 +98,10 @@ namespace SisControl.View
                 {
                     dt = new DataTable();
 
-                    // Definir colunas no DataTable apenas uma vez
-                    dt.Columns.Add("ParcelaID", typeof(Guid));
+                    // Definir colunas no DataTable apenas uma vez                    
                     dt.Columns.Add("ValorParcela", typeof(decimal));
                     dt.Columns.Add("NumeroParcela", typeof(int));
                     dt.Columns.Add("DataVencimento", typeof(DateTime));
-                    dt.Columns.Add("VendaID", typeof(Guid));
 
                     dataGrid_Parcelas.DataSource = dt;
                 }
@@ -176,7 +114,7 @@ namespace SisControl.View
                 // Adicionar linhas ao DataTable
                 for (var i = 0; i < numeroParcelas; i++)
                 {
-                    dt.Rows.Add(Guid.NewGuid(), valorParcela, (i + 1), dataVencimento.AddDays(i * dias), Guid.Parse(txtIdVenda.Text));
+                    dt.Rows.Add(valorParcela, (i + 1), dataVencimento.AddDays(i * dias).Date);
                 }
 
                 // Tentar obter a instância correta do FrmVendas
@@ -196,6 +134,7 @@ namespace SisControl.View
                 MessageBox.Show("Erro ao gerar parcelas: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         public List<ParcelaModel> ObterParcelas()
         {

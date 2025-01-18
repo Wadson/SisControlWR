@@ -22,7 +22,7 @@ namespace SisControl.MODEL
     public class ContaReceberModel
     {
         public Guid ContaReceberID { get; set; } // Usando GUID como chave primária
-        public int VendaID { get; set; } // Ajustando para GUID
+        public Guid VendaID { get; set; } // Ajustando para GUID
         public Guid ParcelaID { get; set; } // Ajustando para GUID
         public DateTime? DataRecebimento { get; set; } // Permite valores nulos
         public decimal ValorRecebido { get; set; }

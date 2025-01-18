@@ -29,7 +29,7 @@ namespace SisControl.BLL
             return dtable;
         }
 
-        public void Salvar(ProdutoMODEL produto)
+        public void Salvar(ProdutosModel produto)
         {
             try
             {
@@ -41,7 +41,7 @@ namespace SisControl.BLL
                 throw erro;
             }
         }
-        public void Alterar(ProdutoMODEL produto)
+        public void Alterar(ProdutosModel produto)
         {
             try
             {

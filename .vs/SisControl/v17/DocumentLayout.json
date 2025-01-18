@@ -3,12 +3,24 @@
   "WorkspaceRootPath": "D:\\SisControl\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DBDB5375-4381-46B4-AD77-796E102800CD}|SisControl.csproj|d:\\siscontrol\\view\\frmvendas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DBDB5375-4381-46B4-AD77-796E102800CD}|SisControl.csproj|solutionrelative:view\\frmvendas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DBDB5375-4381-46B4-AD77-796E102800CD}|SisControl.csproj|d:\\siscontrol\\view\\frmcadprodutos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DBDB5375-4381-46B4-AD77-796E102800CD}|SisControl.csproj|solutionrelative:view\\frmcadprodutos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DBDB5375-4381-46B4-AD77-796E102800CD}|SisControl.csproj|d:\\siscontrol\\view\\frmvendas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{DBDB5375-4381-46B4-AD77-796E102800CD}|SisControl.csproj|solutionrelative:view\\frmvendas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{DBDB5375-4381-46B4-AD77-796E102800CD}|SisControl.csproj|d:\\siscontrol\\view\\frmcadprodutos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{DBDB5375-4381-46B4-AD77-796E102800CD}|SisControl.csproj|solutionrelative:view\\frmcadprodutos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DBDB5375-4381-46B4-AD77-796E102800CD}|SisControl.csproj|d:\\siscontrol\\view\\frmmanutproduto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DBDB5375-4381-46B4-AD77-796E102800CD}|SisControl.csproj|solutionrelative:view\\frmmanutproduto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DBDB5375-4381-46B4-AD77-796E102800CD}|SisControl.csproj|d:\\siscontrol\\utilitario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DBDB5375-4381-46B4-AD77-796E102800CD}|SisControl.csproj|solutionrelative:utilitario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DBDB5375-4381-46B4-AD77-796E102800CD}|SisControl.csproj|d:\\siscontrol\\view\\frmmanutproduto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{DBDB5375-4381-46B4-AD77-796E102800CD}|SisControl.csproj|solutionrelative:view\\frmmanutproduto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -26,28 +38,66 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "FrmVendas.cs",
-              "DocumentMoniker": "D:\\SisControl\\View\\FrmVendas.cs",
-              "RelativeDocumentMoniker": "View\\FrmVendas.cs",
-              "ToolTip": "D:\\SisControl\\View\\FrmVendas.cs",
-              "RelativeToolTip": "View\\FrmVendas.cs",
-              "ViewState": "AgIAAMMAAAAAAAAAAAAUwM8AAAAgAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "FrmManutProduto.cs [Design]",
+              "DocumentMoniker": "D:\\SisControl\\View\\FrmManutProduto.cs",
+              "RelativeDocumentMoniker": "View\\FrmManutProduto.cs",
+              "ToolTip": "D:\\SisControl\\View\\FrmManutProduto.cs [Design]",
+              "RelativeToolTip": "View\\FrmManutProduto.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-13T10:28:18.636Z",
+              "WhenOpened": "2025-01-18T02:21:08Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FrmManutProduto.cs",
+              "DocumentMoniker": "D:\\SisControl\\View\\FrmManutProduto.cs",
+              "RelativeDocumentMoniker": "View\\FrmManutProduto.cs",
+              "ToolTip": "D:\\SisControl\\View\\FrmManutProduto.cs",
+              "RelativeToolTip": "View\\FrmManutProduto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAANgAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-18T01:27:14.116Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "FrmVendas.cs [Design]",
-              "DocumentMoniker": "D:\\SisControl\\View\\FrmVendas.cs",
-              "RelativeDocumentMoniker": "View\\FrmVendas.cs",
-              "ToolTip": "D:\\SisControl\\View\\FrmVendas.cs [Design]",
-              "RelativeToolTip": "View\\FrmVendas.cs [Design]",
+              "Title": "FrmCadProdutos.cs [Design]",
+              "DocumentMoniker": "D:\\SisControl\\View\\FrmCadProdutos.cs",
+              "RelativeDocumentMoniker": "View\\FrmCadProdutos.cs",
+              "ToolTip": "D:\\SisControl\\View\\FrmCadProdutos.cs [Design]",
+              "RelativeToolTip": "View\\FrmCadProdutos.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-13T10:28:11.285Z",
+              "WhenOpened": "2025-01-18T01:09:06.651Z",
               "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Utilitario.cs",
+              "DocumentMoniker": "D:\\SisControl\\Utilitario.cs",
+              "RelativeDocumentMoniker": "Utilitario.cs",
+              "ToolTip": "D:\\SisControl\\Utilitario.cs",
+              "RelativeToolTip": "Utilitario.cs",
+              "ViewState": "AgIAAHsAAAAAAAAAAAA1wIoAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-18T00:53:18.182Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FrmCadProdutos.cs",
+              "DocumentMoniker": "D:\\SisControl\\View\\FrmCadProdutos.cs",
+              "RelativeDocumentMoniker": "View\\FrmCadProdutos.cs",
+              "ToolTip": "D:\\SisControl\\View\\FrmCadProdutos.cs",
+              "RelativeToolTip": "View\\FrmCadProdutos.cs",
+              "ViewState": "AgIAAB4BAAAAAAAAAAApwB8BAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-17T23:18:10.792Z",
+              "EditorCaption": ""
             }
           ]
         }

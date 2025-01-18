@@ -101,3 +101,8 @@ D:\SisControl\obj\Debug\SisControl.View.FrmCadProduto.resources
 D:\SisControl\obj\Debug\SisControl.View.FrmLocalizarProduto.resources
 D:\SisControl\obj\Debug\SisControl.View.FrmGerarParcelas.resources
 D:\SisControl\obj\Debug\SisControl.View.FrmLocalizarCliente.resources
+D:\SisControl\obj\Debug\SisControl.View.FrmContaReceber.resources
+D:\SisControl\obj\Debug\SisControl.View.FrmCadProdutos.resources
+D:\SisControl\obj\Debug\SisControl.View.FrmLocalizarFornedeor.resources
+D:\SisControl\obj\Debug\SisControl.View.FrmCadFabricantes.resources
+D:\SisControl\obj\Debug\SisControl.View.FrmManutFabricante.resources

@@ -17,7 +17,7 @@ namespace SisControl.DALL
             var conn = Conexao.Conex();
             try
             {
-                SqlCommand sql = new SqlCommand("SELECT ProdutoID, NomeProduto, PrecoCusto, Estoque, PrecoVenda FROM Produto", conn);
+                SqlCommand sql = new SqlCommand("SELECT ProdutoID, NomeProduto, Descricao, PrecoCusto, Lucro, PrecoDeVenda, QuantidadeEmEstoque, DataDeEntrada, CategoriaID, FabricanteID, UnidadeDeMedida, Status, DataDeVencimento, Imagem, FornecedorID FROM Produtos", conn);
 
                 SqlDataAdapter daCliente = new SqlDataAdapter();
                 daCliente.SelectCommand = sql;
@@ -34,18 +34,28 @@ namespace SisControl.DALL
                 conn.Close();
             }
         }
-        public void SalvarProduto(ProdutoMODEL produto)
+
+        public void SalvarProduto(ProdutosModel produto)
         {
             var conn = Conexao.Conex();
             try
             {
-                SqlCommand sql = new SqlCommand("INSERT INTO Produto (ProdutoID, NomeProduto, PrecoCusto, Estoque, PrecoVenda) VALUES (@ProdutoID, @NomeProduto, @PrecoCusto, @Estoque, @PrecoVenda)", conn);
+                SqlCommand sql = new SqlCommand("INSERT INTO Produto (NomeProduto, Descricao, PrecoCusto, Lucro, PrecoDeVenda, QuantidadeEmEstoque, DataDeEntrada, CategoriaID, FabricanteID, UnidadeDeMedida, Status, DataDeVencimento, Imagem, FornecedorID) VALUES (@NomeProduto, @Descricao, @PrecoCusto, @Lucro, @PrecoDeVenda, @QuantidadeEmEstoque, @DataDeEntrada, @CategoriaID, @FabricanteID, @UnidadeDeMedida, @Status, @DataDeVencimento, @Imagem, @FornecedorID)", conn);
 
-                sql.Parameters.AddWithValue("@ProdutoID", produto.ProdutoID);
                 sql.Parameters.AddWithValue("@NomeProduto", produto.NomeProduto);
+                sql.Parameters.AddWithValue("@Descricao", produto.Descricao);
                 sql.Parameters.AddWithValue("@PrecoCusto", produto.PrecoCusto);
-                sql.Parameters.AddWithValue("@Estoque", produto.Estoque);
-                sql.Parameters.AddWithValue("@PrecoVenda", produto.PrecoVenda);
+                sql.Parameters.AddWithValue("@Lucro", produto.Lucro);
+                sql.Parameters.AddWithValue("@PrecoDeVenda", produto.PrecoDeVenda);
+                sql.Parameters.AddWithValue("@QuantidadeEmEstoque", produto.QuantidadeEmEstoque);
+                sql.Parameters.AddWithValue("@DataDeEntrada", produto.DataDeEntrada);
+                sql.Parameters.AddWithValue("@CategoriaID", produto.CategoriaID);
+                sql.Parameters.AddWithValue("@FabricanteID", produto.FabricanteID);
+                sql.Parameters.AddWithValue("@UnidadeDeMedida", produto.UnidadeDeMedida);
+                sql.Parameters.AddWithValue("@Status", produto.Status);
+                sql.Parameters.AddWithValue("@DataDeVencimento", produto.DataDeVencimento);
+                sql.Parameters.AddWithValue("@Imagem", produto.Imagem);
+                sql.Parameters.AddWithValue("@FornecedorID", produto.FornecedorID);
 
                 conn.Open();
                 sql.ExecuteNonQuery();
@@ -65,7 +75,7 @@ namespace SisControl.DALL
             var conn = Conexao.Conex();
             try
             {
-                SqlCommand sql = new SqlCommand("DELETE FROM Produto WHERE ProdutoID = @ProdutoID", conn);
+                SqlCommand sql = new SqlCommand("DELETE FROM Produtos WHERE ProdutoID = @ProdutoID", conn);
                 sql.Parameters.AddWithValue("@ProdutoID", produto.ProdutoID); // Corrigir para passar o ProdutoID
 
                 conn.Open();
@@ -82,17 +92,27 @@ namespace SisControl.DALL
         }
 
 
-        public void AtualizaProduto(ProdutoMODEL produto)
+        public void AtualizaProduto(ProdutosModel produto)
         {
             var conn = Conexao.Conex();
             try
             {
-                SqlCommand sql = new SqlCommand("UPDATE Produto SET NomeProduto = @NomeProduto, PrecoCusto = @PrecoCusto, Estoque = @Estoque, PrecoVenda = @PrecoVenda WHERE ProdutoID = @ProdutoID", conn);
+                SqlCommand sql = new SqlCommand("UPDATE Produto SET NomeProduto = @NomeProduto, Descricao = @Descricao, PrecoCusto = @PrecoCusto, Lucro = @Lucro, PrecoDeVenda = @PrecoDeVenda, QuantidadeEmEstoque = @QuantidadeEmEstoque, DataDeEntrada = @DataDeEntrada, CategoriaID = @CategoriaID, FabricanteID = @FabricanteID, UnidadeDeMedida = @UnidadeDeMedida, Status = @Status, DataDeVencimento = @DataDeVencimento, Imagem = @Imagem, FornecedorID = @FornecedorID WHERE ProdutoID = @ProdutoID", conn);
 
                 sql.Parameters.AddWithValue("@NomeProduto", produto.NomeProduto);
+                sql.Parameters.AddWithValue("@Descricao", produto.Descricao);
                 sql.Parameters.AddWithValue("@PrecoCusto", produto.PrecoCusto);
-                sql.Parameters.AddWithValue("@Estoque", produto.Estoque); // Corrigido
-                sql.Parameters.AddWithValue("@PrecoVenda", produto.PrecoVenda); // Corrigido
+                sql.Parameters.AddWithValue("@Lucro", produto.Lucro);
+                sql.Parameters.AddWithValue("@PrecoDeVenda", produto.PrecoDeVenda);
+                sql.Parameters.AddWithValue("@QuantidadeEmEstoque", produto.QuantidadeEmEstoque);
+                sql.Parameters.AddWithValue("@DataDeEntrada", produto.DataDeEntrada);
+                sql.Parameters.AddWithValue("@CategoriaID", produto.CategoriaID);
+                sql.Parameters.AddWithValue("@FabricanteID", produto.FabricanteID);
+                sql.Parameters.AddWithValue("@UnidadeDeMedida", produto.UnidadeDeMedida);
+                sql.Parameters.AddWithValue("@Status", produto.Status);
+                sql.Parameters.AddWithValue("@DataDeVencimento", produto.DataDeVencimento);
+                sql.Parameters.AddWithValue("@Imagem", produto.Imagem);
+                sql.Parameters.AddWithValue("@FornecedorID", produto.FornecedorID);
                 sql.Parameters.AddWithValue("@ProdutoID", produto.ProdutoID);
 
                 conn.Open();
@@ -108,6 +128,7 @@ namespace SisControl.DALL
             }
         }
 
+
         public DataTable PesquisarPorNome(string nome)
         {
             var conn = Conexao.Conex();
@@ -115,10 +136,10 @@ namespace SisControl.DALL
             {
                 DataTable dt = new DataTable();
 
-                string sqlconn = "SELECT ProdutoID, NomeProduto, PrecoCusto, Estoque, PrecoVenda FROM Produto WHERE NomeProduto LIKE @NomeProduto";
+                string sqlconn = "SELECT ProdutoID, NomeProduto, Descricao, PrecoCusto, Lucro, PrecoDeVenda, QuantidadeEmEstoque, DataDeEntrada, CategoriaID, FabricanteID, UnidadeDeMedida, Status, DataDeVencimento, Imagem, FornecedorID FROM Produtos WHERE NomeProduto LIKE @NomeProduto";
 
                 SqlCommand cmd = new SqlCommand(sqlconn, conn);
-                cmd.Parameters.AddWithValue("@NomeProduto", nome);
+                cmd.Parameters.AddWithValue("@NomeProduto", "%" + nome + "%");
                 conn.Open();
                 cmd.ExecuteNonQuery();
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -129,10 +150,11 @@ namespace SisControl.DALL
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao executar a pesquisa: " + ex);
+                MessageBox.Show("Erro ao executar a pesquisa: " + ex.Message);
                 return null;
             }
         }
+
         public DataTable PesquisarPorCodigo(string nome)
         {
             var conn = Conexao.Conex();
@@ -140,10 +162,10 @@ namespace SisControl.DALL
             {
                 DataTable dt = new DataTable();
 
-                string sqlconn = "SELECT ProdutoID, NomeProduto, PrecoCusto, Estoque, PrecoVenda FROM Produto WHERE ProdutoID LIKE @ProdutoID";
+                string sqlconn = "SELECT ProdutoID, NomeProduto, Descricao, PrecoCusto, Lucro, PrecoDeVenda, QuantidadeEmEstoque, DataDeEntrada, CategoriaID, FabricanteID, UnidadeDeMedida, Status, DataDeVencimento, Imagem, FornecedorID FROM Produto WHERE ProdutoID LIKE @ProdutoID";
 
                 SqlCommand cmd = new SqlCommand(sqlconn, conn);
-                cmd.Parameters.AddWithValue("@ProdutoID", nome);
+                cmd.Parameters.AddWithValue("@ProdutoID", "%" + nome + "%");
                 conn.Open();
                 cmd.ExecuteNonQuery();
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -154,9 +176,10 @@ namespace SisControl.DALL
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao executar a pesquisa: " + ex);
+                MessageBox.Show("Erro ao executar a pesquisa: " + ex.Message);
                 return null;
             }
         }
+
     }
 }

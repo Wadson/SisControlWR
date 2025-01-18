@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
@@ -7,18 +7,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Globalization;
+using System.ComponentModel;
+using System.Text.RegularExpressions;
+using System.Security.Cryptography;
+using SisControl;
 
 namespace SisControl
 {
     public static class Utilitario
-    { 
-        // Método que retorna a string de conexão
-        public static string GetConnectionString()
-        {
-            // Substitua com a sua string de conexão real
-            return "Data Source=NOTEBOOK-DELL\\SQLEXPRESS;Initial Catalog=bdsiscontrol;Integrated Security=True;";                   
-        }
-        // Método global para remover zeros à esquerda
+    {
+        private static readonly SqlConnection conn = Conexao.Conex();
         public static string RemoverZerosAEsquerda(string valor)
         {
             if (string.IsNullOrEmpty(valor))
@@ -36,8 +34,7 @@ namespace SisControl
         {
             int proximoCodigo = 1; // Valor inicial padrão
 
-            string connectionString = GetConnectionString(); // Obtém a string de conexão
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = Conexao.Conex()) // Inicializando a conexão aqui
             {
                 try
                 {
@@ -77,6 +74,7 @@ namespace SisControl
 
             return proximoCodigo;
         }
+
         public static decimal RemoverFormatoMoeda(System.Windows.Forms.TextBox textBox)
         {
             // Obtém o texto do TextBox
@@ -94,7 +92,6 @@ namespace SisControl
             {
                 return valorDecimal;
             }
-
             return 0;
         }
 
@@ -133,23 +130,21 @@ namespace SisControl
         }
 
         // Método para preencher ComboBox
-        public static void PreencherComboBox(ComboBox comboBox, string query)
+        public static void PreencherComboBox(ComboBox comboBox, string query, string nome, string Id)
         {
-            string connectionString = GetConnectionString(); // Obtém a string de conexão
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            
+            using (SqlCommand cmd = new SqlCommand(query, conn))
             {
                 conn.Open();
-                using (SqlCommand cmd = new SqlCommand(query, conn))
+                using (SqlDataReader reader = cmd.ExecuteReader())
                 {
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        DataTable dt = new DataTable();
-                        dt.Load(reader);
-                        
-                        comboBox.DisplayMember = "Nome";  // Substitua "Nome" pela coluna que deseja exibir
-                        comboBox.ValueMember = "ID";      // Substitua "ID" pela coluna de valor
-                        comboBox.DataSource = dt;
-                    }
+                    DataTable dt = new DataTable();
+                    dt.Load(reader);
+
+                    comboBox.DisplayMember = nome;  // Substitua "Nome" pela coluna que deseja exibir
+                    comboBox.ValueMember = Id;      // Substitua "ID" pela coluna de valor
+                    comboBox.DataSource = dt;
+                    conn.Close();
                 }
             }
         }
@@ -197,9 +192,8 @@ private void FrmMeuFormulario_Load(object sender, EventArgs e)
         }
         // Método para localizar dados e preencher DataGridView
         public static void LocalizarGeral(DataGridView dataGridView, string query)
-        {
-            string connectionString = GetConnectionString(); // Obtém a string de conexão
-            using (SqlConnection conn = new SqlConnection(connectionString))
+        {                      
+            using (conn)
             {
                 using (SqlCommand comando = new SqlCommand(query, conn))
                 {
@@ -314,9 +308,8 @@ private void btnLimpar_Click(object sender, EventArgs e)
         // Método para somar valores do banco de dados
         public static decimal SomarValoresBancoDados(string query)
         {
-            decimal soma = 0;
-            string connectionString = GetConnectionString();
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            decimal soma = 0;            
+            using (conn)
             {
                 using (SqlCommand comando = new SqlCommand(query, conn))
                 {
@@ -350,9 +343,7 @@ private void btnLimpar_Click(object sender, EventArgs e)
         }
         public static bool VerificarDuplicidade(string query, Dictionary<string, object> parametros)
         {
-            string connectionString = "Data Source=NOTEBOOK-DELL\\SQLEXPRESS;Initial Catalog=bdsiscontrol;Integrated Security=True"; // Substitua com sua string de conexão
-
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (conn)
             {
                 using (SqlCommand comando = new SqlCommand(query, conn))
                 {
@@ -476,11 +467,9 @@ private void btnLimpar_Click(object sender, EventArgs e)
 
         public static bool EvitarDuplicado(string tabela, string campo, string valor)
         {
-            string connectionString = "Data Source=NOTEBOOK-DELL\\SQLEXPRESS;Initial Catalog=bdsiscontrol;Integrated Security=True;"; // Substitua com sua string de conexão
-
             string query = $"SELECT COUNT(*) FROM {tabela} WHERE {campo} = @valor";
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (conn)
             {
                 using (SqlCommand comando = new SqlCommand(query, conn))
                 {
@@ -567,9 +556,263 @@ private void btnLimpar_Click(object sender, EventArgs e)
 
              * */
         }
+        public static bool ValidarCampos(TextBox txtbox)
+        {
+            if (string.IsNullOrEmpty(txtbox.Text))
+            {
+                MessageBox.Show("O campo Produto é obrigatório.");
+                return false;
+            }
+
+            // Outras validações...
+
+            return true;
+        }
+
+        public static void ProcessarVenda(TextBox txtbox)
+        {
+            if (!ValidarCampos(txtbox)) return;
+
+            var worker = new BackgroundWorker();
+            worker.DoWork += (sender, e) =>
+            {
+                // Operações de banco de dados aqui
+            };
+
+            worker.RunWorkerCompleted += (sender, e) =>
+            {
+                MessageBox.Show("Venda processada com sucesso.");
+            };
+
+            worker.RunWorkerAsync();
+        }
+         public static void FormataTelefone(object sender, KeyPressEventArgs e)
+    {
+        TextBox textBoxTelefone = sender as TextBox;
+
+        if (textBoxTelefone != null)
+        {
+            // Permite apenas dígitos e controle (backspace)
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+
+            // Formata o texto após a entrada de um dígito
+            if (char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                string numero = textBoxTelefone.Text.Replace("(", "").Replace(")", "").Replace(" ", "").Replace("-", "");
+                numero += e.KeyChar;
+
+                if (numero.Length == 1)
+                {
+                    textBoxTelefone.Text = "(" + numero;
+                }
+                else if (numero.Length == 2)
+                {
+                    textBoxTelefone.Text = "(" + numero + ")";
+                }
+                else if (numero.Length == 3)
+                {
+                    textBoxTelefone.Text = "(" + numero.Substring(0, 2) + ") " + numero.Substring(2);
+                }
+                else if (numero.Length == 8)
+                {
+                    textBoxTelefone.Text = "(" + numero.Substring(0, 2) + ") " + numero.Substring(2, 1) + " " + numero.Substring(3);
+                }
+                else if (numero.Length == 12)
+                {
+                    textBoxTelefone.Text = "(" + numero.Substring(0, 2) + ") " + numero.Substring(2, 1) + " " + numero.Substring(3, 4) + "-" + numero.Substring(7);
+                }
+
+                textBoxTelefone.SelectionStart = textBoxTelefone.Text.Length;
+            }            
+        }
+        // Exemplo de uso do Método FormataTelefone
+        // Na classe construtor de inicialização adicione esté código:
+        // textBoxTelefone.KeyPress += new KeyPressEventHandler(FormatadorTelefoneGlobal.FormatarNumero); 
+    }
+        public static string LimparNumero(string numero) => Regex.Replace(numero, @"[\(\)\- ]", ""); //Exemplo de Uso LimparNumero// string numeroFormatado = txtTelefone.Text; // string numeroLimpo = UtilitarioTelefone.LimparNumero(numeroFormatado);
+        public static string LimparNumeroGeral(string numero) 
+    {   
+        // Remove todos os caracteres que não são dígitos 
+        return Regex.Replace(numero, @"\D", ""); 
+        //Exemplo de Uso LimparNumero
+        // string numeroFormatado = txtTelefone.Text; 
+        // string numeroLimpo = UtilitarioTelefone.LimparNumero(numeroFormatado);
+    }
+    public static void FormatarCpf(object sender, KeyPressEventArgs e)
+    {
+        TextBox textBoxCpf = sender as TextBox;
+
+        if (textBoxCpf != null)
+        {
+            // Permite apenas dígitos e controle (backspace)
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+
+            // Formata o texto após a entrada de um dígito
+            if (char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                string numero = textBoxCpf.Text.Replace(".", "").Replace("-", "");
+                numero += e.KeyChar;
+
+                if (numero.Length <= 3)
+                {
+                    textBoxCpf.Text = numero;
+                }
+                else if (numero.Length <= 6)
+                {
+                    textBoxCpf.Text = numero.Substring(0, 3) + "." + numero.Substring(3);
+                }
+                else if (numero.Length <= 9)
+                {
+                    textBoxCpf.Text = numero.Substring(0, 3) + "." + numero.Substring(3, 3) + "." + numero.Substring(6);
+                }
+                else if (numero.Length <= 11)
+                {
+                    textBoxCpf.Text = numero.Substring(0, 3) + "." + numero.Substring(3, 3) + "." + numero.Substring(6, 3) + "-" + numero.Substring(9);
+                }
+
+                textBoxCpf.SelectionStart = textBoxCpf.Text.Length;
+
+                // Uso do Método FormataCpf
+
+                /*
+                // Construtor do formulário
+              //public Form1()
+              //{       
+              //Inicializacomponent;
+              // Adiciona o evento KeyPress ao campo de texto para chamar o método de formatação
+              //textBoxCpf.KeyPress += new KeyPressEventHandler(FormatadorCpfGlobal.FormatarCpf);        
+              //}
+                */
+            }
+        }
+    }
+
+    // Método para converter Guid em hash
+    public static string ConvertGuidToHash(Guid guid)
+    {
+        using (SHA256 sha256 = SHA256.Create())
+        {
+            byte[] hashBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(guid.ToString()));
+            int hashInt = BitConverter.ToInt32(hashBytes, 0);
+            return hashInt.ToString();
+        }
+    }
+
+      // Método para converter hash de volta para Guid (precisa de um mapeamento)
+    public static Guid ConvertHashToGuid(string hash)
+    {
+        // Simulação de conversão - em um cenário real, você precisará manter um mapeamento dos hashes para os GUIDs
+        return Guid.NewGuid();
+    }
+       //Use o método global DE Conversão, Representação de Guid para Número Legivelno seu formulário:
+
+        /*
+         public Form1()
+         {       
+        // Simula a atribuição de um Guid
+        VendaID = Guid.NewGuid();
+        
+        // Exibe um hash do Guid no TextBox
+        textBoxVendaID.Text = UtilitarioGuid.ConvertGuidToHash(VendaID);
+         }
+
+        // Método para salvar no banco de dados (simulação)
+         private void SalvarVenda()
+        {
+            string hash = textBoxVendaID.Text;
+             Guid vendaIdParaSalvar = UtilitarioGuid.ConvertHashToGuid(hash);
+        // Código para salvar vendaIdParaSalvar no banco de dados
+        }
+        */
 
     }
 }
+
+    /*
+//Crie a classe personalizada CustomTextBox:
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+
+public class CustomTextBox : TextBox
+{
+    private Color originalBackColor;
+
+    public CustomTextBox()
+    {
+        // Salvar a cor de fundo original
+        originalBackColor = this.BackColor;
+
+        // Adicionar eventos
+        this.Enter += new EventHandler(CustomTextBox_Enter);
+        this.Leave += new EventHandler(CustomTextBox_Leave);
+    }
+
+    private void CustomTextBox_Enter(object sender, EventArgs e)
+    {
+        // Mudar cor de fundo para azul claro quando em foco
+        this.BackColor = Color.LightBlue;
+    }
+
+    private void CustomTextBox_Leave(object sender, EventArgs e)
+    {
+        // Restaurar a cor de fundo original quando perde o foco
+        this.BackColor = originalBackColor;
+    }
+}
+*/
+//Método para aplicar a personalização a todos os TextBox em um formulário:
+
+
+/*
+public void ApplyCustomTextBox(Control parentControl)
+{
+    foreach (Control control in parentControl.Controls)
+    {
+        if (control is TextBox && !(control is CustomTextBox))
+        {
+            TextBox originalTextBox = control as TextBox;
+            CustomTextBox customTextBox = new CustomTextBox
+            {
+                Size = originalTextBox.Size,
+                Location = originalTextBox.Location,
+                Text = originalTextBox.Text,
+                Font = originalTextBox.Font,
+                Anchor = originalTextBox.Anchor,
+                Dock = originalTextBox.Dock,
+                Multiline = originalTextBox.Multiline
+            };
+
+            parentControl.Controls.Add(customTextBox);
+            parentControl.Controls.Remove(originalTextBox);
+        }
+        else if (control.HasChildren)
+        {
+            ApplyCustomTextBox(control);
+        }
+    }
+}
+
+
+*/
+// 3 Chame o método no seu formulário principal:
+/*
+public Form1()
+{
+    InitializeComponent();
+    ApplyCustomTextBox(this);
+}
+*/
+
+
+
+//}
 /*
             COMO IMPLEMENTAR EM QUALQUER FORMULÁRIO
             using SisControl.Utils;  // Certifique-se de importar o namespace correto

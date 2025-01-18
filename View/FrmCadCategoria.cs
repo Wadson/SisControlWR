@@ -30,10 +30,8 @@ namespace SisControl.View
             {
                 CategoriaMODEL objetoCategoria = new CategoriaMODEL();
 
-                //objetoCliente.ClienteID = Convert.ToInt32(txtClienteID.Text);
+                objetoCategoria.CategoriaID = Convert.ToInt32(txtCodigo.Text);
                 objetoCategoria.NomeCategoria = txtNome.Text;
-                //objetoCategoria.CategoriaID = Convert.ToInt32(txtCodigo.Text);
-               
 
                 CategoriaBLL categoriaBll = new CategoriaBLL();
                 categoriaBll.Salvar(objetoCategoria);

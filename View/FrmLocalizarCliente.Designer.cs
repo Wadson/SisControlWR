@@ -39,6 +39,7 @@
             this.btnSair.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnSair.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(57)))), ((int)(((byte)(80)))));
             this.btnSair.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(57)))), ((int)(((byte)(80)))));
+            this.btnSair.Click += new System.EventHandler(this.btnSair_Click);
             // 
             // txtPesquisa
             // 
@@ -65,7 +66,7 @@
             this.Controls.Add(this.dataGridPesquisar);
             this.Name = "FrmLocalizarCliente";
             this.Text = "Localizar Cliente...";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmLocalizarCliente_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmLocalizarCliente_FormClosed);
             this.Load += new System.EventHandler(this.FrmLocalizarCliente_Load);
             this.Controls.SetChildIndex(this.groupBox1, 0);
             this.Controls.SetChildIndex(this.txtPesquisa, 0);

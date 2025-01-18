@@ -39,9 +39,9 @@ namespace SisControl.DALL
         {
             var conn = Conexao.Conex();
 
-            SqlCommand sql = new SqlCommand("INSERT INTO Categoria (NomeCategoria) VALUES (@NomeCategoria)", conn);
+            SqlCommand sql = new SqlCommand("INSERT INTO Categoria (CategoriaID, NomeCategoria) VALUES (@CategoriaID, @NomeCategoria)", conn);
 
-            //sql.Parameters.AddWithValue("@CategoriaID", categoria.CategoriaID);
+            sql.Parameters.AddWithValue("@CategoriaID", categoria.CategoriaID);
             sql.Parameters.AddWithValue("@NomeCategoria", categoria.NomeCategoria);
 
             conn.Open();

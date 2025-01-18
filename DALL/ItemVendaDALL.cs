@@ -77,27 +77,17 @@ namespace SisControl.DALL
                 {
                     while (reader.Read())
                     {
-                        Guid itemVendaID;
-                        Guid vendaID;
+                        Guid itemVendaID = (Guid)reader["ItemVendaID"];
+                        Guid vendaID = (Guid)reader["VendaID"];
 
-                        // Verificar e converter ItemVendaID e VendaID
-                        if (Guid.TryParse(reader["ItemVendaID"].ToString(), out itemVendaID) &&
-                            Guid.TryParse(reader["VendaID"].ToString(), out vendaID))
+                        itens.Add(new ItemVendaModel
                         {
-                            itens.Add(new ItemVendaModel
-                            {
-                                ItemVendaID = itemVendaID,
-                                VendaID = Convert.ToInt32(vendaID),
-                                ProdutoID = (int)reader["ProdutoID"],
-                                Quantidade = (int)reader["Quantidade"],
-                                PrecoUnitario = (decimal)reader["PrecoUnitario"]
-                            });
-                        }
-                        else
-                        {
-                            // Lidando com falha de conversão
-                            throw new Exception("Falha ao converter ItemVendaID ou VendaID para Guid.");
-                        }
+                            ItemVendaID = itemVendaID,
+                            VendaID = vendaID,
+                            ProdutoID = (int)reader["ProdutoID"],
+                            Quantidade = (int)reader["Quantidade"],
+                            PrecoUnitario = (decimal)reader["PrecoUnitario"]
+                        });
                     }
                 }
             }

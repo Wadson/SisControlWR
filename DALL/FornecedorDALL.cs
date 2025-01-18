@@ -140,5 +140,57 @@ namespace SisControl.DALL
                 return null;
             }
         }
+        public DataTable PesquisarPorCodigo(string nome)
+        {
+            var conn = Conexao.Conex();
+            try
+            {
+                DataTable dt = new DataTable();
+
+                string sqlconn = "SELECT FornecedorID, NomeFornecedor, Cnpj, Endereco, Telefone, Email, CidadeID FROM Fornecedor WHERE FornecedorID LIKE @FornecedorID";
+
+
+                //string sqlconn = "SELECT TOP (30) * FROM Cliente WHERE NomeCliente LIKE @NomeCliente";
+                SqlCommand cmd = new SqlCommand(sqlconn, conn);
+                cmd.Parameters.AddWithValue("@FornecedorID", nome);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+                conn.Close();
+                conn.Dispose();
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao executar a pesquisa: " + ex);
+                return null;
+            }
+        }
+        public DataTable PesquisarGeral()
+        {
+            var conn = Conexao.Conex();
+            try
+            {
+                DataTable dt = new DataTable();
+
+                string sqlconn = "SELECT TOP (30) FornecedorID, NomeFornecedor, Cnpj,   Endereco, Telefone, Email, CidadeID FROM Fornecedor";
+                SqlCommand cmd = new SqlCommand(sqlconn, conn);
+                //cmd.Parameters.AddWithValue("@NomeCategoria", nome);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+                conn.Close();
+                conn.Dispose();
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao executar a pesquisa: " + ex);
+                return null;
+            }
+        }
+
     }
 }

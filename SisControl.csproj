@@ -161,10 +161,12 @@
     <Compile Include="BLL\CidadeBLL.cs" />
     <Compile Include="BLL\ClienteBLL.cs" />
     <Compile Include="BLL\ContaReceberBLL.cs" />
+    <Compile Include="BLL\FabricanteBll.cs" />
     <Compile Include="BLL\FornecedorBLL.cs" />
     <Compile Include="BLL\ItensVendaBLL.cs" />
     <Compile Include="BLL\ParcelaBLL.cs" />
     <Compile Include="BLL\ProdutoBLL.cs" />
+    <Compile Include="BLL\ProdutosBll.cs" />
     <Compile Include="BLL\RegistroPagamentoBLL.cs" />
     <Compile Include="BLL\SubCategoriaBLL.cs" />
     <Compile Include="BLL\UsuarioBLL.cs" />
@@ -175,20 +177,27 @@
     <Compile Include="DALL\ClienteDALL.cs" />
     <Compile Include="DALL\ContaPagarDALL.cs" />
     <Compile Include="DALL\ContaReceberDALL.cs" />
+    <Compile Include="DALL\FabricanteDal.cs" />
     <Compile Include="DALL\FornecedorDALL.cs" />
     <Compile Include="DALL\ItemVendaDALL.cs" />
     <Compile Include="DALL\PagamentoDALL.cs" />
     <Compile Include="DALL\ParcelaDALL.cs" />
+    <Compile Include="DALL\ProdutosDal.cs" />
     <Compile Include="DALL\ProdutosDALL.cs" />
     <Compile Include="DALL\SubCategoriaDALL.cs" />
     <Compile Include="DALL\UsuarioDALL.cs" />
     <Compile Include="DALL\VendaDALL.cs" />
-    <Compile Include="moneyDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>moneyDataSet.xsd</DependentUpon>
-    </Compile>
+    <Compile Include="MODEL\FabricanteModel.cs" />
+    <Compile Include="MODEL\ProdutosModel.cs" />
+    <Compile Include="MODEL\RecebimentoModel.cs" />
+    <Compile Include="PersonalizarControles.cs" />
     <Compile Include="Utilitario.cs" />
+    <Compile Include="View\FormPersonalizado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormPersonalizado.Designer.cs">
+      <DependentUpon>FormPersonalizado.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\FrmBaseGeral.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -219,6 +228,12 @@
     <Compile Include="View\FrmCadCliente.Designer.cs">
       <DependentUpon>FrmCadCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\FrmCadFabricantes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FrmCadFabricantes.Designer.cs">
+      <DependentUpon>FrmCadFabricantes.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\FrmCadFornecedor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -231,6 +246,12 @@
     <Compile Include="View\FrmCadProduto.Designer.cs">
       <DependentUpon>FrmCadProduto.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\FrmCadProdutos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FrmCadProdutos.Designer.cs">
+      <DependentUpon>FrmCadProdutos.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\FrmCadSubCategoria.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -242,6 +263,12 @@
     </Compile>
     <Compile Include="View\FrmCadUsuario.Designer.cs">
       <DependentUpon>FrmCadUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FrmContaReceber.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FrmContaReceber.Designer.cs">
+      <DependentUpon>FrmContaReceber.cs</DependentUpon>
     </Compile>
     <Compile Include="View\FrmGerarParcelas.cs">
       <SubType>Form</SubType>
@@ -267,6 +294,12 @@
     <Compile Include="View\FrmLocalizarCliente.Designer.cs">
       <DependentUpon>FrmLocalizarCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\FrmLocalizarFornedeor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FrmLocalizarFornedeor.Designer.cs">
+      <DependentUpon>FrmLocalizarFornedeor.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\FrmLocalizarProduto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -278,6 +311,12 @@
     </Compile>
     <Compile Include="View\FrmManutCategoria.Designer.cs">
       <DependentUpon>FrmManutCategoria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FrmManutFabricante .cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FrmManutFabricante .Designer.cs">
+      <DependentUpon>FrmManutFabricante .cs</DependentUpon>
     </Compile>
     <Compile Include="View\FrmManutCliente.cs">
       <SubType>Form</SubType>
@@ -357,17 +396,26 @@
     <EmbeddedResource Include="View\FrmCadCliente.resx">
       <DependentUpon>FrmCadCliente.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\FrmCadFabricantes.resx">
+      <DependentUpon>FrmCadFabricantes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\FrmCadFornecedor.resx">
       <DependentUpon>FrmCadFornecedor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\FrmCadProduto.resx">
       <DependentUpon>FrmCadProduto.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\FrmCadProdutos.resx">
+      <DependentUpon>FrmCadProdutos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\FrmCadSubCategoria.resx">
       <DependentUpon>FrmCadSubCategoria.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\FrmCadUsuario.resx">
       <DependentUpon>FrmCadUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FrmContaReceber.resx">
+      <DependentUpon>FrmContaReceber.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\FrmGerarParcelas.resx">
       <DependentUpon>FrmGerarParcelas.cs</DependentUpon>
@@ -381,11 +429,17 @@
     <EmbeddedResource Include="View\FrmLocalizarCliente.resx">
       <DependentUpon>FrmLocalizarCliente.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\FrmLocalizarFornedeor.resx">
+      <DependentUpon>FrmLocalizarFornedeor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\FrmLocalizarProduto.resx">
       <DependentUpon>FrmLocalizarProduto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\FrmManutCategoria.resx">
       <DependentUpon>FrmManutCategoria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FrmManutFabricante .resx">
+      <DependentUpon>FrmManutFabricante .cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\FrmManutCliente.resx">
       <DependentUpon>FrmManutCliente.cs</DependentUpon>
@@ -431,17 +485,6 @@
     </None>
     <None Include="bdsiscontrolDataSet.xss">
       <DependentUpon>bdsiscontrolDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="moneyDataSet.xsc">
-      <DependentUpon>moneyDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="moneyDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>moneyDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="moneyDataSet.xss">
-      <DependentUpon>moneyDataSet.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -543,6 +586,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\LocalizarProduto32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pagar.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\Microsoft.Data.SqlClient.SNI.5.2.0\build\net462\Microsoft.Data.SqlClient.SNI.targets" Condition="Exists('packages\Microsoft.Data.SqlClient.SNI.5.2.0\build\net462\Microsoft.Data.SqlClient.SNI.targets')" />

@@ -11,28 +11,31 @@ namespace SisControl.DALL
 {
     public class VendaDAL
     {
-        private string connectionString = ConfigurationManager.ConnectionStrings["Data Source=NOTEBOOK-DELL\\SQLEXPRESS;Initial Catalog=bdsiscontrol;Integrated Security=True;"].ConnectionString;
-
+        //private string connectionString = ConfigurationManager.ConnectionStrings["Data Source=NOTEBOOK-DELL\\SQLEXPRESS;Initial Catalog=bdsiscontrol;Integrated Security=True;"].ConnectionString;
+        
         public void AddVenda(VendaModel venda)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            var conn = Conexao.Conex();
+            using (conn) //SqlConnection connection = new SqlConnection(connectionString))
             {
                 string query = @"INSERT INTO Venda (DataVenda, ClienteID, ValorTotal, VendaID) 
                              VALUES (@DataVenda, @ClienteID, @ValorTotal, @VendaID)";
-                SqlCommand command = new SqlCommand(query, connection);
+                SqlCommand command = new SqlCommand(query, conn);//connection);
                 command.Parameters.AddWithValue("@DataVenda", venda.DataVenda);
                 command.Parameters.AddWithValue("@ClienteID", venda.ClienteID);
                 command.Parameters.AddWithValue("@ValorTotal", venda.ValorTotal);
                 command.Parameters.AddWithValue("@VendaID", venda.VendaID);
 
-                connection.Open();
+                //connection.Open();
+                conn.Open();
                 command.ExecuteNonQuery();
             }
         }
 
         public void UpdateVenda(VendaModel venda)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            var connection = Conexao.Conex();
+            using (connection)
             {
                 string query = @"UPDATE Venda SET DataVenda = @DataVenda, ClienteID = @ClienteID, ValorTotal = @ValorTotal 
                              WHERE VendaID = @VendaID";
@@ -49,7 +52,8 @@ namespace SisControl.DALL
 
         public void DeleteVenda(int vendaId)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            var connection = Conexao.Conex();
+            using ( connection )
             {
                 string query = "DELETE FROM Venda WHERE VendaID = @VendaID";
                 SqlCommand command = new SqlCommand(query, connection);
@@ -62,7 +66,8 @@ namespace SisControl.DALL
 
         public VendaModel GetVenda(Guid vendaId)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            var connection = Conexao.Conex();
+            using (connection )
             {
                 string query = "SELECT * FROM Venda WHERE VendaID = @VendaID";
                 SqlCommand command = new SqlCommand(query, connection);

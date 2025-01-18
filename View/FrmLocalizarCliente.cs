@@ -13,20 +13,13 @@ namespace SisControl.View
     {
         private int ClienteID;
         protected int LinhaAtual = -1;
+        public Form FormChamador { get; set; }
         public FrmLocalizarCliente()
         {
             InitializeComponent();
-        }
-        public new int ObterLinhaAtual()
-        {
-            return LinhaAtual;
-        }
+        }      
         private void InicializaDataGridView()
         {
-            // Inicializar propriedades básicas do DataGridView.         
-            // dataGridPesquisa.BackgroundColor = Color.LightGray;
-            //dataGridPesquisa.BorderStyle = BorderStyle.Fixed3D;
-
             dataGridPesquisar.MultiSelect = false;
 
             //Configuração das linhas do DataGridView
@@ -40,13 +33,6 @@ namespace SisControl.View
             dataGridPesquisar.Columns[1].Width = 660;
             dataGridPesquisar.Columns[2].Width = 200;
             dataGridPesquisar.Columns[3].Width = 350;
-
-
-            //Renomeia as colunas do DataGridView 
-            //dataGridPesquisa.Columns[0].HeaderText = "Cidade ID";
-            //dataGridPesquisa.Columns[1].HeaderText = "Nome Cidade";
-            //dataGridPesquisa.Columns[2].HeaderText = "Cód. Estado";
-            //dataGridPesquisa.Columns[3].HeaderText = "UF";
         }
         public void ListarCliente()
         {
@@ -60,18 +46,7 @@ namespace SisControl.View
         {
             ListarCliente();
         }
-
-        private void FrmLocalizarCliente_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            ClienteID = Convert.ToInt32(dataGridPesquisar[0, LinhaAtual].Value);            
-            string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(ClienteID, 6);
-
-
-
-            ((FrmVendas)Application.OpenForms["FrmVendas"]).txtClienteID.Text = numeroComZeros;
-            ((FrmVendas)Application.OpenForms["FrmVendas"]).txtNomeCliente.Text = dataGridPesquisar[1, LinhaAtual].Value.ToString();
-        }
-
+       
         private void txtPesquisa_TextChanged(object sender, EventArgs e)
         {
             string nome = "%" + txtPesquisa.Text + "%";
@@ -102,5 +77,37 @@ namespace SisControl.View
                 LinhaAtual = dataGridPesquisar.CurrentRow.Index;
             }
         }
+
+        private void btnSair_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void FrmLocalizarCliente_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            // Obtém o ID do cliente da célula [0, LinhaAtual] do dataGridPesquisar e converte para inteiro.
+            ClienteID = Convert.ToInt32(dataGridPesquisar[0, LinhaAtual].Value);
+
+            // Acrescenta zeros à esquerda do ID do cliente até que ele tenha 4 dígitos.
+            string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(ClienteID, 4);
+
+            // Obtém o nome do cliente da célula [1, LinhaAtual] do dataGridPesquisar e converte para string.
+            string nomeCliente = dataGridPesquisar[1, LinhaAtual].Value.ToString();
+
+            // Verifica se o formulário chamador é uma instância de FrmVendas.
+            if (FormChamador is FrmVendas frmVendas)
+            {
+                // Se for, define os textos dos campos txtClienteID e txtNomeCliente de FrmVendas.
+                frmVendas.txtClienteID.Text = numeroComZeros;
+                frmVendas.txtNomeCliente.Text = nomeCliente;
+            }
+            // Verifica se o formulário chamador é uma instância de FrmContaReceber.
+            else if (FormChamador is FrmContaReceber frmContaReceber)
+            {
+                // Se for, define os textos dos campos txtClienteID e txtNomeCliente de FrmContaReceber.
+                frmContaReceber.txtClienteID.Text = numeroComZeros;
+                frmContaReceber.txtNomeCliente.Text = nomeCliente;
+            }
+        }       
     }
 }

@@ -18,6 +18,8 @@ namespace SisControl.View
         private int ProdutoID;
         private string NomeProduto;
         private decimal PrecoUnitario;
+        public Form FormChamador { get; set; }        
+
         public FrmLocalizarProduto()
         {
             InitializeComponent();
@@ -47,20 +49,7 @@ namespace SisControl.View
             //Cores alternadas no DataGridView
             dataGridPesquisar.RowsDefaultCellStyle.BackColor = Color.LightGray;
             dataGridPesquisar.AlternatingRowsDefaultCellStyle.BackColor = Color.DarkGray;
-
-            //Redimensiona o tamanho das colunas do DataGridView 
-            //dataGridPesquisar.Columns[0].Width = 100;
-            //dataGridPesquisar.Columns[1].Width = 660;
-            //dataGridPesquisar.Columns[2].Width = 200;
-            //dataGridPesquisar.Columns[3].Width = 350;
-            //dataGridPesquisar.Columns[4].Width = 120;
-
-
-            //Renomeia as colunas do DataGridView 
-            //dataGridPesquisa.Columns[0].HeaderText = "Cidade ID";
-            //dataGridPesquisa.Columns[1].HeaderText = "Nome Cidade";
-            //dataGridPesquisa.Columns[2].HeaderText = "Cód. Estado";
-            //dataGridPesquisa.Columns[3].HeaderText = "UF";
+           
         }
         public void ListarProduto()
         {
@@ -90,16 +79,6 @@ namespace SisControl.View
 
         private void FrmLocalizarProduto_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //LinhaAtual = ObterLinhaAtual();
-
-            //ProdutoID = Convert.ToInt32(dataGridPesquisar["ProdutoID", LinhaAtual].Value); 
-            //string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(ProdutoID, 6);
-
-
-            //((FrmVendas)Application.OpenForms["FrmVendas"]).txtProdutoID.Text = numeroComZeros;
-            //((FrmVendas)Application.OpenForms["FrmVendas"]).txtNomeProduto.Text = dataGridPesquisar["NomeProduto", LinhaAtual].Value.ToString();
-            //((FrmVendas)Application.OpenForms["FrmVendas"]).txtValorProduto.Text = dataGridPesquisar["PrecoVenda", LinhaAtual].Value.ToString();
-            
             SelecionarProduto();
         }
 
@@ -118,9 +97,10 @@ namespace SisControl.View
 
                 ProdutoID = Convert.ToInt32(dataGridPesquisar["ProdutoID", LinhaAtual].Value);
 
-                string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(ProdutoID, 6);
+                string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(ProdutoID, 4);
                 NomeProduto = dataGridPesquisar["NomeProduto", LinhaAtual].Value.ToString();
                 PrecoUnitario = Convert.ToDecimal(dataGridPesquisar["PrecoVenda", LinhaAtual].Value);
+
 
                 // Cria uma instância do FrmVendas (ou usa uma existente)
                 FrmVendas frmVendas = (FrmVendas)this.Owner;

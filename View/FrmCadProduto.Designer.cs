@@ -103,7 +103,7 @@
             this.btnFechar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.btnFechar.ForeColor = System.Drawing.Color.White;
             this.btnFechar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFechar.Location = new System.Drawing.Point(356, 186);
+            this.btnFechar.Location = new System.Drawing.Point(333, 423);
             this.btnFechar.Name = "btnFechar";
             this.btnFechar.Size = new System.Drawing.Size(100, 35);
             this.btnFechar.TabIndex = 7;
@@ -130,7 +130,7 @@
             this.btnNovo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.btnNovo.ForeColor = System.Drawing.Color.White;
             this.btnNovo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNovo.Location = new System.Drawing.Point(241, 186);
+            this.btnNovo.Location = new System.Drawing.Point(218, 423);
             this.btnNovo.Name = "btnNovo";
             this.btnNovo.Size = new System.Drawing.Size(100, 35);
             this.btnNovo.TabIndex = 6;
@@ -146,7 +146,7 @@
             this.btnSalvar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.btnSalvar.ForeColor = System.Drawing.Color.White;
             this.btnSalvar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSalvar.Location = new System.Drawing.Point(126, 186);
+            this.btnSalvar.Location = new System.Drawing.Point(103, 423);
             this.btnSalvar.Name = "btnSalvar";
             this.btnSalvar.Size = new System.Drawing.Size(100, 35);
             this.btnSalvar.TabIndex = 5;
@@ -207,7 +207,7 @@
             // FrmCadProduto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(478, 231);
+            this.ClientSize = new System.Drawing.Size(550, 470);
             this.Controls.Add(this.txtProdutoID);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.txtPrecoVenda);

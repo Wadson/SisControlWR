@@ -98,13 +98,16 @@ namespace SisControl
 
         private void btnProdutos_Click(object sender, EventArgs e)
         {
-            FrmManutProduto frm = new FrmManutProduto(StatusOperacao);
+            FrmManutProduto frm = new FrmManutProduto();
             frm.ShowDialog();
+            //FrmManutProduto frm = new FrmManutProduto(StatusOperacao);
+            //frm.ShowDialog();
         }
 
         private void btnContasReceber_Click(object sender, EventArgs e)
         {
-
+            FrmContaReceber frm = new FrmContaReceber();
+            frm.ShowDialog();
         }
 
         private void btnVendas_Click(object sender, EventArgs e)
@@ -157,6 +160,18 @@ namespace SisControl
         private void btnRestauraBackup_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void categoriaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmManutCategoria frm = new FrmManutCategoria(StatusOperacao);
+            frm.ShowDialog();
+        }
+
+        private void fabricanteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmManutFabricante frm = new FrmManutFabricante(StatusOperacao);
+            frm.ShowDialog();
         }
     }
 }

@@ -39,11 +39,12 @@
             this.toolStripStatusLabel11 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblHoraAtual = new System.Windows.Forms.ToolStripStatusLabel();
             this.usuárioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.usuárioToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.clienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fornecedorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.produtoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.categoriaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.manutençãoDeCadastrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.usuárioToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.clienteToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,16 +58,16 @@
             this.btnFORNECEDORES = new System.Windows.Forms.Button();
             this.btnCadCli = new System.Windows.Forms.Button();
             this.SubmenuReportes = new System.Windows.Forms.Panel();
-            this.btnEstorno = new System.Windows.Forms.Button();
-            this.panel9 = new System.Windows.Forms.Panel();
-            this.brnPesquisadinamica = new System.Windows.Forms.Button();
-            this.btnFerramentas = new System.Windows.Forms.Button();
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.btnGerarBackup = new System.Windows.Forms.Button();
-            this.panel14 = new System.Windows.Forms.Panel();
-            this.btnRestauraBackup = new System.Windows.Forms.Button();
             this.panel15 = new System.Windows.Forms.Panel();
+            this.btnRestauraBackup = new System.Windows.Forms.Button();
+            this.panel14 = new System.Windows.Forms.Panel();
+            this.btnGerarBackup = new System.Windows.Forms.Button();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.btnFerramentas = new System.Windows.Forms.Button();
+            this.brnPesquisadinamica = new System.Windows.Forms.Button();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.btnEstorno = new System.Windows.Forms.Button();
             this.btnProdutos = new System.Windows.Forms.Button();
             this.btnContasPagar = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -85,6 +86,7 @@
             this.btnSair = new System.Windows.Forms.Button();
             this.panelContenedor = new System.Windows.Forms.Panel();
             this.MenuVertical = new System.Windows.Forms.Panel();
+            this.fabricanteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SubmenuReportes.SuspendLayout();
@@ -172,10 +174,42 @@
             this.usuárioToolStripMenuItem1,
             this.clienteToolStripMenuItem,
             this.fornecedorToolStripMenuItem,
-            this.produtoToolStripMenuItem});
+            this.produtoToolStripMenuItem,
+            this.categoriaToolStripMenuItem});
             this.usuárioToolStripMenuItem.Name = "usuárioToolStripMenuItem";
             this.usuárioToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
             this.usuárioToolStripMenuItem.Text = "&Cadastro";
+            // 
+            // usuárioToolStripMenuItem1
+            // 
+            this.usuárioToolStripMenuItem1.Name = "usuárioToolStripMenuItem1";
+            this.usuárioToolStripMenuItem1.Size = new System.Drawing.Size(134, 22);
+            this.usuárioToolStripMenuItem1.Text = "&Usuário";
+            // 
+            // clienteToolStripMenuItem
+            // 
+            this.clienteToolStripMenuItem.Name = "clienteToolStripMenuItem";
+            this.clienteToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.clienteToolStripMenuItem.Text = "&Cliente";
+            // 
+            // fornecedorToolStripMenuItem
+            // 
+            this.fornecedorToolStripMenuItem.Name = "fornecedorToolStripMenuItem";
+            this.fornecedorToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.fornecedorToolStripMenuItem.Text = "&Fornecedor";
+            // 
+            // produtoToolStripMenuItem
+            // 
+            this.produtoToolStripMenuItem.Name = "produtoToolStripMenuItem";
+            this.produtoToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.produtoToolStripMenuItem.Text = "&Produto";
+            // 
+            // categoriaToolStripMenuItem
+            // 
+            this.categoriaToolStripMenuItem.Name = "categoriaToolStripMenuItem";
+            this.categoriaToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.categoriaToolStripMenuItem.Text = "Ca&tegoria";
+            this.categoriaToolStripMenuItem.Click += new System.EventHandler(this.categoriaToolStripMenuItem_Click);
             // 
             // menuStrip1
             // 
@@ -189,37 +223,14 @@
             this.menuStrip1.TabIndex = 551;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // usuárioToolStripMenuItem1
-            // 
-            this.usuárioToolStripMenuItem1.Name = "usuárioToolStripMenuItem1";
-            this.usuárioToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.usuárioToolStripMenuItem1.Text = "&Usuário";
-            // 
-            // clienteToolStripMenuItem
-            // 
-            this.clienteToolStripMenuItem.Name = "clienteToolStripMenuItem";
-            this.clienteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.clienteToolStripMenuItem.Text = "&Cliente";
-            // 
-            // fornecedorToolStripMenuItem
-            // 
-            this.fornecedorToolStripMenuItem.Name = "fornecedorToolStripMenuItem";
-            this.fornecedorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.fornecedorToolStripMenuItem.Text = "&Fornecedor";
-            // 
-            // produtoToolStripMenuItem
-            // 
-            this.produtoToolStripMenuItem.Name = "produtoToolStripMenuItem";
-            this.produtoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.produtoToolStripMenuItem.Text = "&Produto";
-            // 
             // manutençãoDeCadastrosToolStripMenuItem
             // 
             this.manutençãoDeCadastrosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.usuárioToolStripMenuItem2,
             this.clienteToolStripMenuItem1,
             this.fornecedorToolStripMenuItem1,
-            this.produtoToolStripMenuItem1});
+            this.produtoToolStripMenuItem1,
+            this.fabricanteToolStripMenuItem});
             this.manutençãoDeCadastrosToolStripMenuItem.Name = "manutençãoDeCadastrosToolStripMenuItem";
             this.manutençãoDeCadastrosToolStripMenuItem.Size = new System.Drawing.Size(157, 20);
             this.manutençãoDeCadastrosToolStripMenuItem.Text = "&Manutenção de Cadastros";
@@ -415,113 +426,14 @@
             this.SubmenuReportes.TabIndex = 21;
             this.SubmenuReportes.Visible = false;
             // 
-            // btnEstorno
+            // panel15
             // 
-            this.btnEstorno.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(40)))));
-            this.btnEstorno.FlatAppearance.BorderSize = 0;
-            this.btnEstorno.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(200)))));
-            this.btnEstorno.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEstorno.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnEstorno.ForeColor = System.Drawing.Color.White;
-            this.btnEstorno.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEstorno.Location = new System.Drawing.Point(6, 0);
-            this.btnEstorno.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnEstorno.Name = "btnEstorno";
-            this.btnEstorno.Size = new System.Drawing.Size(160, 34);
-            this.btnEstorno.TabIndex = 16;
-            this.btnEstorno.Text = "Estorno de lançamentos";
-            this.btnEstorno.UseVisualStyleBackColor = false;
-            this.btnEstorno.Click += new System.EventHandler(this.btnEstorno_Click);
-            // 
-            // panel9
-            // 
-            this.panel9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(200)))));
-            this.panel9.Location = new System.Drawing.Point(0, 0);
-            this.panel9.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(6, 34);
-            this.panel9.TabIndex = 17;
-            // 
-            // brnPesquisadinamica
-            // 
-            this.brnPesquisadinamica.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(40)))));
-            this.brnPesquisadinamica.FlatAppearance.BorderSize = 0;
-            this.brnPesquisadinamica.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(200)))));
-            this.brnPesquisadinamica.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.brnPesquisadinamica.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.brnPesquisadinamica.ForeColor = System.Drawing.Color.White;
-            this.brnPesquisadinamica.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.brnPesquisadinamica.Location = new System.Drawing.Point(3, 39);
-            this.brnPesquisadinamica.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.brnPesquisadinamica.Name = "brnPesquisadinamica";
-            this.brnPesquisadinamica.Size = new System.Drawing.Size(160, 34);
-            this.brnPesquisadinamica.TabIndex = 18;
-            this.brnPesquisadinamica.Text = "Pesquisa dinâmica";
-            this.brnPesquisadinamica.UseVisualStyleBackColor = false;
-            this.brnPesquisadinamica.Click += new System.EventHandler(this.brnPesquisadinamica_Click);
-            // 
-            // btnFerramentas
-            // 
-            this.btnFerramentas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(40)))));
-            this.btnFerramentas.FlatAppearance.BorderSize = 0;
-            this.btnFerramentas.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(200)))));
-            this.btnFerramentas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFerramentas.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnFerramentas.ForeColor = System.Drawing.Color.White;
-            this.btnFerramentas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFerramentas.Location = new System.Drawing.Point(3, 79);
-            this.btnFerramentas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnFerramentas.Name = "btnFerramentas";
-            this.btnFerramentas.Size = new System.Drawing.Size(160, 34);
-            this.btnFerramentas.TabIndex = 18;
-            this.btnFerramentas.Text = "Ferramentas";
-            this.btnFerramentas.UseVisualStyleBackColor = false;
-            this.btnFerramentas.Click += new System.EventHandler(this.btnFerramentas_Click);
-            // 
-            // panel10
-            // 
-            this.panel10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(200)))));
-            this.panel10.Location = new System.Drawing.Point(0, 39);
-            this.panel10.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(6, 34);
-            this.panel10.TabIndex = 19;
-            // 
-            // panel11
-            // 
-            this.panel11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(200)))));
-            this.panel11.Location = new System.Drawing.Point(0, 79);
-            this.panel11.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(6, 34);
-            this.panel11.TabIndex = 19;
-            // 
-            // btnGerarBackup
-            // 
-            this.btnGerarBackup.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(40)))));
-            this.btnGerarBackup.FlatAppearance.BorderSize = 0;
-            this.btnGerarBackup.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(200)))));
-            this.btnGerarBackup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGerarBackup.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnGerarBackup.ForeColor = System.Drawing.Color.White;
-            this.btnGerarBackup.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGerarBackup.Location = new System.Drawing.Point(3, 118);
-            this.btnGerarBackup.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnGerarBackup.Name = "btnGerarBackup";
-            this.btnGerarBackup.Size = new System.Drawing.Size(160, 34);
-            this.btnGerarBackup.TabIndex = 20;
-            this.btnGerarBackup.Text = "Gerar backup";
-            this.btnGerarBackup.UseVisualStyleBackColor = false;
-            this.btnGerarBackup.Click += new System.EventHandler(this.btnGerarBackup_Click);
-            // 
-            // panel14
-            // 
-            this.panel14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(200)))));
-            this.panel14.Location = new System.Drawing.Point(0, 118);
-            this.panel14.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(6, 34);
-            this.panel14.TabIndex = 21;
+            this.panel15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(200)))));
+            this.panel15.Location = new System.Drawing.Point(0, 155);
+            this.panel15.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panel15.Name = "panel15";
+            this.panel15.Size = new System.Drawing.Size(6, 34);
+            this.panel15.TabIndex = 23;
             // 
             // btnRestauraBackup
             // 
@@ -541,14 +453,113 @@
             this.btnRestauraBackup.UseVisualStyleBackColor = false;
             this.btnRestauraBackup.Click += new System.EventHandler(this.btnRestauraBackup_Click);
             // 
-            // panel15
+            // panel14
             // 
-            this.panel15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(200)))));
-            this.panel15.Location = new System.Drawing.Point(0, 155);
-            this.panel15.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(6, 34);
-            this.panel15.TabIndex = 23;
+            this.panel14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(200)))));
+            this.panel14.Location = new System.Drawing.Point(0, 118);
+            this.panel14.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panel14.Name = "panel14";
+            this.panel14.Size = new System.Drawing.Size(6, 34);
+            this.panel14.TabIndex = 21;
+            // 
+            // btnGerarBackup
+            // 
+            this.btnGerarBackup.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(40)))));
+            this.btnGerarBackup.FlatAppearance.BorderSize = 0;
+            this.btnGerarBackup.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(200)))));
+            this.btnGerarBackup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGerarBackup.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnGerarBackup.ForeColor = System.Drawing.Color.White;
+            this.btnGerarBackup.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnGerarBackup.Location = new System.Drawing.Point(3, 118);
+            this.btnGerarBackup.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnGerarBackup.Name = "btnGerarBackup";
+            this.btnGerarBackup.Size = new System.Drawing.Size(160, 34);
+            this.btnGerarBackup.TabIndex = 20;
+            this.btnGerarBackup.Text = "Gerar backup";
+            this.btnGerarBackup.UseVisualStyleBackColor = false;
+            this.btnGerarBackup.Click += new System.EventHandler(this.btnGerarBackup_Click);
+            // 
+            // panel11
+            // 
+            this.panel11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(200)))));
+            this.panel11.Location = new System.Drawing.Point(0, 79);
+            this.panel11.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(6, 34);
+            this.panel11.TabIndex = 19;
+            // 
+            // panel10
+            // 
+            this.panel10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(200)))));
+            this.panel10.Location = new System.Drawing.Point(0, 39);
+            this.panel10.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(6, 34);
+            this.panel10.TabIndex = 19;
+            // 
+            // btnFerramentas
+            // 
+            this.btnFerramentas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(40)))));
+            this.btnFerramentas.FlatAppearance.BorderSize = 0;
+            this.btnFerramentas.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(200)))));
+            this.btnFerramentas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFerramentas.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnFerramentas.ForeColor = System.Drawing.Color.White;
+            this.btnFerramentas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnFerramentas.Location = new System.Drawing.Point(3, 79);
+            this.btnFerramentas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnFerramentas.Name = "btnFerramentas";
+            this.btnFerramentas.Size = new System.Drawing.Size(160, 34);
+            this.btnFerramentas.TabIndex = 18;
+            this.btnFerramentas.Text = "Ferramentas";
+            this.btnFerramentas.UseVisualStyleBackColor = false;
+            this.btnFerramentas.Click += new System.EventHandler(this.btnFerramentas_Click);
+            // 
+            // brnPesquisadinamica
+            // 
+            this.brnPesquisadinamica.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(40)))));
+            this.brnPesquisadinamica.FlatAppearance.BorderSize = 0;
+            this.brnPesquisadinamica.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(200)))));
+            this.brnPesquisadinamica.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.brnPesquisadinamica.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.brnPesquisadinamica.ForeColor = System.Drawing.Color.White;
+            this.brnPesquisadinamica.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.brnPesquisadinamica.Location = new System.Drawing.Point(3, 39);
+            this.brnPesquisadinamica.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.brnPesquisadinamica.Name = "brnPesquisadinamica";
+            this.brnPesquisadinamica.Size = new System.Drawing.Size(160, 34);
+            this.brnPesquisadinamica.TabIndex = 18;
+            this.brnPesquisadinamica.Text = "Pesquisa dinâmica";
+            this.brnPesquisadinamica.UseVisualStyleBackColor = false;
+            this.brnPesquisadinamica.Click += new System.EventHandler(this.brnPesquisadinamica_Click);
+            // 
+            // panel9
+            // 
+            this.panel9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(200)))));
+            this.panel9.Location = new System.Drawing.Point(0, 0);
+            this.panel9.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(6, 34);
+            this.panel9.TabIndex = 17;
+            // 
+            // btnEstorno
+            // 
+            this.btnEstorno.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(40)))));
+            this.btnEstorno.FlatAppearance.BorderSize = 0;
+            this.btnEstorno.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(200)))));
+            this.btnEstorno.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEstorno.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnEstorno.ForeColor = System.Drawing.Color.White;
+            this.btnEstorno.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnEstorno.Location = new System.Drawing.Point(6, 0);
+            this.btnEstorno.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnEstorno.Name = "btnEstorno";
+            this.btnEstorno.Size = new System.Drawing.Size(160, 34);
+            this.btnEstorno.TabIndex = 16;
+            this.btnEstorno.Text = "Estorno de lançamentos";
+            this.btnEstorno.UseVisualStyleBackColor = false;
+            this.btnEstorno.Click += new System.EventHandler(this.btnEstorno_Click);
             // 
             // btnProdutos
             // 
@@ -740,6 +751,13 @@
             this.MenuVertical.Size = new System.Drawing.Size(1082, 99);
             this.MenuVertical.TabIndex = 26;
             // 
+            // fabricanteToolStripMenuItem
+            // 
+            this.fabricanteToolStripMenuItem.Name = "fabricanteToolStripMenuItem";
+            this.fabricanteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.fabricanteToolStripMenuItem.Text = "&Fabricante";
+            this.fabricanteToolStripMenuItem.Click += new System.EventHandler(this.fabricanteToolStripMenuItem_Click);
+            // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -828,6 +846,8 @@
         private System.Windows.Forms.Button btnSair;
         public System.Windows.Forms.Panel panelContenedor;
         private System.Windows.Forms.Panel MenuVertical;
+        private System.Windows.Forms.ToolStripMenuItem categoriaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fabricanteToolStripMenuItem;
     }
 }
 

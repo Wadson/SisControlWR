@@ -8,15 +8,15 @@ using System.Drawing;
 using System.Globalization;
 using System.Text;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace SisControl.View
 {
     public partial class FrmManutProduto : SisControl.FrmBaseManutencao
     {
         private new string StatusOperacao;
-        public FrmManutProduto( string statusOperacao)
-        {
-            this.StatusOperacao = statusOperacao;
+        public FrmManutProduto()
+        {            
             InitializeComponent();
         }
 
@@ -48,7 +48,7 @@ namespace SisControl.View
             //Alinhar o as colunas
 
             dgv.Columns["ProdutoID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
-            dgv.Columns["Estoque"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
+            dgv.Columns["QuantidadeEmEstoque"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
 
             // Ajustar colunas automaticamente
             //dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -78,13 +78,32 @@ namespace SisControl.View
 
             dgv.Columns[0].Name = "ProdutoID";
             dgv.Columns[1].Name = "NomeProduto";
-            dgv.Columns[2].Name = "PrecoCusto";
-            dgv.Columns[3].Name = "Estoque";
-            dgv.Columns[4].Name = "PrecoVenda";
-        }       
+            dgv.Columns[2].Name = "Descricao";
+            dgv.Columns[3].Name = "PrecoCusto";
+            dgv.Columns[4].Name = "Lucro";
+            dgv.Columns[5].Name = "PrecoDeVenda";
+            dgv.Columns[6].Name = "QuantidadeEmEstoque";
+            dgv.Columns[7].Name = "DataDeEntrada";
+            dgv.Columns[8].Name = "CategoriaID";
+            dgv.Columns[9].Name = "FabricanteID";
+            dgv.Columns[10].Name = "UnidadeDeMedida";
+            dgv.Columns[11].Name = "Status";
+            dgv.Columns[12].Name = "DataDeVencimento";
+            dgv.Columns[13].Name = "Imagem";
+            dgv.Columns[14].Name = "FornecedorID";
+
+            // Centralizar colunas de IDs e Quantidade
+            dgv.Columns["ProdutoID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgv.Columns["QuantidadeEmEstoque"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgv.Columns["CategoriaID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgv.Columns["FabricanteID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgv.Columns["FornecedorID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+
+        }
         private void CarregaDados()
         {
-            FrmCadProduto frm = new FrmCadProduto(StatusOperacao);
+            FrmCadProdutos frm = new  FrmCadProdutos(StatusOperacao);
 
             if (StatusOperacao == "NOVO")
             {
@@ -92,7 +111,7 @@ namespace SisControl.View
                 StatusOperacao = "NOVO";
                 frm.ShowDialog();
 
-                ((FrmManutProduto)Application.OpenForms["FrmManutProduto"]).HabilitarTimer(true);
+                ((FrmManutProduto)System.Windows.Forms.Application.OpenForms["FrmManutProduto"]).HabilitarTimer(true);
             }
             if (StatusOperacao == "ALTERAR")
             {
@@ -112,10 +131,18 @@ namespace SisControl.View
                         //  var valor = row.Cells[0].Value;
                         frm.txtProdutoID.Text = dataGridPesquisar.CurrentRow.Cells["ProdutoID"].Value.ToString();
                         frm.txtNomeProduto.Text = dataGridPesquisar.CurrentRow.Cells["NomeProduto"].Value.ToString();
+                        frm.txtDescricao.Text = dataGridPesquisar.CurrentRow.Cells["Descricao"].Value.ToString();
                         frm.txtPrecoCusto.Text = dataGridPesquisar.CurrentRow.Cells["PrecoCusto"].Value.ToString();
-                        frm.txtEstoque.Text = dataGridPesquisar.CurrentRow.Cells["Estoque"].Value.ToString();
-                        frm.txtPrecoVenda.Text = dataGridPesquisar.CurrentRow.Cells["PrecoVenda"].Value.ToString();
-                       
+                        frm.txtLucro.Text = dataGridPesquisar.CurrentRow.Cells["Lucro"].Value.ToString();
+                        frm.txtPrecoDeVenda.Text = dataGridPesquisar.CurrentRow.Cells["PrecoDeVenda"].Value.ToString();
+                        frm.txtQuantidadeEmEstoque.Text = dataGridPesquisar.CurrentRow.Cells["QuantidadeEmEstoque"].Value.ToString();
+                        frm.dtpDataDeEntrada.Text = dataGridPesquisar.CurrentRow.Cells["DataDeEntrada"].Value.ToString();
+                        frm.txtCategoriaID.Text = dataGridPesquisar.CurrentRow.Cells["CategoriaID"].Value.ToString();
+                        frm.txtFabricanteID.Text = dataGridPesquisar.CurrentRow.Cells["FabricanteID"].Value.ToString();
+                        frm.cmbUnidadeDeMedida.Text = dataGridPesquisar.CurrentRow.Cells["UnidadeDeMedida"].Value.ToString();
+                        frm.cmbStatus.Text = dataGridPesquisar.CurrentRow.Cells["Status"].Value.ToString();
+                        frm.dtpDataDeVencimento.Text = dataGridPesquisar.CurrentRow.Cells["DataDeVencimento"].Value.ToString();
+                        frm.txtFornecedorID.Text = dataGridPesquisar.CurrentRow.Cells["FornecedorID"].Value.ToString();
 
                         frm.Text = "SISCONTROL - ALTERAR REGISTRO";
                         StatusOperacao = "ALTERAR";
@@ -124,7 +151,7 @@ namespace SisControl.View
                         frm.btnSalvar.TextAlign = ContentAlignment.MiddleRight;//AlinhamentoDeConteúdo.MiddleLeft; =  StringAlignment
                         frm.btnSalvar.Image = Properties.Resources.Alterar;
                         frm.ShowDialog();
-                        ((FrmManutProduto)Application.OpenForms["FrmManutProduto"]).HabilitarTimer(true);
+                        ((FrmManutProduto)System.Windows.Forms.Application.OpenForms["FrmManutProduto"]).HabilitarTimer(true);
                     }
 
                     //// Execução do código desejado
@@ -157,9 +184,18 @@ namespace SisControl.View
                         //  var valor = row.Cells[0].Value;
                         frm.txtProdutoID.Text = dataGridPesquisar.CurrentRow.Cells["ProdutoID"].Value.ToString();
                         frm.txtNomeProduto.Text = dataGridPesquisar.CurrentRow.Cells["NomeProduto"].Value.ToString();
+                        frm.txtDescricao.Text = dataGridPesquisar.CurrentRow.Cells["Descricao"].Value.ToString();
                         frm.txtPrecoCusto.Text = dataGridPesquisar.CurrentRow.Cells["PrecoCusto"].Value.ToString();
-                        frm.txtEstoque.Text = dataGridPesquisar.CurrentRow.Cells["Estoque"].Value.ToString();
-                        frm.txtPrecoVenda.Text = dataGridPesquisar.CurrentRow.Cells["PrecoVenda"].Value.ToString();
+                        frm.txtLucro.Text = dataGridPesquisar.CurrentRow.Cells["Lucro"].Value.ToString();
+                        frm.txtPrecoDeVenda.Text = dataGridPesquisar.CurrentRow.Cells["PrecoDeVenda"].Value.ToString();
+                        frm.txtQuantidadeEmEstoque.Text = dataGridPesquisar.CurrentRow.Cells["QuantidadeEmEstoque"].Value.ToString();
+                        frm.dtpDataDeEntrada.Text = dataGridPesquisar.CurrentRow.Cells["DataDeEntrada"].Value.ToString();
+                        frm.txtCategoriaID.Text = dataGridPesquisar.CurrentRow.Cells["CategoriaID"].Value.ToString();
+                        frm.txtFabricanteID.Text = dataGridPesquisar.CurrentRow.Cells["FabricanteID"].Value.ToString();
+                        frm.cmbUnidadeDeMedida.Text = dataGridPesquisar.CurrentRow.Cells["UnidadeDeMedida"].Value.ToString();
+                        frm.cmbStatus.Text = dataGridPesquisar.CurrentRow.Cells["Status"].Value.ToString();
+                        frm.dtpDataDeVencimento.Text = dataGridPesquisar.CurrentRow.Cells["DataDeVencimento"].Value.ToString();
+                        frm.txtFornecedorID.Text = dataGridPesquisar.CurrentRow.Cells["FornecedorID"].Value.ToString();
 
                         frm.Text = "SISCONTROL - EXCLUSÃO DE REGISTRO";                        
                         frm.btnSalvar.Text = "Excluir";
@@ -167,14 +203,24 @@ namespace SisControl.View
                         frm.btnSalvar.TextAlign = ContentAlignment.MiddleRight;//AlinhamentoDeConteúdo.MiddleLeft; =  StringAlignment
                         frm.btnSalvar.Image = Properties.Resources.Excluir2;
 
+                        // Desabilitar os campos
                         frm.txtProdutoID.Enabled = false;
                         frm.txtNomeProduto.Enabled = false;
-                        frm.txtProdutoID.Enabled = false;
-                        frm.txtEstoque.Enabled = false;
-                        frm.txtPrecoVenda.Enabled = false;
-                        
+                        frm.txtDescricao.Enabled = false;
+                        frm.txtPrecoCusto.Enabled = false;
+                        frm.txtLucro.Enabled = false;
+                        frm.txtPrecoDeVenda.Enabled = false;
+                        frm.txtQuantidadeEmEstoque.Enabled = false;
+                        frm.dtpDataDeEntrada.Enabled = false;
+                        frm.txtCategoriaID.Enabled = false;
+                        frm.txtFabricanteID.Enabled = false;
+                        frm.cmbUnidadeDeMedida.Enabled = false;
+                        frm.cmbStatus.Enabled = false;
+                        frm.dtpDataDeVencimento.Enabled = false;
+                        frm.txtFornecedorID.Enabled = false;
+
                         frm.ShowDialog();
-                        ((FrmManutProduto)Application.OpenForms["FrmManutProduto"]).HabilitarTimer(true);
+                        ((FrmManutProduto)System.Windows.Forms.Application.OpenForms["FrmManutProduto"]).HabilitarTimer(true);
                     }
                     // Execução do código desejado
                     //foreach (DataGridViewRow row in dataGridPesquisar.Rows)

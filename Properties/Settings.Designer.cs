@@ -45,5 +45,17 @@ namespace SisControl.Properties {
                 return ((string)(this["bdsiscontrolConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=NOTEBOOK-DELL\\SQLEXPRESS;AttachDbFilename=\"C:\\Program Files\\Microsoft" +
+            " SQL Server\\MSSQL16.SQLEXPRESS\\MSSQL\\DATA\\bdsiscontrol.mdf\";Integrated Security=" +
+            "True;TrustServerCertificate=True")]
+        public string bdsiscontrolConnectionString1 {
+            get {
+                return ((string)(this["bdsiscontrolConnectionString1"]));
+            }
+        }
     }
 }

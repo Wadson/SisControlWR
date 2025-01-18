@@ -45,7 +45,7 @@ namespace SisControl.View
         {
             try
             {
-                ProdutoMODEL objetoModel = new ProdutoMODEL();
+                ProdutosModel objetoModel = new ProdutosModel();
 
                 PrecoCusto = Utilitario.RemoverFormatoMoeda(txtPrecoCusto);
                 PrecoVenda = Utilitario.RemoverFormatoMoeda(txtPrecoVenda);
@@ -53,8 +53,8 @@ namespace SisControl.View
                 objetoModel.ProdutoID = Convert.ToInt32(txtProdutoID.Text);
                 objetoModel.NomeProduto = txtNomeProduto.Text;
                 objetoModel.PrecoCusto = PrecoCusto;
-                objetoModel.Estoque = Convert.ToInt32(txtEstoque.Text);
-                objetoModel.PrecoVenda = PrecoVenda;
+                objetoModel.QuantidadeEmEstoque = Convert.ToInt32(txtEstoque.Text);
+                objetoModel.PrecoDeVenda = PrecoVenda;
 
                 ProdutoBLL objetoBll = new ProdutoBLL();
 
@@ -77,17 +77,17 @@ namespace SisControl.View
         {
             try
             {
-                ProdutoMODEL objetoModel = new ProdutoMODEL();
+                ProdutosModel objetoModel = new  ProdutosModel ();
 
                 objetoModel.ProdutoID = Convert.ToInt32(txtProdutoID.Text);
                 objetoModel.NomeProduto = txtNomeProduto.Text;
                 objetoModel.PrecoCusto = Convert.ToDecimal(Utilitario.RemoverFormatoMoeda(txtPrecoCusto));
-                objetoModel.Estoque = Convert.ToInt32(txtEstoque.Text);
-                objetoModel.PrecoVenda = Convert.ToDecimal(Utilitario.RemoverFormatoMoeda(txtPrecoVenda));
+                objetoModel.QuantidadeEmEstoque = Convert.ToInt32(txtEstoque.Text);
+                objetoModel.PrecoDeVenda = Convert.ToDecimal(Utilitario.RemoverFormatoMoeda(txtPrecoVenda));
 
 
-                ProdutoBLL objetoBll = new ProdutoBLL();
-                objetoBll.Alterar(objetoModel);
+                ProdutosBll objetoBll = new ProdutosBll();
+                objetoBll.AtualizaProduto(objetoModel);
 
                 MessageBox.Show("Registro Alterado com sucesso!", "Alteração!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 ((FrmManutProduto)Application.OpenForms["FrmManutProduto"]).HabilitarTimer(true);// Habilita Timer do outro form Obs: O timer no outro form executa um Método.    
@@ -177,7 +177,7 @@ namespace SisControl.View
                 txtNomeProduto.Focus();                
 
                 int NovoCodigo = Utilitario.GerarProximoCodigo(QueryProduto);//RetornaCodigoContaMaisUm(QueryUsuario).ToString();
-                string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(NovoCodigo, 6);
+                string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(NovoCodigo, 4);
                 ProdutoID = NovoCodigo;
                 txtProdutoID.Text = numeroComZeros;
             }

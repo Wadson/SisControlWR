@@ -92,7 +92,7 @@ namespace SisControl.DALL
                             parcelas.Add(new ParcelaModel
                             {
                                 ParcelaID = parcelaID,
-                                VendaID = Convert.ToInt32(vendaID),
+                                VendaID = vendaID,
                                 NumeroParcela = (int)reader["NumeroParcela"],
                                 DataVencimento = (DateTime)reader["DataVencimento"],
                                 ValorParcela = (decimal)reader["ValorParcela"],
