@@ -60,10 +60,6 @@
             this.label15 = new System.Windows.Forms.Label();
             this.txtProdutoID = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
-            this.txtCategoriaID = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.txtFabricanteID = new System.Windows.Forms.TextBox();
-            this.label18 = new System.Windows.Forms.Label();
             this.cmbStatus = new System.Windows.Forms.ComboBox();
             this.txtFornecedorID = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
@@ -71,6 +67,8 @@
             this.btnLocalizarImagem = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cmbUnidadeDeMedida = new System.Windows.Forms.ComboBox();
+            this.txtReferência = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbImagem)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -122,7 +120,7 @@
             this.txtPrecoCusto.Location = new System.Drawing.Point(21, 216);
             this.txtPrecoCusto.Name = "txtPrecoCusto";
             this.txtPrecoCusto.Size = new System.Drawing.Size(100, 20);
-            this.txtPrecoCusto.TabIndex = 5;
+            this.txtPrecoCusto.TabIndex = 2;
             this.txtPrecoCusto.Enter += new System.EventHandler(this.txtPrecoCusto_Enter);
             this.txtPrecoCusto.Leave += new System.EventHandler(this.txtPrecoCusto_Leave);
             // 
@@ -142,7 +140,7 @@
             this.txtQuantidadeEmEstoque.Location = new System.Drawing.Point(336, 216);
             this.txtQuantidadeEmEstoque.Name = "txtQuantidadeEmEstoque";
             this.txtQuantidadeEmEstoque.Size = new System.Drawing.Size(100, 20);
-            this.txtQuantidadeEmEstoque.TabIndex = 8;
+            this.txtQuantidadeEmEstoque.TabIndex = 5;
             this.txtQuantidadeEmEstoque.Enter += new System.EventHandler(this.txtQuantidadeEmEstoque_Enter);
             this.txtQuantidadeEmEstoque.Leave += new System.EventHandler(this.txtQuantidadeEmEstoque_Leave);
             // 
@@ -162,7 +160,7 @@
             this.txtPrecoDeVenda.Location = new System.Drawing.Point(233, 216);
             this.txtPrecoDeVenda.Name = "txtPrecoDeVenda";
             this.txtPrecoDeVenda.Size = new System.Drawing.Size(100, 20);
-            this.txtPrecoDeVenda.TabIndex = 7;
+            this.txtPrecoDeVenda.TabIndex = 4;
             this.txtPrecoDeVenda.Enter += new System.EventHandler(this.txtPrecoDeVenda_Enter);
             this.txtPrecoDeVenda.Leave += new System.EventHandler(this.txtPrecoDeVenda_Leave);
             // 
@@ -182,7 +180,7 @@
             this.txtLucro.Location = new System.Drawing.Point(127, 216);
             this.txtLucro.Name = "txtLucro";
             this.txtLucro.Size = new System.Drawing.Size(100, 20);
-            this.txtLucro.TabIndex = 6;
+            this.txtLucro.TabIndex = 3;
             this.txtLucro.Enter += new System.EventHandler(this.txtLucro_Enter);
             this.txtLucro.Leave += new System.EventHandler(this.txtLucro_Leave);
             // 
@@ -225,7 +223,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(125, 243);
+            this.label10.Location = new System.Drawing.Point(18, 243);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(60, 13);
             this.label10.TabIndex = 16;
@@ -234,7 +232,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(443, 147);
+            this.label11.Location = new System.Drawing.Point(339, 148);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(55, 13);
             this.label11.TabIndex = 14;
@@ -256,7 +254,8 @@
             this.txtFornecedor.Location = new System.Drawing.Point(130, 306);
             this.txtFornecedor.Name = "txtFornecedor";
             this.txtFornecedor.Size = new System.Drawing.Size(411, 20);
-            this.txtFornecedor.TabIndex = 10;
+            this.txtFornecedor.TabIndex = 111;
+            this.txtFornecedor.TabStop = false;
             this.txtFornecedor.Enter += new System.EventHandler(this.txtFornecedor_Enter);
             this.txtFornecedor.Leave += new System.EventHandler(this.txtFornecedor_Leave);
             // 
@@ -330,7 +329,7 @@
             this.btnSalvar.Location = new System.Drawing.Point(91, 358);
             this.btnSalvar.Name = "btnSalvar";
             this.btnSalvar.Size = new System.Drawing.Size(100, 35);
-            this.btnSalvar.TabIndex = 12;
+            this.btnSalvar.TabIndex = 8;
             this.btnSalvar.Text = "     &Salvar";
             this.btnSalvar.UseVisualStyleBackColor = false;
             this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
@@ -364,24 +363,80 @@
             // 
             // cmbCategoria
             // 
+            this.cmbCategoria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCategoria.FormattingEnabled = true;
-            this.cmbCategoria.Location = new System.Drawing.Point(443, 164);
+            this.cmbCategoria.Items.AddRange(new object[] {
+            "Acessórios de Moda",
+            "Alimentos e Bebidas",
+            "Artigos de Coleção",
+            "Artigos de Papelaria",
+            "Artigos para Banho e Cama",
+            "Artigos para Festas",
+            "Artigos para Pets",
+            "Artigos para Viagem",
+            "Artigos Esportivos",
+            "Automóveis",
+            "Brinquedos",
+            "Calçados",
+            "Cosméticos e Cuidados Pessoais",
+            "Eletrônicos",
+            "Eletrodomésticos",
+            "Equipamentos de Fotografia e Vídeo",
+            "Equipamentos de Fitness",
+            "Equipamentos de Iluminação",
+            "Equipamentos de Informática",
+            "Equipamentos de Segurança",
+            "Equipamentos Industriais",
+            "Equipamentos de Som",
+            "Ferramentas e Equipamentos",
+            "Instrumentos Musicais",
+            "Jardim",
+            "Jogos de Tabuleiro e Cartas",
+            "Jornais e Revistas",
+            "Livros e Papéis",
+            "Materiais Artísticos",
+            "Materiais de Construção",
+            "Móveis",
+            "Óptica (Óculos e Lentes)",
+            "Papelaria e Escritório",
+            "Perfumes",
+            "Produtos de Beleza",
+            "Produtos de Climatização",
+            "Produtos de Cozinha",
+            "Produtos de Decor",
+            "Produtos de Limpeza",
+            "Produtos para Bebês",
+            "Produtos para Camping",
+            "Produtos para Ciclismo",
+            "Produtos para Pesca",
+            "Produtos para Saúde",
+            "Produtos para Carpintaria",
+            "Produtos para Fitness",
+            "Produtos para Fotografia",
+            "Produtos para Jardins",
+            "Produtos para Pets",
+            "Relojoaria",
+            "Roupas",
+            "Suplementos Alimentares",
+            "Utensílios Domésticos",
+            "Vestuário de Trabalho"});
+            this.cmbCategoria.Location = new System.Drawing.Point(337, 164);
             this.cmbCategoria.Name = "cmbCategoria";
-            this.cmbCategoria.Size = new System.Drawing.Size(217, 21);
-            this.cmbCategoria.TabIndex = 4;
+            this.cmbCategoria.Size = new System.Drawing.Size(323, 21);
+            this.cmbCategoria.TabIndex = 110;
             this.cmbCategoria.TextChanged += new System.EventHandler(this.cmbCategoria_TextChanged);
             this.cmbCategoria.Enter += new System.EventHandler(this.cmbCategoria_Enter);
             this.cmbCategoria.Leave += new System.EventHandler(this.cmbCategoria_Leave);
             // 
             // cmbFabricante
             // 
+            this.cmbFabricante.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbFabricante.FormattingEnabled = true;
-            this.cmbFabricante.Location = new System.Drawing.Point(128, 259);
+            this.cmbFabricante.Location = new System.Drawing.Point(21, 259);
             this.cmbFabricante.Name = "cmbFabricante";
-            this.cmbFabricante.Size = new System.Drawing.Size(532, 21);
-            this.cmbFabricante.TabIndex = 9;
+            this.cmbFabricante.Size = new System.Drawing.Size(415, 21);
+            this.cmbFabricante.TabIndex = 6;
             this.cmbFabricante.TextChanged += new System.EventHandler(this.cmbFabricante_TextChanged);
-            this.cmbFabricante.VisibleChanged += new System.EventHandler(this.cmbFabricante_VisibleChanged);
             this.cmbFabricante.Enter += new System.EventHandler(this.cmbFabricante_Enter);
             this.cmbFabricante.Leave += new System.EventHandler(this.cmbFabricante_Leave);
             // 
@@ -415,61 +470,20 @@
             this.label16.TabIndex = 174;
             this.label16.Text = "Código Produto:";
             // 
-            // txtCategoriaID
-            // 
-            this.txtCategoriaID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtCategoriaID.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtCategoriaID.Location = new System.Drawing.Point(337, 164);
-            this.txtCategoriaID.Name = "txtCategoriaID";
-            this.txtCategoriaID.ReadOnly = true;
-            this.txtCategoriaID.Size = new System.Drawing.Size(100, 20);
-            this.txtCategoriaID.TabIndex = 177;
-            this.txtCategoriaID.TabStop = false;
-            this.txtCategoriaID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(334, 147);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(88, 13);
-            this.label17.TabIndex = 176;
-            this.label17.Text = "Código Categoria";
-            // 
-            // txtFabricanteID
-            // 
-            this.txtFabricanteID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtFabricanteID.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtFabricanteID.Location = new System.Drawing.Point(22, 260);
-            this.txtFabricanteID.Name = "txtFabricanteID";
-            this.txtFabricanteID.ReadOnly = true;
-            this.txtFabricanteID.Size = new System.Drawing.Size(100, 20);
-            this.txtFabricanteID.TabIndex = 179;
-            this.txtFabricanteID.TabStop = false;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(19, 243);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(96, 13);
-            this.label18.TabIndex = 178;
-            this.label18.Text = "Código Fabricante:";
-            // 
             // cmbStatus
             // 
             this.cmbStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbStatus.FormattingEnabled = true;
             this.cmbStatus.Items.AddRange(new object[] {
-            "DISPONÍVEL",
-            "INDISPONÍVEL",
-            "EM PRODUÇÃO",
-            "DESCONTINUADO",
-            "EM ESPERA"});
+            "Descontinuado",
+            "Disponível",
+            "Em Espera",
+            "Em Produção",
+            "Indisponível"});
             this.cmbStatus.Location = new System.Drawing.Point(21, 164);
             this.cmbStatus.Name = "cmbStatus";
             this.cmbStatus.Size = new System.Drawing.Size(206, 21);
-            this.cmbStatus.TabIndex = 2;
+            this.cmbStatus.TabIndex = 102;
             // 
             // txtFornecedorID
             // 
@@ -503,7 +517,7 @@
             this.btnLocalizarCliente.Location = new System.Drawing.Point(547, 305);
             this.btnLocalizarCliente.Name = "btnLocalizarCliente";
             this.btnLocalizarCliente.Size = new System.Drawing.Size(110, 22);
-            this.btnLocalizarCliente.TabIndex = 11;
+            this.btnLocalizarCliente.TabIndex = 7;
             this.btnLocalizarCliente.Text = "&Localizar";
             this.btnLocalizarCliente.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnLocalizarCliente.UseVisualStyleBackColor = false;
@@ -519,9 +533,8 @@
             this.btnLocalizarImagem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnLocalizarImagem.Location = new System.Drawing.Point(562, 214);
             this.btnLocalizarImagem.Name = "btnLocalizarImagem";
-            this.btnLocalizarImagem.Size = new System.Drawing.Size(98, 22);
-            this.btnLocalizarImagem.TabIndex = 184;
-            this.btnLocalizarImagem.TabStop = false;
+            this.btnLocalizarImagem.Size = new System.Drawing.Size(95, 22);
+            this.btnLocalizarImagem.TabIndex = 5;
             this.btnLocalizarImagem.Text = "&Localizar...";
             this.btnLocalizarImagem.UseVisualStyleBackColor = false;
             this.btnLocalizarImagem.Click += new System.EventHandler(this.btnLocalizarImagem_Click);
@@ -560,10 +573,30 @@
             this.cmbUnidadeDeMedida.Size = new System.Drawing.Size(100, 21);
             this.cmbUnidadeDeMedida.TabIndex = 186;
             // 
+            // txtReferência
+            // 
+            this.txtReferência.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtReferência.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtReferência.Location = new System.Drawing.Point(441, 258);
+            this.txtReferência.Name = "txtReferência";
+            this.txtReferência.Size = new System.Drawing.Size(216, 20);
+            this.txtReferência.TabIndex = 187;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(438, 242);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(113, 13);
+            this.label17.TabIndex = 188;
+            this.label17.Text = "Referência/CódBarras";
+            // 
             // FrmCadProdutos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(842, 428);
+            this.Controls.Add(this.txtReferência);
+            this.Controls.Add(this.label17);
             this.Controls.Add(this.cmbUnidadeDeMedida);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnLocalizarImagem);
@@ -571,10 +604,6 @@
             this.Controls.Add(this.txtFornecedorID);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.cmbStatus);
-            this.Controls.Add(this.txtFabricanteID);
-            this.Controls.Add(this.label18);
-            this.Controls.Add(this.txtCategoriaID);
-            this.Controls.Add(this.label17);
             this.Controls.Add(this.cmbFabricante);
             this.Controls.Add(this.cmbCategoria);
             this.Controls.Add(this.dtpDataDeVencimento);
@@ -638,8 +667,6 @@
         private System.Windows.Forms.PictureBox pbImagem;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Button btnLocalizarCliente;
         private System.Windows.Forms.Button btnLocalizarImagem;
@@ -653,13 +680,13 @@
         public System.Windows.Forms.TextBox txtPrecoDeVenda;
         public System.Windows.Forms.TextBox txtLucro;
         public System.Windows.Forms.ComboBox cmbFabricante;
-        public System.Windows.Forms.TextBox txtCategoriaID;
-        public System.Windows.Forms.TextBox txtFabricanteID;
         public System.Windows.Forms.DateTimePicker dtpDataDeEntrada;
         public System.Windows.Forms.DateTimePicker dtpDataDeVencimento;
         public System.Windows.Forms.ComboBox cmbCategoria;
         public System.Windows.Forms.TextBox txtProdutoID;
         public System.Windows.Forms.ComboBox cmbStatus;
         public System.Windows.Forms.ComboBox cmbUnidadeDeMedida;
+        public System.Windows.Forms.TextBox txtReferência;
+        private System.Windows.Forms.Label label17;
     }
 }

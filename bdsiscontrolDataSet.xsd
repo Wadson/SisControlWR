@@ -4,12 +4,12 @@
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
       <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
         <Connections>
-          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="bdsiscontrolConnectionString1" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="bdsiscontrolConnectionString1 (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.SisControl.Properties.Settings.GlobalReference.Default.bdsiscontrolConnectionString1" Provider="Microsoft.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="bdsiscontrolConnectionString2" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="bdsiscontrolConnectionString2 (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.SisControl.Properties.Settings.GlobalReference.Default.bdsiscontrolConnectionString2" Provider="Microsoft.Data.SqlClient" />
         </Connections>
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="CategoriaTableAdapter" GeneratorDataComponentClassName="CategoriaTableAdapter" Name="Categoria" UserDataComponentName="CategoriaTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="bdsiscontrolConnectionString1 (Settings)" DbObjectName="dbo.Categoria" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="bdsiscontrolConnectionString2 (Settings)" DbObjectName="bdsiscontrol.dbo.Categoria" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [dbo].[Categoria] WHERE (([CategoriaID] = @Original_CategoriaID) AND ((@IsNull_NomeCategoria = 1 AND [NomeCategoria] IS NULL) OR ([NomeCategoria] = @Original_NomeCategoria)))</CommandText>
@@ -59,7 +59,7 @@ SELECT CategoriaID, NomeCategoria FROM Categoria WHERE (CategoriaID = @Categoria
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="CidadeTableAdapter" GeneratorDataComponentClassName="CidadeTableAdapter" Name="Cidade" UserDataComponentName="CidadeTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="bdsiscontrolConnectionString1 (Settings)" DbObjectName="dbo.Cidade" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="bdsiscontrolConnectionString2 (Settings)" DbObjectName="bdsiscontrol.dbo.Cidade" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [dbo].[Cidade] WHERE (([CidadeID] = @Original_CidadeID) AND ((@IsNull_NomeCidade = 1 AND [NomeCidade] IS NULL) OR ([NomeCidade] = @Original_NomeCidade)) AND ((@IsNull_EstadoID = 1 AND [EstadoID] IS NULL) OR ([EstadoID] = @Original_EstadoID)) AND ((@IsNull_ibge = 1 AND [ibge] IS NULL) OR ([ibge] = @Original_ibge)))</CommandText>
@@ -123,7 +123,7 @@ SELECT CidadeID, NomeCidade, EstadoID, ibge FROM Cidade WHERE (CidadeID = @Cidad
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ClienteTableAdapter" GeneratorDataComponentClassName="ClienteTableAdapter" Name="Cliente" UserDataComponentName="ClienteTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="bdsiscontrolConnectionString1 (Settings)" DbObjectName="dbo.Cliente" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="bdsiscontrolConnectionString2 (Settings)" DbObjectName="bdsiscontrol.dbo.Cliente" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [dbo].[Cliente] WHERE (([ClienteID] = @Original_ClienteID) AND ([NomeCliente] = @Original_NomeCliente) AND ((@IsNull_Cpf = 1 AND [Cpf] IS NULL) OR ([Cpf] = @Original_Cpf)) AND ((@IsNull_Email = 1 AND [Email] IS NULL) OR ([Email] = @Original_Email)) AND ((@IsNull_Endereco = 1 AND [Endereco] IS NULL) OR ([Endereco] = @Original_Endereco)) AND ((@IsNull_Telefone = 1 AND [Telefone] IS NULL) OR ([Telefone] = @Original_Telefone)) AND ((@IsNull_CidadeID = 1 AND [CidadeID] IS NULL) OR ([CidadeID] = @Original_CidadeID)))</CommandText>
@@ -206,16 +206,16 @@ SELECT ClienteID, NomeCliente, Cpf, Email, Endereco, Telefone, CidadeID FROM Cli
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ContaReceberTableAdapter" GeneratorDataComponentClassName="ContaReceberTableAdapter" Name="ContaReceber" UserDataComponentName="ContaReceberTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="bdsiscontrolConnectionString1 (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="bdsiscontrolConnectionString2 (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        Venda.ClienteID, Cliente.NomeCliente, ContaReceber.VendaID, ContaReceber.ParcelaID, ContaReceber.DataRecebimento, ContaReceber.ValorRecebido, ContaReceber.SaldoRestante, ContaReceber.Pago, 
-                         ContaReceber.ContaReceberID, Venda.DataVenda, Venda.ValorTotal, Parcela.NumeroParcela, Parcela.DataVencimento, Parcela.ValorParcela, Parcela.Pago, Parcela.ParcelaID
-FROM            ContaReceber INNER JOIN
-                         Parcela ON ContaReceber.ParcelaID = Parcela.ParcelaID INNER JOIN
-                         Venda ON ContaReceber.VendaID = Venda.VendaID AND Parcela.VendaID = Venda.VendaID INNER JOIN
-                         Cliente ON Venda.ClienteID = Cliente.ClienteID INNER JOIN
-                         Recebimentos ON ContaReceber.ContaReceberID = Recebimentos.ContaReceberID AND Parcela.ParcelaID = Recebimentos.ParcelaID AND Venda.VendaID = Recebimentos.VendaID</CommandText>
+                    <CommandText>SELECT        V.ClienteID, C.NomeCliente, CR.VendaID, CR.ParcelaID, CR.DataRecebimento, CR.ValorRecebido, CR.SaldoRestante, CR.Pago, CR.ContaReceberID, V.DataVenda, V.ValorTotal, P.NumeroParcela, P.DataVencimento, 
+                         P.ValorParcela, P.Pago AS Expr1, P.ParcelaID AS Expr2
+FROM            ContaReceber AS CR INNER JOIN
+                         Parcela AS P ON CR.ParcelaID = P.ParcelaID INNER JOIN
+                         Venda AS V ON CR.VendaID = V.VendaID AND P.VendaID = V.VendaID INNER JOIN
+                         Cliente AS C ON V.ClienteID = C.ClienteID INNER JOIN
+                         Recebimentos AS R ON CR.ContaReceberID = R.ContaReceberID AND P.ParcelaID = R.ParcelaID AND V.VendaID = R.VendaID</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -236,14 +236,14 @@ FROM            ContaReceber INNER JOIN
               <Mapping SourceColumn="NumeroParcela" DataSetColumn="NumeroParcela" />
               <Mapping SourceColumn="DataVencimento" DataSetColumn="DataVencimento" />
               <Mapping SourceColumn="ValorParcela" DataSetColumn="ValorParcela" />
-              <Mapping SourceColumn="Pago1" DataSetColumn="Pago1" />
-              <Mapping SourceColumn="ParcelaID1" DataSetColumn="ParcelaID1" />
+              <Mapping SourceColumn="Expr1" DataSetColumn="Expr1" />
+              <Mapping SourceColumn="Expr2" DataSetColumn="Expr2" />
             </Mappings>
             <Sources />
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ContasAPagarTableAdapter" GeneratorDataComponentClassName="ContasAPagarTableAdapter" Name="ContasAPagar" UserDataComponentName="ContasAPagarTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="bdsiscontrolConnectionString1 (Settings)" DbObjectName="dbo.ContasAPagar" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="bdsiscontrolConnectionString2 (Settings)" DbObjectName="bdsiscontrol.dbo.ContasAPagar" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [dbo].[ContasAPagar] WHERE (([ContaPagarID] = @Original_ContaPagarID) AND ((@IsNull_FornecedorID = 1 AND [FornecedorID] IS NULL) OR ([FornecedorID] = @Original_FornecedorID)) AND ((@IsNull_DataVencimento = 1 AND [DataVencimento] IS NULL) OR ([DataVencimento] = @Original_DataVencimento)) AND ((@IsNull_ValorTotal = 1 AND [ValorTotal] IS NULL) OR ([ValorTotal] = @Original_ValorTotal)) AND ((@IsNull_Pago = 1 AND [Pago] IS NULL) OR ([Pago] = @Original_Pago)))</CommandText>
@@ -314,7 +314,7 @@ SELECT ContaPagarID, FornecedorID, DataVencimento, ValorTotal, Pago FROM ContasA
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="EstadoTableAdapter" GeneratorDataComponentClassName="EstadoTableAdapter" Name="Estado" UserDataComponentName="EstadoTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="bdsiscontrolConnectionString1 (Settings)" DbObjectName="dbo.Estado" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="bdsiscontrolConnectionString2 (Settings)" DbObjectName="bdsiscontrol.dbo.Estado" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [dbo].[Estado] WHERE (([EstadoID] = @Original_EstadoID) AND ((@IsNull_NomeEstado = 1 AND [NomeEstado] IS NULL) OR ([NomeEstado] = @Original_NomeEstado)) AND ((@IsNull_Uf = 1 AND [Uf] IS NULL) OR ([Uf] = @Original_Uf)) AND ((@IsNull_Ibge = 1 AND [Ibge] IS NULL) OR ([Ibge] = @Original_Ibge)) AND ((@IsNull_Pais = 1 AND [Pais] IS NULL) OR ([Pais] = @Original_Pais)) AND ((@IsNull_ddd = 1 AND [ddd] IS NULL) OR ([ddd] = @Original_ddd)))</CommandText>
@@ -390,9 +390,67 @@ SELECT EstadoID, NomeEstado, Uf, Ibge, Pais, ddd FROM Estado WHERE (EstadoID = @
             </Mappings>
             <Sources />
           </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="FabricantesTableAdapter" GeneratorDataComponentClassName="FabricantesTableAdapter" Name="Fabricantes" UserDataComponentName="FabricantesTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="bdsiscontrolConnectionString2 (Settings)" DbObjectName="bdsiscontrol.dbo.Fabricantes" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM [dbo].[Fabricantes] WHERE (([FabricanteID] = @Original_FabricanteID) AND ([NomeFabricante] = @Original_NomeFabricante) AND ([Endereco] = @Original_Endereco) AND ([Telefone] = @Original_Telefone))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_FabricanteID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="FabricanteID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_NomeFabricante" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="NomeFabricante" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_Endereco" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="Endereco" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_Telefone" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="Telefone" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO [dbo].[Fabricantes] ([FabricanteID], [NomeFabricante], [Endereco], [Telefone]) VALUES (@FabricanteID, @NomeFabricante, @Endereco, @Telefone);
+SELECT FabricanteID, NomeFabricante, Endereco, Telefone FROM Fabricantes WHERE (FabricanteID = @FabricanteID)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@FabricanteID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="FabricanteID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@NomeFabricante" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="NomeFabricante" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Endereco" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="Endereco" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Telefone" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="Telefone" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT FabricanteID, NomeFabricante, Endereco, Telefone FROM dbo.Fabricantes</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE [dbo].[Fabricantes] SET [FabricanteID] = @FabricanteID, [NomeFabricante] = @NomeFabricante, [Endereco] = @Endereco, [Telefone] = @Telefone WHERE (([FabricanteID] = @Original_FabricanteID) AND ([NomeFabricante] = @Original_NomeFabricante) AND ([Endereco] = @Original_Endereco) AND ([Telefone] = @Original_Telefone));
+SELECT FabricanteID, NomeFabricante, Endereco, Telefone FROM Fabricantes WHERE (FabricanteID = @FabricanteID)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@FabricanteID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="FabricanteID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@NomeFabricante" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="NomeFabricante" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Endereco" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="Endereco" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Telefone" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="Telefone" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_FabricanteID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="FabricanteID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_NomeFabricante" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="NomeFabricante" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_Endereco" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="Endereco" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_Telefone" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="Telefone" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="FabricanteID" DataSetColumn="FabricanteID" />
+              <Mapping SourceColumn="NomeFabricante" DataSetColumn="NomeFabricante" />
+              <Mapping SourceColumn="Endereco" DataSetColumn="Endereco" />
+              <Mapping SourceColumn="Telefone" DataSetColumn="Telefone" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="FormaPgtoTableAdapter" GeneratorDataComponentClassName="FormaPgtoTableAdapter" Name="FormaPgto" UserDataComponentName="FormaPgtoTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="bdsiscontrolConnectionString1 (Settings)" DbObjectName="dbo.FormaPgto" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="bdsiscontrolConnectionString2 (Settings)" DbObjectName="bdsiscontrol.dbo.FormaPgto" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [dbo].[FormaPgto] WHERE (([FormaPgtoID] = @Original_FormaPgtoID) AND ((@IsNull_NomeFormaPgto = 1 AND [NomeFormaPgto] IS NULL) OR ([NomeFormaPgto] = @Original_NomeFormaPgto)))</CommandText>
@@ -442,7 +500,7 @@ SELECT FormaPgtoID, NomeFormaPgto FROM FormaPgto WHERE (FormaPgtoID = @FormaPgto
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="FornecedorTableAdapter" GeneratorDataComponentClassName="FornecedorTableAdapter" Name="Fornecedor" UserDataComponentName="FornecedorTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="bdsiscontrolConnectionString1 (Settings)" DbObjectName="dbo.Fornecedor" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="bdsiscontrolConnectionString2 (Settings)" DbObjectName="bdsiscontrol.dbo.Fornecedor" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [dbo].[Fornecedor] WHERE (([FornecedorID] = @Original_FornecedorID) AND ([NomeFornecedor] = @Original_NomeFornecedor) AND ((@IsNull_Cnpj = 1 AND [Cnpj] IS NULL) OR ([Cnpj] = @Original_Cnpj)) AND ((@IsNull_Endereco = 1 AND [Endereco] IS NULL) OR ([Endereco] = @Original_Endereco)) AND ((@IsNull_Telefone = 1 AND [Telefone] IS NULL) OR ([Telefone] = @Original_Telefone)) AND ((@IsNull_Email = 1 AND [Email] IS NULL) OR ([Email] = @Original_Email)) AND ([CidadeID] = @Original_CidadeID))</CommandText>
@@ -523,7 +581,7 @@ SELECT FornecedorID, NomeFornecedor, Cnpj, Endereco, Telefone, Email, CidadeID F
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ItemVendaTableAdapter" GeneratorDataComponentClassName="ItemVendaTableAdapter" Name="ItemVenda" UserDataComponentName="ItemVendaTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="bdsiscontrolConnectionString1 (Settings)" DbObjectName="dbo.ItemVenda" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="bdsiscontrolConnectionString2 (Settings)" DbObjectName="bdsiscontrol.dbo.ItemVenda" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [dbo].[ItemVenda] WHERE (((@IsNull_VendaID = 1 AND [VendaID] IS NULL) OR ([VendaID] = @Original_VendaID)) AND ([ProdutoID] = @Original_ProdutoID) AND ([Quantidade] = @Original_Quantidade) AND ([PrecoUnitario] = @Original_PrecoUnitario) AND ((@IsNull_Subtotal = 1 AND [Subtotal] IS NULL) OR ([Subtotal] = @Original_Subtotal)) AND ([ItemVendaID] = @Original_ItemVendaID))</CommandText>
@@ -593,7 +651,7 @@ SELECT VendaID, ProdutoID, Quantidade, PrecoUnitario, Subtotal, ItemVendaID FROM
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="PagamentoTableAdapter" GeneratorDataComponentClassName="PagamentoTableAdapter" Name="Pagamento" UserDataComponentName="PagamentoTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="bdsiscontrolConnectionString1 (Settings)" DbObjectName="dbo.Pagamento" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="bdsiscontrolConnectionString2 (Settings)" DbObjectName="bdsiscontrol.dbo.Pagamento" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [dbo].[Pagamento] WHERE (([PagamentoID] = @Original_PagamentoID) AND ((@IsNull_ParcelaID = 1 AND [ParcelaID] IS NULL) OR ([ParcelaID] = @Original_ParcelaID)) AND ((@IsNull_DataPagamento = 1 AND [DataPagamento] IS NULL) OR ([DataPagamento] = @Original_DataPagamento)) AND ((@IsNull_ValorPago = 1 AND [ValorPago] IS NULL) OR ([ValorPago] = @Original_ValorPago)) AND ((@IsNull_MetodoPagamento = 1 AND [MetodoPagamento] IS NULL) OR ([MetodoPagamento] = @Original_MetodoPagamento)) AND ((@IsNull_Observacao = 1 AND [Observacao] IS NULL) OR ([Observacao] = @Original_Observacao)))</CommandText>
@@ -671,7 +729,7 @@ SELECT PagamentoID, ParcelaID, DataPagamento, ValorPago, MetodoPagamento, Observ
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ParcelaTableAdapter" GeneratorDataComponentClassName="ParcelaTableAdapter" Name="Parcela" UserDataComponentName="ParcelaTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="bdsiscontrolConnectionString1 (Settings)" DbObjectName="dbo.Parcela" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="bdsiscontrolConnectionString2 (Settings)" DbObjectName="bdsiscontrol.dbo.Parcela" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [dbo].[Parcela] WHERE (([VendaID] = @Original_VendaID) AND ([NumeroParcela] = @Original_NumeroParcela) AND ([DataVencimento] = @Original_DataVencimento) AND ([ValorParcela] = @Original_ValorParcela) AND ([ValorRecebido] = @Original_ValorRecebido) AND ([SaldoRestante] = @Original_SaldoRestante) AND ([Pago] = @Original_Pago) AND ([ParcelaID] = @Original_ParcelaID))</CommandText>
@@ -749,7 +807,7 @@ SELECT VendaID, NumeroParcela, DataVencimento, ValorParcela, ValorRecebido, Sald
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ProdutoTableAdapter" GeneratorDataComponentClassName="ProdutoTableAdapter" Name="Produto" UserDataComponentName="ProdutoTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="bdsiscontrolConnectionString1 (Settings)" DbObjectName="dbo.Produto" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="bdsiscontrolConnectionString2 (Settings)" DbObjectName="bdsiscontrol.dbo.Produto" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [dbo].[Produto] WHERE (([ProdutoID] = @Original_ProdutoID) AND ((@IsNull_NomeProduto = 1 AND [NomeProduto] IS NULL) OR ([NomeProduto] = @Original_NomeProduto)) AND ((@IsNull_PrecoCusto = 1 AND [PrecoCusto] IS NULL) OR ([PrecoCusto] = @Original_PrecoCusto)) AND ((@IsNull_Estoque = 1 AND [Estoque] IS NULL) OR ([Estoque] = @Original_Estoque)) AND ((@IsNull_PrecoVenda = 1 AND [PrecoVenda] IS NULL) OR ([PrecoVenda] = @Original_PrecoVenda)))</CommandText>
@@ -818,9 +876,131 @@ SELECT ProdutoID, NomeProduto, PrecoCusto, Estoque, PrecoVenda FROM Produto WHER
             </Mappings>
             <Sources />
           </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ProdutosTableAdapter" GeneratorDataComponentClassName="ProdutosTableAdapter" Name="Produtos" UserDataComponentName="ProdutosTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="bdsiscontrolConnectionString2 (Settings)" DbObjectName="bdsiscontrol.dbo.Produtos" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM [dbo].[Produtos] WHERE (([ProdutoID] = @Original_ProdutoID) AND ([NomeProduto] = @Original_NomeProduto) AND ([Descricao] = @Original_Descricao) AND ([PrecoCusto] = @Original_PrecoCusto) AND ([Lucro] = @Original_Lucro) AND ([PrecoDeVenda] = @Original_PrecoDeVenda) AND ([QuantidadeEmEstoque] = @Original_QuantidadeEmEstoque) AND ([DataDeEntrada] = @Original_DataDeEntrada) AND ((@IsNull_CategoriaID = 1 AND [CategoriaID] IS NULL) OR ([CategoriaID] = @Original_CategoriaID)) AND ((@IsNull_FabricanteID = 1 AND [FabricanteID] IS NULL) OR ([FabricanteID] = @Original_FabricanteID)) AND ((@IsNull_UnidadeDeMedida = 1 AND [UnidadeDeMedida] IS NULL) OR ([UnidadeDeMedida] = @Original_UnidadeDeMedida)) AND ((@IsNull_Status = 1 AND [Status] IS NULL) OR ([Status] = @Original_Status)) AND ((@IsNull_DataDeVencimento = 1 AND [DataDeVencimento] IS NULL) OR ([DataDeVencimento] = @Original_DataDeVencimento)) AND ((@IsNull_FornecedorID = 1 AND [FornecedorID] IS NULL) OR ([FornecedorID] = @Original_FornecedorID)))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_ProdutoID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ProdutoID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Original_NomeProduto" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="NomeProduto" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Original_Descricao" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Descricao" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_PrecoCusto" Precision="10" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="PrecoCusto" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_Lucro" Precision="10" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="Lucro" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_PrecoDeVenda" Precision="10" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="PrecoDeVenda" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_QuantidadeEmEstoque" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="QuantidadeEmEstoque" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@Original_DataDeEntrada" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="DataDeEntrada" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_CategoriaID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="CategoriaID" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_CategoriaID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="CategoriaID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_FabricanteID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="FabricanteID" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_FabricanteID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="FabricanteID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_UnidadeDeMedida" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="UnidadeDeMedida" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Original_UnidadeDeMedida" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="UnidadeDeMedida" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_Status" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="Status" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Original_Status" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Status" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_DataDeVencimento" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="DataDeVencimento" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@Original_DataDeVencimento" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="DataDeVencimento" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_FornecedorID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="FornecedorID" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_FornecedorID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="FornecedorID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO [dbo].[Produtos] ([NomeProduto], [Descricao], [PrecoCusto], [Lucro], [PrecoDeVenda], [QuantidadeEmEstoque], [DataDeEntrada], [CategoriaID], [FabricanteID], [UnidadeDeMedida], [Status], [DataDeVencimento], [Imagem], [FornecedorID]) VALUES (@NomeProduto, @Descricao, @PrecoCusto, @Lucro, @PrecoDeVenda, @QuantidadeEmEstoque, @DataDeEntrada, @CategoriaID, @FabricanteID, @UnidadeDeMedida, @Status, @DataDeVencimento, @Imagem, @FornecedorID);
+SELECT ProdutoID, NomeProduto, Descricao, PrecoCusto, Lucro, PrecoDeVenda, QuantidadeEmEstoque, DataDeEntrada, CategoriaID, FabricanteID, UnidadeDeMedida, Status, DataDeVencimento, Imagem, FornecedorID FROM Produtos WHERE (ProdutoID = SCOPE_IDENTITY())</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@NomeProduto" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="NomeProduto" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Descricao" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Descricao" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@PrecoCusto" Precision="10" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="PrecoCusto" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Lucro" Precision="10" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="Lucro" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@PrecoDeVenda" Precision="10" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="PrecoDeVenda" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@QuantidadeEmEstoque" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="QuantidadeEmEstoque" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@DataDeEntrada" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="DataDeEntrada" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@CategoriaID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="CategoriaID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@FabricanteID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="FabricanteID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@UnidadeDeMedida" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="UnidadeDeMedida" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Status" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Status" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@DataDeVencimento" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="DataDeVencimento" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Binary" Direction="Input" ParameterName="@Imagem" Precision="0" ProviderType="VarBinary" Scale="0" Size="0" SourceColumn="Imagem" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@FornecedorID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="FornecedorID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT ProdutoID, NomeProduto, Descricao, PrecoCusto, Lucro, PrecoDeVenda, QuantidadeEmEstoque, DataDeEntrada, CategoriaID, FabricanteID, UnidadeDeMedida, Status, DataDeVencimento, Imagem, FornecedorID FROM dbo.Produtos</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE [dbo].[Produtos] SET [NomeProduto] = @NomeProduto, [Descricao] = @Descricao, [PrecoCusto] = @PrecoCusto, [Lucro] = @Lucro, [PrecoDeVenda] = @PrecoDeVenda, [QuantidadeEmEstoque] = @QuantidadeEmEstoque, [DataDeEntrada] = @DataDeEntrada, [CategoriaID] = @CategoriaID, [FabricanteID] = @FabricanteID, [UnidadeDeMedida] = @UnidadeDeMedida, [Status] = @Status, [DataDeVencimento] = @DataDeVencimento, [Imagem] = @Imagem, [FornecedorID] = @FornecedorID WHERE (([ProdutoID] = @Original_ProdutoID) AND ([NomeProduto] = @Original_NomeProduto) AND ([Descricao] = @Original_Descricao) AND ([PrecoCusto] = @Original_PrecoCusto) AND ([Lucro] = @Original_Lucro) AND ([PrecoDeVenda] = @Original_PrecoDeVenda) AND ([QuantidadeEmEstoque] = @Original_QuantidadeEmEstoque) AND ([DataDeEntrada] = @Original_DataDeEntrada) AND ((@IsNull_CategoriaID = 1 AND [CategoriaID] IS NULL) OR ([CategoriaID] = @Original_CategoriaID)) AND ((@IsNull_FabricanteID = 1 AND [FabricanteID] IS NULL) OR ([FabricanteID] = @Original_FabricanteID)) AND ((@IsNull_UnidadeDeMedida = 1 AND [UnidadeDeMedida] IS NULL) OR ([UnidadeDeMedida] = @Original_UnidadeDeMedida)) AND ((@IsNull_Status = 1 AND [Status] IS NULL) OR ([Status] = @Original_Status)) AND ((@IsNull_DataDeVencimento = 1 AND [DataDeVencimento] IS NULL) OR ([DataDeVencimento] = @Original_DataDeVencimento)) AND ((@IsNull_FornecedorID = 1 AND [FornecedorID] IS NULL) OR ([FornecedorID] = @Original_FornecedorID)));
+SELECT ProdutoID, NomeProduto, Descricao, PrecoCusto, Lucro, PrecoDeVenda, QuantidadeEmEstoque, DataDeEntrada, CategoriaID, FabricanteID, UnidadeDeMedida, Status, DataDeVencimento, Imagem, FornecedorID FROM Produtos WHERE (ProdutoID = @ProdutoID)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@NomeProduto" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="NomeProduto" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Descricao" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Descricao" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@PrecoCusto" Precision="10" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="PrecoCusto" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Lucro" Precision="10" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="Lucro" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@PrecoDeVenda" Precision="10" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="PrecoDeVenda" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@QuantidadeEmEstoque" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="QuantidadeEmEstoque" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@DataDeEntrada" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="DataDeEntrada" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@CategoriaID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="CategoriaID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@FabricanteID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="FabricanteID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@UnidadeDeMedida" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="UnidadeDeMedida" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Status" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Status" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@DataDeVencimento" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="DataDeVencimento" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Binary" Direction="Input" ParameterName="@Imagem" Precision="0" ProviderType="VarBinary" Scale="0" Size="0" SourceColumn="Imagem" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@FornecedorID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="FornecedorID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_ProdutoID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ProdutoID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Original_NomeProduto" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="NomeProduto" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Original_Descricao" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Descricao" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_PrecoCusto" Precision="10" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="PrecoCusto" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_Lucro" Precision="10" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="Lucro" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_PrecoDeVenda" Precision="10" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="PrecoDeVenda" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_QuantidadeEmEstoque" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="QuantidadeEmEstoque" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@Original_DataDeEntrada" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="DataDeEntrada" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_CategoriaID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="CategoriaID" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_CategoriaID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="CategoriaID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_FabricanteID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="FabricanteID" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_FabricanteID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="FabricanteID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_UnidadeDeMedida" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="UnidadeDeMedida" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Original_UnidadeDeMedida" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="UnidadeDeMedida" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_Status" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="Status" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Original_Status" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Status" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_DataDeVencimento" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="DataDeVencimento" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@Original_DataDeVencimento" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="DataDeVencimento" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_FornecedorID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="FornecedorID" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_FornecedorID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="FornecedorID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="ProdutoID" ColumnName="ProdutoID" DataSourceName="bdsiscontrol.dbo.Produtos" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@ProdutoID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="ProdutoID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="ProdutoID" DataSetColumn="ProdutoID" />
+              <Mapping SourceColumn="NomeProduto" DataSetColumn="NomeProduto" />
+              <Mapping SourceColumn="Descricao" DataSetColumn="Descricao" />
+              <Mapping SourceColumn="PrecoCusto" DataSetColumn="PrecoCusto" />
+              <Mapping SourceColumn="Lucro" DataSetColumn="Lucro" />
+              <Mapping SourceColumn="PrecoDeVenda" DataSetColumn="PrecoDeVenda" />
+              <Mapping SourceColumn="QuantidadeEmEstoque" DataSetColumn="QuantidadeEmEstoque" />
+              <Mapping SourceColumn="DataDeEntrada" DataSetColumn="DataDeEntrada" />
+              <Mapping SourceColumn="CategoriaID" DataSetColumn="CategoriaID" />
+              <Mapping SourceColumn="FabricanteID" DataSetColumn="FabricanteID" />
+              <Mapping SourceColumn="UnidadeDeMedida" DataSetColumn="UnidadeDeMedida" />
+              <Mapping SourceColumn="Status" DataSetColumn="Status" />
+              <Mapping SourceColumn="DataDeVencimento" DataSetColumn="DataDeVencimento" />
+              <Mapping SourceColumn="Imagem" DataSetColumn="Imagem" />
+              <Mapping SourceColumn="FornecedorID" DataSetColumn="FornecedorID" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="RecebimentosTableAdapter" GeneratorDataComponentClassName="RecebimentosTableAdapter" Name="Recebimentos" UserDataComponentName="RecebimentosTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="bdsiscontrolConnectionString1 (Settings)" DbObjectName="dbo.Recebimentos" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="bdsiscontrolConnectionString2 (Settings)" DbObjectName="bdsiscontrol.dbo.Recebimentos" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [dbo].[Recebimentos] WHERE (([RecebimentoID] = @Original_RecebimentoID) AND ([VendaID] = @Original_VendaID) AND ((@IsNull_DataRecebimento = 1 AND [DataRecebimento] IS NULL) OR ([DataRecebimento] = @Original_DataRecebimento)) AND ((@IsNull_ValorRecebido = 1 AND [ValorRecebido] IS NULL) OR ([ValorRecebido] = @Original_ValorRecebido)) AND ((@IsNull_ParcelaID = 1 AND [ParcelaID] IS NULL) OR ([ParcelaID] = @Original_ParcelaID)) AND ([ContaReceberID] = @Original_ContaReceberID) AND ((@IsNull_DataRegistro = 1 AND [DataRegistro] IS NULL) OR ([DataRegistro] = @Original_DataRegistro)))</CommandText>
@@ -901,7 +1081,7 @@ SELECT RecebimentoID, VendaID, DataRecebimento, ValorRecebido, ParcelaID, ContaR
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="SubCategoriaTableAdapter" GeneratorDataComponentClassName="SubCategoriaTableAdapter" Name="SubCategoria" UserDataComponentName="SubCategoriaTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="bdsiscontrolConnectionString1 (Settings)" DbObjectName="dbo.SubCategoria" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="bdsiscontrolConnectionString2 (Settings)" DbObjectName="bdsiscontrol.dbo.SubCategoria" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [dbo].[SubCategoria] WHERE (([SubCategoriaID] = @Original_SubCategoriaID) AND ([NomeSubCategoria] = @Original_NomeSubCategoria) AND ([CategoriaID] = @Original_CategoriaID))</CommandText>
@@ -954,7 +1134,7 @@ SELECT SubCategoriaID, NomeSubCategoria, CategoriaID FROM SubCategoria WHERE (Su
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="UsuarioTableAdapter" GeneratorDataComponentClassName="UsuarioTableAdapter" Name="Usuario" UserDataComponentName="UsuarioTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="bdsiscontrolConnectionString1 (Settings)" DbObjectName="dbo.Usuario" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="bdsiscontrolConnectionString2 (Settings)" DbObjectName="bdsiscontrol.dbo.Usuario" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [dbo].[Usuario] WHERE (([UsuarioID] = @Original_UsuarioID) AND ([NomeUsuario] = @Original_NomeUsuario) AND ([Email] = @Original_Email) AND ([Senha] = @Original_Senha) AND ([TipoUsuario] = @Original_TipoUsuario))</CommandText>
@@ -1017,7 +1197,7 @@ SELECT UsuarioID, NomeUsuario, Email, Senha, TipoUsuario FROM Usuario WHERE (Usu
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="VendaTableAdapter" GeneratorDataComponentClassName="VendaTableAdapter" Name="Venda" UserDataComponentName="VendaTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="bdsiscontrolConnectionString1 (Settings)" DbObjectName="dbo.Venda" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="bdsiscontrolConnectionString2 (Settings)" DbObjectName="bdsiscontrol.dbo.Venda" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [dbo].[Venda] WHERE (([ClienteID] = @Original_ClienteID) AND ([DataVenda] = @Original_DataVenda) AND ([ValorTotal] = @Original_ValorTotal) AND ([VendaID] = @Original_VendaID))</CommandText>
@@ -1177,8 +1357,8 @@ SELECT ClienteID, DataVenda, ValorTotal, VendaID FROM Venda WHERE (VendaID = @Ve
               <xs:element name="NumeroParcela" msprop:Generator_ColumnPropNameInRow="NumeroParcela" msprop:Generator_ColumnPropNameInTable="NumeroParcelaColumn" msprop:Generator_ColumnVarNameInTable="columnNumeroParcela" msprop:Generator_UserColumnName="NumeroParcela" type="xs:int" />
               <xs:element name="DataVencimento" msprop:Generator_ColumnPropNameInRow="DataVencimento" msprop:Generator_ColumnPropNameInTable="DataVencimentoColumn" msprop:Generator_ColumnVarNameInTable="columnDataVencimento" msprop:Generator_UserColumnName="DataVencimento" type="xs:dateTime" />
               <xs:element name="ValorParcela" msprop:Generator_ColumnPropNameInRow="ValorParcela" msprop:Generator_ColumnPropNameInTable="ValorParcelaColumn" msprop:Generator_ColumnVarNameInTable="columnValorParcela" msprop:Generator_UserColumnName="ValorParcela" type="xs:decimal" />
-              <xs:element name="Pago1" msprop:Generator_ColumnPropNameInRow="Pago1" msprop:Generator_ColumnPropNameInTable="Pago1Column" msprop:Generator_ColumnVarNameInTable="columnPago1" msprop:Generator_UserColumnName="Pago1" type="xs:boolean" />
-              <xs:element name="ParcelaID1" msdata:DataType="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msprop:Generator_ColumnPropNameInRow="ParcelaID1" msprop:Generator_ColumnPropNameInTable="ParcelaID1Column" msprop:Generator_ColumnVarNameInTable="columnParcelaID1" msprop:Generator_UserColumnName="ParcelaID1" type="xs:string" />
+              <xs:element name="Expr1" msprop:Generator_ColumnPropNameInRow="Expr1" msprop:Generator_ColumnPropNameInTable="Expr1Column" msprop:Generator_ColumnVarNameInTable="columnExpr1" msprop:Generator_UserColumnName="Expr1" type="xs:boolean" />
+              <xs:element name="Expr2" msdata:DataType="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msprop:Generator_ColumnPropNameInRow="Expr2" msprop:Generator_ColumnPropNameInTable="Expr2Column" msprop:Generator_ColumnVarNameInTable="columnExpr2" msprop:Generator_UserColumnName="Expr2" type="xs:string" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -1217,6 +1397,34 @@ SELECT ClienteID, DataVenda, ValorTotal, VendaID FROM Venda WHERE (VendaID = @Ve
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Fabricantes" msprop:Generator_RowClassName="FabricantesRow" msprop:Generator_RowEvHandlerName="FabricantesRowChangeEventHandler" msprop:Generator_RowDeletedName="FabricantesRowDeleted" msprop:Generator_RowDeletingName="FabricantesRowDeleting" msprop:Generator_RowEvArgName="FabricantesRowChangeEvent" msprop:Generator_TablePropName="Fabricantes" msprop:Generator_RowChangedName="FabricantesRowChanged" msprop:Generator_UserTableName="Fabricantes" msprop:Generator_RowChangingName="FabricantesRowChanging" msprop:Generator_TableClassName="FabricantesDataTable" msprop:Generator_TableVarName="tableFabricantes">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="FabricanteID" msprop:Generator_UserColumnName="FabricanteID" msprop:Generator_ColumnPropNameInTable="FabricanteIDColumn" msprop:Generator_ColumnPropNameInRow="FabricanteID" msprop:Generator_ColumnVarNameInTable="columnFabricanteID" type="xs:int" />
+              <xs:element name="NomeFabricante" msprop:Generator_UserColumnName="NomeFabricante" msprop:Generator_ColumnPropNameInTable="NomeFabricanteColumn" msprop:Generator_ColumnPropNameInRow="NomeFabricante" msprop:Generator_ColumnVarNameInTable="columnNomeFabricante">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Endereco" msprop:Generator_UserColumnName="Endereco" msprop:Generator_ColumnPropNameInTable="EnderecoColumn" msprop:Generator_ColumnPropNameInRow="Endereco" msprop:Generator_ColumnVarNameInTable="columnEndereco">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Telefone" msprop:Generator_UserColumnName="Telefone" msprop:Generator_ColumnPropNameInTable="TelefoneColumn" msprop:Generator_ColumnPropNameInRow="Telefone" msprop:Generator_ColumnVarNameInTable="columnTelefone">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
@@ -1347,6 +1555,51 @@ SELECT ClienteID, DataVenda, ValorTotal, VendaID FROM Venda WHERE (VendaID = @Ve
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="Produtos" msprop:Generator_RowClassName="ProdutosRow" msprop:Generator_RowEvHandlerName="ProdutosRowChangeEventHandler" msprop:Generator_RowDeletedName="ProdutosRowDeleted" msprop:Generator_RowDeletingName="ProdutosRowDeleting" msprop:Generator_RowEvArgName="ProdutosRowChangeEvent" msprop:Generator_TablePropName="Produtos" msprop:Generator_RowChangedName="ProdutosRowChanged" msprop:Generator_UserTableName="Produtos" msprop:Generator_RowChangingName="ProdutosRowChanging" msprop:Generator_TableClassName="ProdutosDataTable" msprop:Generator_TableVarName="tableProdutos">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ProdutoID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="ProdutoID" msprop:Generator_ColumnPropNameInTable="ProdutoIDColumn" msprop:Generator_ColumnPropNameInRow="ProdutoID" msprop:Generator_ColumnVarNameInTable="columnProdutoID" type="xs:int" />
+              <xs:element name="NomeProduto" msprop:Generator_UserColumnName="NomeProduto" msprop:Generator_ColumnPropNameInTable="NomeProdutoColumn" msprop:Generator_ColumnPropNameInRow="NomeProduto" msprop:Generator_ColumnVarNameInTable="columnNomeProduto">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Descricao" msprop:Generator_UserColumnName="Descricao" msprop:Generator_ColumnPropNameInTable="DescricaoColumn" msprop:Generator_ColumnPropNameInRow="Descricao" msprop:Generator_ColumnVarNameInTable="columnDescricao">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PrecoCusto" msprop:Generator_UserColumnName="PrecoCusto" msprop:Generator_ColumnPropNameInTable="PrecoCustoColumn" msprop:Generator_ColumnPropNameInRow="PrecoCusto" msprop:Generator_ColumnVarNameInTable="columnPrecoCusto" type="xs:decimal" />
+              <xs:element name="Lucro" msprop:Generator_UserColumnName="Lucro" msprop:Generator_ColumnPropNameInTable="LucroColumn" msprop:Generator_ColumnPropNameInRow="Lucro" msprop:Generator_ColumnVarNameInTable="columnLucro" type="xs:decimal" />
+              <xs:element name="PrecoDeVenda" msprop:Generator_UserColumnName="PrecoDeVenda" msprop:Generator_ColumnPropNameInTable="PrecoDeVendaColumn" msprop:Generator_ColumnPropNameInRow="PrecoDeVenda" msprop:Generator_ColumnVarNameInTable="columnPrecoDeVenda" type="xs:decimal" />
+              <xs:element name="QuantidadeEmEstoque" msprop:Generator_UserColumnName="QuantidadeEmEstoque" msprop:Generator_ColumnPropNameInTable="QuantidadeEmEstoqueColumn" msprop:Generator_ColumnPropNameInRow="QuantidadeEmEstoque" msprop:Generator_ColumnVarNameInTable="columnQuantidadeEmEstoque" type="xs:int" />
+              <xs:element name="DataDeEntrada" msprop:Generator_UserColumnName="DataDeEntrada" msprop:Generator_ColumnPropNameInTable="DataDeEntradaColumn" msprop:Generator_ColumnPropNameInRow="DataDeEntrada" msprop:Generator_ColumnVarNameInTable="columnDataDeEntrada" type="xs:dateTime" />
+              <xs:element name="CategoriaID" msprop:Generator_UserColumnName="CategoriaID" msprop:Generator_ColumnPropNameInTable="CategoriaIDColumn" msprop:Generator_ColumnPropNameInRow="CategoriaID" msprop:Generator_ColumnVarNameInTable="columnCategoriaID" type="xs:int" minOccurs="0" />
+              <xs:element name="FabricanteID" msprop:Generator_UserColumnName="FabricanteID" msprop:Generator_ColumnPropNameInTable="FabricanteIDColumn" msprop:Generator_ColumnPropNameInRow="FabricanteID" msprop:Generator_ColumnVarNameInTable="columnFabricanteID" type="xs:int" minOccurs="0" />
+              <xs:element name="UnidadeDeMedida" msprop:Generator_UserColumnName="UnidadeDeMedida" msprop:Generator_ColumnPropNameInTable="UnidadeDeMedidaColumn" msprop:Generator_ColumnPropNameInRow="UnidadeDeMedida" msprop:Generator_ColumnVarNameInTable="columnUnidadeDeMedida" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Status" msprop:Generator_UserColumnName="Status" msprop:Generator_ColumnPropNameInTable="StatusColumn" msprop:Generator_ColumnPropNameInRow="Status" msprop:Generator_ColumnVarNameInTable="columnStatus" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DataDeVencimento" msprop:Generator_UserColumnName="DataDeVencimento" msprop:Generator_ColumnPropNameInTable="DataDeVencimentoColumn" msprop:Generator_ColumnPropNameInRow="DataDeVencimento" msprop:Generator_ColumnVarNameInTable="columnDataDeVencimento" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Imagem" msprop:Generator_UserColumnName="Imagem" msprop:Generator_ColumnPropNameInTable="ImagemColumn" msprop:Generator_ColumnPropNameInRow="Imagem" msprop:Generator_ColumnVarNameInTable="columnImagem" type="xs:base64Binary" minOccurs="0" />
+              <xs:element name="FornecedorID" msprop:Generator_UserColumnName="FornecedorID" msprop:Generator_ColumnPropNameInTable="FornecedorIDColumn" msprop:Generator_ColumnPropNameInRow="FornecedorID" msprop:Generator_ColumnVarNameInTable="columnFornecedorID" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
         <xs:element name="Recebimentos" msprop:Generator_RowClassName="RecebimentosRow" msprop:Generator_RowEvHandlerName="RecebimentosRowChangeEventHandler" msprop:Generator_RowDeletedName="RecebimentosRowDeleted" msprop:Generator_RowDeletingName="RecebimentosRowDeleting" msprop:Generator_RowEvArgName="RecebimentosRowChangeEvent" msprop:Generator_TablePropName="Recebimentos" msprop:Generator_RowChangedName="RecebimentosRowChanged" msprop:Generator_UserTableName="Recebimentos" msprop:Generator_RowChangingName="RecebimentosRowChanging" msprop:Generator_TableClassName="RecebimentosDataTable" msprop:Generator_TableVarName="tableRecebimentos">
           <xs:complexType>
             <xs:sequence>
@@ -1446,6 +1699,10 @@ SELECT ClienteID, DataVenda, ValorTotal, VendaID FROM Venda WHERE (VendaID = @Ve
       <xs:selector xpath=".//mstns:Estado" />
       <xs:field xpath="mstns:EstadoID" />
     </xs:unique>
+    <xs:unique name="Fabricantes_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Fabricantes" />
+      <xs:field xpath="mstns:FabricanteID" />
+    </xs:unique>
     <xs:unique name="FormaPgto_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:FormaPgto" />
       <xs:field xpath="mstns:FormaPgtoID" />
@@ -1468,6 +1725,10 @@ SELECT ClienteID, DataVenda, ValorTotal, VendaID FROM Venda WHERE (VendaID = @Ve
     </xs:unique>
     <xs:unique name="Produto_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:Produto" />
+      <xs:field xpath="mstns:ProdutoID" />
+    </xs:unique>
+    <xs:unique name="Produtos_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Produtos" />
       <xs:field xpath="mstns:ProdutoID" />
     </xs:unique>
     <xs:unique name="Recebimentos_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
@@ -1498,6 +1759,9 @@ SELECT ClienteID, DataVenda, ValorTotal, VendaID FROM Venda WHERE (VendaID = @Ve
       <msdata:Relationship name="FK_ItemVenda_Produto" msdata:parent="Produto" msdata:child="ItemVenda" msdata:parentkey="ProdutoID" msdata:childkey="ProdutoID" msprop:Generator_UserParentTable="Produto" msprop:Generator_UserChildTable="ItemVenda" msprop:Generator_RelationVarName="relationFK_ItemVenda_Produto" msprop:Generator_ChildPropName="GetItemVendaRows" msprop:Generator_ParentPropName="ProdutoRow" msprop:Generator_UserRelationName="FK_ItemVenda_Produto" />
       <msdata:Relationship name="FK_ItemVenda_Venda" msdata:parent="Venda" msdata:child="ItemVenda" msdata:parentkey="VendaID" msdata:childkey="VendaID" msprop:Generator_UserParentTable="Venda" msprop:Generator_UserChildTable="ItemVenda" msprop:Generator_RelationVarName="relationFK_ItemVenda_Venda" msprop:Generator_ChildPropName="GetItemVendaRows" msprop:Generator_ParentPropName="VendaRow" msprop:Generator_UserRelationName="FK_ItemVenda_Venda" />
       <msdata:Relationship name="FK_Parcela_Venda" msdata:parent="Venda" msdata:child="Parcela" msdata:parentkey="VendaID" msdata:childkey="VendaID" msprop:Generator_UserParentTable="Venda" msprop:Generator_UserChildTable="Parcela" msprop:Generator_RelationVarName="relationFK_Parcela_Venda" msprop:Generator_ChildPropName="GetParcelaRows" msprop:Generator_ParentPropName="VendaRow" msprop:Generator_UserRelationName="FK_Parcela_Venda" />
+      <msdata:Relationship name="FK__Produtos__Categoria" msdata:parent="Categoria" msdata:child="Produtos" msdata:parentkey="CategoriaID" msdata:childkey="CategoriaID" msprop:Generator_UserParentTable="Categoria" msprop:Generator_UserChildTable="Produtos" msprop:Generator_RelationVarName="relationFK__Produtos__Categoria" msprop:Generator_ChildPropName="GetProdutosRows" msprop:Generator_UserRelationName="FK__Produtos__Categoria" msprop:Generator_ParentPropName="CategoriaRow" />
+      <msdata:Relationship name="FK__Produtos__Fornececedor" msdata:parent="Fornecedor" msdata:child="Produtos" msdata:parentkey="FornecedorID" msdata:childkey="FornecedorID" msprop:Generator_UserParentTable="Fornecedor" msprop:Generator_UserChildTable="Produtos" msprop:Generator_RelationVarName="relationFK__Produtos__Fornececedor" msprop:Generator_ChildPropName="GetProdutosRows" msprop:Generator_UserRelationName="FK__Produtos__Fornececedor" msprop:Generator_ParentPropName="FornecedorRow" />
+      <msdata:Relationship name="FK_Produtos_Fabricante" msdata:parent="Fabricantes" msdata:child="Produtos" msdata:parentkey="FabricanteID" msdata:childkey="FabricanteID" msprop:Generator_UserParentTable="Fabricantes" msprop:Generator_UserChildTable="Produtos" msprop:Generator_RelationVarName="relationFK_Produtos_Fabricante" msprop:Generator_ChildPropName="GetProdutosRows" msprop:Generator_UserRelationName="FK_Produtos_Fabricante" msprop:Generator_ParentPropName="FabricantesRow" />
       <msdata:Relationship name="FK_Recebimentos_ContaReceber" msdata:parent="ContaReceber" msdata:child="Recebimentos" msdata:parentkey="ContaReceberID" msdata:childkey="ContaReceberID" msprop:Generator_UserParentTable="ContaReceber" msprop:Generator_UserChildTable="Recebimentos" msprop:Generator_RelationVarName="relationFK_Recebimentos_ContaReceber" msprop:Generator_ChildPropName="GetRecebimentosRows" msprop:Generator_UserRelationName="FK_Recebimentos_ContaReceber" msprop:Generator_ParentPropName="ContaReceberRow" />
       <msdata:Relationship name="FK_Recebimentos_Parcela" msdata:parent="Parcela" msdata:child="Recebimentos" msdata:parentkey="ParcelaID" msdata:childkey="ParcelaID" msprop:Generator_UserParentTable="Parcela" msprop:Generator_UserChildTable="Recebimentos" msprop:Generator_RelationVarName="relationFK_Recebimentos_Parcela" msprop:Generator_ChildPropName="GetRecebimentosRows" msprop:Generator_UserRelationName="FK_Recebimentos_Parcela" msprop:Generator_ParentPropName="ParcelaRow" />
       <msdata:Relationship name="FK_Recebimentos_Venda" msdata:parent="Venda" msdata:child="Recebimentos" msdata:parentkey="VendaID" msdata:childkey="VendaID" msprop:Generator_UserParentTable="Venda" msprop:Generator_UserChildTable="Recebimentos" msprop:Generator_RelationVarName="relationFK_Recebimentos_Venda" msprop:Generator_ChildPropName="GetRecebimentosRows" msprop:Generator_ParentPropName="VendaRow" msprop:Generator_UserRelationName="FK_Recebimentos_Venda" />

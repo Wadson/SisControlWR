@@ -99,7 +99,7 @@ namespace SisControl.View
 
                 string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(ProdutoID, 4);
                 NomeProduto = dataGridPesquisar["NomeProduto", LinhaAtual].Value.ToString();
-                PrecoUnitario = Convert.ToDecimal(dataGridPesquisar["PrecoVenda", LinhaAtual].Value);
+                PrecoUnitario = Convert.ToDecimal(dataGridPesquisar["PrecoDeVenda", LinhaAtual].Value);
 
 
                 // Cria uma instância do FrmVendas (ou usa uma existente)
@@ -108,7 +108,7 @@ namespace SisControl.View
                 // Preenche os campos no FrmVendas
                 ((FrmVendas)Application.OpenForms["FrmVendas"]).txtProdutoID.Text = numeroComZeros;
                 ((FrmVendas)Application.OpenForms["FrmVendas"]).txtNomeProduto.Text = dataGridPesquisar["NomeProduto", LinhaAtual].Value.ToString();
-                ((FrmVendas)Application.OpenForms["FrmVendas"]).txtValorProduto.Text = dataGridPesquisar["PrecoVenda", LinhaAtual].Value.ToString();
+                ((FrmVendas)Application.OpenForms["FrmVendas"]).txtValorProduto.Text = dataGridPesquisar["PrecoDeVenda", LinhaAtual].Value.ToString();
                 ((FrmVendas)Application.OpenForms["FrmVendas"]).txtQuantidade.Text = "1";
 
                 // Calcula o subtotal

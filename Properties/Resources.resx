@@ -151,8 +151,14 @@
   <data name="inserir" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\inserir.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Inserir16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Inserir16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="inserir32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\inserir32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="localizador16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\localizador16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Localizar16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Localizar16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -189,6 +195,9 @@
   </data>
   <data name="Produtos" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Produtos.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="produtos16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\produtos16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Relatório" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Relatório.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

@@ -12,12 +12,10 @@ using System.Configuration;
 namespace SisControl.DALL
 {
     public class ItemVendaDAL
-    {
-        private string connectionString = ConfigurationManager.ConnectionStrings["Data Source=NOTEBOOK-DELL\\SQLEXPRESS;Initial Catalog=bdsiscontrol;Integrated Security=True;"].ConnectionString;
-
+    {       
         public void AddItemVenda(ItemVendaModel itemVenda)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (var connection = Conexao.Conex())
             {
                 string query = @"INSERT INTO ItemVenda (VendaID, ProdutoID, Quantidade, PrecoUnitario, ItemVendaID) 
                              VALUES (@VendaID, @ProdutoID, @Quantidade, @PrecoUnitario, @ItemVendaID)";
@@ -35,7 +33,7 @@ namespace SisControl.DALL
 
         public void UpdateItemVenda(ItemVendaModel itemVenda)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (var connection = Conexao.Conex())
             {
                 string query = @"UPDATE ItemVenda SET ProdutoID = @ProdutoID, Quantidade = @Quantidade, PrecoUnitario = @PrecoUnitario 
                              WHERE ItemVendaID = @ItemVendaID";
@@ -52,7 +50,7 @@ namespace SisControl.DALL
 
         public void DeleteItemVenda(int itemVendaId)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (var connection = Conexao.Conex())
             {
                 string query = "DELETE FROM ItemVenda WHERE ItemVendaID = @ItemVendaID";
                 SqlCommand command = new SqlCommand(query, connection);
@@ -63,10 +61,10 @@ namespace SisControl.DALL
             }
         }
 
-        public List<ItemVendaModel> GetItensVenda(Guid vendaId)
+        public List<ItemVendaModel> GetItensVenda(int vendaId)
         {
             List<ItemVendaModel> itens = new List<ItemVendaModel>();
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (var connection = Conexao.Conex())
             {
                 string query = "SELECT * FROM ItemVenda WHERE VendaID = @VendaID";
                 SqlCommand command = new SqlCommand(query, connection);
@@ -77,8 +75,8 @@ namespace SisControl.DALL
                 {
                     while (reader.Read())
                     {
-                        Guid itemVendaID = (Guid)reader["ItemVendaID"];
-                        Guid vendaID = (Guid)reader["VendaID"];
+                        int itemVendaID = (int)reader["ItemVendaID"];
+                        int vendaID = (int)reader["VendaID"];
 
                         itens.Add(new ItemVendaModel
                         {
@@ -92,26 +90,6 @@ namespace SisControl.DALL
                 }
             }
             return itens;
-        }
-
-
-
-        //public DataTable ObterItensDeVenda()
-        //{
-        //    DataTable dataTable = new DataTable();
-
-        //    using (SqlConnection connection = new SqlConnection(connectionString))
-        //    {
-        //        string query = "SELECT Nome, Preco FROM ItensDeVenda";
-        //        using (SqlCommand command = new SqlCommand(query, connection))
-        //        {
-        //            connection.Open();
-        //            SqlDataAdapter adapter = new SqlDataAdapter(command);
-        //            adapter.Fill(dataTable);
-        //        }
-        //    }
-
-        //    return dataTable;
-        //}
+        }       
     }
 }

@@ -8,6 +8,9 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using Application = System.Windows.Forms.Application;
 
 namespace SisControl.View
 {
@@ -32,14 +35,7 @@ namespace SisControl.View
         {
             timer1.Enabled = habilitar;
         }
-        private void Listar()
-        {
-            List<FabricanteModel> fabricantes = fabricanteDal.ObterTodosFabricantes();
-            foreach (var fabricante in fabricantes)
-            {
-                dataGridViewFabricantes.Rows.Add(fabricante.FabricanteID, fabricante.NomeFabricante, fabricante.Endereco, fabricante.Telefone);
-            }
-        }
+       
         public void PersonalizarDataGridView(DataGridView dgv)
         {
             // Configuração dos cabeçalhos das colunas
@@ -84,13 +80,14 @@ namespace SisControl.View
             this.dataGridViewFabricantes.Columns[0].Name = "FabricanteID"   ;
             this.dataGridViewFabricantes.Columns[1].Name = "NomeFabricante" ;            
             this.dataGridViewFabricantes.Columns[2].Name = "Endereco"      ;
-            this.dataGridViewFabricantes.Columns[3].Name = "Telefone"    ;           
-           
+            this.dataGridViewFabricantes.Columns[3].Name = "Telefone"    ;
+            // Ocultar a coluna, mas ainda manter o acesso aos valores
+            dataGridViewFabricantes.Columns["FabricanteID"].Visible = false;
         }
-      
+
         private void CarregaDados()
         {
-            FrmCadFabricantes frm = new  FrmCadFabricantes(StatusOperacao);
+            FrmCadFabricante frm = new  FrmCadFabricante(StatusOperacao);
 
             if (StatusOperacao == "NOVO")
             {
@@ -98,7 +95,7 @@ namespace SisControl.View
                 StatusOperacao = "NOVO";
                 frm.ShowDialog();
 
-                ((FrmManutCliente)Application.OpenForms["FrmManutCliente"]).HabilitarTimer(true);
+                ((FrmManutFabricante)Application.OpenForms["FrmManutFabricante"]).HabilitarTimer(true);
             }
             if (StatusOperacao == "ALTERAR")
             {
@@ -117,9 +114,35 @@ namespace SisControl.View
                         // Exemplo: Acessar a primeira célula de cada linha
                         //  var valor = row.Cells[0].Value;
                         frm.txtFabricanteID.Text = dataGridViewFabricantes.CurrentRow.Cells["FabricanteID"].Value.ToString();
-                        frm.txtNomeFabricante.Text = dataGridViewFabricantes.CurrentRow.Cells["NomeFabricante"].Value.ToString();                        
-                        frm.txtEndereco.Text = dataGridViewFabricantes.CurrentRow.Cells["Endereco"].Value.ToString();
-                        frm.txtTelefone.Text = dataGridViewFabricantes.CurrentRow.Cells["Telefone"].Value.ToString();
+                        frm.txtNomeFabricante.Text = dataGridViewFabricantes.CurrentRow.Cells["NomeFabricante"].Value.ToString();
+                        //frm.txtEndereco.Text = dataGridViewFabricantes.CurrentRow.Cells["Endereco"].Value.ToString();
+
+
+                        //string NumeroFormatoTelefone = dataGridViewFabricantes.SelectedRows[0].Cells["Telefone"].Value.ToString();
+                        //frm.txtTelefone. = Utilitario.FormatPhoneNumber(NumeroFormatoTelefone);
+
+                        string NumeroFormatoTelefone = dataGridViewFabricantes.CurrentRow.Cells["Telefone"].Value.ToString();
+                        frm.txtTelefone.Text = NumeroFormatoTelefone;
+
+                        // Suponha que dataGridView1 é seu DataGridView e a coluna "Endereco" contém o endereço concatenado
+                        if (dataGridViewFabricantes.SelectedRows.Count > 0)
+                        {
+                            string enderecoCompleto = dataGridViewFabricantes.SelectedRows[0].Cells["Endereco"].Value.ToString();
+
+                            // Separar a string do endereço utilizando a vírgula como delimitador
+                            string[] partesEndereco = enderecoCompleto.Split(new[] { ", " }, StringSplitOptions.None);
+
+                            // Preencher os TextBox com as partes separadas do endereço
+                            frm.txtEndereco.Text = partesEndereco.Length > 0 ? partesEndereco[0] : "";
+                            frm.txtNumero.Text = partesEndereco.Length > 1 ? partesEndereco[1] : "";
+                            frm.txtBairro.Text = partesEndereco.Length > 2 ? partesEndereco[2] : "";
+                            frm.txtCidade.Text = partesEndereco.Length > 3 ? partesEndereco[3] : "";
+                            frm.txtEstado.Text = partesEndereco.Length > 4 ? partesEndereco[4] : "";
+                        }
+                        else
+                        {
+                            MessageBox.Show("Por favor, selecione uma linha no DataGridView para alterar.");
+                        }
 
                         frm.Text = "SISCONTROL - ALTERAR REGISTRO";
                         StatusOperacao = "ALTERAR";
@@ -153,9 +176,28 @@ namespace SisControl.View
                         //  var valor = row.Cells[0].Value;
                         frm.txtFabricanteID.Text = dataGridViewFabricantes.CurrentRow.Cells["FabricanteID"].Value.ToString();
                         frm.txtNomeFabricante.Text = dataGridViewFabricantes.CurrentRow.Cells["NomeFabricante"].Value.ToString();
-                        frm.txtEndereco.Text = dataGridViewFabricantes.CurrentRow.Cells["Endereco"].Value.ToString();
+                        //frm.txtEndereco.Text = dataGridViewFabricantes.CurrentRow.Cells["Endereco"].Value.ToString();
                         frm.txtTelefone.Text = dataGridViewFabricantes.CurrentRow.Cells["Telefone"].Value.ToString();
 
+                        // Suponha que dataGridView1 é seu DataGridView e a coluna "Endereco" contém o endereço concatenado
+                        if (dataGridViewFabricantes.SelectedRows.Count > 0)
+                        {
+                            string enderecoCompleto = dataGridViewFabricantes.SelectedRows[0].Cells["Endereco"].Value.ToString();
+
+                            // Separar a string do endereço utilizando a vírgula como delimitador
+                            string[] partesEndereco = enderecoCompleto.Split(new[] { ", " }, StringSplitOptions.None);
+
+                            // Preencher os TextBox com as partes separadas do endereço
+                            frm.txtEndereco.Text = partesEndereco.Length > 0 ? partesEndereco[0] : "";
+                            frm.txtNumero.Text = partesEndereco.Length > 1 ? partesEndereco[1] : "";
+                            frm.txtBairro.Text = partesEndereco.Length > 2 ? partesEndereco[2] : "";
+                            frm.txtCidade.Text = partesEndereco.Length > 3 ? partesEndereco[3] : "";
+                            frm.txtEstado.Text = partesEndereco.Length > 4 ? partesEndereco[4] : "";
+                        }
+                        else
+                        {
+                            MessageBox.Show("Por favor, selecione uma linha no DataGridView para alterar.");
+                        }
                         frm.Text = "SISCONTROL - EXCLUSÃO DE REGISTRO";
                         StatusOperacao = "EXCLUSÃO";
                         frm.btnSalvar.Text = "Excluir";
@@ -166,10 +208,14 @@ namespace SisControl.View
                         frm.txtFabricanteID.Enabled = false;
                         frm.txtNomeFabricante.Enabled = false;
                         frm.txtEndereco.Enabled = false;                        
-                        frm.txtTelefone.Enabled = false;                       
+                        frm.txtTelefone.Enabled = false; 
+                        frm.txtEstado.Enabled = false;
+                        frm.txtCidade.Enabled = false;
+                        frm.txtBairro.Enabled = false;
+                        frm.txtNumero.Enabled = false;
 
                         frm.ShowDialog();
-                        ((FrmManutCliente)Application.OpenForms["FrmManutCliente"]).HabilitarTimer(true);
+                        ((FrmManutFabricante)Application.OpenForms["FrmManutFabricante"]).HabilitarTimer(true);
                     }                  
                 }
                 catch (Exception ex)
@@ -178,8 +224,11 @@ namespace SisControl.View
                     MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }       
             }
-            Listar();
+            ListarFabricante();
         }
+
+
+         
         private void btnNovo_Click(object sender, EventArgs e)
         {
             StatusOperacao = "NOVO";

@@ -68,10 +68,6 @@ namespace SisControl
             finally { conn.Close(); }
         }
 
-        private void FrmBasePesquisa_KeyDown(object sender, KeyEventArgs e)
-        {            
-        }
-
         private void rbtCodigo_KeyDown(object sender, KeyEventArgs e)
         {
             txtPesquisa.Text = "";

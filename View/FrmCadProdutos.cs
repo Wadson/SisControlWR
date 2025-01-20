@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -18,8 +19,12 @@ namespace SisControl.View
     {
         private string QueryProdutos = "SELECT MAX(ProdutoID)  FROM Produtos";
         private string QueryCategoria = "SELECT MAX(CategoriaID) FROM Categoria";
+        private string QueryFabricantes = "SELECT FabricanteID FROM Fabricantes WHERE NomeFabricante = @NomeFabricante";
+        private string queryCategorias = "SELECT CategoriaID FROM Categoria WHERE NomeCategoria = @NomeCategoria";
         private string StatusOperacao;
         private int ProdutoID;
+        public int CategoriaID, FabricanteID;
+
         public FrmCadProdutos(string statusOperacao)
         {
             InitializeComponent();
@@ -34,6 +39,11 @@ namespace SisControl.View
         {
             Utilitario.PreencherComboBox(cmbCategoria, queryCategoria, "NomeCategoria", "CategoriaID");
             Utilitario.PreencherComboBox(cmbFabricante, queryFabricante, "NomeFabricante", "FabricanteID");
+
+            Utilitario.FormatTextBoxToCurrency(txtPrecoCusto);
+            Utilitario.FormatTextBoxToCurrency(txtLucro);
+            Utilitario.FormatTextBoxToCurrency(txtPrecoDeVenda);
+
             if (StatusOperacao == "ALTERAR")
             {
                 return;
@@ -44,7 +54,53 @@ namespace SisControl.View
                 string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(NovoCodigo, 4);
                 txtProdutoID.Text = numeroComZeros;
             }
+            cmbCategoria.SelectedIndex = 26;
+            cmbFabricante.SelectedIndex = 12;
+            cmbUnidadeDeMedida.SelectedIndex = 4;
+            cmbStatus.SelectedIndex = 1;
         }
+
+        //private void CalcularPrecoVenda()
+        //{
+        //    if (decimal.TryParse(txtPrecoCusto.Text, out decimal precoCusto) &&
+        //   decimal.TryParse(txtLucro.Text, out decimal lucro))
+        //    {
+        //        decimal precoVenda = precoCusto + (precoCusto * lucro / 100);
+        //        txtPrecoDeVenda.Text = String.Format(CultureInfo.CurrentCulture, "{0:N2}");
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Por favor, insira valores válidos.");
+        //    }
+        //}
+        private void CalcularPrecoVenda()
+        {
+            if (decimal.TryParse(txtPrecoCusto.Text, out decimal precoCusto) &&
+                !string.IsNullOrWhiteSpace(txtLucro.Text))
+            {
+                decimal precoVenda = 0;
+
+                if (txtLucro.Text.EndsWith("%"))
+                {
+                    string lucroPercentualStr = txtLucro.Text.TrimEnd('%');
+                    if (decimal.TryParse(lucroPercentualStr, out decimal lucroPercentual))
+                    {
+                        precoVenda = precoCusto + (precoCusto * lucroPercentual / 100);
+                    }
+                }
+                else if (decimal.TryParse(txtLucro.Text, out decimal lucro))
+                {
+                    precoVenda = precoCusto + lucro;
+                }
+
+                txtPrecoDeVenda.Text = String.Format(CultureInfo.CurrentCulture, "{0:N2}", precoVenda);
+            }
+            else
+            {
+                txtPrecoDeVenda.Text = string.Empty;
+            }
+        }
+
 
         private void btnFechar_Click(object sender, EventArgs e)
         {
@@ -79,7 +135,7 @@ namespace SisControl.View
                 }
             }
         }
-
+        #region Evento de Botões
         private void txtNomeProduto_Enter(object sender, EventArgs e)
         {
             txtNomeProduto.BackColor = Color.LightBlue;
@@ -107,12 +163,13 @@ namespace SisControl.View
 
         private void txtPrecoCusto_Enter(object sender, EventArgs e)
         {
-            txtPrecoCusto.BackColor = Color.LightBlue;  
+            txtPrecoCusto.BackColor = Color.LightBlue; 
+            
         }
 
         private void txtLucro_Enter(object sender, EventArgs e)
         {
-            txtLucro.BackColor = Color.LightBlue;
+            txtLucro.BackColor = Color.LightBlue;            
         }
 
         private void txtPrecoDeVenda_Enter(object sender, EventArgs e)
@@ -161,13 +218,38 @@ namespace SisControl.View
         }
 
         private void txtPrecoCusto_Leave(object sender, EventArgs e)
-        {
+        {   
             txtPrecoCusto.BackColor = Color.White;
+
+            // Formata apenas se não estiver vazio
+            if (!string.IsNullOrWhiteSpace(txtPrecoCusto.Text))
+            {
+                CalcularPrecoVenda();               
+            }
+
+            if (!string.IsNullOrWhiteSpace(txtPrecoDeVenda.Text))
+            {
+                Utilitario.FormatTextBoxToCurrency(txtPrecoDeVenda);
+            }
+            Utilitario.FormatTextBoxToCurrency(txtPrecoCusto);
         }
 
         private void txtLucro_Leave(object sender, EventArgs e)
         {
-            txtLucro.BackColor = Color.White;
+            /*Utilitario.FormatTextBoxToCurrency(txtLucro)*/;
+            txtLucro.BackColor = Color.White;            
+
+            // Formata apenas se não estiver vazio
+            if (!string.IsNullOrWhiteSpace(txtLucro.Text))
+            {
+                CalcularPrecoVenda();               
+            }
+
+            if (!string.IsNullOrWhiteSpace(txtPrecoDeVenda.Text))
+            {
+                Utilitario.FormatTextBoxToCurrency(txtPrecoDeVenda);
+            }
+            Utilitario.FormatTextBoxToCurrency(txtLucro);
         }
 
         private void txtPrecoDeVenda_Leave(object sender, EventArgs e)
@@ -189,10 +271,12 @@ namespace SisControl.View
         {
             cmbFabricante.BackColor = Color.White;  
         }
+        #endregion 
+
         private void SalvarProduto()
         {
             // Criar uma nova instância de ProdutoMODEL e preencher com os dados do formulário
-            ProdutosModel produto = new  ProdutosModel
+            ProdutosModel produto = new ProdutosModel
             {
                 NomeProduto = txtNomeProduto.Text,
                 Descricao = txtDescricao.Text,
@@ -201,77 +285,83 @@ namespace SisControl.View
                 PrecoDeVenda = decimal.Parse(txtPrecoDeVenda.Text),
                 QuantidadeEmEstoque = int.Parse(txtQuantidadeEmEstoque.Text),
                 DataDeEntrada = DateTime.Parse(dtpDataDeEntrada.Text),
-                CategoriaID = int.Parse(txtCategoriaID.Text),
-                FabricanteID = int.Parse(txtFabricanteID.Text),
+                CategoriaID = CategoriaID,//int.Parse(txtCategoriaID.Text),
+                FabricanteID = FabricanteID,//int.Parse(txtFabricanteID.Text),
                 UnidadeDeMedida = cmbUnidadeDeMedida.Text,
                 Status = cmbStatus.Text,
                 DataDeVencimento = DateTime.Parse(dtpDataDeVencimento.Text),
                 Imagem = ImageToByteArray(pbImagem.Image), // Exemplo de conversão para byte array
-                FornecedorID = int.Parse(txtFornecedorID.Text)
+                FornecedorID = int.Parse(txtFornecedorID.Text),
+                Referencia = txtReferência.Text
             };
 
             // Chamar o método SalvarProduto da BLL
             ProdutosBll produtosBll = new ProdutosBll();
             produtosBll.SalvarProdutos(produto);
             MessageBox.Show("Produto salvo com sucesso!");
+            Utilitario.LimpaCampo(this);
+
+            int NovoCodigo = Utilitario.GerarProximoCodigo(QueryProdutos);//RetornaCodigoContaMaisUm(QueryUsuario).ToString();
+            string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(NovoCodigo, 4);
+            txtProdutoID.Text = numeroComZeros;
+            txtNomeProduto.Focus();
         }
         private void AbrirFrmLocalizarFornecedor()
         {
-            FrmLocalizarFornedeor frmLocalizarFornecedor = new FrmLocalizarFornedeor();
+            FrmLocalizarFornedor frmLocalizarFornecedor = new FrmLocalizarFornedor();
             frmLocalizarFornecedor.FormChamador = this; // Define o formulário chamador
             frmLocalizarFornecedor.ShowDialog();
         }
         private void btnLocalizarCliente_Click(object sender, EventArgs e)
         {
             AbrirFrmLocalizarFornecedor();
-        }
-        private int ObterCodigoCategoria(string nomeCategoria)
-        {
-            int codigoCategoria = -1;
-            using (var connection = Conexao.Conex())
-            {
-                string query = "SELECT CategoriaID FROM Categoria WHERE NomeCategoria = @NomeCategoria";
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@NomeCategoria", nomeCategoria);
-
-                try
-                {
-                    connection.Open();
-                    var result = command.ExecuteScalar();
-                    if (result != null)
-                    {
-                        codigoCategoria = (int)result;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Erro ao buscar categoria: " + ex.Message);
-                }
-            }
-            return codigoCategoria;
-        }
+        }       
 
         private void cmbCategoria_TextChanged(object sender, EventArgs e)
         {
             string nomeCategoria = cmbCategoria.Text;
-            int codigoCategoria = ObterCodigoCategoria(nomeCategoria);
+            int codigoCategoria = Utilitario.ObterCodigoComboBox(queryCategorias, "@NomeCategoria", nomeCategoria);
             if (codigoCategoria != -1)
             {
-                txtCategoriaID.Text = codigoCategoria.ToString();
+                //txtCategoriaID.Text = codigoCategoria.ToString();
+                CategoriaID = codigoCategoria;
             }
             else
             {
-                txtCategoriaID.Text = "";
+                //txtCategoriaID.Text = "";
+                CategoriaID = 0;
             }
         }
+        private void cmbFabricante_TextChanged(object sender, EventArgs e)
+        {
+            string nomeFabricante = cmbFabricante.Text;
+            int codigoFabricante = Utilitario.ObterCodigoComboBox(QueryFabricantes, "@NomeFabricante", nomeFabricante);
+            if (codigoFabricante != -1)
+            {
+                //txtFabricanteID.Text = codigoFabricante.ToString();
+                FabricanteID = codigoFabricante;
+            }
+            else
+            {
+                //txtFabricanteID.Text = "";
+                FabricanteID = 0;
+            }
+        }
+
         private byte[] ImageToByteArray(Image image)
         {
+            if (image == null)
+            {
+                return null; // Ou retorne um array vazio: return new byte[0];
+            }
+
             using (var ms = new MemoryStream())
             {
                 image.Save(ms, image.RawFormat);
                 return ms.ToArray();
             }
         }
+
 
         private void btnLocalizarImagem_Click(object sender, EventArgs e)
         {
@@ -283,24 +373,7 @@ namespace SisControl.View
                 pbImagem.Image = new Bitmap(openFileDialog.FileName);
             }
         }
-
-        private void cmbFabricante_VisibleChanged(object sender, EventArgs e)
-        {            
-        }
-
-        private void cmbFabricante_TextChanged(object sender, EventArgs e)
-        {
-            string nomeFabricante = cmbFabricante.Text;
-            int codigoFabricante = ObterCodigoCategoria(nomeFabricante);
-            if (codigoFabricante != -1)
-            {
-                txtFabricanteID.Text = codigoFabricante.ToString();
-            }
-            else
-            {
-                txtFabricanteID.Text = "";
-            }
-        }
+       
         // Cria uma instância do FrmLocalizarProduto e define o Owner como o FrmVendas       
     }
 }

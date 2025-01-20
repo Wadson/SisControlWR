@@ -9,7 +9,7 @@ namespace SisControl.MODEL
     public class VendaModel
     {
         //public int VendaID { get; set; }
-        public Guid VendaID { get; set; } // Usando GUID como chave primária
+        public int VendaID { get; set; } // Usando GUID como chave primária
         public DateTime DataVenda { get; set; }
         public int ClienteID { get; set; }
         public decimal ValorTotal { get; set; }

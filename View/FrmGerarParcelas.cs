@@ -12,8 +12,8 @@ namespace SisControl.View
 {
     public partial class FrmGerarParcelas : SisControl.FrmBaseGeral
     {
-        public Guid parcelaID, clienteID;
-        public Guid vendaID;
+        public int parcelaID, clienteID;
+        public int vendaID;
         public List<ParcelaModel> parcelas;
         public decimal valorParcela, valorTotal;
         public int numeroParcelas;

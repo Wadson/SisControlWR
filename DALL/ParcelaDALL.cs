@@ -10,12 +10,10 @@ using System.Configuration;
 namespace SisControl.DALL
 {
     public class ParcelaDAL
-    {
-        private string connectionString = ConfigurationManager.ConnectionStrings["Data Source=NOTEBOOK-DELL\\SQLEXPRESS;Initial Catalog=bdsiscontrol;Integrated Security=True;"].ConnectionString;
-
+    {       
         public void AddParcela(ParcelaModel parcela)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (var connection = Conexao.Conex())
             {
                 string query = @"INSERT INTO Parcela (ParcelaID, VendaID, NumeroParcela, DataVencimento, ValorParcela, ValorRecebido, SaldoRestante, Pago) 
                              VALUES (@ParcelaID, @VendaID, @NumeroParcela, @DataVencimento, @ValorParcela, @ValorRecebido, @SaldoRestante, @Pago)";
@@ -36,7 +34,7 @@ namespace SisControl.DALL
 
         public void UpdateParcela(ParcelaModel parcela)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (var connection = Conexao.Conex())
             {
                 string query = @"UPDATE Parcela SET DataVencimento = @DataVencimento, ValorParcela = @ValorParcela, StatusParcela = @StatusParcela, FormaPagamento = @FormaPagamento 
                              WHERE ParcelaID = @ParcelaID";
@@ -57,7 +55,7 @@ namespace SisControl.DALL
 
         public void DeleteParcela(int parcelaId)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (var connection = Conexao.Conex())
             {
                 string query = "DELETE FROM Parcela WHERE ParcelaID = @ParcelaID";
                 SqlCommand command = new SqlCommand(query, connection);
@@ -68,10 +66,10 @@ namespace SisControl.DALL
             }
         }
 
-        public List<ParcelaModel> GetParcelas(Guid vendaId)
+        public List<ParcelaModel> GetParcelas(int vendaId)
         {
             List<ParcelaModel> parcelas = new List<ParcelaModel>();
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (var connection = Conexao.Conex())
             {
                 string query = "SELECT * FROM Parcela WHERE VendaID = @VendaID";
                 SqlCommand command = new SqlCommand(query, connection);
@@ -82,12 +80,12 @@ namespace SisControl.DALL
                 {
                     while (reader.Read())
                     {
-                        Guid parcelaID;
-                        Guid vendaID;
+                        int parcelaID;
+                        int vendaID;
 
                         // Verificar e converter ParcelaID e VendaID
-                        if (Guid.TryParse(reader["ParcelaID"].ToString(), out parcelaID) &&
-                            Guid.TryParse(reader["VendaID"].ToString(), out vendaID))
+                        if (int.TryParse(reader["ParcelaID"].ToString(), out parcelaID) &&
+                            int.TryParse(reader["VendaID"].ToString(), out vendaID))
                         {
                             parcelas.Add(new ParcelaModel
                             {

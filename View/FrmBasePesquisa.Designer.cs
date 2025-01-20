@@ -123,7 +123,6 @@
             this.Name = "FrmBasePesquisa";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmBasePesquisa";
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmBasePesquisa_KeyDown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

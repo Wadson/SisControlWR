@@ -91,6 +91,7 @@ namespace SisControl.View
             dgv.Columns[12].Name = "DataDeVencimento";
             dgv.Columns[13].Name = "Imagem";
             dgv.Columns[14].Name = "FornecedorID";
+            dgv.Columns[15].Name = "Referencia";
 
             // Centralizar colunas de IDs e Quantidade
             dgv.Columns["ProdutoID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -98,7 +99,6 @@ namespace SisControl.View
             dgv.Columns["CategoriaID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgv.Columns["FabricanteID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgv.Columns["FornecedorID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
 
         }
         private void CarregaDados()
@@ -137,12 +137,13 @@ namespace SisControl.View
                         frm.txtPrecoDeVenda.Text = dataGridPesquisar.CurrentRow.Cells["PrecoDeVenda"].Value.ToString();
                         frm.txtQuantidadeEmEstoque.Text = dataGridPesquisar.CurrentRow.Cells["QuantidadeEmEstoque"].Value.ToString();
                         frm.dtpDataDeEntrada.Text = dataGridPesquisar.CurrentRow.Cells["DataDeEntrada"].Value.ToString();
-                        frm.txtCategoriaID.Text = dataGridPesquisar.CurrentRow.Cells["CategoriaID"].Value.ToString();
-                        frm.txtFabricanteID.Text = dataGridPesquisar.CurrentRow.Cells["FabricanteID"].Value.ToString();
+                        frm.CategoriaID = int.Parse(dataGridPesquisar.CurrentRow.Cells["CategoriaID"].Value.ToString());
+                        frm.FabricanteID = int.Parse(dataGridPesquisar.CurrentRow.Cells["FabricanteID"].Value.ToString());
                         frm.cmbUnidadeDeMedida.Text = dataGridPesquisar.CurrentRow.Cells["UnidadeDeMedida"].Value.ToString();
                         frm.cmbStatus.Text = dataGridPesquisar.CurrentRow.Cells["Status"].Value.ToString();
                         frm.dtpDataDeVencimento.Text = dataGridPesquisar.CurrentRow.Cells["DataDeVencimento"].Value.ToString();
                         frm.txtFornecedorID.Text = dataGridPesquisar.CurrentRow.Cells["FornecedorID"].Value.ToString();
+                        frm.txtReferência.Text = dataGridPesquisar.CurrentRow.Cells["Referencia"].Value.ToString();
 
                         frm.Text = "SISCONTROL - ALTERAR REGISTRO";
                         StatusOperacao = "ALTERAR";
@@ -190,12 +191,13 @@ namespace SisControl.View
                         frm.txtPrecoDeVenda.Text = dataGridPesquisar.CurrentRow.Cells["PrecoDeVenda"].Value.ToString();
                         frm.txtQuantidadeEmEstoque.Text = dataGridPesquisar.CurrentRow.Cells["QuantidadeEmEstoque"].Value.ToString();
                         frm.dtpDataDeEntrada.Text = dataGridPesquisar.CurrentRow.Cells["DataDeEntrada"].Value.ToString();
-                        frm.txtCategoriaID.Text = dataGridPesquisar.CurrentRow.Cells["CategoriaID"].Value.ToString();
-                        frm.txtFabricanteID.Text = dataGridPesquisar.CurrentRow.Cells["FabricanteID"].Value.ToString();
+                        frm.CategoriaID = int.Parse(dataGridPesquisar.CurrentRow.Cells["CategoriaID"].Value.ToString());
+                        frm.FabricanteID = int.Parse(dataGridPesquisar.CurrentRow.Cells["FabricanteID"].Value.ToString());
                         frm.cmbUnidadeDeMedida.Text = dataGridPesquisar.CurrentRow.Cells["UnidadeDeMedida"].Value.ToString();
                         frm.cmbStatus.Text = dataGridPesquisar.CurrentRow.Cells["Status"].Value.ToString();
                         frm.dtpDataDeVencimento.Text = dataGridPesquisar.CurrentRow.Cells["DataDeVencimento"].Value.ToString();
                         frm.txtFornecedorID.Text = dataGridPesquisar.CurrentRow.Cells["FornecedorID"].Value.ToString();
+                        frm.txtReferência.Text = dataGridPesquisar.CurrentRow.Cells["Referencia"].Value.ToString();
 
                         frm.Text = "SISCONTROL - EXCLUSÃO DE REGISTRO";                        
                         frm.btnSalvar.Text = "Excluir";
@@ -211,9 +213,7 @@ namespace SisControl.View
                         frm.txtLucro.Enabled = false;
                         frm.txtPrecoDeVenda.Enabled = false;
                         frm.txtQuantidadeEmEstoque.Enabled = false;
-                        frm.dtpDataDeEntrada.Enabled = false;
-                        frm.txtCategoriaID.Enabled = false;
-                        frm.txtFabricanteID.Enabled = false;
+                        frm.dtpDataDeEntrada.Enabled = false;                        
                         frm.cmbUnidadeDeMedida.Enabled = false;
                         frm.cmbStatus.Enabled = false;
                         frm.dtpDataDeVencimento.Enabled = false;

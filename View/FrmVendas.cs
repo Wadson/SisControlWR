@@ -22,12 +22,14 @@ namespace SisControl.View
         private string QueryItensVenda = "SELECT MAX(ItemVendaID) FROM ItemVenda";
         private string QueryParcela = "SELECT MAX(ParcelaID) FROM Parcela";
         private string QueryContaReceber = "SELECT MAX(ContaReceberID) FROM ContaReceber";
+        private string QueryFormaPgto = "SELECT NomeFormaPgto, FormaPgtoID FROM FormaPgto";
 
-        private Guid VendaID;        
-        private Guid ItemVendaID;
-        private Guid ContaReceberID;
-        private Guid ParcelaID;
-        private Guid ProdutoID;
+        private int ClienteID;
+        private int VendaID;        
+        private int ItemVendaID;
+        private int ContaReceberID;
+        private int ParcelaID;
+        private int ProdutoID;
         private string connectionString; //implementado 10/01/2025 
                 
         private decimal valorTotal;
@@ -237,16 +239,21 @@ namespace SisControl.View
 
         private void NovoCodigo()
         {
+            Utilitario.PreencherComboBox(cmbFormaPgto, QueryFormaPgto, "NomeFormaPgto", "FormaPgtoID");
+            // Definir o item padrão do ComboBox como "Crediário"
+          
+
             // Gera novos GUIDs para as chaves primárias
-            VendaID = Guid.NewGuid();
-            ItemVendaID = Guid.NewGuid();
-            ContaReceberID = Guid.NewGuid();
-            ParcelaID = Guid.NewGuid();
-            
+            VendaID = Utilitario.GerarNovoCodigoID("VendaID", "Venda");
+            ItemVendaID = Utilitario.GerarNovoCodigoID("ItemVendaID", "ItemVenda");
+            ContaReceberID = Utilitario.GerarNovoCodigoID("ContaReceberID", "ContaReceber");
+            ParcelaID = Utilitario.GerarNovoCodigoID("ParcelaID", "Parcela");
+
             txtVendaID.Text = VendaID.ToString();
+
             txtQuantidade.Leave += txtQuantidade_Leave;
             txtValorProduto.Leave += txtValorProduto_Leave;
-        }           
+        }
 
         private void btnFechar_Click(object sender, EventArgs e)
         {
@@ -338,7 +345,7 @@ namespace SisControl.View
 VendaModel venda = new VendaModel
 {
     // Gera um novo identificador único para VendaID
-    VendaID = Guid.NewGuid(),
+    VendaID = VendaID,
 
     // Converte o texto do campo txtClienteID para um inteiro e atribui a ClienteID
     ClienteID = int.Parse(txtClienteID.Text),
@@ -382,10 +389,10 @@ foreach (DataGridViewRow row in dgvItensVenda.Rows)
         var itemVenda = new ItemVendaModel
         {
             // Gera um novo identificador único para ItemVendaID
-            ItemVendaID = Guid.NewGuid(),
+            ItemVendaID = ItemVendaID,
 
             // Atribui o ID da venda atual
-            VendaID = venda.VendaID,
+            VendaID = VendaID,
 
             // Converte o valor da célula 'ProdutoID' para inteiro e atribui a ProdutoID
             ProdutoID = int.Parse(row.Cells["ProdutoID"].Value.ToString()),
@@ -433,8 +440,8 @@ foreach (var item in itens)
                                 {
                                     var parcela = new ParcelaModel
                                     {
-                                        ParcelaID = Guid.NewGuid(),
-                                        VendaID = venda.VendaID,
+                                        ParcelaID = int.Parse(row.Cells["ParcelaID"].Value.ToString()),
+                                        VendaID = VendaID,
                                         NumeroParcela = int.Parse(row.Cells["NumeroParcela"].Value.ToString()),
                                         DataVencimento = DateTime.Parse(row.Cells["DataVencimento"].Value.ToString()),
                                         ValorParcela = decimal.Parse(row.Cells["ValorParcela"].Value.ToString()),
@@ -496,25 +503,23 @@ foreach (var item in itens)
             // Adiciona contas a receber com base nos dados do DataGridView
             foreach (DataGridViewRow row in dgvParcelas.Rows)
             {
-                if (VendaID != null && ParcelaID != null)
+                // Remove a verificação de null para VendaID e ParcelaID, pois são do tipo int
+                var valorParcela = decimal.Parse(row.Cells["ValorParcela"].Value.ToString());
+                var valorRecebido = 0; // Inicialmente, valor recebido é zero.
+
+                DateTime? dataRecebimento = null; // DataRecebimento permanece nula
+
+                var contaReceber = new ContaReceberModel
                 {
-                    var valorParcela = decimal.Parse(row.Cells["ValorParcela"].Value.ToString());
-                    var valorRecebido = 0; // Inicialmente, valor recebido é zero.
-
-                    DateTime? dataRecebimento = null; // DataRecebimento permanece nula
-
-                    var contaReceber = new ContaReceberModel
-                    {
-                        ContaReceberID = Guid.NewGuid(), // Gerar um novo GUID para ContaReceberID
-                        VendaID = VendaID, // Converter VendaID para GUID
-                        ParcelaID = ParcelaID, // Converter ParcelaID para GUID
-                        DataRecebimento = dataRecebimento,
-                        ValorRecebido = valorRecebido,
-                        SaldoRestante = valorParcela - valorRecebido, // Cálculo do Saldo Restante
-                        Pago = false
-                    };
-                    contasReceber.Add(contaReceber);
-                }
+                    ContaReceberID = ContaReceberID, // Gerar um novo GUID para ContaReceberID
+                    VendaID = VendaID, // Converter VendaID para GUID
+                    ParcelaID = ParcelaID, // Converter ParcelaID para GUID
+                    DataRecebimento = dataRecebimento,
+                    ValorRecebido = valorRecebido,
+                    SaldoRestante = valorParcela - valorRecebido, // Cálculo do Saldo Restante
+                    Pago = false
+                };
+                contasReceber.Add(contaReceber);
             }
 
             return contasReceber;
@@ -575,19 +580,25 @@ foreach (var item in itens)
             try
             {
                 // Verifica se todos os valores necessários estão preenchidos
-                if (VendaID == Guid.Empty)
+                if (VendaID == 0)
                 {
                     MessageBox.Show("Por favor, informe o ID da venda.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-               if (VendaID == Guid.Empty)
+               if (VendaID == 0)
                {
                     MessageBox.Show("Por favor, informe o ID da venda.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                if (ItemVendaID == Guid.Empty)
+                if (VendaID == 0)
+                {
+                    MessageBox.Show("Por favor, informe o ID da venda.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (ItemVendaID == 0)
                 {
                     MessageBox.Show("Por favor, informe o ID dos itens da venda.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -683,7 +694,69 @@ foreach (var item in itens)
                 }
             }
         }
-        
 
+        private void cmbFormaPgto_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Verifica se há um item selecionado e captura o ID
+            if (cmbFormaPgto.SelectedValue is int idFormaPgto)
+            {
+                txtFormaPgtoID.Text = idFormaPgto.ToString(); // Atualiza o TextBox com o ID
+            }
+            else
+            {
+                txtFormaPgtoID.Text = string.Empty; // Limpa o TextBox caso não haja seleção válida
+            }
+        }
+
+        private void txtNomeCliente_KeyUp(object sender, KeyEventArgs e)
+        {
+            string textoDigitado = txtNomeCliente.Text;
+
+            // Abre o formulário de pesquisa se ao menos uma letra for digitada
+            if (!string.IsNullOrWhiteSpace(textoDigitado))
+            {
+                FrmLocalizarCliente frmLocalizar = new FrmLocalizarCliente
+                {
+                    txtPesquisa = { Text = textoDigitado } // Passa as letras digitadas
+                };
+
+                frmLocalizar.ShowDialog(); // Exibe o formulário como modal
+
+                // Atualiza o campo com o cliente selecionado
+                if (!string.IsNullOrWhiteSpace(frmLocalizar.nomeCliente))
+                {
+                    txtNomeCliente.Text = frmLocalizar.nomeCliente;
+                    ClienteID = Convert.ToInt16(frmLocalizar.numeroComZeros);
+                }
+            }
+            //// Captura o texto digitado no campo de pesquisa
+            //string textoDigitado = txtNomeCliente.Text;
+
+            //// Abre o formulário de pesquisa se ao menos uma letra for digitada
+            //if (!string.IsNullOrWhiteSpace(textoDigitado))
+            //{
+            //    // Verifica se o formulário já está aberto
+            //    Form formularioAberto = Application.OpenForms["FrmLocalizarCliente"];
+            //    if (formularioAberto == null)
+            //    {
+            //        // Cria uma nova instância do formulário de pesquisa
+            //        FrmLocalizarCliente frmLocalizar = new FrmLocalizarCliente();
+            //        frmLocalizar.txtPesquisa.Text = textoDigitado; // Passa as letras digitadas
+            //        frmLocalizar.Show();
+
+            //        // Foco no campo de pesquisa do formulário de localizar cliente
+            //        frmLocalizar.txtPesquisa.Focus();
+            //        frmLocalizar.txtPesquisa.SelectionStart = frmLocalizar.txtPesquisa.Text.Length;
+            //    }
+            //    else
+            //    {
+            //        // Se o formulário já estiver aberto, apenas atualiza o campo de texto
+            //        FrmLocalizarCliente frmLocalizar = (FrmLocalizarCliente)formularioAberto;
+            //        frmLocalizar.txtPesquisa.Text = textoDigitado;
+            //        frmLocalizar.txtPesquisa.Focus();
+            //        frmLocalizar.txtPesquisa.SelectionStart = frmLocalizar.txtPesquisa.Text.Length;
+            //    }
+            //}
+        }
     }
 }

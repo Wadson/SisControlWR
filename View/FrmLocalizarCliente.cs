@@ -14,9 +14,12 @@ namespace SisControl.View
         private int ClienteID;
         protected int LinhaAtual = -1;
         public Form FormChamador { get; set; }
+        public int numeroComZeros { get; set; }
+        public string nomeCliente { get; set; }
         public FrmLocalizarCliente()
         {
             InitializeComponent();
+            txtPesquisa.TextChanged += txtPesquisa_TextChanged;
         }      
         private void InicializaDataGridView()
         {
@@ -49,6 +52,8 @@ namespace SisControl.View
        
         private void txtPesquisa_TextChanged(object sender, EventArgs e)
         {
+            string textoPesquisa = txtPesquisa.Text.ToLower();
+
             string nome = "%" + txtPesquisa.Text + "%";
             ClienteDALL dao = new ClienteDALL();
 
@@ -89,23 +94,23 @@ namespace SisControl.View
             ClienteID = Convert.ToInt32(dataGridPesquisar[0, LinhaAtual].Value);
 
             // Acrescenta zeros à esquerda do ID do cliente até que ele tenha 4 dígitos.
-            string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(ClienteID, 4);
+            numeroComZeros = int.Parse(Utilitario.AcrescentarZerosEsquerda(ClienteID, 4));
 
             // Obtém o nome do cliente da célula [1, LinhaAtual] do dataGridPesquisar e converte para string.
-            string nomeCliente = dataGridPesquisar[1, LinhaAtual].Value.ToString();
+            nomeCliente = dataGridPesquisar[1, LinhaAtual].Value.ToString();
 
             // Verifica se o formulário chamador é uma instância de FrmVendas.
             if (FormChamador is FrmVendas frmVendas)
             {
                 // Se for, define os textos dos campos txtClienteID e txtNomeCliente de FrmVendas.
-                frmVendas.txtClienteID.Text = numeroComZeros;
+                frmVendas.txtClienteID.Text = numeroComZeros.ToString();
                 frmVendas.txtNomeCliente.Text = nomeCliente;
             }
             // Verifica se o formulário chamador é uma instância de FrmContaReceber.
             else if (FormChamador is FrmContaReceber frmContaReceber)
             {
                 // Se for, define os textos dos campos txtClienteID e txtNomeCliente de FrmContaReceber.
-                frmContaReceber.txtClienteID.Text = numeroComZeros;
+                frmContaReceber.txtClienteID.Text = numeroComZeros.ToString();
                 frmContaReceber.txtNomeCliente.Text = nomeCliente;
             }
         }       

@@ -103,6 +103,9 @@ D:\SisControl\obj\Debug\SisControl.View.FrmGerarParcelas.resources
 D:\SisControl\obj\Debug\SisControl.View.FrmLocalizarCliente.resources
 D:\SisControl\obj\Debug\SisControl.View.FrmContaReceber.resources
 D:\SisControl\obj\Debug\SisControl.View.FrmCadProdutos.resources
-D:\SisControl\obj\Debug\SisControl.View.FrmLocalizarFornedeor.resources
-D:\SisControl\obj\Debug\SisControl.View.FrmCadFabricantes.resources
 D:\SisControl\obj\Debug\SisControl.View.FrmManutFabricante.resources
+D:\SisControl\obj\Debug\SisControl.View.FrmLocalizarFornedor.resources
+D:\SisControl\obj\Debug\SisControl.View.FrmCadFabricante.resources
+D:\SisControl\obj\Debug\SisControl.TexBoxTelefoneFormatado.resources
+D:\SisControl\obj\Debug\SisControl.PhoneFormat.resources
+D:\SisControl\bin\Debug\bdsiscontrol.mdf

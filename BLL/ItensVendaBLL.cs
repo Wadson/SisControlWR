@@ -83,13 +83,14 @@ namespace SisControl.BLL
 
                 while (datareader.Read())
                 {
-                    if (Guid.TryParse(datareader["ItemVendaID"].ToString(), out Guid itemVendaID))
+                    int ItemVendaID = 0;
+                    if (int.TryParse(datareader["ItemVendaID"].ToString(), out ItemVendaID))
                     {
-                        obj_Itensvenda.ItemVendaID = itemVendaID;
+                        obj_Itensvenda.ItemVendaID = ItemVendaID;
                     }
                     else
                     {
-                        throw new Exception("Falha ao converter ItemVendaID para Guid.");
+                        throw new Exception("Falha ao converter ItemVendaID para int.");
                     }
                 }
                 return obj_Itensvenda;

@@ -9,8 +9,8 @@ namespace SisControl.MODEL
     public class ParcelaModel
     {
         //public int ParcelaID { get; set; }
-        public Guid ParcelaID { get; set; } // Usando GUID como chave primária
-        public Guid VendaID { get; set; }
+        public int ParcelaID { get; set; } // Usando GUID como chave primária
+        public int VendaID { get; set; }
         public int NumeroParcela { get; set; }
         public DateTime DataVencimento { get; set; }
         public decimal ValorParcela { get; set; }

@@ -5,25 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SisControl.MODEL
-{
-    //public class ContaReceberModel
-    //{
-    //    //public int ContaReceberID { get; set; }
-    //    public Guid ContaReceberID { get; set; } // Usando GUID como chave primária
-    //    public int VendaID { get; set; }
-    //    public int ParcelaID { get; set; }
-    //    public DateTime? DataRecebimento { get; set; } // Permite valores nulos
-    //    public decimal ValorRecebido { get; set; }
-    //    public decimal SaldoRestante { get; set; }
-    //    public bool Pago { get; set; }
-
-
-    //}
+{  
     public class ContaReceberModel
     {
-        public Guid ContaReceberID { get; set; } // Usando GUID como chave primária
-        public Guid VendaID { get; set; } // Ajustando para GUID
-        public Guid ParcelaID { get; set; } // Ajustando para GUID
+        public int ContaReceberID { get; set; } // Usando GUID como chave primária
+        public int VendaID { get; set; } // Ajustando para GUID
+        public int ParcelaID { get; set; } // Ajustando para GUID
         public DateTime? DataRecebimento { get; set; } // Permite valores nulos
         public decimal ValorRecebido { get; set; }
         public decimal SaldoRestante { get; set; }
@@ -36,7 +23,7 @@ namespace SisControl.MODEL
         {
             return new ContaReceberModel
             {
-                ContaReceberID = Guid.NewGuid(), // Gerar um novo GUID para ContaReceberID
+                //ContaReceberID = ContaReceberID,// Gerar um novo CGUID para ContaReceberID
                 ParcelaID = parcela.ParcelaID,
                 VendaID = parcela.VendaID,
                 DataRecebimento = null,

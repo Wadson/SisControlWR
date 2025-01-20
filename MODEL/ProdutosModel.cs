@@ -23,5 +23,6 @@ namespace SisControl.MODEL
         public DateTime DataDeVencimento { get; set; }
         public byte[] Imagem { get; set; }
         public int FornecedorID { get; set; }
+        public string Referencia { get; set; }
     }
 }

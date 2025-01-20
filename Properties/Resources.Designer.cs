@@ -173,9 +173,29 @@ namespace SisControl.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Inserir16 {
+            get {
+                object obj = ResourceManager.GetObject("Inserir16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap inserir32 {
             get {
                 object obj = ResourceManager.GetObject("inserir32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap localizador16 {
+            get {
+                object obj = ResourceManager.GetObject("localizador16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -296,6 +316,16 @@ namespace SisControl.Properties {
         internal static System.Drawing.Bitmap Produtos {
             get {
                 object obj = ResourceManager.GetObject("Produtos", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap produtos16 {
+            get {
+                object obj = ResourceManager.GetObject("produtos16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

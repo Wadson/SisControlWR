@@ -84,12 +84,12 @@ namespace SisControl.DALL
                 {
                     while (reader.Read())
                     {
-                        Guid contaReceberID;
-                        Guid parcelaID;
+                        int contaReceberID;
+                        int parcelaID;
 
                         // Verificar e converter ContaReceberID
-                        if (Guid.TryParse(reader["ContaReceberID"].ToString(), out contaReceberID) &&
-                            Guid.TryParse(reader["ParcelaID"].ToString(), out parcelaID))
+                        if (int.TryParse(reader["ContaReceberID"].ToString(), out contaReceberID) &&
+                            int.TryParse(reader["ParcelaID"].ToString(), out parcelaID))
                         {
                             contasReceber.Add(new ContaReceberModel
                             {

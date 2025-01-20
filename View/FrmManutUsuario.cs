@@ -133,16 +133,11 @@ namespace SisControl
             this.dataGridPesquisar.Columns[1].Name = "NomeUsuario" ;
             this.dataGridPesquisar.Columns[2].Name = "Email"       ;
             this.dataGridPesquisar.Columns[3].Name = "Senha"        ;
-            this.dataGridPesquisar.Columns[4].Name = "TipoUsuario" ;  
+            this.dataGridPesquisar.Columns[4].Name = "TipoUsuario" ;
+            // Ocultar a coluna, mas ainda manter o acesso aos valores
+            dataGridPesquisar.Columns["UsuarioID"].Visible = false;
+        }
 
-            // Definir largura fixa das colunas
-            //dgv.Columns["UsuarioID"  ].Width = 100;
-            //dgv.Columns["NomeUsuario"].Width = 250;
-            //dgv.Columns["Email"      ].Width = 200;
-            //dgv.Columns["Senha"      ].Width = 100;
-            //dgv.Columns["TipoUsuario"].Width = 150;
-        }        
-       
         public void ListaUsuario()
         {
             UsuarioBLL usuariosBll = new UsuarioBLL();

@@ -11,21 +11,20 @@ using System.ComponentModel;
 using System.Text.RegularExpressions;
 using System.Security.Cryptography;
 using SisControl;
+using System.Drawing;
 
 namespace SisControl
 {
     public static class Utilitario
     {
+        
         private static readonly SqlConnection conn = Conexao.Conex();
         public static string RemoverZerosAEsquerda(string valor)
         {
             if (string.IsNullOrEmpty(valor))
                 return valor;
 
-            return valor.TrimStart('0');
-            // Remover zeros à esquerda do valor do TextBox
-            // string valorComZeros = txtNumeroComZeros.Text;
-            // string valorSemZeros = Utilitario.RemoverZerosAEsquerda(valorComZeros);
+            return valor.TrimStart('0');            
 
         }
 
@@ -74,7 +73,31 @@ namespace SisControl
 
             return proximoCodigo;
         }
+        //Novo Gerador de Código
+        public static int GerarNovoCodigoID(string NomeCampo, string nomeDaTabela)
+        {
+            return GetNextId(NomeCampo ,nomeDaTabela);
+        }
+        private static int GetNextId(string NomeCamp, string tableName)
+        {
+            int nextId = 1;
+            
+            using (var connection = Conexao.Conex())
+            {
+                string query = $"SELECT MAX({NomeCamp}) FROM {tableName}";
 
+                SqlCommand command = new SqlCommand(query, connection);
+
+                connection.Open();
+                object result = command.ExecuteScalar();
+                if (result != DBNull.Value)
+                {
+                    nextId = Convert.ToInt32(result) + 1;
+                }
+            }
+
+            return nextId;
+        }
         public static decimal RemoverFormatoMoeda(System.Windows.Forms.TextBox textBox)
         {
             // Obtém o texto do TextBox
@@ -131,8 +154,7 @@ namespace SisControl
 
         // Método para preencher ComboBox
         public static void PreencherComboBox(ComboBox comboBox, string query, string nome, string Id)
-        {
-            
+        {            
             using (SqlCommand cmd = new SqlCommand(query, conn))
             {
                 conn.Open();
@@ -148,6 +170,62 @@ namespace SisControl
                 }
             }
         }
+        public static int ObterCodigoComboBox(string query, string NomeParametro, string nomePesquisar)
+        {
+            int codigoCategoria = -1;
+            using (var connection = Conexao.Conex())
+            {
+                //string query = "SELECT CategoriaID FROM Categoria WHERE NomeCategoria = @NomeCategoria";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue(NomeParametro, nomePesquisar);
+
+                try
+                {
+                    connection.Open();
+                    var result = command.ExecuteScalar();
+                    if (result != null)
+                    {
+                        codigoCategoria = (int)result;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Erro ao buscar categoria: " + ex.Message);
+                }
+            }
+            return codigoCategoria;
+        }
+
+        private static bool isFormatting = false;
+
+        public static void FormatTextBoxToCurrency(TextBox textBox)
+        {
+            if (!isFormatting)
+            {
+                isFormatting = true;
+                if (decimal.TryParse(textBox.Text, out decimal value))
+                {
+                    textBox.Text = String.Format(CultureInfo.CurrentCulture, "{0:N2}", value);
+                }
+                else
+                {
+                    textBox.Text = "0.00";
+                }
+                textBox.SelectionStart = textBox.Text.Length;
+                isFormatting = false;
+            }
+        }
+
+
+        private static void FormatTextBoxToCurrencyHandler(object sender, EventArgs e)
+        {
+            FormatTextBoxToCurrency(sender as TextBox);
+        }
+
+
+
+
+
         // Método para tornar todos os textos dos TextBox em maiúsculas
         public static void TornarTextosMaiusculas(Control container)
         {
@@ -586,54 +664,101 @@ private void btnLimpar_Click(object sender, EventArgs e)
 
             worker.RunWorkerAsync();
         }
-         public static void FormataTelefone(object sender, KeyPressEventArgs e)
-    {
-        TextBox textBoxTelefone = sender as TextBox;
+        //public static void FormataTelefone(object sender, KeyPressEventArgs e)
+        //{
+        //    TextBox textBoxTelefone = sender as TextBox;
 
-        if (textBoxTelefone != null)
+        //    if (textBoxTelefone != null)
+        //    {
+        //        // Permite apenas dígitos e teclas de controle (como backspace)
+        //        if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+        //        {
+        //            e.Handled = true;
+        //            return;
+        //        }
+
+        //        if (char.IsDigit(e.KeyChar))
+        //        {
+        //            // Prevê o novo valor que seria adicionado ao TextBox
+        //            string novoTexto = textBoxTelefone.Text + e.KeyChar;
+
+        //            // Remove todos os caracteres não numéricos para simplificar a formatação
+        //            string numero = novoTexto.Replace("(", "").Replace(")", "").Replace(" ", "").Replace("-", "");
+
+        //            // Formatação do número de telefone conforme o comprimento do texto
+        //            if (numero.Length <= 2)
+        //            {
+        //                textBoxTelefone.Text = "(" + numero;
+        //            }
+        //            else if (numero.Length <= 6)
+        //            {
+        //                textBoxTelefone.Text = "(" + numero.Substring(0, 2) + ") " + numero.Substring(2);
+        //            }
+        //            else if (numero.Length <= 10)
+        //            {
+        //                textBoxTelefone.Text = "(" + numero.Substring(0, 2) + ") " + numero.Substring(2, 4) + "-" + numero.Substring(6);
+        //            }
+
+        //            // Define o cursor no final do texto
+        //            textBoxTelefone.SelectionStart = textBoxTelefone.Text.Length;
+        //            e.Handled = true;
+        //        }
+        //    }
+        //}
+
+        //// Exemplo de uso do método FormataTelefone
+        //// Na classe construtor de inicialização adicione este código:
+        public static void FormataTelefone(object sender, KeyPressEventArgs e)
         {
-            // Permite apenas dígitos e controle (backspace)
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            TextBox textBoxTelefone = sender as TextBox;
+
+            if (textBoxTelefone != null)
             {
-                e.Handled = true;
+                // Permite apenas dígitos e teclas de controle (como backspace)
+                if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+                {
+                    e.Handled = true;
+                    return;
+                }
+
+                // Permite apenas dígitos
+                if (char.IsDigit(e.KeyChar))
+                {
+                    // Prever o novo texto que será inserido
+                    string novoTexto = textBoxTelefone.Text + e.KeyChar;
+
+                    // Remove caracteres não numéricos para simplificar a formatação
+                    string numero = novoTexto.Replace("(", "").Replace(")", "").Replace(" ", "").Replace("-", "");
+
+                    // Formatação conforme o comprimento do texto
+                    if (numero.Length <= 2)
+                    {
+                        textBoxTelefone.Text = "(" + numero;
+                    }
+                    else if (numero.Length <= 7)
+                    {
+                        textBoxTelefone.Text = "(" + numero.Substring(0, 2) + ") " + numero.Substring(2);
+                    }
+                    else if (numero.Length <= 11)
+                    {
+                        textBoxTelefone.Text = "(" + numero.Substring(0, 2) + ") " + numero.Substring(2, 1) + " " + numero.Substring(3, 4) + "-" + numero.Substring(7);
+                    }
+
+                    // Define a posição do cursor no final do texto
+                    textBoxTelefone.SelectionStart = textBoxTelefone.Text.Length;
+                    e.Handled = true;
+                }
             }
-
-            // Formata o texto após a entrada de um dígito
-            if (char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
-            {
-                string numero = textBoxTelefone.Text.Replace("(", "").Replace(")", "").Replace(" ", "").Replace("-", "");
-                numero += e.KeyChar;
-
-                if (numero.Length == 1)
-                {
-                    textBoxTelefone.Text = "(" + numero;
-                }
-                else if (numero.Length == 2)
-                {
-                    textBoxTelefone.Text = "(" + numero + ")";
-                }
-                else if (numero.Length == 3)
-                {
-                    textBoxTelefone.Text = "(" + numero.Substring(0, 2) + ") " + numero.Substring(2);
-                }
-                else if (numero.Length == 8)
-                {
-                    textBoxTelefone.Text = "(" + numero.Substring(0, 2) + ") " + numero.Substring(2, 1) + " " + numero.Substring(3);
-                }
-                else if (numero.Length == 12)
-                {
-                    textBoxTelefone.Text = "(" + numero.Substring(0, 2) + ") " + numero.Substring(2, 1) + " " + numero.Substring(3, 4) + "-" + numero.Substring(7);
-                }
-
-                textBoxTelefone.SelectionStart = textBoxTelefone.Text.Length;
-            }            
         }
-        // Exemplo de uso do Método FormataTelefone
-        // Na classe construtor de inicialização adicione esté código:
-        // textBoxTelefone.KeyPress += new KeyPressEventHandler(FormatadorTelefoneGlobal.FormatarNumero); 
-    }
-        public static string LimparNumero(string numero) => Regex.Replace(numero, @"[\(\)\- ]", ""); //Exemplo de Uso LimparNumero// string numeroFormatado = txtTelefone.Text; // string numeroLimpo = UtilitarioTelefone.LimparNumero(numeroFormatado);
-        public static string LimparNumeroGeral(string numero) 
+
+        // Exemplo de uso do método FormataTelefone
+        // Na classe construtor de inicialização adicione este código:
+        //textBoxTelefone.KeyPress += new KeyPressEventHandler(FormataTelefone);
+
+
+
+    public static string LimparNumeroTelefone(string numero) => Regex.Replace(numero, @"[\(\)\- ]", ""); //Exemplo de Uso LimparNumero// string numeroFormatado = txtTelefone.Text; // string numeroLimpo = UtilitarioTelefone.LimparNumero(numeroFormatado);
+    public static string LimparNumeroGeral(string numero) 
     {   
         // Remove todos os caracteres que não são dígitos 
         return Regex.Replace(numero, @"\D", ""); 
@@ -641,6 +766,31 @@ private void btnLimpar_Click(object sender, EventArgs e)
         // string numeroFormatado = txtTelefone.Text; 
         // string numeroLimpo = UtilitarioTelefone.LimparNumero(numeroFormatado);
     }
+
+        // método para PERSONALIZAR NUMEROS DE TELEFONE LIMPO PARA O FORMATO (99) 9 9999-4444
+        // PARA EXIBIR EM TEXBOX
+        public static string FormatPhoneNumber(string number)
+        {
+            if (number.Length == 11)
+            {
+                return string.Format("({0}) {1}-{2}",
+                    number.Substring(0, 2),
+                    number.Substring(2, 5),
+                    number.Substring(7));
+            }
+            else if (number.Length == 10)
+            {
+                return string.Format("({0}) {1}-{2}",
+                    number.Substring(0, 2),
+                    number.Substring(2, 4),
+                    number.Substring(6));
+            }
+            else
+            {
+                return number;
+            }
+        }
+
     public static void FormatarCpf(object sender, KeyPressEventArgs e)
     {
         TextBox textBoxCpf = sender as TextBox;
@@ -710,7 +860,7 @@ private void btnLimpar_Click(object sender, EventArgs e)
         // Simulação de conversão - em um cenário real, você precisará manter um mapeamento dos hashes para os GUIDs
         return Guid.NewGuid();
     }
-       //Use o método global DE Conversão, Representação de Guid para Número Legivelno seu formulário:
+        //Use o método global DE Conversão, Representação de Guid para Número Legivelno seu formulário:
 
         /*
          public Form1()
@@ -730,7 +880,34 @@ private void btnLimpar_Click(object sender, EventArgs e)
         // Código para salvar vendaIdParaSalvar no banco de dados
         }
         */
+      
+        public static void PersonalizarTextBox(Control parentControl)
+        {
+            foreach (Control control in parentControl.Controls)
+            {
+                if (control is TextBox && !(control is CustomTextBox))
+                {
+                    TextBox originalTextBox = control as TextBox;
+                    CustomTextBox customTextBox = new CustomTextBox
+                    {
+                        Size = originalTextBox.Size,
+                        Location = originalTextBox.Location,
+                        Text = originalTextBox.Text,
+                        Font = originalTextBox.Font,
+                        Anchor = originalTextBox.Anchor,
+                        Dock = originalTextBox.Dock,
+                        Multiline = originalTextBox.Multiline
+                    };
 
+                    parentControl.Controls.Add(customTextBox);
+                    parentControl.Controls.Remove(originalTextBox);
+                }
+                else if (control.HasChildren)
+                {
+                    PersonalizarTextBox(control);
+                }
+            }
+        }
     }
 }
 
@@ -771,33 +948,6 @@ public class CustomTextBox : TextBox
 
 
 /*
-public void ApplyCustomTextBox(Control parentControl)
-{
-    foreach (Control control in parentControl.Controls)
-    {
-        if (control is TextBox && !(control is CustomTextBox))
-        {
-            TextBox originalTextBox = control as TextBox;
-            CustomTextBox customTextBox = new CustomTextBox
-            {
-                Size = originalTextBox.Size,
-                Location = originalTextBox.Location,
-                Text = originalTextBox.Text,
-                Font = originalTextBox.Font,
-                Anchor = originalTextBox.Anchor,
-                Dock = originalTextBox.Dock,
-                Multiline = originalTextBox.Multiline
-            };
-
-            parentControl.Controls.Add(customTextBox);
-            parentControl.Controls.Remove(originalTextBox);
-        }
-        else if (control.HasChildren)
-        {
-            ApplyCustomTextBox(control);
-        }
-    }
-}
 
 
 */

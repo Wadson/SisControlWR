@@ -57,5 +57,16 @@ namespace SisControl.Properties {
                 return ((string)(this["bdsiscontrolConnectionString1"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=NOTEBOOK-DELL\\SQLEXPRESS;Initial Catalog=bdsiscontrol;Integrated Secu" +
+            "rity=True;TrustServerCertificate=True")]
+        public string bdsiscontrolConnectionString2 {
+            get {
+                return ((string)(this["bdsiscontrolConnectionString2"]));
+            }
+        }
     }
 }

@@ -17,7 +17,7 @@ namespace SisControl.DALL
             var conn = Conexao.Conex();
             try
             {
-                SqlCommand sql = new SqlCommand("SELECT ProdutoID, NomeProduto, Descricao, PrecoCusto, Lucro, PrecoDeVenda, QuantidadeEmEstoque, DataDeEntrada, CategoriaID, FabricanteID, UnidadeDeMedida, Status, DataDeVencimento, Imagem, FornecedorID FROM Produtos", conn);
+                SqlCommand sql = new SqlCommand("SELECT ProdutoID, NomeProduto, Descricao, PrecoCusto, Lucro, PrecoDeVenda, QuantidadeEmEstoque, DataDeEntrada, CategoriaID, FabricanteID, UnidadeDeMedida, Status, DataDeVencimento, Imagem, FornecedorID, Referencia FROM Produtos", conn);
 
                 SqlDataAdapter daCliente = new SqlDataAdapter();
                 daCliente.SelectCommand = sql;
@@ -40,7 +40,7 @@ namespace SisControl.DALL
             var conn = Conexao.Conex();
             try
             {
-                SqlCommand sql = new SqlCommand("INSERT INTO Produto (NomeProduto, Descricao, PrecoCusto, Lucro, PrecoDeVenda, QuantidadeEmEstoque, DataDeEntrada, CategoriaID, FabricanteID, UnidadeDeMedida, Status, DataDeVencimento, Imagem, FornecedorID) VALUES (@NomeProduto, @Descricao, @PrecoCusto, @Lucro, @PrecoDeVenda, @QuantidadeEmEstoque, @DataDeEntrada, @CategoriaID, @FabricanteID, @UnidadeDeMedida, @Status, @DataDeVencimento, @Imagem, @FornecedorID)", conn);
+                SqlCommand sql = new SqlCommand("INSERT INTO Produtos (NomeProduto, Descricao, PrecoCusto, Lucro, PrecoDeVenda, QuantidadeEmEstoque, DataDeEntrada, CategoriaID, FabricanteID, UnidadeDeMedida, Status, DataDeVencimento, Imagem, FornecedorID, Referencia) VALUES (@NomeProduto, @Descricao, @PrecoCusto, @Lucro, @PrecoDeVenda, @QuantidadeEmEstoque, @DataDeEntrada, @CategoriaID, @FabricanteID, @UnidadeDeMedida, @Status, @DataDeVencimento, @Imagem, @FornecedorID, @Referencia)", conn);
 
                 sql.Parameters.AddWithValue("@NomeProduto", produto.NomeProduto);
                 sql.Parameters.AddWithValue("@Descricao", produto.Descricao);
@@ -56,6 +56,8 @@ namespace SisControl.DALL
                 sql.Parameters.AddWithValue("@DataDeVencimento", produto.DataDeVencimento);
                 sql.Parameters.AddWithValue("@Imagem", produto.Imagem);
                 sql.Parameters.AddWithValue("@FornecedorID", produto.FornecedorID);
+                sql.Parameters.AddWithValue("@Referencia", produto.Referencia);
+                
 
                 conn.Open();
                 sql.ExecuteNonQuery();
@@ -97,7 +99,7 @@ namespace SisControl.DALL
             var conn = Conexao.Conex();
             try
             {
-                SqlCommand sql = new SqlCommand("UPDATE Produto SET NomeProduto = @NomeProduto, Descricao = @Descricao, PrecoCusto = @PrecoCusto, Lucro = @Lucro, PrecoDeVenda = @PrecoDeVenda, QuantidadeEmEstoque = @QuantidadeEmEstoque, DataDeEntrada = @DataDeEntrada, CategoriaID = @CategoriaID, FabricanteID = @FabricanteID, UnidadeDeMedida = @UnidadeDeMedida, Status = @Status, DataDeVencimento = @DataDeVencimento, Imagem = @Imagem, FornecedorID = @FornecedorID WHERE ProdutoID = @ProdutoID", conn);
+                SqlCommand sql = new SqlCommand("UPDATE Produto SET NomeProduto = @NomeProduto, Descricao = @Descricao, PrecoCusto = @PrecoCusto, Lucro = @Lucro, PrecoDeVenda = @PrecoDeVenda, QuantidadeEmEstoque = @QuantidadeEmEstoque, DataDeEntrada = @DataDeEntrada, CategoriaID = @CategoriaID, FabricanteID = @FabricanteID, UnidadeDeMedida = @UnidadeDeMedida, Status = @Status, DataDeVencimento = @DataDeVencimento, Imagem = @Imagem, FornecedorID = @FornecedorID, Referencia = @Referencia WHERE ProdutoID = @ProdutoID", conn);
 
                 sql.Parameters.AddWithValue("@NomeProduto", produto.NomeProduto);
                 sql.Parameters.AddWithValue("@Descricao", produto.Descricao);
@@ -113,6 +115,7 @@ namespace SisControl.DALL
                 sql.Parameters.AddWithValue("@DataDeVencimento", produto.DataDeVencimento);
                 sql.Parameters.AddWithValue("@Imagem", produto.Imagem);
                 sql.Parameters.AddWithValue("@FornecedorID", produto.FornecedorID);
+                sql.Parameters.AddWithValue("@Referencia", produto.Referencia);
                 sql.Parameters.AddWithValue("@ProdutoID", produto.ProdutoID);
 
                 conn.Open();
@@ -136,7 +139,7 @@ namespace SisControl.DALL
             {
                 DataTable dt = new DataTable();
 
-                string sqlconn = "SELECT ProdutoID, NomeProduto, Descricao, PrecoCusto, Lucro, PrecoDeVenda, QuantidadeEmEstoque, DataDeEntrada, CategoriaID, FabricanteID, UnidadeDeMedida, Status, DataDeVencimento, Imagem, FornecedorID FROM Produtos WHERE NomeProduto LIKE @NomeProduto";
+                string sqlconn = "SELECT ProdutoID, NomeProduto, Descricao, PrecoCusto, Lucro, PrecoDeVenda, QuantidadeEmEstoque, DataDeEntrada, CategoriaID, FabricanteID, UnidadeDeMedida, Status, DataDeVencimento, Imagem, FornecedorID, Referencia FROM Produtos WHERE NomeProduto LIKE @NomeProduto";
 
                 SqlCommand cmd = new SqlCommand(sqlconn, conn);
                 cmd.Parameters.AddWithValue("@NomeProduto", "%" + nome + "%");
@@ -162,7 +165,7 @@ namespace SisControl.DALL
             {
                 DataTable dt = new DataTable();
 
-                string sqlconn = "SELECT ProdutoID, NomeProduto, Descricao, PrecoCusto, Lucro, PrecoDeVenda, QuantidadeEmEstoque, DataDeEntrada, CategoriaID, FabricanteID, UnidadeDeMedida, Status, DataDeVencimento, Imagem, FornecedorID FROM Produto WHERE ProdutoID LIKE @ProdutoID";
+                string sqlconn = "SELECT ProdutoID, NomeProduto, Descricao, PrecoCusto, Lucro, PrecoDeVenda, QuantidadeEmEstoque, DataDeEntrada, CategoriaID, FabricanteID, UnidadeDeMedida, Status, DataDeVencimento, Imagem, FornecedorID, Referencia FROM Produto WHERE ProdutoID LIKE @ProdutoID";
 
                 SqlCommand cmd = new SqlCommand(sqlconn, conn);
                 cmd.Parameters.AddWithValue("@ProdutoID", "%" + nome + "%");
