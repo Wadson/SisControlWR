@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 namespace SisControl.MODEL
 {
     public class ParcelaModel
-    {
-        //public int ParcelaID { get; set; }
-        public int ParcelaID { get; set; } // Usando GUID como chave primária
+    {        
+        public int ParcelaID { get; set; } 
         public int VendaID { get; set; }
         public int NumeroParcela { get; set; }
         public DateTime DataVencimento { get; set; }

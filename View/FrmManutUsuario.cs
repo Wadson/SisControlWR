@@ -14,14 +14,16 @@ namespace SisControl
 {
     public partial class FrmManutUsuario : SisControl.FrmBaseManutencao
     {
-        public FrmManutUsuario()
+        private new string StatusOperacao;
+        public FrmManutUsuario(string statusOperacao)
         {
             InitializeComponent();
+            this.StatusOperacao = statusOperacao;
         }
       
         private void CarregaDados()
         {
-            FrmCadUsuario cadUsuarios = new FrmCadUsuario(StatusOperacao);
+            FrmCadUser cadUsuarios = new FrmCadUser(StatusOperacao);
 
             try
             {
@@ -35,7 +37,7 @@ namespace SisControl
                 }
                 if(StatusOperacao == "ALTERAR")
                 {
-                    cadUsuarios.txtUsuarioID.Text =     dataGridPesquisar.CurrentRow.Cells["UsuarioID"].Value.ToString();
+                    cadUsuarios.txtUsarioID.Text =     dataGridPesquisar.CurrentRow.Cells["UsuarioID"].Value.ToString();
                     cadUsuarios.txtNomeUsuario.Text =      dataGridPesquisar.CurrentRow.Cells["NomeUsuario"].Value.ToString();
                     cadUsuarios.txtEmail.Text =         dataGridPesquisar.CurrentRow.Cells["Email"].Value.ToString();
                     cadUsuarios.txtSenha.Text =         dataGridPesquisar.CurrentRow.Cells["Senha"].Value.ToString();
@@ -46,14 +48,12 @@ namespace SisControl
                     
                     cadUsuarios.btnSalvar.Text = "Alterar";
                     cadUsuarios.btnNovo.Enabled = false;
-                    cadUsuarios.btnSalvar.TextAlign = ContentAlignment.MiddleRight;//AlinhamentoDeConteúdo.MiddleLeft; =  StringAlignment
-                    cadUsuarios.btnSalvar.Image = Properties.Resources.Alterar;
-                    cadUsuarios.ShowDialog();
+                                        cadUsuarios.ShowDialog();
                     ((FrmManutUsuario)Application.OpenForms["FrmManutUsuario"]).HabilitarTimer(true);
                 }
                 if (StatusOperacao == "EXCLUSÃO")
                 {
-                    cadUsuarios.txtUsuarioID.Text = dataGridPesquisar.CurrentRow.Cells["UsuarioID"].Value.ToString();
+                    cadUsuarios.txtUsarioID.Text = dataGridPesquisar.CurrentRow.Cells["UsuarioID"].Value.ToString();
                     cadUsuarios.txtNomeUsuario.Text = dataGridPesquisar.CurrentRow.Cells["NomeUsuario"].Value.ToString();
                     cadUsuarios.txtEmail.Text = dataGridPesquisar.CurrentRow.Cells["Email"].Value.ToString();
                     cadUsuarios.txtSenha.Text = dataGridPesquisar.CurrentRow.Cells["Senha"].Value.ToString();
@@ -63,11 +63,10 @@ namespace SisControl
                     StatusOperacao = "EXCLUSÃO";
 
                     cadUsuarios.btnSalvar.Text = "Excluir";
-                    cadUsuarios.btnNovo.Enabled = false;
-                    cadUsuarios.btnSalvar.TextAlign = ContentAlignment.MiddleRight;//AlinhamentoDeConteúdo.MiddleLeft; =  StringAlignment
-                    cadUsuarios.btnSalvar.Image = Properties.Resources.Excluir2;
+                    cadUsuarios.btnNovo.Enabled = false;                    
+                    
 
-                    cadUsuarios.txtUsuarioID.Enabled = false;
+                    cadUsuarios.txtUsarioID.Enabled = false;
                     cadUsuarios.txtNomeUsuario.Enabled = false;
                     cadUsuarios.txtEmail.Enabled = false;
                     cadUsuarios.txtSenha.Enabled  = false;
@@ -89,19 +88,7 @@ namespace SisControl
             ListaUsuario();
         }
         public void PersonalizarDataGridView(DataGridView dgv)
-        {
-            // Configuração dos cabeçalhos das colunas
-            dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy;
-            dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 12, FontStyle.Bold);
-            dgv.EnableHeadersVisualStyles = false; // Necessário para aplicar as cores personalizadas no cabeçalho
-
-            // Estilo alternado das linhas
-            dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.LightGray;
-
-            // Alinhamento e fonte das células
-            dgv.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dgv.DefaultCellStyle.Font = new Font("Arial", 10);
+        {          
 
             //Alinhar o as colunas
 

@@ -26,9 +26,9 @@ namespace SisControl.View
         public void ListarFabricante()
         {
             FabricanteDal dao = new FabricanteDal();
-            dataGridViewFabricantes.DataSource = dao.listarFabricante();
+            dataGridPesquisar.DataSource = dao.listarFabricante();
 
-            PersonalizarDataGridView(dataGridViewFabricantes);
+            PersonalizarDataGridView(dataGridPesquisar);
         }
 
         public void HabilitarTimer(bool habilitar)
@@ -38,51 +38,17 @@ namespace SisControl.View
        
         public void PersonalizarDataGridView(DataGridView dgv)
         {
-            // Configuração dos cabeçalhos das colunas
-            dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy;
-            dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 12, FontStyle.Bold);
-            dgv.EnableHeadersVisualStyles = false; // Necessário para aplicar as cores personalizadas no cabeçalho
-
-            // Estilo alternado das linhas
-            dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.LightGray;
-
-            // Alinhamento e fonte das células
-            dgv.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dgv.DefaultCellStyle.Font = new Font("Arial", 10);
-
-            //Alinhar o as colunas
-
-            //dataGridPesquisar.Columns["ProdutoID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
-            //dataGridPesquisar.Columns["Estoque"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
-
-            // Ajustar colunas automaticamente
-            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-
-            // Tornar o grid somente leitura
-            dgv.ReadOnly = true;
-
-            // Estilo das bordas das células
-            dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-
-            // Estilo da seleção das células
-            dgv.DefaultCellStyle.SelectionBackColor = Color.DarkTurquoise;
-            dgv.DefaultCellStyle.SelectionForeColor = Color.White;
-
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv.MultiSelect = false;
             // Esconder a coluna de cabeçalho de linha
             //dgv.RowHeadersVisible = false;
 
-            // Cor do grid
-            dgv.GridColor = Color.Black;
-
-            this.dataGridViewFabricantes.Columns[0].Name = "FabricanteID"   ;
-            this.dataGridViewFabricantes.Columns[1].Name = "NomeFabricante" ;            
-            this.dataGridViewFabricantes.Columns[2].Name = "Endereco"      ;
-            this.dataGridViewFabricantes.Columns[3].Name = "Telefone"    ;
+            //this.dataGridPesquisar.Columns[0].Name = "FabricanteID"   ;
+            //this.dataGridPesquisar.Columns[1].Name = "NomeFabricante" ;            
+            //this.dataGridPesquisar.Columns[2].Name = "Endereco"      ;
+            //this.dataGridPesquisar.Columns[3].Name = "Telefone"    ;
             // Ocultar a coluna, mas ainda manter o acesso aos valores
-            dataGridViewFabricantes.Columns["FabricanteID"].Visible = false;
+            dataGridPesquisar.Columns["FabricanteID"].Visible = false;
         }
 
         private void CarregaDados()
@@ -102,7 +68,7 @@ namespace SisControl.View
                 try
                 {
                     // Verificar se a DataGridView contém alguma linha
-                    if (dataGridViewFabricantes.Rows.Count == 0)
+                    if (dataGridPesquisar.Rows.Count == 0)
                     {
                         // Lançar exceção personalizada
                         //throw new Exception("A DataGridView está vazia. Não há dados para serem processados.");
@@ -113,21 +79,21 @@ namespace SisControl.View
                     {
                         // Exemplo: Acessar a primeira célula de cada linha
                         //  var valor = row.Cells[0].Value;
-                        frm.txtFabricanteID.Text = dataGridViewFabricantes.CurrentRow.Cells["FabricanteID"].Value.ToString();
-                        frm.txtNomeFabricante.Text = dataGridViewFabricantes.CurrentRow.Cells["NomeFabricante"].Value.ToString();
+                        frm.txtFabricanteID.Text = dataGridPesquisar.CurrentRow.Cells["FabricanteID"].Value.ToString();
+                        frm.txtNomeFabricante.Text = dataGridPesquisar.CurrentRow.Cells["NomeFabricante"].Value.ToString();
                         //frm.txtEndereco.Text = dataGridViewFabricantes.CurrentRow.Cells["Endereco"].Value.ToString();
 
 
                         //string NumeroFormatoTelefone = dataGridViewFabricantes.SelectedRows[0].Cells["Telefone"].Value.ToString();
                         //frm.txtTelefone. = Utilitario.FormatPhoneNumber(NumeroFormatoTelefone);
 
-                        string NumeroFormatoTelefone = dataGridViewFabricantes.CurrentRow.Cells["Telefone"].Value.ToString();
+                        string NumeroFormatoTelefone = dataGridPesquisar.CurrentRow.Cells["Telefone"].Value.ToString();
                         frm.txtTelefone.Text = NumeroFormatoTelefone;
 
                         // Suponha que dataGridView1 é seu DataGridView e a coluna "Endereco" contém o endereço concatenado
-                        if (dataGridViewFabricantes.SelectedRows.Count > 0)
+                        if (dataGridPesquisar.SelectedRows.Count > 0)
                         {
-                            string enderecoCompleto = dataGridViewFabricantes.SelectedRows[0].Cells["Endereco"].Value.ToString();
+                            string enderecoCompleto = dataGridPesquisar.SelectedRows[0].Cells["Endereco"].Value.ToString();
 
                             // Separar a string do endereço utilizando a vírgula como delimitador
                             string[] partesEndereco = enderecoCompleto.Split(new[] { ", " }, StringSplitOptions.None);
@@ -148,8 +114,8 @@ namespace SisControl.View
                         StatusOperacao = "ALTERAR";
                         frm.btnSalvar.Text = "Alterar";
                         frm.btnNovo.Enabled = false;
-                        frm.btnSalvar.TextAlign = ContentAlignment.MiddleRight;//AlinhamentoDeConteúdo.MiddleLeft; =  StringAlignment
-                        frm.btnSalvar.Image = Properties.Resources.Alterar;
+                        
+                        
                         frm.ShowDialog();                        
                     }
                 }
@@ -164,7 +130,7 @@ namespace SisControl.View
                 try
                 {
                     // Verificar se a DataGridView contém alguma linha
-                    if (dataGridViewFabricantes.Rows.Count == 0)
+                    if (dataGridPesquisar.Rows.Count == 0)
                     {
                         // Lançar exceção personalizada
                         //throw new Exception("A DataGridView está vazia. Não há dados para serem processados.");
@@ -174,15 +140,15 @@ namespace SisControl.View
                     {
                         // Exemplo: Acessar a primeira célula de cada linha
                         //  var valor = row.Cells[0].Value;
-                        frm.txtFabricanteID.Text = dataGridViewFabricantes.CurrentRow.Cells["FabricanteID"].Value.ToString();
-                        frm.txtNomeFabricante.Text = dataGridViewFabricantes.CurrentRow.Cells["NomeFabricante"].Value.ToString();
+                        frm.txtFabricanteID.Text = dataGridPesquisar.CurrentRow.Cells["FabricanteID"].Value.ToString();
+                        frm.txtNomeFabricante.Text = dataGridPesquisar.CurrentRow.Cells["NomeFabricante"].Value.ToString();
                         //frm.txtEndereco.Text = dataGridViewFabricantes.CurrentRow.Cells["Endereco"].Value.ToString();
-                        frm.txtTelefone.Text = dataGridViewFabricantes.CurrentRow.Cells["Telefone"].Value.ToString();
+                        frm.txtTelefone.Text = dataGridPesquisar.CurrentRow.Cells["Telefone"].Value.ToString();
 
                         // Suponha que dataGridView1 é seu DataGridView e a coluna "Endereco" contém o endereço concatenado
-                        if (dataGridViewFabricantes.SelectedRows.Count > 0)
+                        if (dataGridPesquisar.SelectedRows.Count > 0)
                         {
-                            string enderecoCompleto = dataGridViewFabricantes.SelectedRows[0].Cells["Endereco"].Value.ToString();
+                            string enderecoCompleto = dataGridPesquisar.SelectedRows[0].Cells["Endereco"].Value.ToString();
 
                             // Separar a string do endereço utilizando a vírgula como delimitador
                             string[] partesEndereco = enderecoCompleto.Split(new[] { ", " }, StringSplitOptions.None);
@@ -202,9 +168,7 @@ namespace SisControl.View
                         StatusOperacao = "EXCLUSÃO";
                         frm.btnSalvar.Text = "Excluir";
                         frm.btnNovo.Enabled = false;
-                        frm.btnSalvar.TextAlign = ContentAlignment.MiddleRight;//AlinhamentoDeConteúdo.MiddleLeft; =  StringAlignment
-                        frm.btnSalvar.Image = Properties.Resources.Excluir2;
-
+                       
                         frm.txtFabricanteID.Enabled = false;
                         frm.txtNomeFabricante.Enabled = false;
                         frm.txtEndereco.Enabled = false;                        
@@ -261,7 +225,7 @@ namespace SisControl.View
         {
             string nome = "%" + txtPesquisa.Text + "%";
             FabricanteDal dao = new FabricanteDal();
-            dataGridViewFabricantes.DataSource = dao.PesquisarPorNome(nome);
+            dataGridPesquisar.DataSource = dao.PesquisarPorNome(nome);
         }
 
         private void FrmManutCliente_Load(object sender, EventArgs e)

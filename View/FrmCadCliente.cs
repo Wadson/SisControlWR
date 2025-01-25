@@ -7,10 +7,13 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
+
 
 namespace SisControl.View
 {
-    public partial class FrmCadCliente : SisControl.FrmBaseGeral
+    public partial class FrmCadCliente : FrmModeloForm
     {
 
         private string QueryClientes = "SELECT MAX(ClienteID)  FROM Cliente";
@@ -21,6 +24,7 @@ namespace SisControl.View
         {
             InitializeComponent();
             this.StatusOperacao = statusOperação;
+            Utilitario.ConfigurarEventosDeFoco(this);// Texbox fundo amarelo quando em foco
         }
         public void AlterarRegistro()
         {
@@ -41,7 +45,7 @@ namespace SisControl.View
 
                 MessageBox.Show("Registro Alterado com sucesso!", "Alteração!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 ((FrmManutCliente)Application.OpenForms["FrmManutCliente"]).HabilitarTimer(true);// Habilita Timer do outro form Obs: O timer no outro form executa um Método.    
-                Utilitario.LimpaCampo(groupBox1);
+                Utilitario.LimpaCampoKrypton(this);
                 this.Close();
             }
             catch (Exception erro)
@@ -73,11 +77,11 @@ namespace SisControl.View
                 MessageBox.Show("REGISTRO gravado com sucesso! ", "Informação!!!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 ((FrmManutCliente)Application.OpenForms["FrmManutCliente"]).HabilitarTimer(true);
 
-                Utilitario.LimpaCampo(groupBox1);
+                Utilitario.LimpaCampoKrypton(this);
                 txtNomeCliente.Focus();
 
                 txtClienteID.Text = Utilitario.GerarProximoCodigo(QueryClientes).ToString();
-                Utilitario.AcrescentarZerosEsquerda(txtClienteID, 6);//();                                                                    
+                //Utilitario.AcrescentarZerosEsquerda(txtClienteID.Text, 6);//();                                                                    
 
                 int NovoCodigo = Utilitario.GerarProximoCodigo(QueryClientes);//RetornaCodigoContaMaisUm(QueryUsuario).ToString();
                 string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(NovoCodigo, 6);
@@ -106,13 +110,48 @@ namespace SisControl.View
                 clienteBll.Excluir(objetoUsuario);
                 MessageBox.Show("Registro Excluído com sucesso!", "Alteração!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 ((FrmManutCliente)Application.OpenForms["FrmManutCliente"]).HabilitarTimer(true);// Habilita Timer do outro form Obs: O timer no outro form executa um Método.    
-                Utilitario.LimpaCampo(groupBox1);
+                Utilitario.LimpaCampoKrypton(this);
                 this.Close();
             }
             catch (Exception erro)
             {
                 MessageBox.Show("Erro ao Excluir o registro!!! " + erro);
             }
+        }
+
+       
+               
+        private void FrmCadCliente_Load(object sender, EventArgs e)
+        {
+            if (StatusOperacao == "ALTERAR")
+            {
+                return;
+            }
+            if (StatusOperacao == "NOVO")
+            {
+                int NovoCodigo = Utilitario.GerarProximoCodigo(QueryClientes);//RetornaCodigoContaMaisUm(QueryUsuario).ToString();
+                string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(NovoCodigo, 6);
+                ClienteID = NovoCodigo;
+                txtClienteID.Text = numeroComZeros;
+
+                txtNomeCliente.Focus();
+            }            
+        }
+             
+
+        private void btnNovo_Click(object sender, EventArgs e)
+        {
+            Utilitario.LimpaCampo(this);
+
+            int NovoCodigo = Utilitario.GerarProximoCodigo(QueryClientes);//RetornaCodigoContaMaisUm(QueryUsuario).ToString();
+            string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(NovoCodigo, 6);
+            ClienteID = NovoCodigo;
+            txtClienteID.Text = numeroComZeros;
+        }
+
+        private void btnSair_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         private void btnSalvar_Click(object sender, EventArgs e)
@@ -134,49 +173,12 @@ namespace SisControl.View
             }
         }
 
-        private void btnNovo_Click(object sender, EventArgs e)
-        {
-            Utilitario.LimpaCampo(this);
-            
-            int NovoCodigo = Utilitario.GerarProximoCodigo(QueryClientes);//RetornaCodigoContaMaisUm(QueryUsuario).ToString();
-            string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(NovoCodigo, 6);
-            ClienteID = NovoCodigo;
-            txtClienteID.Text = numeroComZeros;
-            
-        }
-
-        private void btnFechar_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void FrmCadCliente_Load(object sender, EventArgs e)
-        {
-            if (StatusOperacao == "ALTERAR")
-            {
-                return;
-            }
-            if (StatusOperacao == "NOVO")
-            {
-                int NovoCodigo = Utilitario.GerarProximoCodigo(QueryClientes);//RetornaCodigoContaMaisUm(QueryUsuario).ToString();
-                string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(NovoCodigo, 6);
-                ClienteID = NovoCodigo;
-                txtClienteID.Text = numeroComZeros;
-
-                txtNomeCliente.Focus();
-            }            
-        }
-
         private void btnLocalizar_Click(object sender, EventArgs e)
-        {           
+        {
             FrmLocalizarCidade frmLocalizarCidade = new FrmLocalizarCidade();
             frmLocalizarCidade.Text = "Localizar Cidade...";
             VariavelGlobal.NomeFormulario = "FrmCadCliente";
-            frmLocalizarCidade.ShowDialog();            
-        }
-       
-        private void txtCpf_Leave(object sender, EventArgs e)
-        {            
+            frmLocalizarCidade.ShowDialog();
         }
     }
 }

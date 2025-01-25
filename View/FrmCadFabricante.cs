@@ -10,10 +10,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
+
 
 namespace SisControl.View
 {
-    public partial class FrmCadFabricante : Form
+    public partial class FrmCadFabricante : FrmModeloForm
     {
         private string QueryFabricante = "SELECT MAX(FabricanteID) FROM Fabricantes";
 
@@ -99,6 +102,31 @@ namespace SisControl.View
                 MessageBox.Show("Erro ao excluir fabricante: " + ex.Message);
             }
         }
+      
+        private void FrmCadFabricante_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl(this.ActiveControl, !e.Shift, true, true, true);
+            }
+        }
+
+        private void FrmCadFabricante_Load(object sender, EventArgs e)
+        {
+            if (StatusOperacao == "ALTERAR")
+            {
+                return;
+            }
+            if (StatusOperacao == "NOVO")
+            {
+                txtNomeFabricante.Focus();
+                int NovoCodigo = Utilitario.GerarProximoCodigo(QueryFabricante);//RetornaCodigoContaMaisUm(QueryUsuario).ToString();
+                string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(NovoCodigo, 4);
+                txtFabricanteID.Text = numeroComZeros;
+            }
+        }       
+                
+
         private void btnSalvar_Click(object sender, EventArgs e)
         {
             if (StatusOperacao == "ALTERAR")
@@ -126,28 +154,6 @@ namespace SisControl.View
                 }
             }
         }
-        private void FrmCadFabricante_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.SelectNextControl(this.ActiveControl, !e.Shift, true, true, true);
-            }
-        }
-
-        private void FrmCadFabricante_Load(object sender, EventArgs e)
-        {
-            if (StatusOperacao == "ALTERAR")
-            {
-                return;
-            }
-            if (StatusOperacao == "NOVO")
-            {
-                txtNomeFabricante.Focus();
-                int NovoCodigo = Utilitario.GerarProximoCodigo(QueryFabricante);//RetornaCodigoContaMaisUm(QueryUsuario).ToString();
-                string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(NovoCodigo, 4);
-                txtFabricanteID.Text = numeroComZeros;
-            }
-        }       
 
         private void btnNovo_Click(object sender, EventArgs e)
         {
@@ -159,7 +165,7 @@ namespace SisControl.View
             txtFabricanteID.Text = numeroComZeros;
         }
 
-        private void btnFechar_Click(object sender, EventArgs e)
+        private void btnSair_Click(object sender, EventArgs e)
         {
             this.Close();
         }

@@ -6,18 +6,22 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using static System.Net.Mime.MediaTypeNames;
+using Image = System.Drawing.Image;
 
 namespace SisControl.View
 {
     public partial class FrmManutProduto : SisControl.FrmBaseManutencao
     {
         private new string StatusOperacao;
-        public FrmManutProduto()
+       
+        public FrmManutProduto(string statusOperacao)
         {            
             InitializeComponent();
+            this.StatusOperacao = statusOperacao;
         }
 
         public void HabilitarTimer(bool habilitar)
@@ -31,37 +35,12 @@ namespace SisControl.View
             PersonalizarDataGridView(dataGridPesquisar);
         }
         public void PersonalizarDataGridView(DataGridView dgv)
-        {
-            // Configuração dos cabeçalhos das colunas
-            dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy;
-            dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 12, FontStyle.Bold);
-            dgv.EnableHeadersVisualStyles = false; // Necessário para aplicar as cores personalizadas no cabeçalho
-
-            // Estilo alternado das linhas
-            dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.LightGray;
-
-            // Alinhamento e fonte das células
-            dgv.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dgv.DefaultCellStyle.Font = new Font("Arial", 10);
-
+        {            
             //Alinhar o as colunas
 
             dgv.Columns["ProdutoID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
             dgv.Columns["QuantidadeEmEstoque"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
-
-            // Ajustar colunas automaticamente
-            //dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-
-            // Tornar o grid somente leitura
-            dgv.ReadOnly = true;
-
-            // Estilo das bordas das células
-
-            //Adiciona Dock para expandir o DataGridView
-            dgv.Dock = DockStyle.Fill;
-
+                        
             dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
 
             // Estilo da seleção das células
@@ -77,28 +56,19 @@ namespace SisControl.View
             dgv.GridColor = Color.Black;
 
             dgv.Columns[0].Name = "ProdutoID";
-            dgv.Columns[1].Name = "NomeProduto";
-            dgv.Columns[2].Name = "Descricao";
-            dgv.Columns[3].Name = "PrecoCusto";
-            dgv.Columns[4].Name = "Lucro";
-            dgv.Columns[5].Name = "PrecoDeVenda";
-            dgv.Columns[6].Name = "QuantidadeEmEstoque";
-            dgv.Columns[7].Name = "DataDeEntrada";
-            dgv.Columns[8].Name = "CategoriaID";
-            dgv.Columns[9].Name = "FabricanteID";
-            dgv.Columns[10].Name = "UnidadeDeMedida";
-            dgv.Columns[11].Name = "Status";
-            dgv.Columns[12].Name = "DataDeVencimento";
-            dgv.Columns[13].Name = "Imagem";
-            dgv.Columns[14].Name = "FornecedorID";
-            dgv.Columns[15].Name = "Referencia";
+            dgv.Columns[1].Name = "NomeProduto";           
+            dgv.Columns[2].Name = "PrecoCusto";
+            dgv.Columns[3].Name = "Lucro";
+            dgv.Columns[4].Name = "PrecoDeVenda";
+            dgv.Columns[5].Name = "QuantidadeEmEstoque";
+            dgv.Columns[6].Name = "DataDeEntrada";
+            dgv.Columns[7].Name = "Status";           
+            dgv.Columns[8].Name = "Imagem";           
+            dgv.Columns[9].Name = "Referencia";
 
             // Centralizar colunas de IDs e Quantidade
             dgv.Columns["ProdutoID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgv.Columns["QuantidadeEmEstoque"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgv.Columns["CategoriaID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgv.Columns["FabricanteID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgv.Columns["FornecedorID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgv.Columns["QuantidadeEmEstoque"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;   
 
         }
         private void CarregaDados()
@@ -131,36 +101,35 @@ namespace SisControl.View
                         //  var valor = row.Cells[0].Value;
                         frm.txtProdutoID.Text = dataGridPesquisar.CurrentRow.Cells["ProdutoID"].Value.ToString();
                         frm.txtNomeProduto.Text = dataGridPesquisar.CurrentRow.Cells["NomeProduto"].Value.ToString();
-                        frm.txtDescricao.Text = dataGridPesquisar.CurrentRow.Cells["Descricao"].Value.ToString();
                         frm.txtPrecoCusto.Text = dataGridPesquisar.CurrentRow.Cells["PrecoCusto"].Value.ToString();
                         frm.txtLucro.Text = dataGridPesquisar.CurrentRow.Cells["Lucro"].Value.ToString();
                         frm.txtPrecoDeVenda.Text = dataGridPesquisar.CurrentRow.Cells["PrecoDeVenda"].Value.ToString();
-                        frm.txtQuantidadeEmEstoque.Text = dataGridPesquisar.CurrentRow.Cells["QuantidadeEmEstoque"].Value.ToString();
+                        frm.txtEstoque.Text = dataGridPesquisar.CurrentRow.Cells["QuantidadeEmEstoque"].Value.ToString();                        
                         frm.dtpDataDeEntrada.Text = dataGridPesquisar.CurrentRow.Cells["DataDeEntrada"].Value.ToString();
-                        frm.CategoriaID = int.Parse(dataGridPesquisar.CurrentRow.Cells["CategoriaID"].Value.ToString());
-                        frm.FabricanteID = int.Parse(dataGridPesquisar.CurrentRow.Cells["FabricanteID"].Value.ToString());
-                        frm.cmbUnidadeDeMedida.Text = dataGridPesquisar.CurrentRow.Cells["UnidadeDeMedida"].Value.ToString();
                         frm.cmbStatus.Text = dataGridPesquisar.CurrentRow.Cells["Status"].Value.ToString();
-                        frm.dtpDataDeVencimento.Text = dataGridPesquisar.CurrentRow.Cells["DataDeVencimento"].Value.ToString();
-                        frm.txtFornecedorID.Text = dataGridPesquisar.CurrentRow.Cells["FornecedorID"].Value.ToString();
-                        frm.txtReferência.Text = dataGridPesquisar.CurrentRow.Cells["Referencia"].Value.ToString();
+
+                        // Convertendo a imagem do DataGridView para exibi-la no PictureBox
+                        if (dataGridPesquisar.CurrentRow.Cells["Imagem"].Value != DBNull.Value)
+                        {
+                            byte[] imageBytes = (byte[])dataGridPesquisar.CurrentRow.Cells["Imagem"].Value;
+
+                            using (MemoryStream ms = new MemoryStream(imageBytes))
+                            {
+                                frm.pictureBoxProduto.Image = System.Drawing.Image.FromStream(ms);
+                            }
+                        }
+
+                        frm.txtReferencia.Text = dataGridPesquisar.CurrentRow.Cells["Referencia"].Value.ToString();                        
+                        
 
                         frm.Text = "SISCONTROL - ALTERAR REGISTRO";
-                        StatusOperacao = "ALTERAR";
-                        frm.btnSalvar.Text = "Alterar";
+                        StatusOperacao = "ALTERAR";                        
                         frm.btnNovo.Enabled = false;
-                        frm.btnSalvar.TextAlign = ContentAlignment.MiddleRight;//AlinhamentoDeConteúdo.MiddleLeft; =  StringAlignment
-                        frm.btnSalvar.Image = Properties.Resources.Alterar;
+                        frm.btnSalva.Text = "&Alterar";
                         frm.ShowDialog();
                         ((FrmManutProduto)System.Windows.Forms.Application.OpenForms["FrmManutProduto"]).HabilitarTimer(true);
                     }
-
-                    //// Execução do código desejado
-                    //foreach (DataGridViewRow row in dataGridPesquisar.Rows)
-                    //{
-
-
-                    //}
+                    
                 }
                 catch (Exception ex)
                 {
@@ -185,47 +154,46 @@ namespace SisControl.View
                         //  var valor = row.Cells[0].Value;
                         frm.txtProdutoID.Text = dataGridPesquisar.CurrentRow.Cells["ProdutoID"].Value.ToString();
                         frm.txtNomeProduto.Text = dataGridPesquisar.CurrentRow.Cells["NomeProduto"].Value.ToString();
-                        frm.txtDescricao.Text = dataGridPesquisar.CurrentRow.Cells["Descricao"].Value.ToString();
                         frm.txtPrecoCusto.Text = dataGridPesquisar.CurrentRow.Cells["PrecoCusto"].Value.ToString();
                         frm.txtLucro.Text = dataGridPesquisar.CurrentRow.Cells["Lucro"].Value.ToString();
                         frm.txtPrecoDeVenda.Text = dataGridPesquisar.CurrentRow.Cells["PrecoDeVenda"].Value.ToString();
-                        frm.txtQuantidadeEmEstoque.Text = dataGridPesquisar.CurrentRow.Cells["QuantidadeEmEstoque"].Value.ToString();
+                        frm.txtEstoque.Text = dataGridPesquisar.CurrentRow.Cells["QuantidadeEmEstoque"].Value.ToString();
                         frm.dtpDataDeEntrada.Text = dataGridPesquisar.CurrentRow.Cells["DataDeEntrada"].Value.ToString();
-                        frm.CategoriaID = int.Parse(dataGridPesquisar.CurrentRow.Cells["CategoriaID"].Value.ToString());
-                        frm.FabricanteID = int.Parse(dataGridPesquisar.CurrentRow.Cells["FabricanteID"].Value.ToString());
-                        frm.cmbUnidadeDeMedida.Text = dataGridPesquisar.CurrentRow.Cells["UnidadeDeMedida"].Value.ToString();
                         frm.cmbStatus.Text = dataGridPesquisar.CurrentRow.Cells["Status"].Value.ToString();
-                        frm.dtpDataDeVencimento.Text = dataGridPesquisar.CurrentRow.Cells["DataDeVencimento"].Value.ToString();
-                        frm.txtFornecedorID.Text = dataGridPesquisar.CurrentRow.Cells["FornecedorID"].Value.ToString();
-                        frm.txtReferência.Text = dataGridPesquisar.CurrentRow.Cells["Referencia"].Value.ToString();
 
-                        frm.Text = "SISCONTROL - EXCLUSÃO DE REGISTRO";                        
-                        frm.btnSalvar.Text = "Excluir";
-                        frm.btnNovo.Enabled = false;
-                        frm.btnSalvar.TextAlign = ContentAlignment.MiddleRight;//AlinhamentoDeConteúdo.MiddleLeft; =  StringAlignment
-                        frm.btnSalvar.Image = Properties.Resources.Excluir2;
+                        if (dataGridPesquisar.CurrentRow.Cells["Imagem"].Value != DBNull.Value)
+                        {
+                            byte[] imageBytes = (byte[])dataGridPesquisar.CurrentRow.Cells["Imagem"].Value;
+
+                            using (MemoryStream ms = new MemoryStream(imageBytes))
+                            {
+                                frm.pictureBoxProduto.Image = System.Drawing.Image.FromStream(ms);
+                            }
+                        }
+
+
+                        frm.txtReferencia.Text = dataGridPesquisar.CurrentRow.Cells["Referencia"].Value.ToString();
+
+                        frm.Text = "SISCONTROL - EXCLUSÃO DE REGISTRO";
+                        frm.btnSalva.Text = "&Excluir";
+
+                        frm.btnNovo.Enabled = false;                       
 
                         // Desabilitar os campos
                         frm.txtProdutoID.Enabled = false;
                         frm.txtNomeProduto.Enabled = false;
-                        frm.txtDescricao.Enabled = false;
+                        frm.txtReferencia.Enabled = false;                      
                         frm.txtPrecoCusto.Enabled = false;
                         frm.txtLucro.Enabled = false;
                         frm.txtPrecoDeVenda.Enabled = false;
-                        frm.txtQuantidadeEmEstoque.Enabled = false;
-                        frm.dtpDataDeEntrada.Enabled = false;                        
-                        frm.cmbUnidadeDeMedida.Enabled = false;
+                        frm.dtpDataDeEntrada.Enabled = false;   
                         frm.cmbStatus.Enabled = false;
-                        frm.dtpDataDeVencimento.Enabled = false;
-                        frm.txtFornecedorID.Enabled = false;
+                        frm.txtReferencia.Enabled = false;
+                       
 
                         frm.ShowDialog();
                         ((FrmManutProduto)System.Windows.Forms.Application.OpenForms["FrmManutProduto"]).HabilitarTimer(true);
-                    }
-                    // Execução do código desejado
-                    //foreach (DataGridViewRow row in dataGridPesquisar.Rows)
-                    //{
-                    //}
+                    }                   
                 }
                 catch (Exception ex)
                 {
@@ -237,7 +205,7 @@ namespace SisControl.View
         private void txtPesquisa_TextChanged(object sender, EventArgs e)
         {
             string nome = "%" + txtPesquisa.Text + "%";
-            ProdutosDALL objetoDal = new ProdutosDALL();
+            ProdutosDal objetoDal = new ProdutosDal();
 
             dataGridPesquisar.DataSource = objetoDal.PesquisarPorNome(nome);
             PersonalizarDataGridView(dataGridPesquisar);

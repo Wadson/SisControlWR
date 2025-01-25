@@ -13,6 +13,7 @@ namespace SisControl.MODEL
         public DateTime DataVenda { get; set; }
         public int ClienteID { get; set; }
         public decimal ValorTotal { get; set; }
+        public int FormaPgtoID { get; set; }
 
         public List<ItemVendaModel> ItensVendidos { get; set; }
         public List<ParcelaModel> Parcelas { get; set; }

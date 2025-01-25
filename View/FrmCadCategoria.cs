@@ -7,10 +7,12 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace SisControl.View
 {
-    public partial class FrmCadCategoria : SisControl.FrmBaseGeral
+    public partial class FrmCadCategoria : FrmModeloForm
     {
         private string QueryCategoria = "SELECT MAX(CategoriaID) FROM Categoria";
         private int UsuarioID;
@@ -39,7 +41,7 @@ namespace SisControl.View
                 MessageBox.Show("REGISTRO gravado com sucesso! ", "Informação!!!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 ((FrmManutCategoria)Application.OpenForms["FrmManutCategoria"]).HabilitarTimer(true);
 
-                Utilitario.LimpaCampo(this);
+                Utilitario.LimpaCampoKrypton(this);
                 txtNome.Focus();
 
                 int NovoCodigo = Utilitario.GerarProximoCodigo(QueryCategoria);//RetornaCodigoContaMaisUm(QueryUsuario).ToString();
@@ -56,24 +58,6 @@ namespace SisControl.View
                 MessageBox.Show("Win32 Win32!!! \n" + erro);
             }
         }
-        private void btnSalvar_Click(object sender, EventArgs e)
-        {
-            if (StatusOperacao == "NOVO")
-            {
-                SalvarRegistro();                
-            }
-            else if (StatusOperacao == "ALTERAR")
-            {
-                AlterarRegistro();
-            }
-            else if (StatusOperacao == "EXCLUSÃO")
-            {
-                if (MessageBox.Show("Deseja Excluir? \n\n O Cliente: " + txtNome.Text + " ??? ", "Excluir", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    ExcluirRegistro();
-                }
-            }
-        }
         public void AlterarRegistro()
         {
             try
@@ -88,7 +72,7 @@ namespace SisControl.View
 
                 MessageBox.Show("Registro Alterado com sucesso!", "Alteração!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 //((FrmManutCliente)Application.OpenForms["FrmManutCliente"]).HabilitarTimer(true);// Habilita Timer do outro form Obs: O timer no outro form executa um Método.    
-                Utilitario.LimpaCampo(this);
+                Utilitario.LimpaCampoKrypton(this);
                 this.Close();
             }
             catch (Exception erro)
@@ -108,26 +92,13 @@ namespace SisControl.View
                 categoriaBll.Excluir(objetocategoria);
                 MessageBox.Show("Registro Excluído com sucesso!", "Alteração!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 //((FrmManutCliente)Application.OpenForms["FrmManutCliente"]).HabilitarTimer(true);// Habilita Timer do outro form Obs: O timer no outro form executa um Método.    
-                Utilitario.LimpaCampo(this);
+                Utilitario.LimpaCampoKrypton(this);
                 this.Close();
             }
             catch (Exception erro)
             {
                 MessageBox.Show("Erro ao Excluir o registro!!! " + erro);
             }
-        }
-        private void btnNovo_Click(object sender, EventArgs e)
-        {
-            Utilitario.LimpaCampo(this);
-            int NovoCodigo = Utilitario.GerarProximoCodigo(QueryCategoria);//RetornaCodigoContaMaisUm(QueryUsuario).ToString();
-            string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(NovoCodigo, 6);
-            CategoriaID = NovoCodigo;
-            txtCodigo.Text = numeroComZeros;
-        }
-
-        private void btnFechar_Click(object sender, EventArgs e)
-        {
-            this.Close();   
         }
 
         private void FrmCadCategoria_Load(object sender, EventArgs e)
@@ -145,6 +116,39 @@ namespace SisControl.View
 
                 txtNome.Focus();
             }            
+        }
+
+        private void btnSalvar_Click(object sender, EventArgs e)
+        {
+            if (StatusOperacao == "NOVO")
+            {
+                SalvarRegistro();
+            }
+            else if (StatusOperacao == "ALTERAR")
+            {
+                AlterarRegistro();
+            }
+            else if (StatusOperacao == "EXCLUSÃO")
+            {
+                if (MessageBox.Show("Deseja Excluir? \n\n O Cliente: " + txtNome.Text + " ??? ", "Excluir", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    ExcluirRegistro();
+                }
+            }
+        }
+
+        private void btnNovo_Click(object sender, EventArgs e)
+        {
+            Utilitario.LimpaCampoKrypton(this);
+            int NovoCodigo = Utilitario.GerarProximoCodigo(QueryCategoria);//RetornaCodigoContaMaisUm(QueryUsuario).ToString();
+            string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(NovoCodigo, 6);
+            CategoriaID = NovoCodigo;
+            txtCodigo.Text = numeroComZeros;
+        }
+
+        private void btnSair_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

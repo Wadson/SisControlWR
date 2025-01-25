@@ -12,6 +12,7 @@ using System.Text.RegularExpressions;
 using System.Security.Cryptography;
 using SisControl;
 using System.Drawing;
+using ComponentFactory.Krypton.Toolkit;
 
 namespace SisControl
 {
@@ -27,6 +28,97 @@ namespace SisControl
             return valor.TrimStart('0');            
 
         }
+        // Mudar a Cor dos Texbox inicio
+        public static void ConfigurarEventosDeFoco(Control container)
+        {
+            foreach (Control c in container.Controls)
+            {
+                if (c is TextBox textBox)
+                {
+                    textBox.Enter += TextBox_Enter;
+                    textBox.Leave += TextBox_Leave;
+                }
+                else if (c is Panel panel || c is GroupBox groupBox)
+                {
+                    // Configurar recursivamente para controles dentro de Painéis e GroupBoxes
+                    ConfigurarEventosDeFoco(c);
+                }
+            }
+        }
+        public static void ConfigurarEventosDeFocoKrypton( Control container)
+        {
+            foreach (Control c in container.Controls)
+            {
+                if (c is KryptonTextBox textBox)
+                {
+                    textBox.Enter += TextBox_Enter;
+                    textBox.Leave += TextBox_Leave;
+                }
+                else if (c is KryptonPanel panel || c is KryptonGroupBox groupBox)
+                {
+                    // Configurar recursivamente para controles dentro de Painéis e GroupBoxes
+                    ConfigurarEventosDeFoco(c);
+                }
+            }
+        }
+
+        private static void TextBox_Enter(object sender, EventArgs e)
+        {
+            if (sender is TextBox textBox)
+            {
+                textBox.BackColor = Color.Yellow;//Color.LightBlue; // Define a cor de fundo como azul claro quando em foco
+            }
+        }
+
+        private static void TextBox_Leave(object sender, EventArgs e)
+        {
+            if (sender is TextBox textBox)
+            {
+                textBox.BackColor = Color.White; // Define a cor de fundo como branco quando perde o foco
+            }
+        }
+        //FIM ACIMA
+        public static string BuscarResultadoPorQuery(string query, int codigo)
+        {
+            string resultado = "Resultado não encontrado";
+
+            using (var connection = Conexao.Conex())
+            {
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Codigo", codigo);
+
+                try
+                {
+                    connection.Open();
+                    Console.WriteLine("Conexão aberta com sucesso.");
+                    Console.WriteLine($"Executando a query: {query}");
+
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        resultado = reader[0].ToString(); // Acessando o primeiro resultado da consulta
+                        Console.WriteLine($"Resultado encontrado: {resultado}");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Nenhum registro encontrado.");
+                    }
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    // Trate exceções conforme necessário
+                    Console.WriteLine(ex.Message);
+                }
+            }
+
+            return resultado;
+        }
+
+
+
+
+
 
         // Método que gera o próximo código
         public static int GerarProximoCodigo(string query)
@@ -74,17 +166,19 @@ namespace SisControl
             return proximoCodigo;
         }
         //Novo Gerador de Código
-        public static int GerarNovoCodigoID(string NomeCampo, string nomeDaTabela)
+
+        public static int GerarNovoCodigoID(string nomeCampo, string nomeDaTabela)
         {
-            return GetNextId(NomeCampo ,nomeDaTabela);
+            return GetNextId(nomeCampo, nomeDaTabela);
         }
-        private static int GetNextId(string NomeCamp, string tableName)
+
+        private static int GetNextId(string nomeCampo, string nomeDaTabela)
         {
             int nextId = 1;
-            
+
             using (var connection = Conexao.Conex())
             {
-                string query = $"SELECT MAX({NomeCamp}) FROM {tableName}";
+                string query = $"SELECT MAX({nomeCampo}) FROM {nomeDaTabela}";
 
                 SqlCommand command = new SqlCommand(query, connection);
 
@@ -98,6 +192,30 @@ namespace SisControl
 
             return nextId;
         }
+        //public static int GerarNovoCodigoID(string NomeCampo, string nomeDaTabela)
+        //{
+        //    return GetNextId(NomeCampo ,nomeDaTabela);
+        //}
+        //private static int GetNextId(string NomeCamp, string tableName)
+        //{
+        //    int nextId = 1;
+
+        //    using (var connection = Conexao.Conex())
+        //    {
+        //        string query = $"SELECT MAX({NomeCamp}) FROM {tableName}";
+
+        //        SqlCommand command = new SqlCommand(query, connection);
+
+        //        connection.Open();
+        //        object result = command.ExecuteScalar();
+        //        if (result != DBNull.Value)
+        //        {
+        //            nextId = Convert.ToInt32(result) + 1;
+        //        }
+        //    }
+
+        //    return nextId;
+        //}
         public static decimal RemoverFormatoMoeda(System.Windows.Forms.TextBox textBox)
         {
             // Obtém o texto do TextBox
@@ -170,6 +288,23 @@ namespace SisControl
                 }
             }
         }
+        public static void PreencherComboBoxKrypton(KryptonComboBox comboBox, string query, string nome, string Id)
+        {
+            using (SqlCommand cmd = new SqlCommand(query, conn))
+            {
+                conn.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    DataTable dt = new DataTable();
+                    dt.Load(reader);
+
+                    comboBox.DisplayMember = nome;  // Substitua "Nome" pela coluna que deseja exibir
+                    comboBox.ValueMember = Id;      // Substitua "ID" pela coluna de valor
+                    comboBox.DataSource = dt;
+                    conn.Close();
+                }
+            }
+        }
         public static int ObterCodigoComboBox(string query, string NomeParametro, string nomePesquisar)
         {
             int codigoCategoria = -1;
@@ -195,6 +330,115 @@ namespace SisControl
             }
             return codigoCategoria;
         }
+        public static void PesquisarPorNome(string query, string nomeParametro, string nomePesquisar, DataGridView dataGridView)
+        {
+            using (var connection = Conexao.Conex())
+            {
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue(nomeParametro, nomePesquisar);
+
+                try
+                {
+                    connection.Open();
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter(command);
+                    DataTable dataTable = new DataTable();
+                    dataAdapter.Fill(dataTable);
+
+                    if (dataTable.Rows.Count == 0)
+                    {
+                        MessageBox.Show("Nenhum resultado encontrado.","Informe.",MessageBoxButtons.OK,MessageBoxIcon.Asterisk);
+                        dataGridView.DataSource = null; // Limpa o DataGridView
+                    }
+                    else
+                    {
+                        dataGridView.DataSource = dataTable;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Erro ao buscar categoria: " + ex.Message);
+                }
+            }
+        }
+        public static void PesquisarPorNomeMensagemSuprimida(string query, string nomeParametro, string valorParametro, KryptonDataGridView dgv)
+        {
+            try
+            {
+                using (SqlConnection conn = Conexao.Conex())
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue(nomeParametro, valorParametro);
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            DataTable dt = new DataTable();
+                            dt.Load(reader);
+
+                            if (dt.Rows.Count == 0)
+                            {
+                                // Limpar o DataGridView se não houver resultados
+                                dgv.DataSource = null;
+                                return;
+                            }
+
+                            dgv.DataSource = dt;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao buscar categoria: " + ex.Message);
+            }
+        }
+
+
+        public static void PesquisarPorPeriodo(string query, string nomeParametroInicio, DateTime dataVencimentoInicio, string nomeParametroFim, DateTime dataVencimentoFim, DataGridView dataGridView)
+        {
+            using (var connection = Conexao.Conex())
+            {
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue(nomeParametroInicio, dataVencimentoInicio);
+                command.Parameters.AddWithValue(nomeParametroFim, dataVencimentoFim);
+
+                try
+                {
+                    connection.Open();
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter(command);
+                    DataTable dataTable = new DataTable();
+                    dataAdapter.Fill(dataTable);
+
+                    if (dataTable.Rows.Count == 0)
+                    {
+                        MessageBox.Show("Nenhum resultado encontrado.", "Informe.", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        dataGridView.DataSource = null; // Limpa o DataGridView
+                    }
+                    else
+                    {
+                        dataGridView.DataSource = dataTable;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Erro ao buscar categoria: " + ex.Message);
+                }
+            }
+        }
+        public static int ContaRegistros(DataGridView dataGridView)
+        {
+            if (dataGridView.DataSource != null)
+            {
+                DataTable dataTable = dataGridView.DataSource as DataTable;
+                return dataTable.Rows.Count;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
 
         private static bool isFormatting = false;
 
@@ -215,7 +459,23 @@ namespace SisControl
                 isFormatting = false;
             }
         }
-
+        public static void FormatTextBoxToCurrencyKrypton(KryptonTextBox textBox)
+        {
+            if (!isFormatting)
+            {
+                isFormatting = true;
+                if (decimal.TryParse(textBox.Text, out decimal value))
+                {
+                    textBox.Text = String.Format(CultureInfo.CurrentCulture, "{0:N2}", value);
+                }
+                else
+                {
+                    textBox.Text = "0.00";
+                }
+                textBox.SelectionStart = textBox.Text.Length;
+                isFormatting = false;
+            }
+        }
 
         private static void FormatTextBoxToCurrencyHandler(object sender, EventArgs e)
         {
@@ -327,6 +587,7 @@ private void FrmMeuFormulario_Load(object sender, EventArgs e)
                 }
             }
         }
+
         // Método para limpar campos
         public static void LimpaCampo(Control container)
         {
@@ -356,17 +617,45 @@ private void FrmMeuFormulario_Load(object sender, EventArgs e)
                 {
                     LimpaCampo(groupBox); // Recursivamente limpar os controles dentro do groupBox
                 }
+                else if (c is DataGridView dataGridView)
+                {
+                    dataGridView.Rows.Clear(); // Limpar todas as linhas do DataGridView
+                }
             }
-
-            /*
-
-            ******IMPLEMENTAÇÃO DO MÉTODO LimpaCampo*******
-private void btnLimpar_Click(object sender, EventArgs e)
-{
-    Utilitario.LimpaCampo(this); // Chama o método global para limpar todos os campos do formulário
-    MessageBox.Show("Todos os campos foram limpos!", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
-}
-            */
+        }
+        public static void LimpaCampoKrypton(Control container)
+        {
+            foreach (Control c in container.Controls)
+            {
+                if (c is KryptonTextBox textBox)
+                {
+                    textBox.Clear();
+                }
+                else if (c is KryptonMaskedTextBox maskedTextBox)
+                {
+                    maskedTextBox.Clear();
+                }
+                else if (c is KryptonDateTimePicker dateTimePicker)
+                {
+                    dateTimePicker.Value = DateTime.Now;
+                }
+                else if (c is KryptonComboBox comboBox)
+                {
+                    comboBox.SelectedIndex = -1;
+                }
+                else if (c is KryptonPanel panel)
+                {
+                    LimpaCampo(panel); // Recursivamente limpar os controles dentro do painel
+                }
+                else if (c is KryptonGroupBox groupBox)
+                {
+                    LimpaCampo(groupBox); // Recursivamente limpar os controles dentro do groupBox
+                }
+                else if (c is KryptonDataGridView dataGridView)
+                {
+                    dataGridView.Rows.Clear(); // Limpar todas as linhas do DataGridView
+                }
+            }
         }
 
         // Método para somar valores no DataGridView
@@ -380,6 +669,28 @@ private void btnLimpar_Click(object sender, EventArgs e)
                     soma += Convert.ToDecimal(row.Cells[columnName].Value);
                 }
             }
+            return soma;
+        }
+        //Versão melhorada do Método SOMARVALORESDATAGRIDVIEW
+
+        public static decimal SomarValoresDataGrid(DataGridView dataGridView, string columnName)
+        {
+            decimal soma = 0;
+
+            foreach (DataGridViewRow row in dataGridView.Rows)
+            {
+                // Verifica se a célula na coluna especificada contém um valor válido
+                if (row.Cells[columnName].Value != null)
+                {
+                    decimal valor;
+                    // Tenta converter o valor para decimal, se não conseguir, ignora essa célula
+                    if (decimal.TryParse(row.Cells[columnName].Value.ToString(), out valor))
+                    {
+                        soma += valor;
+                    }
+                }
+            }
+
             return soma;
         }
 

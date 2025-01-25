@@ -7,20 +7,21 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace SisControl.BLL
 {
     internal class ProdutoBLL
     {
-        ProdutosDALL produtodall = null;
+        ProdutosDal produtodall = null;
 
         public DataTable Listar()
         {
             DataTable dtable = new DataTable();
             try
             {
-                produtodall = new ProdutosDALL();
-                dtable = produtodall.ListaProduto();
+                produtodall = new ProdutosDal();
+                dtable = produtodall.listarProdutos();
             }
             catch (Exception erro)
             {
@@ -31,10 +32,11 @@ namespace SisControl.BLL
 
         public void Salvar(ProdutosModel produto)
         {
+            produtodall = new ProdutosDal();
+            produtodall.SalvarProduto(produto);
             try
             {
-                produtodall = new ProdutosDALL();
-                produtodall.SalvarProduto(produto);
+               
             }
             catch (SqlException erro)
             {
@@ -45,19 +47,19 @@ namespace SisControl.BLL
         {
             try
             {
-                produtodall = new ProdutosDALL();
-                produtodall.AtualizaProduto(produto);
+                produtodall = new ProdutosDal();
+                produtodall.AlterarProduto(produto);
             }
             catch (SqlException erro)
             {
                 throw erro;
             }
         }
-        public void Excluir(ProdutoMODEL produto)
+        public void Excluir(ProdutosModel produto)
         {
             try
             {
-                produtodall = new ProdutosDALL();
+                produtodall = new ProdutosDal();
                 produtodall.ExcluirProduto(produto);
             }
             catch (SqlException erro)
@@ -65,35 +67,28 @@ namespace SisControl.BLL
                 throw erro;
             }
         }
-        public ProdutoMODEL PesquisarPorCodigo(string pesquisa)
+        public void PesquisarPorNome(ProdutosModel produto, string ParametroNome )
         {
-            var conn = Conexao.Conex();
             try
             {
-
-                SqlCommand sql = new SqlCommand("SELECT * FROM Produto WHERE ProdutoID LIKE '" + pesquisa + "%' ", conn);
-                conn.Open();
-                SqlDataReader datareader;
-                ProdutoMODEL obj_Produto = new ProdutoMODEL();
-
-                datareader = sql.ExecuteReader(CommandBehavior.CloseConnection);
-                while (datareader.Read())
-                {
-                    obj_Produto.ProdutoID = Convert.ToInt32(datareader["ProdutoID"]);
-                    obj_Produto.NomeProduto = datareader["NomeProduto"].ToString();
-                    obj_Produto.Estoque = Convert.ToInt32(datareader["Estoque"]);
-                    obj_Produto.PrecoCusto = Convert.ToDecimal(datareader["PrecoCusto"]);
-                    obj_Produto.PrecoVenda = Convert.ToDecimal(datareader["PrecoVenda"]);                    
-                }
-                return obj_Produto;
+                produtodall = new ProdutosDal();
+                produtodall.PesquisarPorNome(ParametroNome);
             }
-            catch (Exception erro)
+            catch (SqlException erro)
             {
                 throw erro;
             }
-            finally
+        }
+        public void PesquisarPorCodigo(ProdutosModel produto, string ParametroCodigo)
+        {
+            try
             {
-                conn.Close();
+                produtodall = new ProdutosDal();
+                produtodall.PesquisarPorNome(ParametroCodigo);
+            }
+            catch (SqlException erro)
+            {
+                throw erro;
             }
         }
     }

@@ -9,15 +9,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static SisControl.View.FrmContaReceberr;
 
 namespace SisControl
 {
     public partial class FrmPrincipal : Form
     {
         private string StatusOperacao = "";
+        private FrmContaReceberr _frmContaReceberr;
+        private Parcela _parcela;
         public FrmPrincipal()
         {
             InitializeComponent();
+            _frmContaReceberr = new FrmContaReceberr();
             StatusOperacao = "";
         }
         private void AbrirFormInPanel(object formHijo)
@@ -59,33 +63,24 @@ namespace SisControl
 
         private void btnFUNCIONARIOS_Click(object sender, EventArgs e)
         {
-            FrmManutUsuario frm = new FrmManutUsuario();
-            //AbrirFormInPanel(frm);
-            frm.ShowDialog();
-
-            //Form1 form1 = new Form1();
-
-            //// Definir o evento de fechamento do Form2 quando Form1 é aberto
-            //form1.FormClosed += (s, args) => this.Close();
-
-            //// Mostra o Form1
-            //form1.Show();
-
-            //// Esconder o Form2
-            //this.Hide();
+            FrmTelaPrincipal telaPrincipal = new FrmTelaPrincipal();
+            telaPrincipal.ShowDialog();
+            //FrmManutUsuario frm = new FrmManutUsuario();
+            ////AbrirFormInPanel(frm);
+            //frm.ShowDialog();            
         }
 
         private void btnCadCli_Click(object sender, EventArgs e)
         {
             FrmManutCliente frm = new FrmManutCliente(StatusOperacao);
             StatusOperacao = "NOVO";
-            frm.ShowDialog();
+            AbrirFormInPanel(frm);  
         }
 
         private void btnFORNECEDORES_Click(object sender, EventArgs e)
         {
             FrmManutFornecedor frm = new FrmManutFornecedor(StatusOperacao);
-            frm.ShowDialog();
+            AbrirFormInPanel(frm);  
         }
 
         private void btnCategoria_Click(object sender, EventArgs e)
@@ -98,28 +93,30 @@ namespace SisControl
 
         private void btnProdutos_Click(object sender, EventArgs e)
         {
-            FrmManutProduto frm = new FrmManutProduto();
-            frm.ShowDialog();
-            //FrmManutProduto frm = new FrmManutProduto(StatusOperacao);
-            //frm.ShowDialog();
+            FrmManutProduto frm = new FrmManutProduto(StatusOperacao);
+            AbrirFormInPanel(frm);            
         }
 
         private void btnContasReceber_Click(object sender, EventArgs e)
         {
-            FrmContaReceber frm = new FrmContaReceber();
-            frm.ShowDialog();
+            // Suponha que você tenha uma instância de Parcela
+            Parcela parcela = new Parcela();
+
+            // Chama o construtor de FrmContaReceberr com os parâmetros necessários
+            FrmContaReceberr frm = new FrmContaReceberr(_frmContaReceberr, parcela);
+            frm.Show();
         }
 
         private void btnVendas_Click(object sender, EventArgs e)
         {
-            FrmVendas frm = new FrmVendas();
-                        //AbrirFormInPanel(frm); 
-            frm.ShowDialog();   
+            //FrmVendas frm = new FrmVendas();             
+            //frm.ShowDialog();   
+            FrmPedido frm = new FrmPedido();
+            frm.ShowDialog();
         }
 
         private void btnContasPagar_Click(object sender, EventArgs e)
         {
-
         }
 
         private void btnRELATORIOS_Click(object sender, EventArgs e)

@@ -12,37 +12,75 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using ComponentFactory.Krypton.Toolkit;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace SisControl.View
 {
-    public partial class FrmCadProdutos : FrmBaseGeral
+    public partial class FrmCadProdutos : FrmModeloForm
     {
         private string QueryProdutos = "SELECT MAX(ProdutoID)  FROM Produtos";
-        private string QueryCategoria = "SELECT MAX(CategoriaID) FROM Categoria";
-        private string QueryFabricantes = "SELECT FabricanteID FROM Fabricantes WHERE NomeFabricante = @NomeFabricante";
-        private string queryCategorias = "SELECT CategoriaID FROM Categoria WHERE NomeCategoria = @NomeCategoria";
+        
         private string StatusOperacao;
         private int ProdutoID;
-        public int CategoriaID, FabricanteID;
 
         public FrmCadProdutos(string statusOperacao)
         {
             InitializeComponent();
-            // Adicionar evento TextChanged ao ComboBox
-            cmbCategoria.TextChanged += new EventHandler(cmbCategoria_TextChanged);
+
+
+            this.txtPrecoCusto.Enter += new System.EventHandler(this.txtPrecoCusto_Enter);
+            this.txtPrecoCusto.Leave += new System.EventHandler(this.txtPrecoCusto_Leave);
+            this.txtLucro.Enter += new System.EventHandler(this.txtLucro_Enter);
+            this.txtLucro.Leave += new System.EventHandler(this.txtLucro_Leave);
+
+            Utilitario.ConfigurarEventosDeFoco(this);
+            
+
             this.StatusOperacao = statusOperacao;
         }
-        private string queryCategoria = "SELECT * FROM Categoria";
-        private string queryFabricante = "SELECT * FROM Fabricantes";
-        
+        #region ENTER COMO TAB **************************************************************************************
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Enter)
+            {
+                if (this.ActiveControl is KryptonButton)
+                {
+                    ((KryptonButton)this.ActiveControl).PerformClick();
+                    return true;
+                }
+                else
+                {
+                    SelectNextControl(this.ActiveControl, true, true, true, true);
+                    return true;
+                }
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        //protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        //{
+        //    if (keyData == Keys.Enter)
+        //    {
+        //        SelectNextControl(this.ActiveControl, true, true, true, true);
+        //        return true;
+        //    }
+
+        //    return base.ProcessCmdKey(ref msg, keyData);
+        //}
+        //TECLA ENTER COMO ENTER
+
+
+
+
+        #endregion ********************ENTER COMO TAB**********************************************************
         private void FrmCadProdutos_Load(object sender, EventArgs e)
         {
-            Utilitario.PreencherComboBox(cmbCategoria, queryCategoria, "NomeCategoria", "CategoriaID");
-            Utilitario.PreencherComboBox(cmbFabricante, queryFabricante, "NomeFabricante", "FabricanteID");
-
-            Utilitario.FormatTextBoxToCurrency(txtPrecoCusto);
-            Utilitario.FormatTextBoxToCurrency(txtLucro);
-            Utilitario.FormatTextBoxToCurrency(txtPrecoDeVenda);
+            Utilitario.FormatTextBoxToCurrencyKrypton(txtPrecoCusto);
+            Utilitario.FormatTextBoxToCurrencyKrypton(txtLucro);
+            Utilitario.FormatTextBoxToCurrencyKrypton(txtPrecoDeVenda);
 
             if (StatusOperacao == "ALTERAR")
             {
@@ -53,26 +91,10 @@ namespace SisControl.View
                 int NovoCodigo = Utilitario.GerarProximoCodigo(QueryProdutos);//RetornaCodigoContaMaisUm(QueryUsuario).ToString();
                 string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(NovoCodigo, 4);
                 txtProdutoID.Text = numeroComZeros;
-            }
-            cmbCategoria.SelectedIndex = 26;
-            cmbFabricante.SelectedIndex = 12;
-            cmbUnidadeDeMedida.SelectedIndex = 4;
+            }            
             cmbStatus.SelectedIndex = 1;
         }
 
-        //private void CalcularPrecoVenda()
-        //{
-        //    if (decimal.TryParse(txtPrecoCusto.Text, out decimal precoCusto) &&
-        //   decimal.TryParse(txtLucro.Text, out decimal lucro))
-        //    {
-        //        decimal precoVenda = precoCusto + (precoCusto * lucro / 100);
-        //        txtPrecoDeVenda.Text = String.Format(CultureInfo.CurrentCulture, "{0:N2}");
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("Por favor, insira valores válidos.");
-        //    }
-        //}
         private void CalcularPrecoVenda()
         {
             if (decimal.TryParse(txtPrecoCusto.Text, out decimal precoCusto) &&
@@ -102,251 +124,169 @@ namespace SisControl.View
         }
 
 
-        private void btnFechar_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void btnNovo_Click(object sender, EventArgs e)
-        {
-            Utilitario.LimpaCampo(this);
-            ProdutoID = Utilitario.GerarProximoCodigo("SELECT MAX(ProdutoID) FROM Produto");
-        }
-
-        private void btnSalvar_Click(object sender, EventArgs e)
-        {
-            SalvarProduto();
-        }
-
         private void FrmCadProdutos_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Escape)
+            if (e.KeyCode == Keys.Enter)
             {
-                if (MessageBox.Show("Deseja sair?", "Atenção", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    this.Close();
-                }
-            }
-            if (e.KeyCode == Keys.Enter) 
-            { 
-                if (this.GetNextControl(ActiveControl, true) != null) 
-                { 
-                    e.Handled = true; this.GetNextControl(ActiveControl, true).Focus(); 
-                }
+                // Muda o foco para o próximo controle
+                this.SelectNextControl(this.ActiveControl, true, true, true, true);
+
+                // Impede o som de alerta padrão do Windows
+                e.Handled = true;
+                e.SuppressKeyPress = true;
             }
         }
-        #region Evento de Botões
-        private void txtNomeProduto_Enter(object sender, EventArgs e)
-        {
-            txtNomeProduto.BackColor = Color.LightBlue;
-        }
 
-        private void txtDescricao_Enter(object sender, EventArgs e)
-        {
-            txtDescricao.BackColor = Color.LightBlue;
-        }
 
-        private void cmbStatus_Enter(object sender, EventArgs e)
-        {
-            cmbStatus.BackColor = Color.LightBlue;
-        }
-
-        private void cmbUnidadeDeMedida_Enter(object sender, EventArgs e)
-        {
-            cmbUnidadeDeMedida.BackColor = Color.LightBlue;
-        }
-
-        private void txtFornecedor_Enter(object sender, EventArgs e)
-        {
-            txtFornecedor.BackColor = Color.LightBlue;
-        }
-
-        private void txtPrecoCusto_Enter(object sender, EventArgs e)
-        {
-            txtPrecoCusto.BackColor = Color.LightBlue; 
-            
-        }
-
-        private void txtLucro_Enter(object sender, EventArgs e)
-        {
-            txtLucro.BackColor = Color.LightBlue;            
-        }
-
-        private void txtPrecoDeVenda_Enter(object sender, EventArgs e)
-        {
-            txtPrecoDeVenda.BackColor = Color.LightBlue;
-        }
-
-        private void txtQuantidadeEmEstoque_Enter(object sender, EventArgs e)
-        {
-            txtQuantidadeEmEstoque.BackColor = Color.LightBlue;
-        }
-
-        private void cmbCategoria_Enter(object sender, EventArgs e)
-        {
-            cmbCategoria.BackColor = Color.LightBlue;
-        }
-
-        private void cmbFabricante_Enter(object sender, EventArgs e)
-        {
-            cmbFabricante.BackColor = Color.LightBlue;
-        }
-
-        private void txtNomeProduto_Leave(object sender, EventArgs e)
-        {
-            txtNomeProduto.BackColor = Color.White;
-        }
-
-        private void txtDescricao_Leave(object sender, EventArgs e)
-        {
-            txtDescricao.BackColor = Color.White;
-        }
-
-        private void cmbStatus_Leave(object sender, EventArgs e)
-        {
-            cmbStatus.BackColor = Color.White;
-        }
-
-        private void cmbUnidadeDeMedida_Leave(object sender, EventArgs e)
-        {
-            cmbUnidadeDeMedida.BackColor = Color.White;
-        }
-
-        private void txtFornecedor_Leave(object sender, EventArgs e)
-        {
-            txtFornecedor.BackColor = Color.White;
-        }
-
-        private void txtPrecoCusto_Leave(object sender, EventArgs e)
-        {   
-            txtPrecoCusto.BackColor = Color.White;
-
-            // Formata apenas se não estiver vazio
-            if (!string.IsNullOrWhiteSpace(txtPrecoCusto.Text))
-            {
-                CalcularPrecoVenda();               
-            }
-
-            if (!string.IsNullOrWhiteSpace(txtPrecoDeVenda.Text))
-            {
-                Utilitario.FormatTextBoxToCurrency(txtPrecoDeVenda);
-            }
-            Utilitario.FormatTextBoxToCurrency(txtPrecoCusto);
-        }
-
-        private void txtLucro_Leave(object sender, EventArgs e)
-        {
-            /*Utilitario.FormatTextBoxToCurrency(txtLucro)*/;
-            txtLucro.BackColor = Color.White;            
-
-            // Formata apenas se não estiver vazio
-            if (!string.IsNullOrWhiteSpace(txtLucro.Text))
-            {
-                CalcularPrecoVenda();               
-            }
-
-            if (!string.IsNullOrWhiteSpace(txtPrecoDeVenda.Text))
-            {
-                Utilitario.FormatTextBoxToCurrency(txtPrecoDeVenda);
-            }
-            Utilitario.FormatTextBoxToCurrency(txtLucro);
-        }
-
-        private void txtPrecoDeVenda_Leave(object sender, EventArgs e)
-        {
-            txtPrecoDeVenda.BackColor = Color.White;
-        }
-
-        private void txtQuantidadeEmEstoque_Leave(object sender, EventArgs e)
-        {
-            txtQuantidadeEmEstoque.BackColor = Color.White;
-        }
-
-        private void cmbCategoria_Leave(object sender, EventArgs e)
-        {
-            cmbCategoria.BackColor = Color.White;
-        }
-
-        private void cmbFabricante_Leave(object sender, EventArgs e)
-        {
-            cmbFabricante.BackColor = Color.White;  
-        }
-        #endregion 
-
-        private void SalvarProduto()
+        private void Salvar()
         {
             // Criar uma nova instância de ProdutoMODEL e preencher com os dados do formulário
             ProdutosModel produto = new ProdutosModel
             {
+                ProdutoID = int.Parse(txtProdutoID.Text),
                 NomeProduto = txtNomeProduto.Text,
-                Descricao = txtDescricao.Text,
                 PrecoCusto = decimal.Parse(txtPrecoCusto.Text),
                 Lucro = decimal.Parse(txtLucro.Text),
                 PrecoDeVenda = decimal.Parse(txtPrecoDeVenda.Text),
-                QuantidadeEmEstoque = int.Parse(txtQuantidadeEmEstoque.Text),
-                DataDeEntrada = DateTime.Parse(dtpDataDeEntrada.Text),
-                CategoriaID = CategoriaID,//int.Parse(txtCategoriaID.Text),
-                FabricanteID = FabricanteID,//int.Parse(txtFabricanteID.Text),
-                UnidadeDeMedida = cmbUnidadeDeMedida.Text,
+                QuantidadeEmEstoque = int.Parse(txtEstoque.Text),
+                DataDeEntrada = dtpDataDeEntrada.Value,
                 Status = cmbStatus.Text,
-                DataDeVencimento = DateTime.Parse(dtpDataDeVencimento.Text),
-                Imagem = ImageToByteArray(pbImagem.Image), // Exemplo de conversão para byte array
-                FornecedorID = int.Parse(txtFornecedorID.Text),
-                Referencia = txtReferência.Text
+
+                Imagem = ImageToByteArray(pictureBoxProduto.Image), // Exemplo de conversão para byte array               
+                Referencia = txtReferencia.Text
             };
 
             // Chamar o método SalvarProduto da BLL
-            ProdutosBll produtosBll = new ProdutosBll();
-            produtosBll.SalvarProdutos(produto);
-            MessageBox.Show("Produto salvo com sucesso!");
-            Utilitario.LimpaCampo(this);
+            ProdutoBLL produtosbll = new ProdutoBLL();
+            produtosbll.Salvar(produto);
 
+            MessageBox.Show("Produto salvo com sucesso!");
+            Utilitario.LimpaCampoKrypton(this);
+            // Limpar o PictureBox
+            pictureBoxProduto.Image = null;
             int NovoCodigo = Utilitario.GerarProximoCodigo(QueryProdutos);//RetornaCodigoContaMaisUm(QueryUsuario).ToString();
             string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(NovoCodigo, 4);
             txtProdutoID.Text = numeroComZeros;
             txtNomeProduto.Focus();
+            ((FrmManutProduto)Application.OpenForms["FrmManutProduto"]).HabilitarTimer(true);
         }
-        private void AbrirFrmLocalizarFornecedor()
-        {
-            FrmLocalizarFornedor frmLocalizarFornecedor = new FrmLocalizarFornedor();
-            frmLocalizarFornecedor.FormChamador = this; // Define o formulário chamador
-            frmLocalizarFornecedor.ShowDialog();
-        }
-        private void btnLocalizarCliente_Click(object sender, EventArgs e)
-        {
-            AbrirFrmLocalizarFornecedor();
-        }       
 
-        private void cmbCategoria_TextChanged(object sender, EventArgs e)
+        public void Excluir()
         {
-            string nomeCategoria = cmbCategoria.Text;
-            int codigoCategoria = Utilitario.ObterCodigoComboBox(queryCategorias, "@NomeCategoria", nomeCategoria);
-            if (codigoCategoria != -1)
+            try
             {
-                //txtCategoriaID.Text = codigoCategoria.ToString();
-                CategoriaID = codigoCategoria;
+                ProdutosModel objetoProduto = new ProdutosModel();
+
+                objetoProduto.ProdutoID = Convert.ToInt32(txtProdutoID.Text);
+                ProdutoBLL produtoBll = new ProdutoBLL();
+
+                produtoBll.Excluir(objetoProduto);
+                MessageBox.Show("Registro Excluído com sucesso!", "Alteração!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                ((FrmManutProduto)Application.OpenForms["FrmManutProduto"]).HabilitarTimer(true);// Habilita Timer do outro form Obs: O timer no outro form executa um Método.    
+                Utilitario.LimpaCampoKrypton(this);
+                this.Close();
             }
-            else
+            catch (Exception erro)
             {
-                //txtCategoriaID.Text = "";
-                CategoriaID = 0;
+                MessageBox.Show("Erro ao Excluir o registro!!! " + erro);
             }
         }
-        private void cmbFabricante_TextChanged(object sender, EventArgs e)
+
+
+        public void Alterar()
         {
-            string nomeFabricante = cmbFabricante.Text;
-            int codigoFabricante = Utilitario.ObterCodigoComboBox(QueryFabricantes, "@NomeFabricante", nomeFabricante);
-            if (codigoFabricante != -1)
+            try
             {
-                //txtFabricanteID.Text = codigoFabricante.ToString();
-                FabricanteID = codigoFabricante;
+                ProdutosModel objetoProduto = new ProdutosModel();
+
+                objetoProduto.NomeProduto = txtNomeProduto.Text;
+                objetoProduto.PrecoCusto = decimal.Parse(txtPrecoCusto.Text);
+                objetoProduto.Lucro = decimal.Parse(txtLucro.Text);
+                objetoProduto.PrecoDeVenda = decimal.Parse(txtPrecoDeVenda.Text);
+                objetoProduto.QuantidadeEmEstoque = int.Parse(txtEstoque.Text);
+                objetoProduto.DataDeEntrada = dtpDataDeEntrada.Value;
+                objetoProduto.Status = cmbStatus.Text;               
+
+                if (pictureBoxProduto.Image != null)
+                {
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        pictureBoxProduto.Image.Save(ms, pictureBoxProduto.Image.RawFormat);
+                        objetoProduto.Imagem = ms.ToArray();
+                    }
+                }
+
+                objetoProduto.Referencia = txtReferencia.Text;
+                objetoProduto.ProdutoID = int.Parse(txtProdutoID.Text);
+
+                ProdutoBLL produtoBll = new ProdutoBLL();
+                produtoBll.Alterar(objetoProduto);
+
+                MessageBox.Show("Registro Alterado com sucesso!", "Alteração!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                ((FrmManutProduto)Application.OpenForms["FrmManutProduto"]).HabilitarTimer(true);// Habilita Timer do outro form Obs: O timer no outro form executa um Método.    
+                Utilitario.LimpaCampoKrypton(this);
+                this.Close();
             }
-            else
+            catch (Exception erro)
             {
-                //txtFabricanteID.Text = "";
-                FabricanteID = 0;
+                MessageBox.Show("Erro ao Alterar o registro!!! " + erro);
+            }
+        } 
+
+      
+        private void btnSalva_Click(object sender, EventArgs e)
+        {
+            FrmManutUsuario pesquisausuario = new FrmManutUsuario(StatusOperacao);
+
+            if (StatusOperacao == "ALTERAR")
+            {
+                Alterar();
+            }
+            if (StatusOperacao == "NOVO")
+            {
+                Salvar();
+                Utilitario.LimpaCampoKrypton(this);
+                txtNomeProduto.Focus();
+
+                ProdutoID = Utilitario.GerarProximoCodigo(QueryProdutos);
+                int codigo = ProdutoID;
+                txtProdutoID.Text = Utilitario.AcrescentarZerosEsquerda(codigo, 6);
+
+                ((FrmManutProduto)Application.OpenForms["FrmManutProduto"]).HabilitarTimer(true);
+            }
+            if (StatusOperacao == "EXCLUSÃO")
+            {
+                if (MessageBox.Show("Deseja Excluir? \n\n O Usuário: " + txtNomeProduto.Text + " ??? ", "Excluir", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    Excluir();
+                }
             }
         }
+
+        private void btnNovo_Click(object sender, EventArgs e)
+        {
+            Utilitario.LimpaCampoKrypton(this);
+            ProdutoID = Utilitario.GerarProximoCodigo("SELECT MAX(ProdutoID) FROM Produto");
+        }
+
+        private void btnSair_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+      
+
+
+        private void btnLocalizarImagem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                pictureBoxProduto.Image = new Bitmap(openFileDialog.FileName);
+            }
+        }
+          
 
         private byte[] ImageToByteArray(Image image)
         {
@@ -362,18 +302,68 @@ namespace SisControl.View
             }
         }
 
-
-        private void btnLocalizarImagem_Click(object sender, EventArgs e)
+        private void txtPrecoCusto_Leave(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
+            txtPrecoCusto.BackColor = Color.White;
 
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            // Formata apenas se não estiver vazio
+            if (!string.IsNullOrWhiteSpace(txtPrecoCusto.Text))
             {
-                pbImagem.Image = new Bitmap(openFileDialog.FileName);
+                CalcularPrecoVenda();
+            }
+
+            if (!string.IsNullOrWhiteSpace(txtPrecoDeVenda.Text))
+            {
+                Utilitario.FormatTextBoxToCurrencyKrypton(txtPrecoDeVenda);
+            }
+            Utilitario.FormatTextBoxToCurrencyKrypton(txtPrecoCusto);
+        }
+
+        private void txtLucro_Leave(object sender, EventArgs e)
+        {
+            /*Utilitario.FormatTextBoxToCurrency(txtLucro)*/
+            ;
+            txtLucro.BackColor = Color.White;
+
+            // Formata apenas se não estiver vazio
+            if (!string.IsNullOrWhiteSpace(txtLucro.Text))
+            {
+                CalcularPrecoVenda();
+            }
+
+            if (!string.IsNullOrWhiteSpace(txtPrecoDeVenda.Text))
+            {
+                Utilitario.FormatTextBoxToCurrencyKrypton(txtPrecoDeVenda);
+            }
+            Utilitario.FormatTextBoxToCurrencyKrypton(txtLucro);
+        }
+
+        private void txtPrecoCusto_Enter(object sender, EventArgs e)
+        {
+            KryptonTextBox textBox = sender as KryptonTextBox;
+
+            
+            if (textBox != null && textBox.Text == "0,00")
+            {
+                this.BeginInvoke((MethodInvoker)delegate
+                {
+                    textBox.Text = string.Empty;
+                });
             }
         }
-       
-        // Cria uma instância do FrmLocalizarProduto e define o Owner como o FrmVendas       
+
+        private void txtLucro_Enter(object sender, EventArgs e)
+        {
+            KryptonTextBox textBox = sender as KryptonTextBox;
+                       
+            if (textBox != null && textBox.Text == "0,00")
+            {
+                this.BeginInvoke((MethodInvoker)delegate
+                {
+                    textBox.Text = string.Empty;
+                });
+            }
+        }
     }
 }
+

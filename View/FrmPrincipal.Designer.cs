@@ -50,6 +50,7 @@
             this.clienteToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.fornecedorToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.produtoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.fabricanteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnRELATORIOS = new System.Windows.Forms.Button();
             this.btnFUNCIONARIOS = new System.Windows.Forms.Button();
             this.btnContasReceber = new System.Windows.Forms.Button();
@@ -86,7 +87,6 @@
             this.btnSair = new System.Windows.Forms.Button();
             this.panelContenedor = new System.Windows.Forms.Panel();
             this.MenuVertical = new System.Windows.Forms.Panel();
-            this.fabricanteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SubmenuReportes.SuspendLayout();
@@ -238,26 +238,33 @@
             // usuárioToolStripMenuItem2
             // 
             this.usuárioToolStripMenuItem2.Name = "usuárioToolStripMenuItem2";
-            this.usuárioToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.usuárioToolStripMenuItem2.Size = new System.Drawing.Size(134, 22);
             this.usuárioToolStripMenuItem2.Text = "&Usuário";
             // 
             // clienteToolStripMenuItem1
             // 
             this.clienteToolStripMenuItem1.Name = "clienteToolStripMenuItem1";
-            this.clienteToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.clienteToolStripMenuItem1.Size = new System.Drawing.Size(134, 22);
             this.clienteToolStripMenuItem1.Text = "&Cliente";
             // 
             // fornecedorToolStripMenuItem1
             // 
             this.fornecedorToolStripMenuItem1.Name = "fornecedorToolStripMenuItem1";
-            this.fornecedorToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.fornecedorToolStripMenuItem1.Size = new System.Drawing.Size(134, 22);
             this.fornecedorToolStripMenuItem1.Text = "&Fornecedor";
             // 
             // produtoToolStripMenuItem1
             // 
             this.produtoToolStripMenuItem1.Name = "produtoToolStripMenuItem1";
-            this.produtoToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.produtoToolStripMenuItem1.Size = new System.Drawing.Size(134, 22);
             this.produtoToolStripMenuItem1.Text = "&Produto";
+            // 
+            // fabricanteToolStripMenuItem
+            // 
+            this.fabricanteToolStripMenuItem.Name = "fabricanteToolStripMenuItem";
+            this.fabricanteToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.fabricanteToolStripMenuItem.Text = "&Fabricante";
+            this.fabricanteToolStripMenuItem.Click += new System.EventHandler(this.fabricanteToolStripMenuItem_Click);
             // 
             // btnRELATORIOS
             // 
@@ -269,7 +276,7 @@
             this.btnRELATORIOS.ForeColor = System.Drawing.Color.White;
             this.btnRELATORIOS.Image = global::SisControl.Properties.Resources.Relatório;
             this.btnRELATORIOS.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnRELATORIOS.Location = new System.Drawing.Point(638, 28);
+            this.btnRELATORIOS.Location = new System.Drawing.Point(632, 1);
             this.btnRELATORIOS.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnRELATORIOS.Name = "btnRELATORIOS";
             this.btnRELATORIOS.Size = new System.Drawing.Size(90, 68);
@@ -291,7 +298,7 @@
             this.btnFUNCIONARIOS.ForeColor = System.Drawing.Color.White;
             this.btnFUNCIONARIOS.Image = global::SisControl.Properties.Resources.Usuario;
             this.btnFUNCIONARIOS.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnFUNCIONARIOS.Location = new System.Drawing.Point(7, 28);
+            this.btnFUNCIONARIOS.Location = new System.Drawing.Point(1, 1);
             this.btnFUNCIONARIOS.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnFUNCIONARIOS.Name = "btnFUNCIONARIOS";
             this.btnFUNCIONARIOS.Size = new System.Drawing.Size(90, 68);
@@ -312,7 +319,7 @@
             this.btnContasReceber.ForeColor = System.Drawing.Color.White;
             this.btnContasReceber.Image = global::SisControl.Properties.Resources.Contas_a_Receber;
             this.btnContasReceber.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnContasReceber.Location = new System.Drawing.Point(368, 28);
+            this.btnContasReceber.Location = new System.Drawing.Point(362, 1);
             this.btnContasReceber.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnContasReceber.Name = "btnContasReceber";
             this.btnContasReceber.Size = new System.Drawing.Size(90, 68);
@@ -333,7 +340,7 @@
             this.btnVendas.ForeColor = System.Drawing.Color.White;
             this.btnVendas.Image = ((System.Drawing.Image)(resources.GetObject("btnVendas.Image")));
             this.btnVendas.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnVendas.Location = new System.Drawing.Point(458, 28);
+            this.btnVendas.Location = new System.Drawing.Point(452, 1);
             this.btnVendas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnVendas.Name = "btnVendas";
             this.btnVendas.Size = new System.Drawing.Size(90, 68);
@@ -352,9 +359,9 @@
             this.btnFerramenta.FlatAppearance.MouseOverBackColor = System.Drawing.Color.IndianRed;
             this.btnFerramenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFerramenta.ForeColor = System.Drawing.Color.White;
-            this.btnFerramenta.Image = global::SisControl.Properties.Resources.Ferramentas;
+            
             this.btnFerramenta.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnFerramenta.Location = new System.Drawing.Point(728, 28);
+            this.btnFerramenta.Location = new System.Drawing.Point(722, 1);
             this.btnFerramenta.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnFerramenta.Name = "btnFerramenta";
             this.btnFerramenta.Size = new System.Drawing.Size(90, 68);
@@ -374,7 +381,7 @@
             this.btnFORNECEDORES.ForeColor = System.Drawing.Color.White;
             this.btnFORNECEDORES.Image = global::SisControl.Properties.Resources.Fornecedor;
             this.btnFORNECEDORES.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnFORNECEDORES.Location = new System.Drawing.Point(187, 28);
+            this.btnFORNECEDORES.Location = new System.Drawing.Point(181, 1);
             this.btnFORNECEDORES.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnFORNECEDORES.Name = "btnFORNECEDORES";
             this.btnFORNECEDORES.Size = new System.Drawing.Size(90, 68);
@@ -396,7 +403,7 @@
             this.btnCadCli.ForeColor = System.Drawing.Color.White;
             this.btnCadCli.Image = global::SisControl.Properties.Resources.Cliente;
             this.btnCadCli.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnCadCli.Location = new System.Drawing.Point(97, 28);
+            this.btnCadCli.Location = new System.Drawing.Point(91, 1);
             this.btnCadCli.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnCadCli.Name = "btnCadCli";
             this.btnCadCli.Size = new System.Drawing.Size(90, 68);
@@ -419,7 +426,7 @@
             this.SubmenuReportes.Controls.Add(this.brnPesquisadinamica);
             this.SubmenuReportes.Controls.Add(this.panel9);
             this.SubmenuReportes.Controls.Add(this.btnEstorno);
-            this.SubmenuReportes.Location = new System.Drawing.Point(728, 101);
+            this.SubmenuReportes.Location = new System.Drawing.Point(722, 2);
             this.SubmenuReportes.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.SubmenuReportes.Name = "SubmenuReportes";
             this.SubmenuReportes.Size = new System.Drawing.Size(166, 194);
@@ -571,7 +578,7 @@
             this.btnProdutos.ForeColor = System.Drawing.Color.White;
             this.btnProdutos.Image = global::SisControl.Properties.Resources.Produtos;
             this.btnProdutos.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnProdutos.Location = new System.Drawing.Point(278, 28);
+            this.btnProdutos.Location = new System.Drawing.Point(272, 1);
             this.btnProdutos.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnProdutos.Name = "btnProdutos";
             this.btnProdutos.Size = new System.Drawing.Size(90, 68);
@@ -592,7 +599,7 @@
             this.btnContasPagar.ForeColor = System.Drawing.Color.White;
             this.btnContasPagar.Image = global::SisControl.Properties.Resources.Contas_a_Pagar;
             this.btnContasPagar.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnContasPagar.Location = new System.Drawing.Point(548, 28);
+            this.btnContasPagar.Location = new System.Drawing.Point(542, 1);
             this.btnContasPagar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnContasPagar.Name = "btnContasPagar";
             this.btnContasPagar.Size = new System.Drawing.Size(90, 68);
@@ -618,7 +625,7 @@
             this.toolStripStatusLabel5,
             this.toolStripStatusLabel6,
             this.lblUsuarioLogado});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 644);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 541);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1082, 22);
             this.statusStrip1.TabIndex = 22;
@@ -707,7 +714,7 @@
             this.btnSair.ForeColor = System.Drawing.Color.White;
             this.btnSair.Image = global::SisControl.Properties.Resources.sair;
             this.btnSair.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnSair.Location = new System.Drawing.Point(989, 26);
+            this.btnSair.Location = new System.Drawing.Point(991, -1);
             this.btnSair.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnSair.Name = "btnSair";
             this.btnSair.Size = new System.Drawing.Size(90, 68);
@@ -719,20 +726,22 @@
             // 
             // panelContenedor
             // 
+            this.panelContenedor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panelContenedor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(112)))), ((int)(((byte)(156)))));
             this.panelContenedor.Controls.Add(this.SubmenuReportes);
-            this.panelContenedor.Controls.Add(this.MenuVertical);
             this.panelContenedor.Controls.Add(this.statusStrip1);
-            this.panelContenedor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelContenedor.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panelContenedor.Location = new System.Drawing.Point(0, 0);
+            this.panelContenedor.Location = new System.Drawing.Point(0, 103);
             this.panelContenedor.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panelContenedor.Name = "panelContenedor";
-            this.panelContenedor.Size = new System.Drawing.Size(1082, 666);
+            this.panelContenedor.Size = new System.Drawing.Size(1082, 563);
             this.panelContenedor.TabIndex = 549;
             // 
             // MenuVertical
             // 
+            this.MenuVertical.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.MenuVertical.BackColor = System.Drawing.Color.White;
             this.MenuVertical.Controls.Add(this.btnVendas);
             this.MenuVertical.Controls.Add(this.btnSair);
@@ -744,27 +753,19 @@
             this.MenuVertical.Controls.Add(this.btnFerramenta);
             this.MenuVertical.Controls.Add(this.btnFORNECEDORES);
             this.MenuVertical.Controls.Add(this.btnCadCli);
-            this.MenuVertical.Dock = System.Windows.Forms.DockStyle.Top;
-            this.MenuVertical.Location = new System.Drawing.Point(0, 0);
+            this.MenuVertical.Location = new System.Drawing.Point(0, 28);
             this.MenuVertical.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MenuVertical.Name = "MenuVertical";
-            this.MenuVertical.Size = new System.Drawing.Size(1082, 99);
+            this.MenuVertical.Size = new System.Drawing.Size(1082, 72);
             this.MenuVertical.TabIndex = 26;
-            // 
-            // fabricanteToolStripMenuItem
-            // 
-            this.fabricanteToolStripMenuItem.Name = "fabricanteToolStripMenuItem";
-            this.fabricanteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.fabricanteToolStripMenuItem.Text = "&Fabricante";
-            this.fabricanteToolStripMenuItem.Click += new System.EventHandler(this.fabricanteToolStripMenuItem_Click);
             // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.SkyBlue;
             this.ClientSize = new System.Drawing.Size(1082, 666);
             this.Controls.Add(this.statusStrip2);
+            this.Controls.Add(this.MenuVertical);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.panelContenedor);
             this.MainMenuStrip = this.menuStrip1;

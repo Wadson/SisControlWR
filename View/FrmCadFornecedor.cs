@@ -7,10 +7,12 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace SisControl.View
 {
-    public partial class FrmCadFornecedor : SisControl.FrmBaseGeral
+    public partial class FrmCadFornecedor : FrmModeloForm
     {
         private string QueryFornecedor = "SELECT MAX(FornecedorID) FROM Fornecedor";
         private int FornecedorID;        
@@ -19,6 +21,7 @@ namespace SisControl.View
         {
             this.StatusOperacao = statusOperacao;
             InitializeComponent();
+            Utilitario.ConfigurarEventosDeFoco(this);// Texbox fundo amarelo quando em foco
         }
         public void SalvarRegistro()
         {
@@ -97,49 +100,7 @@ namespace SisControl.View
                 MessageBox.Show("Erro ao Excluir o registro!!! " + erro);
             }
         }
-        private void btnSalvar_Click(object sender, EventArgs e)
-        {
-            if (StatusOperacao == "ALTERAR")
-            {
-                AlterarRegistro();
-            }
-            if (StatusOperacao == "NOVO")
-            {               
-                SalvarRegistro();
-                Utilitario.LimpaCampo(this);
-                txtNomeFornecedor.Focus();
-
-                int NovoCodigo = Utilitario.GerarProximoCodigo(QueryFornecedor);//RetornaCodigoContaMaisUm(QueryUsuario).ToString();
-                string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(NovoCodigo, 6);
-                FornecedorID = NovoCodigo;
-                txtFornecedorID.Text = numeroComZeros;
-
-                ((FrmManutFornecedor)Application.OpenForms["FrmManutFornecedor"]).HabilitarTimer(true);
-                
-            }
-            if (StatusOperacao == "EXCLUSÃO")
-            {
-                if (MessageBox.Show("Deseja Excluir? \n\n O Usuário: " + txtNomeFornecedor.Text + " ??? ", "Excluir", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    ExcluirRegistro();
-                }
-            }
-        }
-
-        private void btnNovo_Click(object sender, EventArgs e)
-        {
-            Utilitario.LimpaCampo(this);
-
-            int NovoCodigo = Utilitario.GerarProximoCodigo(QueryFornecedor);//RetornaCodigoContaMaisUm(QueryUsuario).ToString();
-            string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(NovoCodigo, 6);
-            FornecedorID = NovoCodigo;
-            txtFornecedorID.Text = numeroComZeros;
-        }
-
-        private void btnFechar_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+      
 
         private void FrmCadFornecedor_Load(object sender, EventArgs e)
         {
@@ -158,14 +119,63 @@ namespace SisControl.View
 
         private void btnLocalizar_Click(object sender, EventArgs e)
         {            
+            
+        }
+
+        private void btnLocalizar_Click_1(object sender, EventArgs e)
+        {
             FrmLocalizarCidade frmLocalizarCidade = new FrmLocalizarCidade();
             frmLocalizarCidade.Text = "Localizar Fornecedor...";
             VariavelGlobal.NomeFormulario = "FrmCadFornecedor";
             frmLocalizarCidade.ShowDialog();
-            
+
             string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(FornecedorID, 6);
             FornecedorID = int.Parse(numeroComZeros);
             txtFornecedorID.Text = FornecedorID.ToString();
+        }
+
+        private void btnSalva_Click(object sender, EventArgs e)
+        {
+            if (StatusOperacao == "ALTERAR")
+            {
+                AlterarRegistro();
+            }
+            if (StatusOperacao == "NOVO")
+            {
+                SalvarRegistro();
+                Utilitario.LimpaCampo(this);
+                txtNomeFornecedor.Focus();
+
+                int NovoCodigo = Utilitario.GerarProximoCodigo(QueryFornecedor);//RetornaCodigoContaMaisUm(QueryUsuario).ToString();
+                string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(NovoCodigo, 6);
+                FornecedorID = NovoCodigo;
+                txtFornecedorID.Text = numeroComZeros;
+
+                ((FrmManutFornecedor)Application.OpenForms["FrmManutFornecedor"]).HabilitarTimer(true);
+
+            }
+            if (StatusOperacao == "EXCLUSÃO")
+            {
+                if (MessageBox.Show("Deseja Excluir? \n\n O Usuário: " + txtNomeFornecedor.Text + " ??? ", "Excluir", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    ExcluirRegistro();
+                }
+            }
+        }
+
+        private void btnNovo_Click_1(object sender, EventArgs e)
+        {
+            Utilitario.LimpaCampo(this);
+
+            int NovoCodigo = Utilitario.GerarProximoCodigo(QueryFornecedor);//RetornaCodigoContaMaisUm(QueryUsuario).ToString();
+            string numeroComZeros = Utilitario.AcrescentarZerosEsquerda(NovoCodigo, 6);
+            FornecedorID = NovoCodigo;
+            txtFornecedorID.Text = numeroComZeros;
+        }
+
+        private void btnSair_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

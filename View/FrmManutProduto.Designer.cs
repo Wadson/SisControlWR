@@ -30,10 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.dataGridPesquisar = new System.Windows.Forms.DataGridView();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.dataGridPesquisar = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.label28 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridPesquisar)).BeginInit();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnSair
@@ -42,10 +41,12 @@
             this.btnSair.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.btnSair.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnSair.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnSair.Location = new System.Drawing.Point(635, 369);
             this.btnSair.Click += new System.EventHandler(this.btnSair_Click);
             // 
             // txtPesquisa
             // 
+            this.txtPesquisa.Size = new System.Drawing.Size(512, 22);
             this.txtPesquisa.TextChanged += new System.EventHandler(this.txtPesquisa_TextChanged);
             // 
             // btnExcluir
@@ -54,6 +55,7 @@
             this.btnExcluir.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.btnExcluir.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnExcluir.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnExcluir.Location = new System.Drawing.Point(635, 157);
             this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
             // 
             // btnNovo
@@ -62,6 +64,7 @@
             this.btnNovo.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.btnNovo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnNovo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnNovo.Location = new System.Drawing.Point(635, 67);
             this.btnNovo.Click += new System.EventHandler(this.btnNovo_Click);
             // 
             // btnAlterar
@@ -70,6 +73,7 @@
             this.btnAlterar.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.btnAlterar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnAlterar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnAlterar.Location = new System.Drawing.Point(635, 112);
             this.btnAlterar.Click += new System.EventHandler(this.btnAlterar_Click);
             // 
             // timer1
@@ -81,39 +85,48 @@
             // 
             this.dataGridPesquisar.AllowUserToAddRows = false;
             this.dataGridPesquisar.AllowUserToDeleteRows = false;
+            this.dataGridPesquisar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridPesquisar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridPesquisar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridPesquisar.Location = new System.Drawing.Point(0, 0);
+            this.dataGridPesquisar.Location = new System.Drawing.Point(10, 67);
+            this.dataGridPesquisar.MultiSelect = false;
             this.dataGridPesquisar.Name = "dataGridPesquisar";
             this.dataGridPesquisar.ReadOnly = true;
-            this.dataGridPesquisar.Size = new System.Drawing.Size(628, 350);
-            this.dataGridPesquisar.TabIndex = 429;
-            this.dataGridPesquisar.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridPesquisar_CellFormatting);
+            this.dataGridPesquisar.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridPesquisar.Size = new System.Drawing.Size(598, 339);
+            this.dataGridPesquisar.TabIndex = 597;
             // 
-            // panel1
+            // label28
             // 
-            this.panel1.Controls.Add(this.dataGridPesquisar);
-            this.panel1.Location = new System.Drawing.Point(12, 67);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(628, 350);
-            this.panel1.TabIndex = 430;
+            this.label28.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label28.AutoSize = true;
+            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
+            this.label28.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(76)))), ((int)(((byte)(172)))));
+            this.label28.Location = new System.Drawing.Point(317, 2);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(115, 24);
+            this.label28.TabIndex = 600;
+            this.label28.Text = "PRODUTOS";
             // 
             // FrmManutProduto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(785, 430);
-            this.Controls.Add(this.panel1);
+            this.ClientSize = new System.Drawing.Size(779, 456);
+            this.Controls.Add(this.label28);
+            this.Controls.Add(this.dataGridPesquisar);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FrmManutProduto";
-            this.Text = "Manutenção de Produtos";
+            this.Text = "PRODUTOS";
             this.Load += new System.EventHandler(this.FrmManutProduto_Load);
             this.Controls.SetChildIndex(this.btnAlterar, 0);
             this.Controls.SetChildIndex(this.btnNovo, 0);
             this.Controls.SetChildIndex(this.btnExcluir, 0);
             this.Controls.SetChildIndex(this.txtPesquisa, 0);
             this.Controls.SetChildIndex(this.btnSair, 0);
-            this.Controls.SetChildIndex(this.panel1, 0);
+            this.Controls.SetChildIndex(this.dataGridPesquisar, 0);
+            this.Controls.SetChildIndex(this.label28, 0);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridPesquisar)).EndInit();
-            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -122,7 +135,7 @@
         #endregion
 
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.DataGridView dataGridPesquisar;
-        private System.Windows.Forms.Panel panel1;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridView dataGridPesquisar;
+        private System.Windows.Forms.Label label28;
     }
 }

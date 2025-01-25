@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.dataGridPesquisar = new System.Windows.Forms.DataGridView();
+            this.dataGridPesquisar = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridPesquisar)).BeginInit();
             this.SuspendLayout();
             // 
@@ -78,20 +78,26 @@
             // 
             this.dataGridPesquisar.AllowUserToAddRows = false;
             this.dataGridPesquisar.AllowUserToDeleteRows = false;
+            this.dataGridPesquisar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridPesquisar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridPesquisar.Location = new System.Drawing.Point(12, 67);
+            this.dataGridPesquisar.Location = new System.Drawing.Point(12, 78);
+            this.dataGridPesquisar.MultiSelect = false;
             this.dataGridPesquisar.Name = "dataGridPesquisar";
             this.dataGridPesquisar.ReadOnly = true;
-            this.dataGridPesquisar.Size = new System.Drawing.Size(609, 351);
-            this.dataGridPesquisar.TabIndex = 430;
+            this.dataGridPesquisar.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridPesquisar.Size = new System.Drawing.Size(628, 339);
+            this.dataGridPesquisar.TabIndex = 596;
             // 
             // FrmManutCategoria
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(785, 430);
             this.Controls.Add(this.dataGridPesquisar);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FrmManutCategoria";
-            this.Text = "SISCONTROL - Manutenção de Categoria";
+            this.Text = "CATEGORIA";
             this.Load += new System.EventHandler(this.FrmManutCategoria_Load);
             this.Controls.SetChildIndex(this.btnAlterar, 0);
             this.Controls.SetChildIndex(this.btnNovo, 0);
@@ -108,6 +114,6 @@
         #endregion
 
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.DataGridView dataGridPesquisar;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridView dataGridPesquisar;
     }
 }

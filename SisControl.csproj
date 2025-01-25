@@ -14,6 +14,7 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -26,7 +27,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -55,6 +55,21 @@
     </Reference>
     <Reference Include="Azure.Identity, Version=1.11.4.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
       <HintPath>packages\Azure.Identity.1.11.4\lib\netstandard2.0\Azure.Identity.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentFactory.Krypton.Docking">
+      <HintPath>..\Krypton\Bin\ComponentFactory.Krypton.Docking.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentFactory.Krypton.Navigator">
+      <HintPath>..\Krypton\Bin\ComponentFactory.Krypton.Navigator.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentFactory.Krypton.Ribbon">
+      <HintPath>..\Krypton\Bin\ComponentFactory.Krypton.Ribbon.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentFactory.Krypton.Toolkit">
+      <HintPath>..\Krypton\Bin\ComponentFactory.Krypton.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentFactory.Krypton.Workspace">
+      <HintPath>..\Krypton\Bin\ComponentFactory.Krypton.Workspace.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.1.1.1\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
@@ -179,9 +194,8 @@
     <Compile Include="BLL\FabricanteBll.cs" />
     <Compile Include="BLL\FornecedorBLL.cs" />
     <Compile Include="BLL\ItensVendaBLL.cs" />
-    <Compile Include="BLL\ParcelaBLL.cs" />
+    <Compile Include="BLL\PagamentoParcialBll.cs" />
     <Compile Include="BLL\ProdutoBLL.cs" />
-    <Compile Include="BLL\ProdutosBll.cs" />
     <Compile Include="BLL\RegistroPagamentoBLL.cs" />
     <Compile Include="BLL\SubCategoriaBLL.cs" />
     <Compile Include="BLL\UsuarioBLL.cs" />
@@ -199,12 +213,72 @@
     <Compile Include="DALL\FornecedorDALL.cs" />
     <Compile Include="DALL\ItemVendaDALL.cs" />
     <Compile Include="DALL\PagamentoDALL.cs" />
+    <Compile Include="DALL\PagamentoParcialDal.cs" />
     <Compile Include="DALL\ParcelaDALL.cs" />
     <Compile Include="DALL\ProdutosDal.cs" />
-    <Compile Include="DALL\ProdutosDALL.cs" />
     <Compile Include="DALL\SubCategoriaDALL.cs" />
     <Compile Include="DALL\UsuarioDALL.cs" />
     <Compile Include="DALL\VendaDALL.cs" />
+    <Compile Include="MODEL\PagamentoParcialModel.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormPrincipal.Designer.cs">
+      <DependentUpon>FormPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FrmCadUser .cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FrmCadUser .Designer.cs">
+      <DependentUpon>FrmCadUser .cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FrmContaReceberr.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FrmContaReceberr.Designer.cs">
+      <DependentUpon>FrmContaReceberr.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FrmModeloForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FrmModeloForm.Designer.cs">
+      <DependentUpon>FrmModeloForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FrmBaixarConta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FrmBaixarConta.Designer.cs">
+      <DependentUpon>FrmBaixarConta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FrmModeloUI .cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FrmModeloUI .Designer.cs">
+      <DependentUpon>FrmModeloUI .cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FrmTelaPrincipal .cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FrmTelaPrincipal .Designer.cs">
+      <DependentUpon>FrmTelaPrincipal .cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FrmUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FrmUsuario.Designer.cs">
+      <DependentUpon>FrmUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmModelo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmModelo.Designer.cs">
+      <DependentUpon>FrmModelo.cs</DependentUpon>
+    </Compile>
     <Compile Include="MODEL\FabricanteModel.cs" />
     <Compile Include="MODEL\ProdutosModel.cs" />
     <Compile Include="MODEL\RecebimentoModel.cs" />
@@ -270,12 +344,6 @@
     <Compile Include="View\FrmCadFornecedor.Designer.cs">
       <DependentUpon>FrmCadFornecedor.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\FrmCadProduto.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\FrmCadProduto.Designer.cs">
-      <DependentUpon>FrmCadProduto.cs</DependentUpon>
-    </Compile>
     <Compile Include="View\FrmCadProdutos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -287,18 +355,6 @@
     </Compile>
     <Compile Include="View\FrmCadSubCategoria.Designer.cs">
       <DependentUpon>FrmCadSubCategoria.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\FrmCadUsuario.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\FrmCadUsuario.Designer.cs">
-      <DependentUpon>FrmCadUsuario.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\FrmContaReceber.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\FrmContaReceber.Designer.cs">
-      <DependentUpon>FrmContaReceber.cs</DependentUpon>
     </Compile>
     <Compile Include="View\FrmGerarParcelas.cs">
       <SubType>Form</SubType>
@@ -393,7 +449,6 @@
     <Compile Include="MODEL\ItemVendaMODEL.cs" />
     <Compile Include="MODEL\PagamentoMODEL.cs" />
     <Compile Include="MODEL\ParcelaMODEL.cs" />
-    <Compile Include="MODEL\ProdutoMODEL.cs" />
     <Compile Include="MODEL\SubCategoriaMODEL.cs" />
     <Compile Include="MODEL\UsuarioMODEL.cs" />
     <Compile Include="MODEL\VendaMODEL.cs" />
@@ -405,12 +460,51 @@
     <Compile Include="TexBoxPersonalizado.Designer.cs">
       <DependentUpon>TexBoxPersonalizado.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\FrmPedido .cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FrmPedido .Designer.cs">
+      <DependentUpon>FrmPedido .cs</DependentUpon>
+    </Compile>
     <Compile Include="View\FrmVendas.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\FrmVendas.Designer.cs">
       <DependentUpon>FrmVendas.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\FrmVendas2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FrmVendas2.Designer.cs">
+      <DependentUpon>FrmVendas2.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="View\FormPrincipal.resx">
+      <DependentUpon>FormPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FrmCadUser .resx">
+      <DependentUpon>FrmCadUser .cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FrmContaReceberr.resx">
+      <DependentUpon>FrmContaReceberr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FrmModeloForm.resx">
+      <DependentUpon>FrmModeloForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FrmBaixarConta.resx">
+      <DependentUpon>FrmBaixarConta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FrmModeloUI .resx">
+      <DependentUpon>FrmModeloUI .cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FrmTelaPrincipal .resx">
+      <DependentUpon>FrmTelaPrincipal .cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FrmUsuario.resx">
+      <DependentUpon>FrmUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmModelo.resx">
+      <DependentUpon>FrmModelo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PhoneFormat.resx">
       <DependentUpon>PhoneFormat.cs</DependentUpon>
     </EmbeddedResource>
@@ -438,20 +532,11 @@
     <EmbeddedResource Include="View\FrmCadFornecedor.resx">
       <DependentUpon>FrmCadFornecedor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\FrmCadProduto.resx">
-      <DependentUpon>FrmCadProduto.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="View\FrmCadProdutos.resx">
       <DependentUpon>FrmCadProdutos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\FrmCadSubCategoria.resx">
       <DependentUpon>FrmCadSubCategoria.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\FrmCadUsuario.resx">
-      <DependentUpon>FrmCadUsuario.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\FrmContaReceber.resx">
-      <DependentUpon>FrmContaReceber.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\FrmGerarParcelas.resx">
       <DependentUpon>FrmGerarParcelas.cs</DependentUpon>
@@ -497,16 +582,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="TexBoxPersonalizado.resx">
       <DependentUpon>TexBoxPersonalizado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FrmPedido .resx">
+      <DependentUpon>FrmPedido .cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\FrmVendas.resx">
       <DependentUpon>FrmVendas.cs</DependentUpon>
@@ -559,9 +642,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Excluir.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Ferramentas.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Fornecedor.png" />
@@ -627,9 +707,6 @@
     <None Include="Resources\pagar.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bdsiscontrol.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="Resources\Inserir16.png" />
     <None Include="Resources\localizador16.png" />
     <None Include="Resources\produtos16.png" />
@@ -645,6 +722,45 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bdsiscontrol.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bdsiscontrol_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>bdsiscontrol.mdf</DependentUpon>
+    </Content>
+    <None Include="Resources\cartao24.png" />
+    <None Include="Data\WR SOFT.png" />
+    <None Include="Resources\caixas.png" />
+    <None Include="Resources\Ferramentas24.png" />
+    <None Include="Resources\Ferramentas.png" />
+    <None Include="Resources\Sair24.png" />
+    <None Include="Resources\Minimizada.png" />
+    <None Include="Resources\Venda24.png" />
+    <None Include="Resources\Usuario24.png" />
+    <None Include="Resources\Restaurar.png" />
+    <None Include="Resources\Relatorio24.png" />
+    <None Include="Resources\Receber24.png" />
+    <None Include="Resources\procurar16.png" />
+    <None Include="Resources\praca.png" />
+    <None Include="Resources\Pagar24.png" />
+    <None Include="Resources\Menu24.png" />
+    <None Include="Resources\Maximizar.png" />
+    <None Include="Resources\Home.png" />
+    <None Include="Resources\Fornec24.png" />
+    <None Include="Resources\Exit.png" />
+    <None Include="Resources\Clientes24.png" />
+    <None Include="Resources\Cliente24.png" />
+    <None Include="Resources\Restaurar2.png" />
+    <None Include="Resources\Mobile-Menu-Icon.png" />
+    <None Include="Resources\menu2.png" />
+    <None Include="Resources\maximize3.png" />
+    <None Include="Resources\Fechar2.png" />
+    <None Include="Resources\Close.png" />
+    <None Include="Resources\Fechar.png" />
+    <None Include="Resources\app.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\Microsoft.Data.SqlClient.SNI.5.2.0\build\net462\Microsoft.Data.SqlClient.SNI.targets" Condition="Exists('packages\Microsoft.Data.SqlClient.SNI.5.2.0\build\net462\Microsoft.Data.SqlClient.SNI.targets')" />

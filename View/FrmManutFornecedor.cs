@@ -51,16 +51,10 @@ namespace SisControl.View
 
                     frm.Text = "SISCONTROL - ALTERAR REGISTRO";
                     StatusOperacao = "ALTERAR";
-                    frm.btnSalvar.Text = "Alterar";
+                    
                     frm.btnNovo.Enabled = false;
-                    frm.btnSalvar.TextAlign = ContentAlignment.MiddleRight;//AlinhamentoDeConteúdo.MiddleLeft; =  StringAlignment
-                    frm.btnSalvar.Image = Properties.Resources.Alterar;
-                    frm.ShowDialog();
-                    //foreach (DataGridViewRow row in dataGridPesquisar.Rows)
-                    //{
-                    //    // Exemplo: Acessar a primeira célula de cada linha
-                    //    //  var valor = row.Cells[0].Value;                     
-                    //}
+                  
+                    frm.ShowDialog();                   
                 }
                 catch (Exception ex)
                 {
@@ -92,10 +86,9 @@ namespace SisControl.View
                     frm.txtCidadeID.Text = dataGridPesquisar.CurrentRow.Cells["CidadeID"].Value.ToString();
                     frm.Text = "SISCONTROL - EXCLUSÃO DE REGISTRO";
                     StatusOperacao = "EXCLUSÃO";
-                    frm.btnSalvar.Text = "Excluir";
+                   
                     frm.btnNovo.Enabled = false;
-                    frm.btnSalvar.TextAlign = ContentAlignment.MiddleRight;//AlinhamentoDeConteúdo.MiddleLeft; =  StringAlignment
-                    frm.btnSalvar.Image = Properties.Resources.Excluir2;
+                   
 
                     frm.txtFornecedorID.Enabled = false;
                     frm.txtNomeFornecedor.Enabled = false;
@@ -119,44 +112,12 @@ namespace SisControl.View
        
         public void PersonalizarDataGridView(DataGridView dgv)
         {
-            // Configuração dos cabeçalhos das colunas
-            dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy;
-            dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 12, FontStyle.Bold);
-            dgv.EnableHeadersVisualStyles = false; // Necessário para aplicar as cores personalizadas no cabeçalho
-
-            // Estilo alternado das linhas
-            dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.LightGray;
-
-            // Alinhamento e fonte das células
-            dgv.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dgv.DefaultCellStyle.Font = new Font("Arial", 10);
-
+           
             //Alinhar o as colunas
 
             dgv.Columns["FornecedorID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
             dgv.Columns["CidadeID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
-
-            // Ajustar colunas automaticamente
-            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-
-            // Tornar o grid somente leitura
-            dgv.ReadOnly = true;
-
-            // Estilo das bordas das células
-            dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-
-            // Estilo da seleção das células
-            dgv.DefaultCellStyle.SelectionBackColor = Color.DarkTurquoise;
-            dgv.DefaultCellStyle.SelectionForeColor = Color.White;
-
-            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgv.MultiSelect = false;
-            // Esconder a coluna de cabeçalho de linha
-            //dgv.RowHeadersVisible = false;
-
-            // Cor do grid
-            dgv.GridColor = Color.Black;
+                       
 
             this.dataGridPesquisar.Columns[0].Name = "FornecedorID"   ;
             this.dataGridPesquisar.Columns[1].Name = "NomeFornecedor" ;
@@ -166,18 +127,6 @@ namespace SisControl.View
             this.dataGridPesquisar.Columns[5].Name = "Email"          ;
             this.dataGridPesquisar.Columns[6].Name = "CidadeID"            ;
             this.dataGridPesquisar.Columns[7].Name = "NomeCidade"          ;
-
-
-            //// Definir largura fixa  das colunas
-            //dgv.Columns["FornecedorID"   ].Width = 100;
-            //dgv.Columns["NomeFornecedor" ].Width = 250;
-            //dgv.Columns["Cnpj"           ].Width = 100;
-            //dgv.Columns["Endereco"       ].Width = 200;
-            //dgv.Columns["Telefone"       ].Width = 100;
-            //dgv.Columns["Email"          ].Width = 150;
-            //dgv.Columns["CidadeID"       ].Width = 100;
-            //dgv.Columns["NomeCidade"].Width = 200;
-
 
         }
         public void ListarFornecedor()

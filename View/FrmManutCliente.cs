@@ -30,44 +30,26 @@ namespace SisControl.View
         }
         public void PersonalizarDataGridView(DataGridView dgv)
         {
-            // Configuração dos cabeçalhos das colunas
-            dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy;
-            dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 12, FontStyle.Bold);
-            dgv.EnableHeadersVisualStyles = false; // Necessário para aplicar as cores personalizadas no cabeçalho
-
-            // Estilo alternado das linhas
-            dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.LightGray;
-
-            // Alinhamento e fonte das células
-            dgv.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dgv.DefaultCellStyle.Font = new Font("Arial", 10);
-
-            //Alinhar o as colunas
-
-            //dataGridPesquisar.Columns["ProdutoID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
-            //dataGridPesquisar.Columns["Estoque"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
-
-            // Ajustar colunas automaticamente
-            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            //// Ajustar colunas automaticamente
+            //dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
             // Tornar o grid somente leitura
             dgv.ReadOnly = true;
 
-            // Estilo das bordas das células
-            dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            //// Estilo das bordas das células
+            //dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
 
-            // Estilo da seleção das células
-            dgv.DefaultCellStyle.SelectionBackColor = Color.DarkTurquoise;
-            dgv.DefaultCellStyle.SelectionForeColor = Color.White;
+            //// Estilo da seleção das células
+            //dgv.DefaultCellStyle.SelectionBackColor = Color.DarkTurquoise;
+            //dgv.DefaultCellStyle.SelectionForeColor = Color.White;
 
-            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgv.MultiSelect = false;
-            // Esconder a coluna de cabeçalho de linha
-            //dgv.RowHeadersVisible = false;
+            ////dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            //dgv.MultiSelect = false;
+            //// Esconder a coluna de cabeçalho de linha
+            ////dgv.RowHeadersVisible = false;
 
             // Cor do grid
-            dgv.GridColor = Color.Black;
+            //dgv.GridColor = Color.Black;
 
             this.dataGridPesquisar.Columns[0].Name = "ClienteID"   ;
             this.dataGridPesquisar.Columns[1].Name = "NomeCliente" ;
@@ -76,23 +58,9 @@ namespace SisControl.View
             this.dataGridPesquisar.Columns[4].Name = "Telefone"    ;
             this.dataGridPesquisar.Columns[5].Name = "Email"        ;
             this.dataGridPesquisar.Columns[6].Name = "CidadeID"     ;
-            this.dataGridPesquisar.Columns[7].Name = "Expr1"         ;
-            this.dataGridPesquisar.Columns[8].Name = "Expr2"        ;
-            this.dataGridPesquisar.Columns[9].Name = "Uf"            ;
-
-
-
-            // Definir largura fixa  das colunas
-            //dgv.Columns["ClienteID"   ].Width = 100;
-            //dgv.Columns["NomeCliente" ].Width = 250;
-            //dgv.Columns["Cpf"         ].Width = 100;
-            //dgv.Columns["Endereco"    ].Width = 200;
-            //dgv.Columns["Telefone"    ].Width = 100;
-            //dgv.Columns["Email"       ].Width = 150;
-            //dgv.Columns["CidadeID"    ].Width = 100;
-            //dgv.Columns["Expr1"       ].Width = 200;
-            //dgv.Columns["Expr2"       ].Width = 100;
-            //dgv.Columns["Uf"].Width = 200;
+            this.dataGridPesquisar.Columns[7].Name = "NomeCidade"         ;
+            this.dataGridPesquisar.Columns[8].Name = "NomeEstado"        ;           
+           
         }
       
         private void CarregaDados()
@@ -121,32 +89,26 @@ namespace SisControl.View
                     }
                     else
                     {
-                        // Exemplo: Acessar a primeira célula de cada linha
-                        //  var valor = row.Cells[0].Value;
+                        // Exemplo: Acessar a primeira célula de cada linha                        
                         cadCliente.txtClienteID.Text = dataGridPesquisar.CurrentRow.Cells["ClienteID"].Value.ToString();
                         cadCliente.txtNomeCliente.Text = dataGridPesquisar.CurrentRow.Cells["NomeCliente"].Value.ToString();
                         cadCliente.txtCpf.Text = dataGridPesquisar.CurrentRow.Cells["Cpf"].Value.ToString();
                         cadCliente.txtEndereco.Text = dataGridPesquisar.CurrentRow.Cells["Endereco"].Value.ToString();
-
-                        //Utilitario.RestoreTextBoxesFromDataGridView(cadCliente.txtEndereco, cadCliente.txtNumero, cadCliente.txtBairro, dataGridPesquisar);
-
-                        cadCliente.txtEndereco.Text = dataGridPesquisar.CurrentRow.Cells[""].Value.ToString();
-                        cadCliente.txtEndereco.Text = dataGridPesquisar.CurrentRow.Cells["Endereco"].Value.ToString();
-                        cadCliente.txtEndereco.Text = dataGridPesquisar.CurrentRow.Cells["Endereco"].Value.ToString();
-
                         cadCliente.txtTelefone.Text = dataGridPesquisar.CurrentRow.Cells["Telefone"].Value.ToString();
                         cadCliente.txtEmail.Text = dataGridPesquisar.CurrentRow.Cells["Email"].Value.ToString();
                         cadCliente.txtCidadeID.Text = dataGridPesquisar.CurrentRow.Cells["CidadeID"].Value.ToString();
-                        cadCliente.txtNomeCidade.Text = dataGridPesquisar.CurrentRow.Cells["Expr1"].Value.ToString();
-                        //cadCliente.txtEstadoCliente.Text = dataGridPesquisar.CurrentRow.Cells["Expr1"].Value.ToString();
-                        cadCliente.txtEstadoCliente.Text = dataGridPesquisar.CurrentRow.Cells["Uf"].Value.ToString();
+                        cadCliente.txtNomeCidade.Text = dataGridPesquisar.CurrentRow.Cells["NomeCidade"].Value.ToString();
+                        cadCliente.txtEstadoCliente.Text = dataGridPesquisar.CurrentRow.Cells["NomeEstado"].Value.ToString();
+                        cadCliente.txtCidadeID.Text = dataGridPesquisar.CurrentRow.Cells["CidadeID"].Value.ToString();
+                        
+                        
+                        
 
                         cadCliente.Text = "SISCONTROL - ALTERAR REGISTRO";
                         StatusOperacao = "ALTERAR";
                         cadCliente.btnSalvar.Text = "Alterar";
                         cadCliente.btnNovo.Enabled = false;
-                        cadCliente.btnSalvar.TextAlign = ContentAlignment.MiddleRight;//AlinhamentoDeConteúdo.MiddleLeft; =  StringAlignment
-                        cadCliente.btnSalvar.Image = Properties.Resources.Alterar;
+                      
                         cadCliente.ShowDialog();
                         ((FrmManutCliente)Application.OpenForms["FrmManutCliente"]).HabilitarTimer(true);
                     }
@@ -172,23 +134,22 @@ namespace SisControl.View
                     {
                         // Exemplo: Acessar a primeira célula de cada linha
                         //  var valor = row.Cells[0].Value;
-                        cadCliente.txtClienteID.Text = //dataGridPesquisar.CurrentRow.Cells["ClienteID"].Value.ToString();
+                        cadCliente.txtClienteID.Text = dataGridPesquisar.CurrentRow.Cells["ClienteID"].Value.ToString();
                         cadCliente.txtNomeCliente.Text = dataGridPesquisar.CurrentRow.Cells["NomeCliente"].Value.ToString();
                         cadCliente.txtCpf.Text = dataGridPesquisar.CurrentRow.Cells["Cpf"].Value.ToString();
                         cadCliente.txtEndereco.Text = dataGridPesquisar.CurrentRow.Cells["Endereco"].Value.ToString();
                         cadCliente.txtTelefone.Text = dataGridPesquisar.CurrentRow.Cells["Telefone"].Value.ToString();
                         cadCliente.txtEmail.Text = dataGridPesquisar.CurrentRow.Cells["Email"].Value.ToString();
                         cadCliente.txtCidadeID.Text = dataGridPesquisar.CurrentRow.Cells["CidadeID"].Value.ToString();
-                        cadCliente.txtNomeCidade.Text = dataGridPesquisar.CurrentRow.Cells["Expr1"].Value.ToString();
-                        //cadCliente.txtEstadoCliente.Text = dataGridPesquisar.CurrentRow.Cells["Expr1"].Value.ToString();
-                        cadCliente.txtEstadoCliente.Text = dataGridPesquisar.CurrentRow.Cells["Uf"].Value.ToString();
+                        cadCliente.txtNomeCidade.Text = dataGridPesquisar.CurrentRow.Cells["NomeCidade"].Value.ToString();
+                        cadCliente.txtEstadoCliente.Text = dataGridPesquisar.CurrentRow.Cells["NomeEstado"].Value.ToString();
+                        cadCliente.txtCidadeID.Text = dataGridPesquisar.CurrentRow.Cells["CidadeID"].Value.ToString();
 
                         cadCliente.Text = "SISCONTROL - EXCLUSÃO DE REGISTRO";
                         StatusOperacao = "EXCLUSÃO";
                         cadCliente.btnSalvar.Text = "Excluir";
                         cadCliente.btnNovo.Enabled = false;
-                        cadCliente.btnSalvar.TextAlign = ContentAlignment.MiddleRight;//AlinhamentoDeConteúdo.MiddleLeft; =  StringAlignment
-                        cadCliente.btnSalvar.Image = Properties.Resources.Excluir2;
+                       
 
                         cadCliente.txtClienteID.Enabled = false;
                         cadCliente.txtNomeCliente.Enabled = false;

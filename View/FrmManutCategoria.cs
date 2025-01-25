@@ -55,8 +55,7 @@ namespace SisControl.View
                         StatusOperacao = "ALTERAR";
                         cadCategoria.btnSalvar.Text = "Alterar";
                         cadCategoria.btnNovo.Enabled = false;
-                        cadCategoria.btnSalvar.TextAlign = ContentAlignment.MiddleRight;//AlinhamentoDeConteúdo.MiddleLeft; =  StringAlignment
-                        cadCategoria.btnSalvar.Image = Properties.Resources.Alterar;
+                       
                         cadCategoria.ShowDialog();
                         ((FrmManutCategoria)Application.OpenForms["FrmManutCategoria"]).HabilitarTimer(true);
 
@@ -92,9 +91,7 @@ namespace SisControl.View
                         cadCategoria.Text = "SISCONTROL - EXCLUSÃO DE REGISTRO";
                         StatusOperacao = "EXCLUSÃO";
                         cadCategoria.btnSalvar.Text = "Excluir";
-                        cadCategoria.btnNovo.Enabled = false;
-                        cadCategoria.btnSalvar.TextAlign = ContentAlignment.MiddleRight;//AlinhamentoDeConteúdo.MiddleLeft; =  StringAlignment
-                        cadCategoria.btnSalvar.Image = Properties.Resources.Excluir2;
+                        cadCategoria.btnNovo.Enabled = false;                       
 
                         cadCategoria.txtCodigo.Enabled = false;
                         cadCategoria.txtNome.Enabled = false;
@@ -112,49 +109,11 @@ namespace SisControl.View
             }
             ListarCategoria();
 
-            //try
-            //{
-
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show("Erro..." + ex.Message);
-            //}
-
+           
         }
    
         public void PersonalizarDataGridView(DataGridView dgv)
         {
-            // Configuração dos cabeçalhos das colunas
-            dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy;
-            dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 12, FontStyle.Bold);
-            dgv.EnableHeadersVisualStyles = false; // Necessário para aplicar as cores personalizadas no cabeçalho
-
-            // Estilo alternado das linhas
-            dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.LightGray;
-
-            // Alinhamento e fonte das células
-            dgv.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dgv.DefaultCellStyle.Font = new Font("Arial", 10);
-
-            //Alinhar o as colunas
-
-            //dataGridPesquisar.Columns["ProdutoID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
-            //dataGridPesquisar.Columns["Estoque"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
-
-            // Ajustar colunas automaticamente
-            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-
-            // Tornar o grid somente leitura
-            dgv.ReadOnly = true;
-
-            // Estilo das bordas das células
-            dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-
-            // Estilo da seleção das células
-            dgv.DefaultCellStyle.SelectionBackColor = Color.DarkTurquoise;
-            dgv.DefaultCellStyle.SelectionForeColor = Color.White;
-
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv.MultiSelect = false;
             // Esconder a coluna de cabeçalho de linha

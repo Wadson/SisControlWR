@@ -8,9 +8,9 @@ namespace SisControl.MODEL
 {  
     public class ContaReceberModel
     {
-        public int ContaReceberID { get; set; } // Usando GUID como chave primária
-        public int VendaID { get; set; } // Ajustando para GUID
-        public int ParcelaID { get; set; } // Ajustando para GUID
+        public int ContaReceberID { get; set; } 
+        public int VendaID { get; set; } 
+        public int ParcelaID { get; set; } 
         public DateTime? DataRecebimento { get; set; } // Permite valores nulos
         public decimal ValorRecebido { get; set; }
         public decimal SaldoRestante { get; set; }
